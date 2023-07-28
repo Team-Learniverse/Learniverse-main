@@ -1,15 +1,19 @@
 package learniverse.learniversemain.service;
 
+import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.RoomDTO;
-import learniverse.learniversemain.entity.HashtagEntity;
+import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
-import learniverse.learniversemain.entity.RoomEntity;
-import learniverse.learniversemain.entity.RoomMemberEntity;
-import learniverse.learniversemain.repository.HashtagRepository;
-import learniverse.learniversemain.repository.RoomMemberRepository;
-import learniverse.learniversemain.repository.RoomRepository;
+import learniverse.learniversemain.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static learniverse.learniversemain.dto.MemberDTO.toMemberDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +21,8 @@ public class RoomService {
     private final RoomRepository roomRepository;
     private final RoomMemberRepository roomMemberRepository;
     private final HashtagRepository hashtagRepository;
+    private final MemberRepository memberRepository;
+    private final MemberStatusRepository memberStatusRepository;
 
     public void createRoom(RoomDTO roomDTO){
         //방 생성
@@ -52,6 +58,19 @@ public class RoomService {
         RoomMemberEntity roomMemberEntity = roomMemberRepository.findById(roomMemberID).get();
         roomMemberEntity.changePin();
         roomMemberRepository.save(roomMemberEntity);
+    }
+
+    public List<MemberDTO> getMembers(long room_id){
+        List<MemberDTO> memberDTOS = new ArrayList<>();
+        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByRoomId(room_id);
+        for(RoomMemberEntity roomMemberEntity : roomMemberEntities){
+            long member_id = roomMemberEntity.getMemberId();
+            Optional<MemberEntity> memberEntity = memberRepository.findById(member_id);
+            Optional<MemberStatusEntity> memberStatusEntity = memberStatusRepository.findById(member_id);
+            MemberDTO memberDTO = toMemberDTO(memberEntity.get(), memberStatusEntity.get());
+            memberDTOS.add(memberDTO);
+        }
+        return memberDTOS;
     }
 
 }

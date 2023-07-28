@@ -1,15 +1,16 @@
 package learniverse.learniversemain.controller;
 
+import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
+import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.entity.RoomMemberEntity;
 import learniverse.learniversemain.service.RoomService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,5 +40,10 @@ public class RoomController {
     public void pin(@RequestBody RoomMemberID roomMemberID){
         //null 처리
         roomService.pin(roomMemberID);
+    }
+
+    @GetMapping("/members")
+    public List<MemberDTO> members(@RequestParam long room_id){
+        return roomService.getMembers(room_id);
     }
 }
