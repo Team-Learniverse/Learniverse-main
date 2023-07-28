@@ -11,7 +11,8 @@ import lombok.Setter;
 @Entity(name = "core_time")
 public class CoreTimeEntity {
     @Id
-    private long room_id;
-    @Column(nullable = false)
-    private String core_date;
+    @Column(name = "room_id")
+    private long roomId;
+    @Column(name = "core_date", nullable = false)
+    private String coreDate;
 }

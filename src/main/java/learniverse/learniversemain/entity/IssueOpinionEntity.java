@@ -11,9 +11,10 @@ import lombok.Setter;
 @Entity(name = "issue_opinions")
 public class IssueOpinionEntity {
     @Id
-    private long issue_id;
-    @Column(nullable = false)
-    private long member_id;
-    @Column(nullable = false)
-    private String issue_opinion;
+    @Column(name = "issue_id")
+    private long issueId;
+    @Column(name = "member_id", nullable = false)
+    private long memberId;
+    @Column(name = "issue_opinion", nullable = false)
+    private String issueOpinion;
 }

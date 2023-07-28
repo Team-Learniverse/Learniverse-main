@@ -13,11 +13,12 @@ import lombok.Setter;
 public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long member_id;
-    @Column(nullable = false)
-    private String member_email;
-    @Column(nullable = false)
+    @Column(name = "member_id")
+    private long memberId;
+    @Column(name = "member_email", nullable = false)
+    private String memberEmail;
+    @Column(name = "nickname", nullable = false)
     private String nickname;
-    @Column(nullable = false)
-    private String member_message;
+    @Column(name = "member_message", nullable = false)
+    private String memberMessage;
 }

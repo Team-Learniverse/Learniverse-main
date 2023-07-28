@@ -29,16 +29,16 @@ public class RoomService {
         RoomEntity roomEntity = RoomEntity.toRoomEntity(roomDTO);
         roomRepository.save(roomEntity);
         //해시태그 처리
-        saveHashtag(roomEntity.getRoom_id(), roomDTO.getRoom_hashtags());
+        saveHashtag(roomEntity.getRoomId(), roomDTO.getRoom_hashtags());
         //방장 처리
         RoomMemberEntity roomMemberEntity
-                = new RoomMemberEntity(roomEntity.getRoom_id(), roomDTO.getMember_id(), 1);
+                = new RoomMemberEntity(roomEntity.getRoomId(), roomDTO.getMember_id(), 1);
         roomMemberRepository.save(roomMemberEntity);
     }
 
-    public void saveHashtag(long room_id, String[] hashtags){
+    public void saveHashtag(long roomId, String[] hashtags){
         for(String hashtag : hashtags){
-            HashtagEntity hashtagEntity = new HashtagEntity(room_id, hashtag);
+            HashtagEntity hashtagEntity = new HashtagEntity(roomId, hashtag);
             hashtagRepository.save(hashtagEntity);
         }
     }
@@ -50,7 +50,7 @@ public class RoomService {
 
     public void join(RoomMemberID roomMemberID){
         RoomMemberEntity roomMemberEntity = roomMemberRepository.findById(roomMemberID).get();
-        roomMemberEntity.setIs_wait(0);
+        roomMemberEntity.setIsWait(0);
         roomMemberRepository.save(roomMemberEntity);
     }
 
@@ -60,13 +60,13 @@ public class RoomService {
         roomMemberRepository.save(roomMemberEntity);
     }
 
-    public List<MemberDTO> getMembers(long room_id){
+    public List<MemberDTO> getMembers(long roomId){
         List<MemberDTO> memberDTOS = new ArrayList<>();
-        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByRoomId(room_id);
+        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByRoomId(roomId);
         for(RoomMemberEntity roomMemberEntity : roomMemberEntities){
-            long member_id = roomMemberEntity.getMemberId();
-            Optional<MemberEntity> memberEntity = memberRepository.findById(member_id);
-            Optional<MemberStatusEntity> memberStatusEntity = memberStatusRepository.findById(member_id);
+            long memberId = roomMemberEntity.getMemberId();
+            Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
+            Optional<MemberStatusEntity> memberStatusEntity = memberStatusRepository.findById(memberId);
             MemberDTO memberDTO = toMemberDTO(memberEntity.get(), memberStatusEntity.get());
             memberDTOS.add(memberDTO);
         }

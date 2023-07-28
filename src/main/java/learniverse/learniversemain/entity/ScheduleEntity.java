@@ -11,7 +11,8 @@ import lombok.Setter;
 @Entity(name = "schedules")
 public class ScheduleEntity {
     @Id
-    private int room_id;
+    @Column(name = "room_id")
+    private int roomId;
     @Column(nullable = false)
     private String schedule_date;
     @Column(nullable = false)

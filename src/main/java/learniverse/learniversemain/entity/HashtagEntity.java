@@ -13,14 +13,15 @@ import lombok.Setter;
 public class HashtagEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long hashtag_id;
-    @Column(nullable = false)
-    private long room_id;
+    @Column(name = "hashtag_id")
+    private long hashtagId;
+    @Column(name = "room_id", nullable = false)
+    private long roomId;
     @Column(nullable = false)
     private String hashtag;
 
-    public HashtagEntity(long room_id,String hashtag) {
-        this.room_id = room_id;
+    public HashtagEntity(long roomId,String hashtag) {
+        this.roomId = roomId;
         this.hashtag = hashtag;
     }
 }
