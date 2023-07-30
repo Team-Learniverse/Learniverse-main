@@ -59,8 +59,13 @@ public class RoomController {
     }
 
     @GetMapping("/members")
-    public List<MemberDTO> members(@RequestParam long room_id){
-        return roomService.getMembers(room_id);
+    public List<MemberDTO> members(@RequestParam long roomId){
+        return roomService.getMembers(roomId);
+    }
+
+    @GetMapping("/info")
+    public RoomEntity getRoomInfo(@RequestParam long roomId){
+        return roomService.getRoomInfo(roomId);
     }
 
 

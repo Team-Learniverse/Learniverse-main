@@ -4,6 +4,7 @@ import learniverse.learniversemain.entity.CoreTimeEntity;
 import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.entity.ScheduleEntity;
 import learniverse.learniversemain.repository.CoreTimeRepository;
+import learniverse.learniversemain.repository.RoomRepository;
 import learniverse.learniversemain.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

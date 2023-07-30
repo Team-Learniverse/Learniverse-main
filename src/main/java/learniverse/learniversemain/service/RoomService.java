@@ -45,6 +45,10 @@ public class RoomService {
         oldRoom.update(newRoom);
     }
 
+    public RoomEntity getRoomInfo(Long roomId){
+        return roomRepository.findById(roomId).orElseThrow();
+    }
+
     public void saveHashtag(long roomId, String[] hashtags){
         for(String hashtag : hashtags){
             HashtagEntity hashtagEntity = new HashtagEntity(roomId, hashtag);
