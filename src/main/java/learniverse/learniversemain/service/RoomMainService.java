@@ -8,6 +8,9 @@ import learniverse.learniversemain.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RoomMainService {
@@ -23,7 +26,9 @@ public class RoomMainService {
         scheduleRepository.deleteById(scheduleId);
     }
 
-    public void getSchedules(){
+    public List<ScheduleEntity> getSchedules(Long roomId){
+        List<ScheduleEntity> scheduleEntities = scheduleRepository.findByRoomId(roomId);
+        return scheduleEntities;
     }
 
     public void createCore(CoreTimeEntity coreTimeEntity){
@@ -36,7 +41,9 @@ public class RoomMainService {
 
     }
 
-    public void getCores(){
+    public List<CoreTimeEntity> getCores(Long roomId){
+        List<CoreTimeEntity> coreTimeEntities = coreTimeRepository.findByRoomId(roomId);
+        return coreTimeEntities;
 
     }
 }
