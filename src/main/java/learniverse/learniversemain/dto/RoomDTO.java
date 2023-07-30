@@ -18,4 +18,18 @@ public class RoomDTO {
     private String roomNotion;
     private String roomGoogleDrive;
     private String roomFigma;
+
+    public static RoomEntity toRoomEntity(RoomDTO roomDTO){
+        RoomEntity roomEntity = new RoomEntity();
+        roomEntity.setRoomId(roomDTO.getRoomId());
+        roomEntity.setRoomName(roomDTO.getRoomName());
+        roomEntity.setRoomCategory(roomDTO.getRoomCategory());
+        roomEntity.setRoomIntro(roomDTO.getRoomIntro());
+        roomEntity.setRoomLimit(roomDTO.getRoomLimit());
+        roomEntity.setRoomGitOrg(roomDTO.getRoomGitOrg());
+        roomEntity.setRoomNotion(roomDTO.getRoomNotion());
+        roomEntity.setRoomGoogleDrive(roomDTO.getRoomGoogleDrive());
+        roomEntity.setRoomFigma(roomDTO.getRoomFigma());
+        return roomEntity;
+    }
 }

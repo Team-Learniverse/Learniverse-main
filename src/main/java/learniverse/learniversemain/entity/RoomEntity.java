@@ -46,5 +46,14 @@ public class RoomEntity {
     }
 
 
-
+    public void update(RoomEntity newRoom) {
+        this.roomName = newRoom.getRoomName();
+        this.roomCategory = newRoom.getRoomCategory();
+        this.roomIntro = newRoom.getRoomIntro();
+        this.roomLimit = newRoom.getRoomLimit();
+        this.roomGitOrg = newRoom.getRoomGitOrg();
+        this.roomNotion = newRoom.getRoomNotion();
+        this.roomGoogleDrive = newRoom.getRoomGoogleDrive();
+        this.roomFigma = newRoom.getRoomFigma();
+    }
 }

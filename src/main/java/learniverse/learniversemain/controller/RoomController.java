@@ -2,6 +2,7 @@ package learniverse.learniversemain.controller;
 
 import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.RoomDTO;
+import learniverse.learniversemain.entity.HashtagEntity;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.entity.RoomEntity;
@@ -36,6 +37,21 @@ public class RoomController {
         roomService.join(roomMemberID);
     }
 
+    @PostMapping("/update")
+    public void update(@RequestBody RoomDTO roomDTO){
+        roomService.updateRoom(roomDTO);
+    }
+
+    @PostMapping("/hashtags/add")
+    public void saveHashtags(@RequestBody List<HashtagEntity> hashtagEntities){
+        roomService.saveHashtags(hashtagEntities);
+    }
+
+    @PostMapping("/hashtags/delete")
+    public void deleteHashtags(@RequestBody List<HashtagEntity> hashtagEntities){
+        roomService.deleteHashtags(hashtagEntities);
+    }
+
     @PostMapping("/pin")
     public void pin(@RequestBody RoomMemberID roomMemberID){
         //null 처리
@@ -46,4 +62,6 @@ public class RoomController {
     public List<MemberDTO> members(@RequestParam long room_id){
         return roomService.getMembers(room_id);
     }
+
+
 }

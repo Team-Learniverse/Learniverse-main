@@ -1,5 +1,6 @@
 package learniverse.learniversemain.service;
 
+import jakarta.transaction.Transactional;
 import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.entity.*;
@@ -36,11 +37,35 @@ public class RoomService {
         roomMemberRepository.save(roomMemberEntity);
     }
 
+    @Transactional
+    public void updateRoom(RoomDTO roomDTO){
+        RoomEntity oldRoom = roomRepository.findById(roomDTO.getRoomId())
+                .orElseThrow(()-> new IllegalArgumentException("해당 방이 없습니다."));
+        RoomEntity newRoom = RoomDTO.toRoomEntity(roomDTO);
+        oldRoom.update(newRoom);
+    }
+
     public void saveHashtag(long roomId, String[] hashtags){
         for(String hashtag : hashtags){
             HashtagEntity hashtagEntity = new HashtagEntity(roomId, hashtag);
             hashtagRepository.save(hashtagEntity);
         }
+    }
+
+    public void saveHashtags(List<HashtagEntity> hashtagEntities){
+        for (HashtagEntity hashtagEntity : hashtagEntities){
+            hashtagRepository.save(hashtagEntity);
+        }
+    }
+
+    public void deleteHashtags(List<HashtagEntity> hashtagEntities) {
+        for(HashtagEntity hashtagEntity : hashtagEntities){
+            hashtagRepository.deleteById(hashtagEntity.getHashtagId());
+        }
+    }
+
+    public void deleteHashtag(long hashtagId){
+        hashtagRepository.deleteById(hashtagId);
     }
 
     public void application(RoomMemberID roomMemberID){
