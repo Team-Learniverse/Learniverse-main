@@ -31,7 +31,7 @@ public class RoomMainService {
 
     }
 
-    public void dropCore(Long coreId){
+    public void deleteCore(Long coreId){
         coreTimeRepository.deleteById(coreId);
 
     }
