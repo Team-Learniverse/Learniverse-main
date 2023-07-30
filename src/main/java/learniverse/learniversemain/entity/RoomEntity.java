@@ -32,15 +32,15 @@ public class RoomEntity {
 
     public static RoomEntity toRoomEntity(RoomDTO roomDTO){
         RoomEntity roomEntity = new RoomEntity();
-        roomEntity.setRoomId(roomDTO.getRoom_id());
-        roomEntity.setRoomName(roomDTO.getRoom_name());
-        roomEntity.setRoomCategory(roomDTO.getRoom_category());
-        roomEntity.setRoomIntro(roomDTO.getRoom_intro());
-        roomEntity.setRoomLimit(roomDTO.getRoom_limit());
-        roomEntity.setRoomGitOrg(roomDTO.getRoom_git_org());
-        roomEntity.setRoomNotion(roomDTO.getRoom_notion());
-        roomEntity.setRoomGoogleDrive(roomDTO.getRoom_google_drive());
-        roomEntity.setRoomFigma(roomDTO.getRoom_figma());
+        roomEntity.setRoomId(roomDTO.getRoomId());
+        roomEntity.setRoomName(roomDTO.getRoomName());
+        roomEntity.setRoomCategory(roomDTO.getRoomCategory());
+        roomEntity.setRoomIntro(roomDTO.getRoomIntro());
+        roomEntity.setRoomLimit(roomDTO.getRoomLimit());
+        roomEntity.setRoomGitOrg(roomDTO.getRoomGitOrg());
+        roomEntity.setRoomNotion(roomDTO.getRoomNotion());
+        roomEntity.setRoomGoogleDrive(roomDTO.getRoomGoogleDrive());
+        roomEntity.setRoomFigma(roomDTO.getRoomFigma());
 
         return roomEntity;
     }

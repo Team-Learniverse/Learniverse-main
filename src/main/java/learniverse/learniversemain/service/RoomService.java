@@ -29,10 +29,10 @@ public class RoomService {
         RoomEntity roomEntity = RoomEntity.toRoomEntity(roomDTO);
         roomRepository.save(roomEntity);
         //해시태그 처리
-        saveHashtag(roomEntity.getRoomId(), roomDTO.getRoom_hashtags());
+        saveHashtag(roomEntity.getRoomId(), roomDTO.getRoomHashtags());
         //방장 처리
         RoomMemberEntity roomMemberEntity
-                = new RoomMemberEntity(roomEntity.getRoomId(), roomDTO.getMember_id(), 1);
+                = new RoomMemberEntity(roomEntity.getRoomId(), roomDTO.getMemberId(), 1);
         roomMemberRepository.save(roomMemberEntity);
     }
 

@@ -1,8 +1,6 @@
 package learniverse.learniversemain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,12 +9,15 @@ import lombok.Setter;
 @Entity(name = "schedules")
 public class ScheduleEntity {
     @Id
-    @Column(name = "room_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "schedule_id")
+    private long scheduleId;
+    @Column(name = "room_id", nullable = false)
     private int roomId;
-    @Column(nullable = false)
-    private String schedule_date;
-    @Column(nullable = false)
-    private String schedule_task;
-    @Column(nullable = false)
-    private int schedule_is_done;
+    @Column(name = "schedule_date", nullable = false)
+    private String scheduleDate;
+    @Column(name = "schedule_task", nullable = false)
+    private String scheduleTask;
+    @Column(name = "schedule_is_done", nullable = false)
+    private int scheduleIsDone;
 }

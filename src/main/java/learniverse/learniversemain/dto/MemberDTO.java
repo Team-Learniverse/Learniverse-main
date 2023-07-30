@@ -8,18 +8,18 @@ import java.util.Optional;
 
 @Data
 public class MemberDTO {
-    private long member_id;
-    private String member_email;
+    private long memberId;
+    private String memberEmail;
     private String nickname;
-    private String member_message;
+    private String memberMessage;
     private int status;
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity, MemberStatusEntity memberStatusEntity) {
         MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setMember_id(memberEntity.getMember_id());
-        memberDTO.setMember_email(memberEntity.getMember_email());
+        memberDTO.setMemberId(memberEntity.getMemberId());
+        memberDTO.setMemberEmail(memberEntity.getMemberEmail());
         memberDTO.setNickname(memberEntity.getNickname());
-        memberDTO.setMember_message(memberEntity.getMember_message());
+        memberDTO.setMemberMessage(memberEntity.getMemberMessage());
         memberDTO.setStatus(memberStatusEntity.getMemberStatus());
 
         return memberDTO;
