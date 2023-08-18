@@ -37,9 +37,6 @@ public class RoomController {
         response.setStatus(Response.StatusEnum.CREATED);
         response.setMessage("방 생성 성공");
         return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
-    public void create(@RequestBody RoomDTO roomDTO){
-        //null 처리
-        roomService.createRoom(roomDTO);
     }
 
     @PostMapping("/application")
