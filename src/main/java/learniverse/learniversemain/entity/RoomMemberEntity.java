@@ -2,7 +2,6 @@ package learniverse.learniversemain.entity;
 
 import jakarta.persistence.*;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
-import learniverse.learniversemain.entity.pk.RoomMemberPK;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,33 +14,36 @@ import lombok.Setter;
 @IdClass(RoomMemberID.class)
 public class RoomMemberEntity {
     @Id
-    private long room_id;
+    @Column(name = "room_id")
+    private long roomId;
     @Id
-    private long member_id;
-    @Column(nullable = false)
-    private int is_leader;
-    @Column(nullable = false)
-    private int is_wait;
-    @Column(nullable = false)
-    private int is_pin;
+    @Column(name = "member_id")
+    private long memberId;
+    @Column(name = "is_leader", nullable = false)
+    private int isLeader;
+    @Column(name = "is_wait", nullable = false)
+    private int isWait;
+    @Column(name = "is_pin", nullable = false)
+    private int isPin;
 
     public RoomMemberEntity(long room_id, long member_id, int is_leader) {
-        this.room_id = room_id;
-        this.member_id = member_id;
-        this.is_leader = is_leader;
-        this.is_wait = (is_leader==0)? 1:0;
-        this.is_pin = 0;
+        this.roomId = room_id;
+        this.memberId = member_id;
+        this.isLeader = is_leader;
+        this.isWait = (is_leader==0)? 1:0;
+        this.isPin = 0;
     }
 
     public RoomMemberEntity(RoomMemberID roomMemberID, int is_leader) {
-        this.room_id = roomMemberID.getRoom_id();
-        this.member_id = roomMemberID.getMember_id();
-        this.is_leader = is_leader;
-        this.is_wait = (is_leader==0)? 1:0;
-        this.is_pin = 0;
+        this.roomId = roomMemberID.getRoomId();
+        this.memberId = roomMemberID.getMemberId();
+        this.isLeader = is_leader;
+        this.isWait = (is_leader==0)? 1:0;
+        this.isPin = 0;
     }
 
     public void changePin(){
-        setIs_pin((this.getIs_pin()==0)? 1:0);
+        setIsPin((this.getIsPin()==0)? 1:0);
+
     }
 }
