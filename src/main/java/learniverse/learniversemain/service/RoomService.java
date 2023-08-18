@@ -1,6 +1,5 @@
 package learniverse.learniversemain.service;
 
-
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.RoomDTO;
@@ -17,7 +16,6 @@ import java.util.Optional;
 
 import static learniverse.learniversemain.dto.MemberDTO.toMemberDTO;
 
-
 @Service
 @RequiredArgsConstructor
 public class RoomService {
@@ -26,7 +24,6 @@ public class RoomService {
     private final HashtagRepository hashtagRepository;
     private final MemberRepository memberRepository;
     private final MemberStatusRepository memberStatusRepository;
-
 
     public void createRoom(RoomDTO roomDTO){
         //방 생성
@@ -49,6 +46,9 @@ public class RoomService {
     }
 
     public RoomEntity getRoomInfo(Long roomId){
+        RoomEntity findRoom = roomRepository.findById(roomId).get();
+        System.out.println(findRoom);
+        return findRoom;
         return roomRepository.findById(roomId).orElseThrow();
     }
 
@@ -61,6 +61,7 @@ public class RoomService {
 
     public void saveHashtags(List<HashtagEntity> hashtagEntities){
         for (HashtagEntity hashtagEntity : hashtagEntities){
+
         saveHashtag(roomEntity.getRoom_id(), roomDTO.getRoom_hashtags());
         //방장 처리
         RoomMemberEntity roomMemberEntity
@@ -74,7 +75,6 @@ public class RoomService {
             hashtagRepository.save(hashtagEntity);
         }
     }
-
 
     public void deleteHashtags(List<HashtagEntity> hashtagEntities) {
         for(HashtagEntity hashtagEntity : hashtagEntities){
@@ -94,7 +94,6 @@ public class RoomService {
     public void join(RoomMemberID roomMemberID){
         RoomMemberEntity roomMemberEntity = roomMemberRepository.findById(roomMemberID).get();
         roomMemberEntity.setIsWait(0);
-        roomMemberEntity.setIs_wait(0);
         roomMemberRepository.save(roomMemberEntity);
     }
 

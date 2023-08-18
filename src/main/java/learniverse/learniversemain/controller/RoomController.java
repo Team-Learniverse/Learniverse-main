@@ -19,14 +19,24 @@ import org.springframework.web.bind.annotation.*;
 import java.nio.charset.Charset;
 import java.util.List;
 
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/room")
+@Validated
 public class RoomController {
     private final RoomService roomService;
 
     @PostMapping("/create")
+    public ResponseEntity<Response> create(@Valid @RequestBody RoomDTO roomDTO){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        roomService.createRoom(roomDTO);
+
+        response.setStatus(Response.StatusEnum.CREATED);
+        response.setMessage("방 생성 성공");
+        return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
     public void create(@RequestBody RoomDTO roomDTO){
         //null 처리
         roomService.createRoom(roomDTO);
@@ -66,13 +76,17 @@ public class RoomController {
     }
 
     @GetMapping("/members")
-    public List<MemberDTO> members(@RequestParam long roomId){
-        return roomService.getMembers(roomId);
+    public ResponseEntity members(@RequestParam long roomId){
+
+        return new ResponseEntity(roomService.getMembers(roomId), HttpStatus.OK);
+
     }
 
     @GetMapping("/info")
     public RoomEntity getRoomInfo(@RequestParam long roomId){
         return roomService.getRoomInfo(roomId);
+
+        //return new ResponseEntity(roomService.getRoomInfo(roomId), HttpStatus.OK);
     }
 
 

@@ -13,7 +13,6 @@ import lombok.Setter;
 public class HashtagEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "hashtag_id")
     private long hashtagId;
     @Column(name = "room_id", nullable = false)
