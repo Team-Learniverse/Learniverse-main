@@ -37,6 +37,9 @@ public class RoomController {
         response.setStatus(Response.StatusEnum.CREATED);
         response.setMessage("방 생성 성공");
         return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
+    public void create(@RequestBody RoomDTO roomDTO){
+        //null 처리
+        roomService.createRoom(roomDTO);
     }
 
     @PostMapping("/application")
@@ -76,13 +79,14 @@ public class RoomController {
     public ResponseEntity members(@RequestParam long roomId){
 
         return new ResponseEntity(roomService.getMembers(roomId), HttpStatus.OK);
+
     }
 
     @GetMapping("/info")
     public RoomEntity getRoomInfo(@RequestParam long roomId){
         return roomService.getRoomInfo(roomId);
-        //return new ResponseEntity(roomService.getRoomInfo(roomId), HttpStatus.OK);
 
+        //return new ResponseEntity(roomService.getRoomInfo(roomId), HttpStatus.OK);
     }
 
 

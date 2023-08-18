@@ -49,6 +49,7 @@ public class RoomService {
         RoomEntity findRoom = roomRepository.findById(roomId).get();
         System.out.println(findRoom);
         return findRoom;
+        return roomRepository.findById(roomId).orElseThrow();
     }
 
     public void saveHashtag(long roomId, String[] hashtags){
@@ -60,6 +61,17 @@ public class RoomService {
 
     public void saveHashtags(List<HashtagEntity> hashtagEntities){
         for (HashtagEntity hashtagEntity : hashtagEntities){
+
+        saveHashtag(roomEntity.getRoom_id(), roomDTO.getRoom_hashtags());
+        //방장 처리
+        RoomMemberEntity roomMemberEntity
+                = new RoomMemberEntity(roomEntity.getRoom_id(), roomDTO.getMember_id(), 1);
+        roomMemberRepository.save(roomMemberEntity);
+    }
+
+    public void saveHashtag(long room_id, String[] hashtags){
+        for(String hashtag : hashtags){
+            HashtagEntity hashtagEntity = new HashtagEntity(room_id, hashtag);
             hashtagRepository.save(hashtagEntity);
         }
     }
@@ -103,5 +115,4 @@ public class RoomService {
         }
         return memberDTOS;
     }
-
 }
