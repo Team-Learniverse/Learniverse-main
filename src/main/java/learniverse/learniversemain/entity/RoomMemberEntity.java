@@ -44,5 +44,6 @@ public class RoomMemberEntity {
 
     public void changePin(){
         setIsPin((this.getIsPin()==0)? 1:0);
+
     }
 }
