@@ -46,7 +46,9 @@ public class RoomService {
     }
 
     public RoomEntity getRoomInfo(Long roomId){
-        return roomRepository.findById(roomId).orElseThrow();
+        RoomEntity findRoom = roomRepository.findById(roomId).get();
+        System.out.println(findRoom);
+        return findRoom;
     }
 
     public void saveHashtag(long roomId, String[] hashtags){

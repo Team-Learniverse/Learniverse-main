@@ -1,6 +1,7 @@
 package learniverse.learniversemain.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.dto.RoomDTO;
 import lombok.Getter;
 import lombok.Setter;
