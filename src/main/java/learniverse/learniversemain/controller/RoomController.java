@@ -1,7 +1,9 @@
 package learniverse.learniversemain.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
+import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.entity.HashtagEntity;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
@@ -73,10 +75,23 @@ public class RoomController {
     }
 
     @GetMapping("/members")
-    public ResponseEntity members(@RequestParam long roomId){
+    public ResponseEntity<Response> members(@NotNull @RequestParam long roomId){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
-        return new ResponseEntity(roomService.getMembers(roomId), HttpStatus.OK);
+        List<MemberDTO> member_list = roomService.getMembers(roomId);
+        if(member_list.size() == 0){
+            response.setStatus(Response.StatusEnum.BAD_REQUEST);
+            response.setMessage("결과 값이 존재하지 않습니다. roomId 확인 필요");
 
+            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        }
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("멤버 리스트 출력 성공");
+        response.setData(member_list);
+        return new ResponseEntity<>(response, headers, HttpStatus.OK);
     }
 
     @GetMapping("/info")
