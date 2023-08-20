@@ -8,11 +8,11 @@ import java.util.Optional;
 
 @Data
 public class MemberDTO {
-    private long memberId;
+    private Long memberId;
     private String memberEmail;
     private String nickname;
     private String memberMessage;
-    private int status;
+    private Integer status;
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity, MemberStatusEntity memberStatusEntity) {
         MemberDTO memberDTO = new MemberDTO();

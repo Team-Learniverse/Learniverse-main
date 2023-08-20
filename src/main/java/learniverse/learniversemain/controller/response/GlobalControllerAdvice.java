@@ -39,7 +39,6 @@ public class GlobalControllerAdvice {
         List<Error> errorList = new ArrayList<>();
         BindingResult bindingResult = e.getBindingResult();
         bindingResult.getAllErrors().forEach(error -> {
-            System.out.println("fd");
             FieldError fieldError = (FieldError) error; //형 변환
 //
             Error errorMessage = new Error();

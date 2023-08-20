@@ -1,8 +1,10 @@
 package learniverse.learniversemain.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
+import learniverse.learniversemain.dto.HashtagDTO;
 import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.entity.HashtagEntity;
@@ -58,14 +60,67 @@ public class RoomController {
         roomService.updateRoom(roomDTO);
     }
 
-    @PostMapping("/hashtags/add")
-    public void saveHashtags(@RequestBody List<HashtagEntity> hashtagEntities){
-        roomService.saveHashtags(hashtagEntities);
+    @GetMapping("/hashtags")
+    public  ResponseEntity<Response> getHashtags(@NotNull @RequestParam Long roomId){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        List<HashtagEntity> hashtagEntities = roomService.getHashtags(roomId);
+        if(hashtagEntities.size() == 0){
+            response.setStatus(Response.StatusEnum.BAD_REQUEST);
+            response.setMessage("해당 방이 존재하지 않습니다. roomId 확인 필요");
+
+            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        }
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("해시태그 리스트 출력 성공");
+        response.setData(hashtagEntities);
+        return new ResponseEntity<>(response, headers, HttpStatus.OK);
     }
 
-    @PostMapping("/hashtags/delete")
-    public void deleteHashtags(@RequestBody List<HashtagEntity> hashtagEntities){
-        roomService.deleteHashtags(hashtagEntities);
+    @PostMapping("/hashtags/add")
+    public ResponseEntity<Response> saveHashtags(@Valid @RequestBody HashtagDTO hashtagDTO){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        boolean existRoom = roomService.saveHashtags(hashtagDTO.getRoomId(), hashtagDTO.getHashtags());
+        if(existRoom){
+            response.setStatus(Response.StatusEnum.OK);
+            response.setMessage("해시태그 저장 성공");
+
+            return new ResponseEntity<>(response, headers, HttpStatus.OK);
+        }
+        else{
+            response.setStatus(Response.StatusEnum.BAD_REQUEST);
+            response.setMessage("해당 방이 존재하지 않습니다. roomId 확인 필요");
+
+            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/hashtags/delete")
+    public ResponseEntity<Response> deleteHashtags(@Valid @RequestParam @NotEmpty Long[] hashtagIds){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        boolean result = roomService.deleteHashtags(hashtagIds);
+        if(result){
+            response.setStatus(Response.StatusEnum.OK);
+            response.setMessage("해시태그 삭제 성공");
+
+            return new ResponseEntity<>(response, headers, HttpStatus.OK);
+        }
+        else{
+            response.setStatus(Response.StatusEnum.BAD_REQUEST);
+            response.setMessage("해당 해시태그가 존재하지 않습니다. 해시태그 확인 필요");
+
+            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @PostMapping("/pin")

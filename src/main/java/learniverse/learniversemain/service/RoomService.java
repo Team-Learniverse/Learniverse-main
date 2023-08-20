@@ -32,6 +32,7 @@ public class RoomService {
         //해시태그 처리
         saveHashtag(roomEntity.getRoomId(), roomDTO.getRoomHashtags());
         //방장 처리
+        //meber 존재 유무 체크
         RoomMemberEntity roomMemberEntity
                 = new RoomMemberEntity(roomEntity.getRoomId(), roomDTO.getMemberId(), 1);
         roomMemberRepository.save(roomMemberEntity);
@@ -51,10 +52,16 @@ public class RoomService {
         return roomRepository.findById(roomId).orElseThrow();
     }
 
-    public void saveHashtags(List<HashtagEntity> hashtagEntities){
-        for (HashtagEntity hashtagEntity : hashtagEntities){
+    public boolean saveHashtags(long roomId, List<String> hashtags){
+        //roomId 확인
+        boolean existRoom = hashtagRepository.existsByRoomId(roomId);
+        if(!existRoom) return false;
+
+        for (String hashtag : hashtags){
+            HashtagEntity hashtagEntity = new HashtagEntity(roomId, hashtag);
             hashtagRepository.save(hashtagEntity);
         }
+        return true;
     }
 
     public void saveHashtag(long room_id, String[] hashtags){
@@ -64,10 +71,25 @@ public class RoomService {
         }
     }
 
-    public void deleteHashtags(List<HashtagEntity> hashtagEntities) {
-        for(HashtagEntity hashtagEntity : hashtagEntities){
-            hashtagRepository.deleteById(hashtagEntity.getHashtagId());
+    @Transactional
+    public boolean deleteHashtags(Long[] hashtagIds) {
+        List<HashtagEntity> hashtagEntityList = new ArrayList<>();
+        //해시태그 존재여부 확인
+        for (Long hashtagId : hashtagIds){
+            Optional<HashtagEntity> hashtagEntity = hashtagRepository.findById(hashtagId);
+            if(hashtagEntity.isEmpty()) {return false;}
+            hashtagEntityList.add(hashtagEntity.get());
         }
+        //삭제
+        for (HashtagEntity hashtagEntity : hashtagEntityList){
+            hashtagRepository.delete(hashtagEntity);
+        }
+        return true;
+    }
+
+    @Transactional
+    public List<HashtagEntity> getHashtags(long roomId){
+        return hashtagRepository.findByRoomId(roomId);
     }
 
     public void deleteHashtag(long hashtagId){

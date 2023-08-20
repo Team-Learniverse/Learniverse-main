@@ -33,7 +33,7 @@ public class RoomEntity {
 
     public static RoomEntity toRoomEntity(RoomDTO roomDTO){
         RoomEntity roomEntity = new RoomEntity();
-        roomEntity.setRoomId(roomDTO.getRoomId());
+        //roomEntity.setRoomId(roomDTO.getRoomId());
         roomEntity.setRoomName(roomDTO.getRoomName());
         roomEntity.setRoomCategory(roomDTO.getRoomCategory());
         roomEntity.setRoomIntro(roomDTO.getRoomIntro());
