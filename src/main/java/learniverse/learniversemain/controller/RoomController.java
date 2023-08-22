@@ -20,7 +20,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 @RestController
@@ -154,6 +156,46 @@ public class RoomController {
         return roomService.getRoomInfo(roomId);
 
         //return new ResponseEntity(roomService.getRoomInfo(roomId), HttpStatus.OK);
+    }
+
+    @GetMapping("/encode")
+    public ResponseEntity<Response> getRoomEncoding(@NotNull @RequestParam long roomId) throws GeneralSecurityException, UnsupportedEncodingException {
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        String encoded = roomService.getRoomEncoding(roomId);
+        if(encoded == null){
+            response.setStatus(Response.StatusEnum.BAD_REQUEST);
+            response.setMessage("roomId 확인 필요");
+
+            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        }
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("roomId 인코딩 성공");
+        response.setData(encoded);
+        return new ResponseEntity<>(response, headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/decode")
+    public ResponseEntity<Response> getRoomEncoding(@NotNull @RequestParam String encoded) throws GeneralSecurityException, UnsupportedEncodingException {
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        long roomId = roomService.getRoomDecoding(encoded);
+        if(roomId == 0){
+            response.setStatus(Response.StatusEnum.BAD_REQUEST);
+            response.setMessage("roomId 확인 필요");
+
+            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        }
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("roomId 디코딩 성공");
+        response.setData(roomId);
+        return new ResponseEntity<>(response, headers, HttpStatus.OK);
     }
 
 

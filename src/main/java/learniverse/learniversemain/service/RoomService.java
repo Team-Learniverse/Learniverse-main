@@ -10,7 +10,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -124,5 +135,27 @@ public class RoomService {
             memberDTOS.add(memberDTO);
         }
         return memberDTOS;
+    }
+
+    final static String key = "learniverse";
+
+    public String getRoomEncoding (long roomId) throws NoSuchAlgorithmException,
+            GeneralSecurityException, UnsupportedEncodingException {
+        //roomId 확인
+        boolean existRoom = hashtagRepository.existsByRoomId(roomId);
+        if(!existRoom) return null;
+
+        AES256Util aes = new AES256Util();
+        return aes.encrypt(String.valueOf(roomId));
+    }
+    public long getRoomDecoding (String encoded) throws UnsupportedEncodingException, GeneralSecurityException {
+
+        AES256Util aes = new AES256Util();
+        String roomStr = aes.decrypt(encoded);
+        long roomId = Integer.parseInt(roomStr);
+        //roomId 확인
+        boolean existRoom = hashtagRepository.existsByRoomId(roomId);
+        if(!existRoom) return 0;
+        return roomId;
     }
 }
