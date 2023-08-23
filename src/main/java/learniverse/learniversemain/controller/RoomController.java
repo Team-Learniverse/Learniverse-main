@@ -94,10 +94,10 @@ public class RoomController {
 
         boolean existRoom = roomService.saveHashtags(hashtagDTO.getRoomId(), hashtagDTO.getHashtags());
         if(existRoom){
-            response.setStatus(Response.StatusEnum.OK);
+            response.setStatus(Response.StatusEnum.CREATED);
             response.setMessage("해시태그 저장 성공");
 
-            return new ResponseEntity<>(response, headers, HttpStatus.OK);
+            return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
         }
         else{
             response.setStatus(Response.StatusEnum.BAD_REQUEST);
@@ -183,6 +183,7 @@ public class RoomController {
         Map<String, String> data = new HashMap<>();
         data.put("encoded", encoded);
         response.setData(data);
+
         return new ResponseEntity<>(response, headers, HttpStatus.OK);
     }
 
