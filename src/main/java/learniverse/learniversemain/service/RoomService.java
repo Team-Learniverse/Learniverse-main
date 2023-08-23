@@ -137,8 +137,6 @@ public class RoomService {
         return memberDTOS;
     }
 
-    final static String key = "learniverse";
-
     public String getRoomEncoding (long roomId) throws NoSuchAlgorithmException,
             GeneralSecurityException, UnsupportedEncodingException {
         //roomId 확인

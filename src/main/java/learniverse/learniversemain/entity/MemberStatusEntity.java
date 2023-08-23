@@ -14,5 +14,9 @@ public class MemberStatusEntity {
     @Column(name = "member_id")
     private long memberId;
     @Column(nullable = false, name = "member_status")
-    private int memberStatus;
+    private boolean memberStatus;
+
+    public boolean getMemberStatus() {
+        return this.memberStatus;
+    }
 }

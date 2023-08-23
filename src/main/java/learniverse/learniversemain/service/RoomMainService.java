@@ -23,6 +23,7 @@ public class RoomMainService {
         scheduleRepository.save(scheduleEntity);
     }
 
+    //bool로수정
     public void deleteSchedule(Long scheduleId){
         scheduleRepository.deleteById(scheduleId);
     }
@@ -37,6 +38,7 @@ public class RoomMainService {
 
     }
 
+    //bool로수정
     public void deleteCore(Long coreId){
         coreTimeRepository.deleteById(coreId);
 

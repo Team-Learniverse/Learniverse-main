@@ -12,7 +12,7 @@ public class MemberDTO {
     private String memberEmail;
     private String nickname;
     private String memberMessage;
-    private Integer status;
+    private boolean status;
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity, MemberStatusEntity memberStatusEntity) {
         MemberDTO memberDTO = new MemberDTO();

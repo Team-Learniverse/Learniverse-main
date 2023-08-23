@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -78,7 +80,9 @@ public class RoomController {
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("해시태그 리스트 출력 성공");
-        response.setData(hashtagEntities);
+        Map<String,List<HashtagEntity>> data = new HashMap<>();
+        data.put("hashtags", hashtagEntities);
+        response.setData(data);
         return new ResponseEntity<>(response, headers, HttpStatus.OK);
     }
 
@@ -147,7 +151,9 @@ public class RoomController {
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("멤버 리스트 출력 성공");
-        response.setData(member_list);
+        Map<String,List<MemberDTO>> data = new HashMap<>();
+        data.put("members", member_list);
+        response.setData(data);
         return new ResponseEntity<>(response, headers, HttpStatus.OK);
     }
 
@@ -167,14 +173,16 @@ public class RoomController {
         String encoded = roomService.getRoomEncoding(roomId);
         if(encoded == null){
             response.setStatus(Response.StatusEnum.BAD_REQUEST);
-            response.setMessage("roomId 확인 필요");
+            response.setMessage("해당 방 정보 없음. roomId 확인 필요");
 
             return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
         }
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("roomId 인코딩 성공");
-        response.setData(encoded);
+        Map<String, String> data = new HashMap<>();
+        data.put("encoded", encoded);
+        response.setData(data);
         return new ResponseEntity<>(response, headers, HttpStatus.OK);
     }
 
@@ -187,14 +195,16 @@ public class RoomController {
         long roomId = roomService.getRoomDecoding(encoded);
         if(roomId == 0){
             response.setStatus(Response.StatusEnum.BAD_REQUEST);
-            response.setMessage("roomId 확인 필요");
+            response.setMessage("해당 방 정보 없음. encoded 확인 필요");
 
             return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
         }
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("roomId 디코딩 성공");
-        response.setData(roomId);
+        Map<String, Long> data = new HashMap<>();
+        data.put("roomId", roomId);
+        response.setData(data);
         return new ResponseEntity<>(response, headers, HttpStatus.OK);
     }
 
