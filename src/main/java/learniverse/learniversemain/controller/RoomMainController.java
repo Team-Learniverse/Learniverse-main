@@ -4,6 +4,7 @@ package learniverse.learniversemain.controller;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
+import learniverse.learniversemain.dto.CoreTimeDTO;
 import learniverse.learniversemain.dto.ScheduleDTO;
 import learniverse.learniversemain.entity.CoreTimeEntity;
 import learniverse.learniversemain.entity.ScheduleEntity;
@@ -84,18 +85,59 @@ public class RoomMainController {
     }
 
     @PostMapping("/core/create")
-    public void createCoreTime(@RequestBody CoreTimeEntity coreTimeEntity){
-        roomMainService.createCore(coreTimeEntity);
+    public ResponseEntity<Response>  createCoreTime(@Valid @RequestBody CoreTimeDTO coreTimeDTO){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        if(roomMainService.createCore(coreTimeDTO)){
+            response.setStatus(Response.StatusEnum.CREATED);
+            response.setMessage("코어타임 생성 성공");
+            return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
+        }
+        else{
+            response.setStatus(Response.StatusEnum.BAD_REQUEST);
+            response.setMessage("해당 방 정보 없음. roomId 확인 필요");
+            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/core/delete")
-    public void deleteCoreTime(@NotNull @RequestParam long coreTimeId){
-        roomMainService.deleteCore(coreTimeId);
+    public ResponseEntity<Response>  deleteCoreTime(@NotNull @RequestParam long coreTimeId){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        if(roomMainService.deleteCore(coreTimeId)){
+            response.setStatus(Response.StatusEnum.OK);
+            response.setMessage("코어타임 삭제 성공");
+            return new ResponseEntity<>(response, headers, HttpStatus.OK);
+        }
+        else{
+            response.setStatus(Response.StatusEnum.BAD_REQUEST);
+            response.setMessage("코어타임 삭제 실패, coreTimeId 확인 필요");
+            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/cores")
-    public List<CoreTimeEntity> getCores(@RequestParam Long roomId){
-        return roomMainService.getCores(roomId);
+    public ResponseEntity<Response> getCores(@NotNull @RequestParam Long roomId){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+        List<CoreTimeEntity> coreTimeEntities = roomMainService.getCores(roomId);
+
+        if(coreTimeEntities == null){
+            response.setStatus(Response.StatusEnum.BAD_REQUEST);
+            response.setMessage("조회 실패. roomId 확인 필요");
+            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        }
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("코어타임 리스트 출력 성공");
+        Map<String, List<CoreTimeEntity>> data = new HashMap<>();
+        data.put("cores", coreTimeEntities);
+        response.setData(data);
+        return new ResponseEntity<>(response, headers, HttpStatus.OK);
     }
 
 

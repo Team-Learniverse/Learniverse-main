@@ -1,11 +1,16 @@
 package learniverse.learniversemain.entity;
 
 import jakarta.persistence.*;
+import learniverse.learniversemain.dto.CoreTimeDTO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity(name = "core_time")
 public class CoreTimeEntity {
     @Id
@@ -15,5 +20,10 @@ public class CoreTimeEntity {
     @Column(name = "room_id")
     private long roomId;
     @Column(name = "core_date", nullable = false)
-    private String coreDate;
+    private LocalDateTime coreDate;
+
+    public CoreTimeEntity(CoreTimeDTO coreTimeDTO){
+        this.roomId = coreTimeDTO.getRoomId();
+        this.coreDate = coreTimeDTO.getCoreDate();
+    }
 }

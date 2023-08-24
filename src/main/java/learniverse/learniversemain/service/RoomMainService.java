@@ -1,5 +1,6 @@
 package learniverse.learniversemain.service;
 
+import learniverse.learniversemain.dto.CoreTimeDTO;
 import learniverse.learniversemain.dto.ScheduleDTO;
 import learniverse.learniversemain.entity.CoreTimeEntity;
 import learniverse.learniversemain.entity.RoomEntity;
@@ -47,18 +48,28 @@ public class RoomMainService {
         return scheduleEntities;
     }
 
-    public void createCore(CoreTimeEntity coreTimeEntity){
+    public boolean createCore(CoreTimeDTO coreTimeDTO){
+        boolean existRoom = roomRepository.existsByRoomId(coreTimeDTO.getRoomId());
+        if(!existRoom) return false;
+
+        CoreTimeEntity coreTimeEntity = new CoreTimeEntity(coreTimeDTO);
         coreTimeRepository.save(coreTimeEntity);
+        return true;
 
     }
 
-    //bool로수정
-    public void deleteCore(Long coreId){
-        coreTimeRepository.deleteById(coreId);
+    public boolean deleteCore(Long coreId){
+        Optional<CoreTimeEntity> coreTimeEntity = coreTimeRepository.findById(coreId);
+        if(coreTimeEntity.isEmpty()) return false;
+        coreTimeRepository.delete(coreTimeEntity.get());
+        return true;
 
     }
 
     public List<CoreTimeEntity> getCores(Long roomId){
+        boolean existRoom = roomRepository.existsByRoomId(roomId);
+        if(!existRoom) return null;
+
         List<CoreTimeEntity> coreTimeEntities = coreTimeRepository.findByRoomId(roomId);
         return coreTimeEntities;
 
