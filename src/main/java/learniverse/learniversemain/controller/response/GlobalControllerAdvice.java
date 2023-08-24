@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -86,6 +88,42 @@ public class GlobalControllerAdvice {
         response.setMessage(e.getParameterName()+" 파라미터가 필요합니다."); // error message
         response.setStatus(Response.StatusEnum.BAD_REQUEST);
 
+        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = HttpMessageNotReadableException.class)
+    public ResponseEntity<Response> httpMessageNotReadableException(HttpMessageNotReadableException e){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+        List<Error> errorList = new ArrayList<>();
+
+        response.setMessage("올바르지 않은 형식의 값이 포함되어있습니다");
+        Error errorMessage = new Error();
+        errorMessage.setMessage(e.getMessage()); // error message
+        errorList.add(errorMessage);
+
+        response.setStatus(Response.StatusEnum.BAD_REQUEST);
+        response.setErrorList(errorList);
+        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<Response> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+        List<Error> errorList = new ArrayList<>();
+
+        response.setMessage("올바르지 않은 형식입니다.");
+        Error errorMessage = new Error();
+        errorMessage.setField(e.getName());
+        errorMessage.setMessage(e.getErrorCode()); // error message
+        errorMessage.setInvalidValue(e.getValue().toString());
+        errorList.add(errorMessage);
+
+        response.setStatus(Response.StatusEnum.BAD_REQUEST);
+        response.setErrorList(errorList);
         return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
     }
 }

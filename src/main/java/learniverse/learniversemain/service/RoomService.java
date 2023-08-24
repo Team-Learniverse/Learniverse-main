@@ -140,7 +140,7 @@ public class RoomService {
     public String getRoomEncoding (long roomId) throws NoSuchAlgorithmException,
             GeneralSecurityException, UnsupportedEncodingException {
         //roomId 확인
-        boolean existRoom = hashtagRepository.existsByRoomId(roomId);
+        boolean existRoom = roomRepository.existsByRoomId(roomId);
         if(!existRoom) return null;
 
         AES256Util aes = new AES256Util();
