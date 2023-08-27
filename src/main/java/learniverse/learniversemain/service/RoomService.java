@@ -1,6 +1,7 @@
 package learniverse.learniversemain.service;
 
 import jakarta.transaction.Transactional;
+import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.entity.*;
@@ -66,7 +67,7 @@ public class RoomService {
     public boolean saveHashtags(long roomId, List<String> hashtags){
         //roomId 확인
         boolean existRoom = hashtagRepository.existsByRoomId(roomId);
-        if(!existRoom) return false;
+        if(!existRoom) throw new CannotFindRoomException();
 
         for (String hashtag : hashtags){
             HashtagEntity hashtagEntity = new HashtagEntity(roomId, hashtag);
@@ -107,15 +108,28 @@ public class RoomService {
         hashtagRepository.deleteById(hashtagId);
     }
 
-    public void application(RoomMemberID roomMemberID){
+    public boolean application(RoomMemberID roomMemberID){
+        //roomId 확인
+        boolean existRoom = roomRepository.existsByRoomId(roomMemberID.getRoomId());
+        if(!existRoom) throw new CannotFindRoomException();
+
         RoomMemberEntity roomMemberEntity = new RoomMemberEntity(roomMemberID,0);
         roomMemberRepository.save(roomMemberEntity);
+        return true;
     }
 
-    public void join(RoomMemberID roomMemberID){
-        RoomMemberEntity roomMemberEntity = roomMemberRepository.findById(roomMemberID).get();
+    public boolean join(RoomMemberID roomMemberID){
+        //roomId 확인
+        boolean existRoom = roomRepository.existsByRoomId(roomMemberID.getRoomId());
+        if(!existRoom) throw new CannotFindRoomException();
+
+        Optional<RoomMemberEntity> findRoomMemberEntity = roomMemberRepository.findById(roomMemberID);
+        //memberId가 대기에 있는지 확인
+        if(findRoomMemberEntity.isEmpty()) return false;
+        RoomMemberEntity roomMemberEntity = findRoomMemberEntity.get();
         roomMemberEntity.setIsWait(0);
         roomMemberRepository.save(roomMemberEntity);
+        return true;
     }
 
     public void pin(RoomMemberID roomMemberID){
@@ -127,6 +141,7 @@ public class RoomService {
     public List<MemberDTO> getMembers(long roomId){
         List<MemberDTO> memberDTOS = new ArrayList<>();
         List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByRoomId(roomId);
+        roomMemberEntities.removeIf(entity -> entity.getIsWait() != 0);
         for(RoomMemberEntity roomMemberEntity : roomMemberEntities){
             long memberId = roomMemberEntity.getMemberId();
             Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
@@ -141,7 +156,7 @@ public class RoomService {
             GeneralSecurityException, UnsupportedEncodingException {
         //roomId 확인
         boolean existRoom = roomRepository.existsByRoomId(roomId);
-        if(!existRoom) return null;
+        if(!existRoom) throw new CannotFindRoomException();
 
         AES256Util aes = new AES256Util();
         return aes.encrypt(String.valueOf(roomId));
@@ -153,7 +168,7 @@ public class RoomService {
         long roomId = Integer.parseInt(roomStr);
         //roomId 확인
         boolean existRoom = hashtagRepository.existsByRoomId(roomId);
-        if(!existRoom) return 0;
+        if(!existRoom) throw new CannotFindRoomException();
         return roomId;
     }
 }

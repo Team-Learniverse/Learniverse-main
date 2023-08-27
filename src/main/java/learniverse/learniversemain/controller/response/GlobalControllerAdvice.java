@@ -2,6 +2,7 @@ package learniverse.learniversemain.controller.response;
 
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Path;
+import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,10 +28,17 @@ import java.util.stream.StreamSupport;
 @RestControllerAdvice
 public class GlobalControllerAdvice {
 
-//    @ExceptionHandler(value = Exception.class)
-//    public ResponseEntity exception(Exception e){
-//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("-");
-//    }
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity exception(Exception e){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        response.setMessage(e.getMessage()); // error message
+        response.setStatus(Response.StatusEnum.INTERNAL_SERER_ERROR);
+
+        return new ResponseEntity<>(response, headers, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Response> methodArgumentNotValidException(MethodArgumentNotValidException e){
@@ -42,7 +50,6 @@ public class GlobalControllerAdvice {
         BindingResult bindingResult = e.getBindingResult();
         bindingResult.getAllErrors().forEach(error -> {
             FieldError fieldError = (FieldError) error; //형 변환
-//
             Error errorMessage = new Error();
             errorMessage.setField(fieldError.getField()); // field name
             errorMessage.setMessage(fieldError.getDefaultMessage()); // error message
@@ -124,6 +131,17 @@ public class GlobalControllerAdvice {
 
         response.setStatus(Response.StatusEnum.BAD_REQUEST);
         response.setErrorList(errorList);
+        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = CannotFindRoomException.class)
+    public ResponseEntity<Response> cannotFindRoomException(CannotFindRoomException e){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        response.setMessage(e.getMessage());
+        response.setStatus(Response.StatusEnum.BAD_REQUEST);
         return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
     }
 }

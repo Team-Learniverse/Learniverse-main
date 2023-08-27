@@ -48,15 +48,31 @@ public class RoomController {
     }
 
     @PostMapping("/application")
-    public void application(@RequestBody RoomMemberID roomMemberID){
-        //null 처리
-        roomService.application(roomMemberID);
+    public ResponseEntity<Response> application(@Valid @RequestBody RoomMemberID roomMemberID){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        if(roomService.application(roomMemberID)){
+            response.setStatus(Response.StatusEnum.CREATED);
+            response.setMessage("가입 신청 성공");
+            return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
+        }
+        else throw new RuntimeException();
     }
 
     @PostMapping("/join")
-    public void join(@RequestBody RoomMemberID roomMemberID){
-        //null 처리
+    public ResponseEntity<Response>  join(@Valid @RequestBody RoomMemberID roomMemberID){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+
         roomService.join(roomMemberID);
+
+        response.setStatus(Response.StatusEnum.CREATED);
+        response.setMessage("가입 성공");
+        return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
     }
 
     @PostMapping("/update")
@@ -71,12 +87,6 @@ public class RoomController {
         headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         List<HashtagEntity> hashtagEntities = roomService.getHashtags(roomId);
-        if(hashtagEntities.size() == 0){
-            response.setStatus(Response.StatusEnum.BAD_REQUEST);
-            response.setMessage("해당 방이 존재하지 않습니다. roomId 확인 필요");
-
-            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
-        }
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("해시태그 리스트 출력 성공");
@@ -99,12 +109,7 @@ public class RoomController {
 
             return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
         }
-        else{
-            response.setStatus(Response.StatusEnum.BAD_REQUEST);
-            response.setMessage("해당 방이 존재하지 않습니다. roomId 확인 필요");
-
-            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
-        }
+        else throw new RuntimeException();
     }
 
     @DeleteMapping("/hashtags/delete")
@@ -142,12 +147,6 @@ public class RoomController {
         headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         List<MemberDTO> member_list = roomService.getMembers(roomId);
-        if(member_list.size() == 0){
-            response.setStatus(Response.StatusEnum.BAD_REQUEST);
-            response.setMessage("결과 값이 존재하지 않습니다. roomId 확인 필요");
-
-            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
-        }
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("멤버 리스트 출력 성공");
@@ -171,12 +170,6 @@ public class RoomController {
         headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         String encoded = roomService.getRoomEncoding(roomId);
-        if(encoded == null){
-            response.setStatus(Response.StatusEnum.BAD_REQUEST);
-            response.setMessage("해당 방 정보 없음. roomId 확인 필요");
-
-            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
-        }
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("roomId 인코딩 성공");
