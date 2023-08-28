@@ -4,6 +4,7 @@ import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Path;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.controller.Exception.CustomException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -138,9 +139,16 @@ public class GlobalControllerAdvice {
     @ExceptionHandler(value = CustomBadRequestException.class)
     public ResponseEntity<Response> customBadRequestException(CustomBadRequestException e){
         Response response = new Response();
-
         response.setMessage(e.getMessage());
         response.setStatus(Response.StatusEnum.BAD_REQUEST);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = CustomException.class)
+    public ResponseEntity<Response> customException(CustomException e){
+        Response response = new Response();
+        response.setMessage(e.getMessage());
+        response.setStatus(Response.StatusEnum.INTERNAL_SERER_ERROR);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

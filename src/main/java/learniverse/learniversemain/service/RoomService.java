@@ -3,6 +3,7 @@ package learniverse.learniversemain.service;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.controller.Exception.CustomException;
 import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.entity.*;
@@ -47,7 +48,7 @@ public class RoomService {
         //방장 처리
         //meber 존재 유무 체크
         RoomMemberEntity roomMemberEntity
-                = new RoomMemberEntity(roomEntity.getRoomId(), roomDTO.getMemberId(), 1);
+                = new RoomMemberEntity(roomEntity.getRoomId(), roomDTO.getMemberId(), true);
         roomMemberRepository.save(roomMemberEntity);
     }
 
@@ -118,7 +119,7 @@ public class RoomService {
         boolean existRoomMember = roomMemberRepository.existsById(roomMemberID);
         if(existRoomMember) throw new CustomBadRequestException("이미 참여 신청했거나 참여한 상태입니다.");
 
-        RoomMemberEntity roomMemberEntity = new RoomMemberEntity(roomMemberID,0);
+        RoomMemberEntity roomMemberEntity = new RoomMemberEntity(roomMemberID,false);
         roomMemberRepository.save(roomMemberEntity);
         return true;
     }
@@ -132,9 +133,9 @@ public class RoomService {
         if(findRoomMemberEntity.isEmpty()) throw new CustomBadRequestException("해당 방 대기 리스트에 입력한 memberId가 존재하지 않습니다.");
 
         RoomMemberEntity roomMemberEntity = findRoomMemberEntity.get();
-        if(roomMemberEntity.getIsWait()==0) throw new CustomBadRequestException("이미 참여하고있는 팀원입니다.");
+        if(roomMemberEntity.isWait()==false) throw new CustomBadRequestException("이미 참여하고있는 팀원입니다.");
 
-        roomMemberEntity.setIsWait(0);
+        roomMemberEntity.setWait(false);
         roomMemberRepository.save(roomMemberEntity);
         return true;
     }
@@ -145,15 +146,20 @@ public class RoomService {
         roomMemberRepository.save(roomMemberEntity);
     }
 
-    public List<MemberDTO> getMembers(long roomId){
+    public List<MemberDTO> getMembers(long roomId, boolean isWait){
         List<MemberDTO> memberDTOS = new ArrayList<>();
         List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByRoomId(roomId);
-        roomMemberEntities.removeIf(entity -> entity.getIsWait() != 0);
+        if (roomMemberEntities.isEmpty()) throw new CannotFindRoomException();
+
+        roomMemberEntities.removeIf(entity -> entity.isWait() != isWait);
+
         for(RoomMemberEntity roomMemberEntity : roomMemberEntities){
             long memberId = roomMemberEntity.getMemberId();
-            Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
-            Optional<MemberStatusEntity> memberStatusEntity = memberStatusRepository.findById(memberId);
-            MemberDTO memberDTO = toMemberDTO(memberEntity.get(), memberStatusEntity.get());
+            MemberEntity memberEntity = memberRepository.findById(memberId)
+                    .orElseThrow(()->new CustomBadRequestException("존재하지 않는 memberId"));
+            MemberStatusEntity memberStatusEntity = memberStatusRepository.findById(memberId)
+                    .orElseThrow(()->new CustomBadRequestException("memberId \'"+memberId+"\'의 memberStauts가 존재하지 않습니다"));
+            MemberDTO memberDTO = toMemberDTO(memberEntity, memberStatusEntity);
             memberDTOS.add(memberDTO);
         }
         return memberDTOS;

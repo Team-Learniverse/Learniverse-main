@@ -129,10 +129,25 @@ public class RoomController {
     public ResponseEntity<Response> members(@NotNull @RequestParam long roomId){
         Response response = new Response();
 
-        List<MemberDTO> member_list = roomService.getMembers(roomId);
+        List<MemberDTO> member_list = roomService.getMembers(roomId, false);
+        if(member_list == null) throw new RuntimeException();
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("멤버 리스트 출력 성공");
+        Map<String,List<MemberDTO>> data = new HashMap<>();
+        data.put("members", member_list);
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/members/isWait")
+    public ResponseEntity<Response> waitMembers(@NotNull @RequestParam long roomId){
+        Response response = new Response();
+
+        List<MemberDTO> member_list = roomService.getMembers(roomId, true);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("대기 멤버 리스트 출력 성공");
         Map<String,List<MemberDTO>> data = new HashMap<>();
         data.put("members", member_list);
         response.setData(data);
