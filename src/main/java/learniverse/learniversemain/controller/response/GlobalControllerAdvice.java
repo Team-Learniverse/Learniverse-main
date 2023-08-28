@@ -13,10 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.nio.charset.Charset;
@@ -28,24 +25,26 @@ import java.util.stream.StreamSupport;
 
 @RestControllerAdvice
 public class GlobalControllerAdvice {
+    @ModelAttribute
+    public HttpHeaders jsonHeaders(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+        return headers;
+    }
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity exception(Exception e){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         response.setMessage(e.getMessage()); // error message
         response.setStatus(Response.StatusEnum.INTERNAL_SERER_ERROR);
 
-        return new ResponseEntity<>(response, headers, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Response> methodArgumentNotValidException(MethodArgumentNotValidException e){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         List<Error> errorList = new ArrayList<>();
         BindingResult bindingResult = e.getBindingResult();
@@ -60,14 +59,12 @@ public class GlobalControllerAdvice {
         response.setErrorList(errorList);
         response.setMessage("잘못된 값을 입력했습니다. (errorList 확인 필요)");
         response.setStatus(Response.StatusEnum.BAD_REQUEST);
-        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)
     public ResponseEntity<Response> constraintViolationException(ConstraintViolationException e){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
         List<Error> errorList = new ArrayList<>();
 
         e.getConstraintViolations().forEach(error ->{
@@ -84,27 +81,23 @@ public class GlobalControllerAdvice {
         response.setErrorList(errorList);
         response.setMessage("잘못된 값을 입력했습니다. (errorList 확인 필요)");
         response.setStatus(Response.StatusEnum.BAD_REQUEST);
-        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = MissingServletRequestParameterException.class) //아무값도 입력안하면 나오는 애러 (GET)
     public ResponseEntity<Response> missingServletRequestParameterException(MissingServletRequestParameterException e){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         response.setMessage(e.getParameterName()+" 파라미터가 필요합니다."); // error message
         response.setStatus(Response.StatusEnum.BAD_REQUEST);
 
-        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ResponseEntity<Response> httpMessageNotReadableException(HttpMessageNotReadableException e){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
-        List<Error> errorList = new ArrayList<>();
+          List<Error> errorList = new ArrayList<>();
 
         response.setMessage("올바르지 않은 형식의 값이 포함되어있습니다");
         Error errorMessage = new Error();
@@ -113,14 +106,12 @@ public class GlobalControllerAdvice {
 
         response.setStatus(Response.StatusEnum.BAD_REQUEST);
         response.setErrorList(errorList);
-        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = MethodArgumentTypeMismatchException.class)
     public ResponseEntity<Response> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
         List<Error> errorList = new ArrayList<>();
 
         response.setMessage("올바르지 않은 형식입니다.");
@@ -132,28 +123,24 @@ public class GlobalControllerAdvice {
 
         response.setStatus(Response.StatusEnum.BAD_REQUEST);
         response.setErrorList(errorList);
-        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = CannotFindRoomException.class)
     public ResponseEntity<Response> cannotFindRoomException(CannotFindRoomException e){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         response.setMessage(e.getMessage());
         response.setStatus(Response.StatusEnum.BAD_REQUEST);
-        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = CustomBadRequestException.class)
     public ResponseEntity<Response> customBadRequestException(CustomBadRequestException e){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         response.setMessage(e.getMessage());
         response.setStatus(Response.StatusEnum.BAD_REQUEST);
-        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
