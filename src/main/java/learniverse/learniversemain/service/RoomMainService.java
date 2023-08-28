@@ -1,5 +1,7 @@
 package learniverse.learniversemain.service;
 
+import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
+import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
 import learniverse.learniversemain.dto.CoreTimeDTO;
 import learniverse.learniversemain.dto.ScheduleDTO;
 import learniverse.learniversemain.entity.CoreTimeEntity;
@@ -26,7 +28,7 @@ public class RoomMainService {
     public boolean createSchedule(ScheduleDTO scheduleDTO){
         //roomId 확인
         boolean existRoom = roomRepository.existsByRoomId(scheduleDTO.getRoomId());
-        if(!existRoom) return false;
+        if(!existRoom) throw new CannotFindRoomException();
 
         ScheduleEntity scheduleEntity = new ScheduleEntity(scheduleDTO);
         scheduleRepository.save(scheduleEntity);
@@ -34,15 +36,15 @@ public class RoomMainService {
     }
 
     public boolean deleteSchedule(Long scheduleId){
-        Optional<ScheduleEntity> scheduleEntity = scheduleRepository.findById(scheduleId);
-        if(scheduleEntity.isEmpty()) return false;
-        scheduleRepository.delete(scheduleEntity.get());
+        ScheduleEntity scheduleEntity = scheduleRepository.findById(scheduleId)
+                .orElseThrow(()-> new CustomBadRequestException("일정 삭제 실패, scheduleId 확인 필요"));
+        scheduleRepository.delete(scheduleEntity);
         return true;
     }
 
     public List<ScheduleEntity> getSchedules(Long roomId){
         boolean existRoom = roomRepository.existsByRoomId(roomId);
-        if(!existRoom) return null;
+        if(!existRoom) throw new CannotFindRoomException();
 
         List<ScheduleEntity> scheduleEntities = scheduleRepository.findByRoomId(roomId);
         return scheduleEntities;
@@ -50,7 +52,7 @@ public class RoomMainService {
 
     public boolean createCore(CoreTimeDTO coreTimeDTO){
         boolean existRoom = roomRepository.existsByRoomId(coreTimeDTO.getRoomId());
-        if(!existRoom) return false;
+        if(!existRoom) throw new CannotFindRoomException();
 
         CoreTimeEntity coreTimeEntity = new CoreTimeEntity(coreTimeDTO);
         coreTimeRepository.save(coreTimeEntity);
@@ -59,16 +61,16 @@ public class RoomMainService {
     }
 
     public boolean deleteCore(Long coreId){
-        Optional<CoreTimeEntity> coreTimeEntity = coreTimeRepository.findById(coreId);
-        if(coreTimeEntity.isEmpty()) return false;
-        coreTimeRepository.delete(coreTimeEntity.get());
+        CoreTimeEntity coreTimeEntity = coreTimeRepository.findById(coreId)
+                .orElseThrow(()-> new CustomBadRequestException("코어타임 삭제 실패, coreTimeId 확인 필요"));
+        coreTimeRepository.delete(coreTimeEntity);
         return true;
 
     }
 
     public List<CoreTimeEntity> getCores(Long roomId){
         boolean existRoom = roomRepository.existsByRoomId(roomId);
-        if(!existRoom) return null;
+        if(!existRoom) throw new CannotFindRoomException();
 
         List<CoreTimeEntity> coreTimeEntities = coreTimeRepository.findByRoomId(roomId);
         return coreTimeEntities;
