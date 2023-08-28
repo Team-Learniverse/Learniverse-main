@@ -2,6 +2,7 @@ package learniverse.learniversemain.service;
 
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
+import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
 import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.entity.*;
@@ -53,15 +54,15 @@ public class RoomService {
     @Transactional
     public void updateRoom(RoomDTO roomDTO){
         RoomEntity oldRoom = roomRepository.findById(roomDTO.getRoomId())
-                .orElseThrow(()-> new IllegalArgumentException("해당 방이 없습니다."));
+                .orElseThrow(()-> new CannotFindRoomException());
         RoomEntity newRoom = RoomDTO.toRoomEntity(roomDTO);
         oldRoom.update(newRoom);
     }
 
     public RoomEntity getRoomInfo(Long roomId){
-        RoomEntity findRoom = roomRepository.findById(roomId).get();
-        System.out.println(findRoom);
-        return roomRepository.findById(roomId).orElseThrow();
+        RoomEntity findRoom = roomRepository.findById(roomId)
+                .orElseThrow(()-> new CannotFindRoomException());
+        return roomRepository.findById(roomId).orElseThrow(() -> new RuntimeException());
     }
 
     public boolean saveHashtags(long roomId, List<String> hashtags){
@@ -113,6 +114,10 @@ public class RoomService {
         boolean existRoom = roomRepository.existsByRoomId(roomMemberID.getRoomId());
         if(!existRoom) throw new CannotFindRoomException();
 
+        //이미 참여했거나 참여 신청한 경우
+        boolean existRoomMember = roomMemberRepository.existsById(roomMemberID);
+        if(existRoomMember) throw new CustomBadRequestException("이미 참여 신청했거나 참여한 상태입니다.");
+
         RoomMemberEntity roomMemberEntity = new RoomMemberEntity(roomMemberID,0);
         roomMemberRepository.save(roomMemberEntity);
         return true;
@@ -124,9 +129,11 @@ public class RoomService {
         if(!existRoom) throw new CannotFindRoomException();
 
         Optional<RoomMemberEntity> findRoomMemberEntity = roomMemberRepository.findById(roomMemberID);
-        //memberId가 대기에 있는지 확인
-        if(findRoomMemberEntity.isEmpty()) return false;
+        if(findRoomMemberEntity.isEmpty()) throw new CustomBadRequestException("해당 방 대기 리스트에 입력한 memberId가 존재하지 않습니다.");
+
         RoomMemberEntity roomMemberEntity = findRoomMemberEntity.get();
+        if(roomMemberEntity.getIsWait()==0) throw new CustomBadRequestException("이미 참여하고있는 팀원입니다.");
+
         roomMemberEntity.setIsWait(0);
         roomMemberRepository.save(roomMemberEntity);
         return true;

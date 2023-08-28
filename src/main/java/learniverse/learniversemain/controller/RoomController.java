@@ -47,7 +47,7 @@ public class RoomController {
         return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
     }
 
-    @PostMapping("/application")
+    @PostMapping("/apply")
     public ResponseEntity<Response> application(@Valid @RequestBody RoomMemberID roomMemberID){
         Response response = new Response();
         HttpHeaders headers = new HttpHeaders();
@@ -55,7 +55,7 @@ public class RoomController {
 
         if(roomService.application(roomMemberID)){
             response.setStatus(Response.StatusEnum.CREATED);
-            response.setMessage("가입 신청 성공");
+            response.setMessage("참여 신청 성공");
             return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
         }
         else throw new RuntimeException();
@@ -68,11 +68,12 @@ public class RoomController {
         headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
 
-        roomService.join(roomMemberID);
-
-        response.setStatus(Response.StatusEnum.CREATED);
-        response.setMessage("가입 성공");
-        return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
+        if(roomService.join(roomMemberID)){
+            response.setStatus(Response.StatusEnum.CREATED);
+            response.setMessage("참여 성공");
+            return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
+        }
+        else throw new RuntimeException();
     }
 
     @PostMapping("/update")
@@ -157,10 +158,19 @@ public class RoomController {
     }
 
     @GetMapping("/info")
-    public RoomEntity getRoomInfo(@RequestParam long roomId){
-        return roomService.getRoomInfo(roomId);
+    public ResponseEntity<Response> getRoomInfo(@NotNull @RequestParam long roomId){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
-        //return new ResponseEntity(roomService.getRoomInfo(roomId), HttpStatus.OK);
+        RoomEntity roomEntity = roomService.getRoomInfo(roomId);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("스터디룸 정보 출력 성공");
+        Map<String, RoomEntity> data = new HashMap<>();
+        data.put("info", roomEntity);
+        response.setData(data);
+        return new ResponseEntity<>(response, headers, HttpStatus.OK);
     }
 
     @GetMapping("/encode")

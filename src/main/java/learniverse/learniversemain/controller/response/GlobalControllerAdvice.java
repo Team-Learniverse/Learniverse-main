@@ -3,6 +3,7 @@ package learniverse.learniversemain.controller.response;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Path;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
+import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -136,6 +137,17 @@ public class GlobalControllerAdvice {
 
     @ExceptionHandler(value = CannotFindRoomException.class)
     public ResponseEntity<Response> cannotFindRoomException(CannotFindRoomException e){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        response.setMessage(e.getMessage());
+        response.setStatus(Response.StatusEnum.BAD_REQUEST);
+        return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = CustomBadRequestException.class)
+    public ResponseEntity<Response> customBadRequestException(CustomBadRequestException e){
         Response response = new Response();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
