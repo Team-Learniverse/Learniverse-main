@@ -152,6 +152,24 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/info/{path}")
+    public ResponseEntity<Response> getRoomInfo(@PathVariable String path,
+                                                @NotNull @RequestParam long roomId){
+        Response response = new Response();
+        RoomEntity roomEntity = roomService.getRoomInfo(roomId);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("스터디룸 정보 출력 성공");
+        Map<String, String> data = roomEntity.getPath(path);
+        if(data == null){
+            response.setStatus(Response.StatusEnum.BAD_REQUEST);
+            response.setMessage("잘못된 path 입력입니다. (roomName, workspace, roomIntro만 가능)");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @GetMapping("/encode")
     public ResponseEntity<Response> getRoomEncoding(@NotNull @RequestParam long roomId) throws GeneralSecurityException, UnsupportedEncodingException {
         Response response = new Response();

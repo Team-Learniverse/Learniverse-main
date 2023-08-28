@@ -1,10 +1,12 @@
 package learniverse.learniversemain.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.dto.RoomDTO;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -56,5 +58,24 @@ public class RoomEntity {
         this.roomNotion = newRoom.getRoomNotion();
         this.roomGoogleDrive = newRoom.getRoomGoogleDrive();
         this.roomFigma = newRoom.getRoomFigma();
+    }
+
+    public Map<String, String> getPath(String path) {
+        System.out.println(path);
+        Map<String, String> data = new HashMap<>();
+        if(path.equals("workspace")){
+            data.put("roomGitOrg", this.roomGitOrg);
+            data.put("roomNotion", this.roomNotion);
+            data.put("roomGoogleDrive", this.roomGoogleDrive);
+            data.put("roomFigma", this.roomFigma);
+        }
+        else if (path.equals("roomName")) {
+            data.put("roomName", this.roomName);
+        }
+        else if (path.equals("roomIntro")) {
+            data.put("roomIntro", this.roomIntro);
+        }
+        else return  null;
+        return data;
     }
 }
