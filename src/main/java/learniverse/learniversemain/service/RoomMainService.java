@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +52,17 @@ public class RoomMainService {
     }
 
     public boolean createCore(CoreTimeDTO coreTimeDTO){
+        //중복체크
+        CoreTimeEntity coreTimeEntities = coreTimeRepository
+                .findOneByRoomIdAndCoreStartDateLessThanEqualAndCoreEndDateGreaterThan(coreTimeDTO.getRoomId(), coreTimeDTO.getCoreStartDate(), coreTimeDTO.getCoreStartDate());
+        if(coreTimeEntities != null) throw new CustomBadRequestException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
+
+        if(coreTimeDTO.getCoreEndDate().isBefore(coreTimeDTO.getCoreStartDate()))
+            throw new CustomBadRequestException("coreEndTime은 coreStartTime 이후 datetime이어야 합니다.");
+
+        if(coreTimeDTO.getCoreEndDate().isEqual(coreTimeDTO.getCoreStartDate()))
+            throw new CustomBadRequestException("coreEndTime은 coreStartTime 이후 datetime이어야 합니다.");
+
         boolean existRoom = roomRepository.existsByRoomId(coreTimeDTO.getRoomId());
         if(!existRoom) throw new CannotFindRoomException();
 
@@ -74,6 +86,14 @@ public class RoomMainService {
 
         List<CoreTimeEntity> coreTimeEntities = coreTimeRepository.findByRoomId(roomId);
         return coreTimeEntities;
+    }
 
+    public boolean isCore(Long roomId){
+        boolean existRoom = roomRepository.existsByRoomId(roomId);
+        if(!existRoom) throw new CannotFindRoomException();
+
+        CoreTimeEntity coreTimeEntities = coreTimeRepository.findOneByRoomIdAndCoreStartDateLessThanEqualAndCoreEndDateGreaterThan(roomId, LocalDateTime.now(), LocalDateTime.now());
+        if(coreTimeEntities == null) return false;
+        else return true;
     }
 }

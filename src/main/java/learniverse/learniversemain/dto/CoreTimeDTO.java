@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 public class CoreTimeDTO {
     @NotNull(message = "roomId 입력은 필수입니다.")
     private Long roomId;
-    @NotNull(message = "coreDate 입력은 필수입니다.")
-    private LocalDateTime coreDate;
+    @NotNull(message = "coreStartDate 입력은 필수입니다.")
+    private LocalDateTime coreStartDate;
+    @NotNull(message = "coreEndDate 입력은 필수입니다.")
+    private LocalDateTime coreEndDate;
 }

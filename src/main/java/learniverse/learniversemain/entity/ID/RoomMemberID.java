@@ -13,4 +13,12 @@ public class RoomMemberID implements Serializable {
     private Long roomId;
     @NotNull(message = "memberId 입력은 필수입니다.")
     private Long memberId;
+
+    public RoomMemberID(){
+
+    }
+    public RoomMemberID(long roomId, long memberId) {
+        this.roomId = roomId;
+        this.memberId = memberId;
+    }
 }

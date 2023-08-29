@@ -103,5 +103,18 @@ public class RoomMainController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/core/isCore")
+    public ResponseEntity<Response> isCore(@NotNull @RequestParam Long roomId){
+        Response response = new Response();
+
+        List<CoreTimeEntity> coreTimeEntities = roomMainService.getCores(roomId);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("코어타임 여부 출력 성공");
+        Map<String, Boolean> data = new HashMap<>();
+        data.put("isCore", roomMainService.isCore(roomId));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

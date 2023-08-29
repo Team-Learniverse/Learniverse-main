@@ -154,6 +154,21 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/member/isLeader")
+    public ResponseEntity<Response> leaderMembers(@NotNull @RequestParam long roomId,
+                                                  @NotNull @RequestParam long memberId){
+        Response response = new Response();
+
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("팀장 여부 출력 성공");
+        Map<String,Boolean> data = new HashMap<>();
+        data.put("isLeader", roomService.getIsLeader(roomId, memberId));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
     @GetMapping("/info")
     public ResponseEntity<Response> getRoomInfo(@NotNull @RequestParam long roomId){
         Response response = new Response();

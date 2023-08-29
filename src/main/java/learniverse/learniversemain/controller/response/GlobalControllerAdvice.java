@@ -33,12 +33,17 @@ public class GlobalControllerAdvice {
         return headers;
     }
 
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(value = Exception.class) // 500
     public ResponseEntity exception(Exception e){
         Response response = new Response();
+        response.setMessage("서버 내 오류");
+        response.setStatus(Response.StatusEnum.INTERNAL_SERVER_ERROR);
 
-        response.setMessage(e.getMessage()); // error message
-        response.setStatus(Response.StatusEnum.INTERNAL_SERER_ERROR);
+        List<Error> errorList = new ArrayList<>();
+        Error errorMessage = new Error();
+        errorMessage.setMessage(e.getMessage()); // error message
+        errorList.add(errorMessage);
+        response.setErrorList(errorList);
 
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -148,7 +153,7 @@ public class GlobalControllerAdvice {
     public ResponseEntity<Response> customException(CustomException e){
         Response response = new Response();
         response.setMessage(e.getMessage());
-        response.setStatus(Response.StatusEnum.INTERNAL_SERER_ERROR);
+        response.setStatus(Response.StatusEnum.INTERNAL_SERVER_ERROR);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

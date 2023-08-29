@@ -39,6 +39,7 @@ public class RoomService {
     private final MemberRepository memberRepository;
     private final MemberStatusRepository memberStatusRepository;
 
+    @Transactional
     public void createRoom(RoomDTO roomDTO){
         //방 생성
         RoomEntity roomEntity = RoomEntity.toRoomEntity(roomDTO);
@@ -46,7 +47,6 @@ public class RoomService {
         //해시태그 처리
         saveHashtag(roomEntity.getRoomId(), roomDTO.getRoomHashtags());
         //방장 처리
-        //meber 존재 유무 체크
         RoomMemberEntity roomMemberEntity
                 = new RoomMemberEntity(roomEntity.getRoomId(), roomDTO.getMemberId(), true);
         roomMemberRepository.save(roomMemberEntity);
@@ -163,6 +163,14 @@ public class RoomService {
             memberDTOS.add(memberDTO);
         }
         return memberDTOS;
+    }
+
+    public boolean getIsLeader(long roomId, long memberId){
+        RoomMemberID roomMemberID = new RoomMemberID(roomId, memberId);
+        RoomMemberEntity roomMemberEntity = roomMemberRepository.findById(roomMemberID)
+                .orElseThrow(() -> new CustomBadRequestException("입력한 roomId, memberId 관련 정보를 찾을 수 없습니다."));
+
+        return roomMemberEntity.isLeader();
     }
 
     public String getRoomEncoding (long roomId) throws NoSuchAlgorithmException,
