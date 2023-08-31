@@ -7,6 +7,7 @@ import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.HashtagDTO;
 import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.RoomDTO;
+import learniverse.learniversemain.dto.RoomSettingDTO;
 import learniverse.learniversemain.entity.HashtagEntity;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.RoomEntity;
@@ -30,40 +31,42 @@ import java.util.Map;
 public class RoomController {
     private final RoomService roomService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Response> create(@Valid @RequestBody RoomDTO roomDTO){
+    @GetMapping("/setting/category")
+    public ResponseEntity<Response> getCategories(){
         Response response = new Response();
 
-        roomService.createRoom(roomDTO);
+        Map<String, List<RoomSettingDTO>> data = new HashMap<>();
+        data.put("category",roomService.getSetting("category"));
+        response.setData(data);
+        response.setStatus(Response.StatusEnum.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
+    @GetMapping("/setting/language")
+    public ResponseEntity<Response> getLanguages(){
+        Response response = new Response();
+
+        Map<String, List<RoomSettingDTO>> data = new HashMap<>();
+        data.put("language",roomService.getSetting("language"));
+        response.setData(data);
+        response.setStatus(Response.StatusEnum.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<Response> create(@Valid @RequestBody RoomDTO roomDTO) throws GeneralSecurityException, UnsupportedEncodingException {
+        Response response = new Response();
+
+        long roomId = roomService.createRoom(roomDTO);
         response.setStatus(Response.StatusEnum.CREATED);
+
+        Map<String,String> data = new HashMap<>();
+        data.put("encoded", roomService.getRoomEncoding(roomId));
+        response.setData(data);
         response.setMessage("방 생성 성공");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PostMapping("/apply")
-    public ResponseEntity<Response> application(@Valid @RequestBody RoomMemberID roomMemberID){
-        Response response = new Response();
-
-        if(roomService.application(roomMemberID)){
-            response.setStatus(Response.StatusEnum.CREATED);
-            response.setMessage("참여 신청 성공");
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
-        }
-        else throw new RuntimeException();
-    }
-
-    @PostMapping("/join")
-    public ResponseEntity<Response>  join(@Valid @RequestBody RoomMemberID roomMemberID){
-        Response response = new Response();
-
-        if(roomService.join(roomMemberID)){
-            response.setStatus(Response.StatusEnum.CREATED);
-            response.setMessage("참여 성공");
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
-        }
-        else throw new RuntimeException();
-    }
 
     @PostMapping("/update")
     public void update(@RequestBody RoomDTO roomDTO){
@@ -116,56 +119,6 @@ public class RoomController {
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
 
-    }
-
-    @PostMapping("/pin")
-    public void pin(@RequestBody RoomMemberID roomMemberID){
-        //null 처리
-        roomService.pin(roomMemberID);
-        //return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/members")
-    public ResponseEntity<Response> members(@NotNull @RequestParam long roomId){
-        Response response = new Response();
-
-        List<MemberDTO> member_list = roomService.getMembers(roomId, false);
-        if(member_list == null) throw new RuntimeException();
-
-        response.setStatus(Response.StatusEnum.OK);
-        response.setMessage("멤버 리스트 출력 성공");
-        Map<String,List<MemberDTO>> data = new HashMap<>();
-        data.put("members", member_list);
-        response.setData(data);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/members/isWait")
-    public ResponseEntity<Response> waitMembers(@NotNull @RequestParam long roomId){
-        Response response = new Response();
-
-        List<MemberDTO> member_list = roomService.getMembers(roomId, true);
-
-        response.setStatus(Response.StatusEnum.OK);
-        response.setMessage("대기 멤버 리스트 출력 성공");
-        Map<String,List<MemberDTO>> data = new HashMap<>();
-        data.put("members", member_list);
-        response.setData(data);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/member/isLeader")
-    public ResponseEntity<Response> leaderMembers(@NotNull @RequestParam long roomId,
-                                                  @NotNull @RequestParam long memberId){
-        Response response = new Response();
-
-
-        response.setStatus(Response.StatusEnum.OK);
-        response.setMessage("팀장 여부 출력 성공");
-        Map<String,Boolean> data = new HashMap<>();
-        data.put("isLeader", roomService.getIsLeader(roomId, memberId));
-        response.setData(data);
-        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
@@ -235,5 +188,13 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<Response> getSearch(@NotNull @RequestParam String str){
+        Response response = new Response();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("검색");
+        response.setData(roomService.getSearch(str, 0));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

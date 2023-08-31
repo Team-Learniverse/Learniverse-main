@@ -8,4 +8,6 @@ import java.util.List;
 public interface HashtagRepository extends JpaRepository<HashtagEntity, Long> {
     boolean existsByRoomId(long roomId);
     List<HashtagEntity> findByRoomId(Long roomId);
+
+    List<HashtagEntity> findByHashtagContaining(String str);
 }

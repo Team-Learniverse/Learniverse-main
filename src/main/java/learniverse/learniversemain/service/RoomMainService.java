@@ -1,8 +1,11 @@
 package learniverse.learniversemain.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
 import learniverse.learniversemain.dto.CoreTimeDTO;
+import learniverse.learniversemain.dto.RoomSettingDTO;
 import learniverse.learniversemain.dto.ScheduleDTO;
 import learniverse.learniversemain.entity.CoreTimeEntity;
 import learniverse.learniversemain.entity.RoomEntity;
@@ -25,6 +28,8 @@ public class RoomMainService {
     private final ScheduleRepository scheduleRepository;
     private final CoreTimeRepository coreTimeRepository;
     private final RoomRepository roomRepository;
+
+
 
     public boolean createSchedule(ScheduleDTO scheduleDTO){
         //roomId 확인

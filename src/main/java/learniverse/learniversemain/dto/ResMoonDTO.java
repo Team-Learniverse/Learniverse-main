@@ -14,4 +14,9 @@ public class ResMoonDTO {
         this.moonDate = moonEntity.getMoonDate();
         this.moonScore = moonEntity.getMoonScore();
     }
+
+    public ResMoonDTO(LocalDate localDate, int i) {
+        this.moonDate = localDate;
+        this.moonScore = i;
+    }
 }

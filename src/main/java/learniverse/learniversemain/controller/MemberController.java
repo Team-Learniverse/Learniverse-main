@@ -6,6 +6,8 @@ import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.MoonDTO;
 import learniverse.learniversemain.dto.ResMoonDTO;
 import learniverse.learniversemain.entity.HashtagEntity;
+import learniverse.learniversemain.entity.ID.RoomMemberID;
+import learniverse.learniversemain.entity.RoomMemberEntity;
 import learniverse.learniversemain.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,7 +28,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/moon")
+    @PostMapping("/moon/add")
     public ResponseEntity<Response> saveMoon(@Valid @RequestBody MoonDTO moonDTO){
         Response response = new Response();
 
@@ -53,16 +55,33 @@ public class MemberController {
     public ResponseEntity<Response> getMoon(@NotNull @RequestParam Long memberId){
         Response response = new Response();
 
-        List<ResMoonDTO> resMoonList= memberService.getMoon(memberId);
-
         Map<String,List<ResMoonDTO>> data = new HashMap<>();
-        data.put("moons", resMoonList);
+        data.put("moons", memberService.getMoon(memberId));
         response.setData(data);
+
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("달 리스트 출력 성공");
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
+    @GetMapping("/rooms")
+    public ResponseEntity<Response> getRooms(@NotNull @RequestParam Long memberId){
+        Response response = new Response();
+        response.setData(memberService.getRooms(memberId));
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("참여 스터디룸 출력 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/pin")
+    public ResponseEntity<Response> addPin(@Valid @RequestBody RoomMemberID roomMemberID){
+        Response response = new Response();
+
+        boolean change = memberService.updatePin(roomMemberID);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("스터디룸 고정 \'"+ change +"\' 로 변경 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

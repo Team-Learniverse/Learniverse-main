@@ -105,7 +105,7 @@ public class GlobalControllerAdvice {
         Response response = new Response();
           List<Error> errorList = new ArrayList<>();
 
-        response.setMessage("올바르지 않은 형식의 값이 포함되어있습니다");
+        response.setMessage("올바르지 않은 형식의 포함된 요청입니다.");
         Error errorMessage = new Error();
         errorMessage.setMessage(e.getMessage()); // error message
         errorList.add(errorMessage);

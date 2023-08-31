@@ -12,7 +12,7 @@ import lombok.Setter;
 public class MemberStatusEntity {
     @Id
     @Column(name = "member_id")
-    private long memberId;
+    private Long memberId;
     @Column(nullable = false, name = "member_status")
     private boolean memberStatus;
 

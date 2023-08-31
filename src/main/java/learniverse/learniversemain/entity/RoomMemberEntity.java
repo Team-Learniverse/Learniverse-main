@@ -23,6 +23,8 @@ public class RoomMemberEntity {
     private boolean isLeader;
     @Column(name = "is_wait", nullable = false)
     private boolean isWait;
+    @Column(name = "is_reject", nullable = false)
+    private boolean isReject;
     @Column(name = "is_pin", nullable = false)
     private boolean isPin;
 
@@ -31,6 +33,7 @@ public class RoomMemberEntity {
         this.memberId = member_id;
         this.isLeader = is_leader;
         this.isWait = (is_leader==true)? false:true;
+        this.isReject = false;
         this.isPin = false;
     }
 
@@ -39,6 +42,7 @@ public class RoomMemberEntity {
         this.memberId = roomMemberID.getMemberId();
         this.isLeader = is_leader;
         this.isWait = (is_leader==true)? false:true;
+        this.isReject = false;
         this.isPin = false;
     }
 
