@@ -48,13 +48,19 @@ public class RoomMemberController {
         else throw new RuntimeException();
     }
 
-
+    @PostMapping("/reject")
+    public ResponseEntity<Response> reject(@Valid @RequestBody RoomMemberID roomMemberID){
+        Response response = new Response();
+        roomMemberService.reject(roomMemberID);
+        response.setStatus(Response.StatusEnum.CREATED);
+        response.setMessage("참여 거절 성공");
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
 
     @GetMapping("/isLeader")
     public ResponseEntity<Response> leaderMembers(@NotNull @RequestParam long roomId,
                                                   @NotNull @RequestParam long memberId){
         Response response = new Response();
-
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("팀장 여부 출력 성공");

@@ -15,6 +15,7 @@ public class RoomDTO {
     private Long roomId;
     @NotBlank(message = "방 이름은 필수입니다.")
     private String roomName;
+    @NotNull(message = "roomCategory 입력은 필수입니다. ")
     private Integer roomCategory;
     private String roomIntro;
     @NotNull(message = "방 제한 인원 입력은 필수입니다.")

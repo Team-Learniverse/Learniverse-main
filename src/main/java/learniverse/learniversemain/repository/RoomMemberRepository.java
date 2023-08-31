@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface RoomMemberRepository extends JpaRepository<RoomMemberEntity, RoomMemberID> {
     List<RoomMemberEntity> findByRoomId(long room_id);
     List<RoomMemberEntity> findByMemberId(long member_id);
+
+    List<RoomMemberEntity> findByRoomIdAndIsWait(long roomId, boolean isWait);
 }

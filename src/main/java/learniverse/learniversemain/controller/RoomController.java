@@ -4,10 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
-import learniverse.learniversemain.dto.HashtagDTO;
-import learniverse.learniversemain.dto.MemberDTO;
-import learniverse.learniversemain.dto.RoomDTO;
-import learniverse.learniversemain.dto.RoomSettingDTO;
+import learniverse.learniversemain.dto.*;
 import learniverse.learniversemain.entity.HashtagEntity;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.RoomEntity;
@@ -194,6 +191,17 @@ public class RoomController {
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("검색");
         response.setData(roomService.getSearch(str, 0));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<Response> getRooms(){
+        Response response = new Response();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("전체 방 조회");
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomService.getRooms());
+        response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

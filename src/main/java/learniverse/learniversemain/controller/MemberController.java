@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.MoonDTO;
 import learniverse.learniversemain.dto.ResMoonDTO;
+import learniverse.learniversemain.dto.RoomCardDTO;
 import learniverse.learniversemain.entity.HashtagEntity;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.RoomMemberEntity;
@@ -65,12 +66,36 @@ public class MemberController {
 
     }
 
-    @GetMapping("/rooms")
-    public ResponseEntity<Response> getRooms(@NotNull @RequestParam Long memberId){
+    @GetMapping("/room/list")
+    public ResponseEntity<Response> getRooms(){
         Response response = new Response();
-        response.setData(memberService.getRooms(memberId));
+        response.setData(memberService.getRooms());
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("참여 스터디룸 출력 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/room/list/apply")
+    public ResponseEntity<Response> getApplyRooms(){
+        Response response = new Response();
+        List<RoomCardDTO>  roomCardDTOS = memberService.getRoomsIs(false);
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomCardDTOS);
+        response.setData(data);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("신청한 스터디룸 출력 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/room/list/leader")
+    public ResponseEntity<Response> getLeaderRooms(){
+        Response response = new Response();
+        List<RoomCardDTO>  roomCardDTOS = memberService.getRoomsIs(true);
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomCardDTOS);
+        response.setData(data);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("내가 만든 스터디룸 출력 성공");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

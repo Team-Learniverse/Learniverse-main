@@ -1,14 +1,18 @@
 package learniverse.learniversemain.service;
 
 import jakarta.transaction.Transactional;
+import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
 import learniverse.learniversemain.dto.MoonDTO;
 import learniverse.learniversemain.dto.ResMoonDTO;
+import learniverse.learniversemain.dto.RoomCardDTO;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.MoonEntity;
+import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.entity.RoomMemberEntity;
 import learniverse.learniversemain.repository.MoonRepository;
 import learniverse.learniversemain.repository.RoomMemberRepository;
+import learniverse.learniversemain.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +24,8 @@ import java.util.*;
 public class MemberService {
     private final MoonRepository moonRepository;
     private final RoomMemberRepository roomMemberRepository;
+    private final RoomService roomService;
+    private final RoomRepository roomRepository;
 
     public void saveMoon(MoonDTO moonDTO){
         //memberId 체크
@@ -70,21 +76,52 @@ public class MemberService {
         return resMoonDTOS;
     }
 
-    public Map<String,List<Long>> getRooms(long memberId){
-        Map<String,List<Long>> data = new HashMap<>();
-        List<Long> rooms = new ArrayList<>();
-        List<Long> pinRooms = new ArrayList<>();
+    public Map<String,List<RoomCardDTO>> getRooms() {
+        long memberId = 1;
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        List<RoomCardDTO> rooms = new ArrayList<>();
+        List<RoomCardDTO> pinRooms = new ArrayList<>();
         List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByMemberId(memberId);
-        if(roomMemberEntities != null){
-            for(RoomMemberEntity roomMemberEntity : roomMemberEntities){
-                if(roomMemberEntity.isPin() == true)
-                    pinRooms.add(roomMemberEntity.getRoomId());
-                else rooms.add(roomMemberEntity.getRoomId());
+        if (roomMemberEntities != null)
+            for (RoomMemberEntity roomMemberEntity : roomMemberEntities) {
+                if (!roomMemberEntity.isWait()) {
+                    long roomId = roomMemberEntity.getRoomId();
+                    Optional<RoomEntity> roomEntity = roomRepository.findById(roomId);
+                    if (roomEntity.isEmpty()) throw new CannotFindRoomException();
+                    String isMember = roomService.getIsMember(roomId, memberId);
+                    List<String> hashtags = roomService.getHashtags2String(roomId);
+                    String roomCategory = roomService.getCategory(roomEntity.get().getRoomCategory());
+                    int roomCount = roomService.getRoomCount(roomId);
+                    if (roomMemberEntity.isPin() == true)
+                        pinRooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
+                    else rooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
+                }
             }
-        }
+
         data.put("pinRooms", pinRooms);
         data.put("rooms", rooms);
         return data;
+    }
+
+    public List<RoomCardDTO> getRoomsIs (boolean isLeader) {
+        long memberId = 1;
+        List<RoomCardDTO> rooms = new ArrayList<>();
+        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByMemberId(memberId);
+        if (roomMemberEntities != null)
+            for (RoomMemberEntity roomMemberEntity : roomMemberEntities) {
+                if (roomMemberEntity.isLeader() == isLeader) {
+                    long roomId = roomMemberEntity.getRoomId();
+                    Optional<RoomEntity> roomEntity = roomRepository.findById(roomId);
+                    if (roomEntity.isEmpty()) throw new CannotFindRoomException();
+                    String isMember = roomService.getIsMember(roomId, memberId);
+                    List<String> hashtags = roomService.getHashtags2String(roomId);
+                    String roomCategory = roomService.getCategory(roomEntity.get().getRoomCategory());
+                    int roomCount = roomService.getRoomCount(roomId);
+                    rooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
+                }
+            }
+
+        return rooms;
     }
 
     @Transactional

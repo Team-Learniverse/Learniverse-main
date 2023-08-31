@@ -2,12 +2,10 @@ package learniverse.learniversemain.service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
-import learniverse.learniversemain.controller.Exception.CustomException;
-import learniverse.learniversemain.dto.MemberDTO;
+import learniverse.learniversemain.dto.RoomCardDTO;
 import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.dto.RoomSettingDTO;
 import learniverse.learniversemain.entity.*;
@@ -17,18 +15,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
-import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
-
-import static learniverse.learniversemain.dto.MemberDTO.toMemberDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -121,6 +114,16 @@ public class RoomService {
         return hashtagRepository.findByRoomId(roomId);
     }
 
+
+    public List<String> getHashtags2String(long roomId){
+        List<String> res = new ArrayList<>();
+        List<HashtagEntity>  hashtagEntityList = hashtagRepository.findByRoomId(roomId);
+        for(HashtagEntity hashtagEntity : hashtagEntityList){
+            res.add(hashtagEntity.getHashtag());
+        }
+        return res;
+    }
+
     public void deleteHashtag(long hashtagId){
         hashtagRepository.deleteById(hashtagId);
     }
@@ -151,5 +154,44 @@ public class RoomService {
         Page<RoomEntity> roomList1 = roomRepository.findByRoomNameContainingOrRoomIntroContaining(str, str, pageRequest);
         //List<HashtagEntity> roomList3 = hashtagRepository.findByHashtagContaining(str);
         return roomList1;
+    }
+
+    public String getCategory(int settingId){
+        RoomSettingEntity roomSettingEntity = roomSettingRepository.findById(settingId)
+                .orElseThrow(() -> new CustomBadRequestException("settingId 오류"));
+
+        return roomSettingEntity.getName();
+    }
+
+    public String getIsMember(long roomId, long memberId){
+        RoomMemberID roomMemberID = new RoomMemberID(roomId, memberId);
+        RoomMemberEntity roomMemberEntity = roomMemberRepository.findById(roomMemberID)
+                .orElseThrow(() -> new CustomBadRequestException("입력한 roomId, memberId 관련 정보를 찾을 수 없습니다."));
+
+        if(roomMemberEntity.isLeader()) return ("팀장");
+        else if(roomMemberEntity.isReject()) return ("거절");
+        else if(!roomMemberEntity.isWait()) return("승인");
+        else return ("대기");
+    }
+
+    public int getRoomCount(long roomId){
+        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByRoomIdAndIsWait(roomId, false);
+        if(roomMemberEntities != null) return roomMemberEntities.size();
+        else return 0;
+    }
+
+    public List<RoomCardDTO> getRooms() {
+        long memberId = 1;
+        List<RoomCardDTO> resRooms = new ArrayList<>();
+        List<RoomEntity> roomEntities = roomRepository.findAll();
+        for(RoomEntity roomEntity : roomEntities){
+            long roomId = roomEntity.getRoomId();
+            String isMember = getIsMember(roomId, memberId);
+            List<String> hashtags = getHashtags2String(roomId);
+            String roomCategory = getCategory(roomEntity.getRoomCategory());
+            int roomCount = getRoomCount(roomId);
+            resRooms.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+        }
+        return resRooms;
     }
 }

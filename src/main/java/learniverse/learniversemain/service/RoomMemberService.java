@@ -83,7 +83,12 @@ public class RoomMemberService {
         List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByRoomId(roomId);
         if (roomMemberEntities.isEmpty()) throw new CannotFindRoomException();
 
-        roomMemberEntities.removeIf(entity -> entity.isWait() != isWait);
+        if(isWait){
+            roomMemberEntities.removeIf(entity -> entity.isLeader() == true);
+        }else{
+            roomMemberEntities.removeIf(entity -> entity.isWait() == true);
+        }
+
 
         for(RoomMemberEntity roomMemberEntity : roomMemberEntities){
             long memberId = roomMemberEntity.getMemberId();
@@ -91,7 +96,7 @@ public class RoomMemberService {
                     .orElseThrow(()->new CustomBadRequestException("존재하지 않는 memberId"));
             MemberStatusEntity memberStatusEntity = memberStatusRepository.findById(memberId)
                     .orElseThrow(()->new CustomBadRequestException("memberId \'"+memberId+"\'의 memberStauts가 존재하지 않습니다"));
-            MemberDTO memberDTO = toMemberDTO(memberEntity, memberStatusEntity);
+            MemberDTO memberDTO = toMemberDTO(memberEntity, memberStatusEntity, roomMemberEntity);
             memberDTOS.add(memberDTO);
         }
         return memberDTOS;
