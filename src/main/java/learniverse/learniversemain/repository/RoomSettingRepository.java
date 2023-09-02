@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface RoomSettingRepository extends JpaRepository<RoomSettingEntity, Integer> {
     List<RoomSettingEntity> findByType(String type);
+
+    RoomSettingEntity findFirstByTypeOrderBySettingIdAsc(String type);
 }

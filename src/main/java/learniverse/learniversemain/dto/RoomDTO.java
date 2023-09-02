@@ -10,8 +10,8 @@ import lombok.*;
 
 @Data
 public class RoomDTO {
-    @NotNull(message = "멤버 id 입력은 필수입니다.")
-    private Long memberId;
+    //@NotNull(message = "멤버 id 입력은 필수입니다.")
+    //private Long memberId = 1L;
     private Long roomId;
     @NotBlank(message = "방 이름은 필수입니다.")
     private String roomName;

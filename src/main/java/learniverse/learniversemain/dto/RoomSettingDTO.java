@@ -14,4 +14,9 @@ public class RoomSettingDTO {
         this.setting_id = roomSettingEntity.getSettingId();
         this.name = roomSettingEntity.getName();
     }
+
+    public RoomSettingDTO(int i, String name) {
+        this.setting_id = i;
+        this.name = name;
+    }
 }

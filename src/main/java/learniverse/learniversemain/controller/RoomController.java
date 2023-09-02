@@ -1,5 +1,7 @@
 package learniverse.learniversemain.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -21,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Tag(name = "room", description = "스터디룸 관련 api")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/room")
@@ -39,6 +42,7 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Hidden
     @GetMapping("/setting/language")
     public ResponseEntity<Response> getLanguages(){
         Response response = new Response();
@@ -65,11 +69,13 @@ public class RoomController {
     }
 
 
+    @Hidden
     @PostMapping("/update")
     public void update(@RequestBody RoomDTO roomDTO){
         roomService.updateRoom(roomDTO);
     }
 
+    @Hidden
     @GetMapping("/hashtags")
     public  ResponseEntity<Response> getHashtags(@NotNull @RequestParam Long roomId){
         Response response = new Response();
@@ -84,6 +90,7 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Hidden
     @PostMapping("/hashtags/add")
     public ResponseEntity<Response> saveHashtags(@Valid @RequestBody HashtagDTO hashtagDTO){
         Response response = new Response();
@@ -98,6 +105,7 @@ public class RoomController {
         else throw new RuntimeException();
     }
 
+    @Hidden
     @DeleteMapping("/hashtags/delete")
     public ResponseEntity<Response> deleteHashtags(@Valid @RequestParam @NotEmpty Long[] hashtagIds){
         Response response = new Response();
@@ -118,7 +126,7 @@ public class RoomController {
 
     }
 
-
+    @Hidden
     @GetMapping("/info")
     public ResponseEntity<Response> getRoomInfo(@NotNull @RequestParam long roomId){
         Response response = new Response();
@@ -150,6 +158,7 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Hidden
     @GetMapping("/encode")
     public ResponseEntity<Response> getRoomEncoding(@NotNull @RequestParam long roomId) throws GeneralSecurityException, UnsupportedEncodingException {
         Response response = new Response();
@@ -185,6 +194,7 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Hidden
     @GetMapping("/search")
     public ResponseEntity<Response> getSearch(@NotNull @RequestParam String str){
         Response response = new Response();

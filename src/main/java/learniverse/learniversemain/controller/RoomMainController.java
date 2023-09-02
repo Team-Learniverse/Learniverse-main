@@ -1,6 +1,8 @@
 package learniverse.learniversemain.controller;
 
 
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
@@ -22,12 +24,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Tag(name = "roomMain", description = "스터디룸 입장 시 필요한 정보와 관련된 api")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/room")
 @Validated
 public class RoomMainController {
     private final RoomMainService roomMainService;
+
+
+    @Hidden
     @PostMapping("/schedule/create")
     public ResponseEntity<Response> createSchedule(@Valid @RequestBody ScheduleDTO scheduleDTO){
         Response response = new Response();
@@ -40,6 +46,7 @@ public class RoomMainController {
         else throw new RuntimeException();
     }
 
+    @Hidden
     @DeleteMapping("/schedule/delete")
     public ResponseEntity<Response> deleteSchedule(@NotNull @RequestParam long scheduleId){
         Response response = new Response();
@@ -52,6 +59,7 @@ public class RoomMainController {
         else throw new RuntimeException();
     }
 
+    @Hidden
     @GetMapping("/schedules")
     public ResponseEntity<Response> getSchedules(@RequestParam Long roomId){
         Response response = new Response();
@@ -66,6 +74,7 @@ public class RoomMainController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Hidden
     @PostMapping("/core/create")
     public ResponseEntity<Response>  createCoreTime(@Valid @RequestBody CoreTimeDTO coreTimeDTO){
         Response response = new Response();
@@ -78,6 +87,7 @@ public class RoomMainController {
         else throw new RuntimeException();
     }
 
+    @Hidden
     @DeleteMapping("/core/delete")
     public ResponseEntity<Response>  deleteCoreTime(@NotNull @RequestParam long coreTimeId){
         Response response = new Response();
@@ -89,7 +99,7 @@ public class RoomMainController {
         else throw new RuntimeException();
     }
 
-    @GetMapping("/cores")
+    @GetMapping("/core/list")
     public ResponseEntity<Response> getCores(@NotNull @RequestParam Long roomId){
         Response response = new Response();
 
@@ -103,6 +113,7 @@ public class RoomMainController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Hidden
     @GetMapping("/core/isCore")
     public ResponseEntity<Response> isCore(@NotNull @RequestParam Long roomId){
         Response response = new Response();

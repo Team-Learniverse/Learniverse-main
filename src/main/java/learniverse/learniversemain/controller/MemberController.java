@@ -1,5 +1,7 @@
 package learniverse.learniversemain.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
@@ -21,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Tag(name = "member", description = "member 관련 api")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")
@@ -29,6 +32,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    @Hidden
     @PostMapping("/moon/add")
     public ResponseEntity<Response> saveMoon(@Valid @RequestBody MoonDTO moonDTO){
         Response response = new Response();
@@ -41,6 +45,7 @@ public class MemberController {
 
     }
 
+    @Hidden
     @PostMapping("/moon/minus")
     public ResponseEntity<Response> deleteMoon(@Valid @RequestBody MoonDTO moonDTO){
         Response response = new Response();
@@ -52,12 +57,12 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/moon")
-    public ResponseEntity<Response> getMoon(@NotNull @RequestParam Long memberId){
+    @GetMapping("/moon/list")
+    public ResponseEntity<Response> getMoon(){
         Response response = new Response();
 
         Map<String,List<ResMoonDTO>> data = new HashMap<>();
-        data.put("moons", memberService.getMoon(memberId));
+        data.put("moons", memberService.getMoon(1L));
         response.setData(data);
 
         response.setStatus(Response.StatusEnum.OK);
@@ -87,6 +92,7 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+
     @GetMapping("/room/list/leader")
     public ResponseEntity<Response> getLeaderRooms(){
         Response response = new Response();
@@ -99,6 +105,7 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Hidden
     @PostMapping("/pin")
     public ResponseEntity<Response> addPin(@Valid @RequestBody RoomMemberID roomMemberID){
         Response response = new Response();

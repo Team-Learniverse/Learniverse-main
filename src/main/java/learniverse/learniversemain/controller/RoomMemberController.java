@@ -1,5 +1,7 @@
 package learniverse.learniversemain.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
@@ -17,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Tag(name = "roomMember", description = "스터디룸에 참여한 멤버와 관련된 api")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/room/member")
@@ -24,6 +27,7 @@ import java.util.Map;
 public class RoomMemberController {
     private final RoomMemberService roomMemberService;
 
+    @Hidden
     @PostMapping("/apply")
     public ResponseEntity<Response> application(@Valid @RequestBody RoomMemberID roomMemberID){
         Response response = new Response();
@@ -36,6 +40,7 @@ public class RoomMemberController {
         else throw new RuntimeException();
     }
 
+    @Hidden
     @PostMapping("/join")
     public ResponseEntity<Response>  join(@Valid @RequestBody RoomMemberID roomMemberID){
         Response response = new Response();
@@ -48,6 +53,7 @@ public class RoomMemberController {
         else throw new RuntimeException();
     }
 
+    @Hidden
     @PostMapping("/reject")
     public ResponseEntity<Response> reject(@Valid @RequestBody RoomMemberID roomMemberID){
         Response response = new Response();
@@ -57,6 +63,7 @@ public class RoomMemberController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @Hidden
     @GetMapping("/isLeader")
     public ResponseEntity<Response> leaderMembers(@NotNull @RequestParam long roomId,
                                                   @NotNull @RequestParam long memberId){

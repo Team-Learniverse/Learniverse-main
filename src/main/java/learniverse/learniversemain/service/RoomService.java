@@ -39,9 +39,8 @@ public class RoomService {
     public List<RoomSettingDTO> getSetting(String type){
         List<RoomSettingEntity> roomSettingEntities = roomSettingRepository.findByType(type);
         List<RoomSettingDTO> roomSettingDTOS = new ArrayList<>();
-        for(RoomSettingEntity roomSettingEntity : roomSettingEntities){
-            RoomSettingDTO roomSettingDTO = new RoomSettingDTO(roomSettingEntity);
-            roomSettingDTOS.add(roomSettingDTO);
+        for(int i=0;i<roomSettingEntities.size();i++){
+            roomSettingDTOS.add(new RoomSettingDTO(i, roomSettingEntities.get(i).getName()));
         }
         return roomSettingDTOS;
     }
@@ -55,7 +54,7 @@ public class RoomService {
         saveHashtag(roomEntity.getRoomId(), roomDTO.getRoomHashtags());
         //방장 처리
         RoomMemberEntity roomMemberEntity
-                = new RoomMemberEntity(roomEntity.getRoomId(), roomDTO.getMemberId(), true);
+                = new RoomMemberEntity(roomEntity.getRoomId(), 1L, true);
         roomMemberRepository.save(roomMemberEntity);
         return roomEntity.getRoomId();
     }
@@ -157,7 +156,9 @@ public class RoomService {
     }
 
     public String getCategory(int settingId){
-        RoomSettingEntity roomSettingEntity = roomSettingRepository.findById(settingId)
+        RoomSettingEntity roomCategoryEntity = roomSettingRepository.findFirstByTypeOrderBySettingIdAsc("category");
+        System.out.println(settingId + roomCategoryEntity.getSettingId());
+        RoomSettingEntity roomSettingEntity = roomSettingRepository.findById(settingId + roomCategoryEntity.getSettingId())
                 .orElseThrow(() -> new CustomBadRequestException("settingId 오류"));
 
         return roomSettingEntity.getName();
