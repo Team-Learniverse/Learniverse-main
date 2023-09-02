@@ -15,6 +15,8 @@ public class RoomDTO {
     private Long roomId;
     @NotBlank(message = "방 이름은 필수입니다.")
     private String roomName;
+    @Min(value = 0, message = "카테고리 id는 0 이상입니다.")
+    @Max(value = 5, message = "카테고리 id는 5 이하입니다.")
     @NotNull(message = "roomCategory 입력은 필수입니다. ")
     private Integer roomCategory;
     private String roomIntro;
