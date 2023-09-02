@@ -73,6 +73,13 @@ public class MemberService {
         for(LocalDate date : resMoon.keySet()){
             resMoonDTOS.add(new ResMoonDTO(date, resMoon.get(date)));
         }
+        Collections.sort(resMoonDTOS, new Comparator<ResMoonDTO>() {
+            @Override
+            public int compare(ResMoonDTO o1, ResMoonDTO o2) {
+                if(o2.getMoonDate().isAfter( o1.getMoonDate())) return 1;
+                return -1;
+            }
+        });
         return resMoonDTOS;
     }
 

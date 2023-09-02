@@ -166,12 +166,12 @@ public class RoomService {
 
     public String getIsMember(long roomId, long memberId){
         RoomMemberID roomMemberID = new RoomMemberID(roomId, memberId);
-        RoomMemberEntity roomMemberEntity = roomMemberRepository.findById(roomMemberID)
-                .orElseThrow(() -> new CustomBadRequestException("입력한 roomId, memberId 관련 정보를 찾을 수 없습니다."));
+        Optional<RoomMemberEntity> roomMemberEntity = roomMemberRepository.findById(roomMemberID);
+        if(roomMemberEntity.isEmpty()) return null;
 
-        if(roomMemberEntity.isLeader()) return ("팀장");
-        else if(roomMemberEntity.isReject()) return ("거절");
-        else if(!roomMemberEntity.isWait()) return("승인");
+        if(roomMemberEntity.get().isLeader()) return ("팀장");
+        else if(roomMemberEntity.get().isReject()) return ("거절");
+        else if(!roomMemberEntity.get().isWait()) return("승인");
         else return ("대기");
     }
 
