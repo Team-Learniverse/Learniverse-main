@@ -18,7 +18,7 @@ public class RoomEntity {
     private long roomId;
     @Column(name = "room_name", nullable = false)
     private String roomName;
-    @Column(name = "room_category",nullable = true)
+    @Column(name = "room_category",nullable = false)
     private int roomCategory;
     @Column(name = "room_intro",nullable = true)
     private String roomIntro;

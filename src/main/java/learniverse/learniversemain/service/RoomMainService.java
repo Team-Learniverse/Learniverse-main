@@ -62,6 +62,7 @@ public class RoomMainService {
                 .findOneByRoomIdAndCoreStartDateLessThanEqualAndCoreEndDateGreaterThan(coreTimeDTO.getRoomId(), coreTimeDTO.getCoreStartDate(), coreTimeDTO.getCoreStartDate());
         if(coreTimeEntities != null) throw new CustomBadRequestException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
 
+        // end 기준으로도 진행
         if(coreTimeDTO.getCoreEndDate().isBefore(coreTimeDTO.getCoreStartDate()))
             throw new CustomBadRequestException("coreEndTime은 coreStartTime 이후 datetime이어야 합니다.");
 

@@ -29,6 +29,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/room")
 @Validated
+@CrossOrigin(origins = "http://localhost:3000")
 public class RoomMainController {
     private final RoomMainService roomMainService;
 

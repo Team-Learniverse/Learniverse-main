@@ -24,15 +24,15 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/room/member")
 @Validated
+@CrossOrigin(origins = "http://localhost:3000")
 public class RoomMemberController {
     private final RoomMemberService roomMemberService;
 
-    @Hidden
     @PostMapping("/apply")
     public ResponseEntity<Response> application(@Valid @RequestBody RoomMemberID roomMemberID){
         Response response = new Response();
 
-        if(roomMemberService.application(roomMemberID)){
+        if(roomMemberService.apply(roomMemberID)){
             response.setStatus(Response.StatusEnum.CREATED);
             response.setMessage("참여 신청 성공");
             return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -40,7 +40,6 @@ public class RoomMemberController {
         else throw new RuntimeException();
     }
 
-    @Hidden
     @PostMapping("/join")
     public ResponseEntity<Response>  join(@Valid @RequestBody RoomMemberID roomMemberID){
         Response response = new Response();
@@ -53,7 +52,6 @@ public class RoomMemberController {
         else throw new RuntimeException();
     }
 
-    @Hidden
     @PostMapping("/reject")
     public ResponseEntity<Response> reject(@Valid @RequestBody RoomMemberID roomMemberID){
         Response response = new Response();
