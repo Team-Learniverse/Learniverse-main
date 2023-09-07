@@ -12,4 +12,8 @@ public interface RoomMemberRepository extends JpaRepository<RoomMemberEntity, Ro
     List<RoomMemberEntity> findByMemberId(long member_id);
 
     List<RoomMemberEntity> findByRoomIdAndIsWait(long roomId, boolean isWait);
+
+    List<RoomMemberEntity> findByMemberIdOrderByRoomIdDesc(long memberId);
+
+    List<RoomMemberEntity> findByMemberIdOrderByJoinTimeDesc(long memberId);
 }

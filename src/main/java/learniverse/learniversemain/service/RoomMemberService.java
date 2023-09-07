@@ -5,6 +5,7 @@ import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.entity.MemberStatusEntity;
+import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.entity.RoomMemberEntity;
 import learniverse.learniversemain.repository.MemberRepository;
 import learniverse.learniversemain.repository.MemberStatusRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +31,14 @@ public class RoomMemberService {
     private final RoomMemberRepository roomMemberRepository;
     private final MemberRepository memberRepository;
     private final MemberStatusRepository memberStatusRepository;
+
+    private final RoomService roomService;
+
     public boolean apply(RoomMemberID roomMemberID){
+        //memberId 확인
+        boolean existMember = memberRepository.existsByMemberId(roomMemberID.getMemberId());
+        if(!existMember) throw new CustomBadRequestException("해당 멤버Id와 매칭되는 멤버를 찾을 수 없습니다.");
+
         //roomId 확인
         boolean existRoom = roomRepository.existsByRoomId(roomMemberID.getRoomId());
         if(!existRoom) throw new CannotFindRoomException();
@@ -38,6 +47,8 @@ public class RoomMemberService {
         boolean existRoomMember = roomMemberRepository.existsById(roomMemberID);
         if(existRoomMember) throw new CustomBadRequestException("이미 참여 신청했거나 참여한 상태입니다.");
 
+
+
         RoomMemberEntity roomMemberEntity = new RoomMemberEntity(roomMemberID,false);
         roomMemberRepository.save(roomMemberEntity);
         return true;
@@ -45,17 +56,20 @@ public class RoomMemberService {
 
     public boolean join(RoomMemberID roomMemberID){
         //roomId 확인
-        boolean existRoom = roomRepository.existsByRoomId(roomMemberID.getRoomId());
-        if(!existRoom) throw new CannotFindRoomException();
-
+        Optional<RoomEntity> roomEntity = roomRepository.findById(roomMemberID.getRoomId());
+        if(roomEntity.isEmpty()) throw new CannotFindRoomException();
+        //대기여부
         Optional<RoomMemberEntity> findRoomMemberEntity = roomMemberRepository.findById(roomMemberID);
         if(findRoomMemberEntity.isEmpty()) throw new CustomBadRequestException("해당 방 대기 리스트에 입력한 memberId가 존재하지 않습니다.");
-
+        //count
+        if(roomService.getRoomCount(roomMemberID.getRoomId())==roomEntity.get().getRoomLimit())
+            throw new CustomBadRequestException("제한 인원이 초과되는 요청입니다.");
         RoomMemberEntity roomMemberEntity = findRoomMemberEntity.get();
         if(roomMemberEntity.isReject()) throw new CustomBadRequestException("참여 요청이 거절된 멤버입니다.");
         if(!roomMemberEntity.isWait()) throw new CustomBadRequestException("이미 참여하고있는 팀원입니다.");
 
         roomMemberEntity.setWait(false);
+        roomMemberEntity.setJoinTime(LocalDateTime.now());
         roomMemberRepository.save(roomMemberEntity);
         return true;
     }

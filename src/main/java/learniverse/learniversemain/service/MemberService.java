@@ -83,12 +83,10 @@ public class MemberService {
         return resMoonDTOS;
     }
 
-    public Map<String,List<RoomCardDTO>> getRooms() {
-        long memberId = 1;
+    public Map<String,List<RoomCardDTO>> getRooms(long memberId) {
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
         List<RoomCardDTO> rooms = new ArrayList<>();
-        List<RoomCardDTO> pinRooms = new ArrayList<>();
-        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByMemberId(memberId);
+        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByMemberIdOrderByJoinTimeDesc(memberId);
         if (roomMemberEntities != null)
             for (RoomMemberEntity roomMemberEntity : roomMemberEntities) {
                 if (!roomMemberEntity.isWait()) {
@@ -99,19 +97,15 @@ public class MemberService {
                     List<String> hashtags = roomService.getHashtags2String(roomId);
                     String roomCategory = roomService.getCategory(roomEntity.get().getRoomCategory());
                     int roomCount = roomService.getRoomCount(roomId);
-                    if (roomMemberEntity.isPin() == true)
-                        pinRooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
-                    else rooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
+                    rooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
                 }
             }
 
-        data.put("pinRooms", pinRooms);
         data.put("rooms", rooms);
         return data;
     }
 
-    public List<RoomCardDTO> getRoomsIs (boolean isLeader) {
-        long memberId = 1;
+    public List<RoomCardDTO> getRoomsIs (long memberId, boolean isLeader) {
         List<RoomCardDTO> rooms = new ArrayList<>();
         List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByMemberId(memberId);
         if (roomMemberEntities != null)

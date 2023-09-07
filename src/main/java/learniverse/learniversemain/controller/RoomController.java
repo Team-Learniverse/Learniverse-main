@@ -128,10 +128,10 @@ public class RoomController {
     }
 
     @Hidden
-    @GetMapping("/info")
-    public ResponseEntity<Response> getRoomInfo(@NotNull @RequestParam long roomId){
+    @GetMapping("/modify/info")
+    public ResponseEntity<Response> getRoomModifyInfo(@NotNull @RequestParam long roomId){
         Response response = new Response();
-        RoomEntity roomEntity = roomService.getRoomInfo(roomId);
+        RoomEntity roomEntity = roomService.getRoomModifyInfo(roomId);
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("스터디룸 정보 출력 성공");
@@ -145,7 +145,7 @@ public class RoomController {
     public ResponseEntity<Response> getRoomInfo(@PathVariable String path,
                                                 @NotNull @RequestParam long roomId){
         Response response = new Response();
-        RoomEntity roomEntity = roomService.getRoomInfo(roomId);
+        RoomEntity roomEntity = roomService.getRoomModifyInfo(roomId);
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("스터디룸 정보 출력 성공");
@@ -159,7 +159,6 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Hidden
     @GetMapping("/encode")
     public ResponseEntity<Response> getRoomEncoding(@NotNull @RequestParam long roomId) throws GeneralSecurityException, UnsupportedEncodingException {
         Response response = new Response();
@@ -205,14 +204,34 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/info")
+    public ResponseEntity<Response> getRoomInfo(@NotNull long roomId, @NotNull long memberId){
+        Response response = new Response();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("방 정보 조회");
+        Map<String, RoomCardDTO> data = new HashMap<>();
+        data.put("rooms", roomService.getRoom(roomId, memberId));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @GetMapping("/list")
-    public ResponseEntity<Response> getRooms(){
+    public ResponseEntity<Response> getRooms(@NotNull long memberId){
         Response response = new Response();
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("전체 방 조회");
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
-        data.put("rooms", roomService.getRooms());
+        data.put("rooms", roomService.getRooms(memberId));
         response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("")
+    public ResponseEntity<Response> deleteRoom(@NotNull long roomId){
+        Response response = new Response();
+        roomService.deleteRoom(roomId);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("방 삭제 성공");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

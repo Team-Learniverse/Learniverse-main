@@ -33,7 +33,6 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @Hidden
     @PostMapping("/moon/add")
     public ResponseEntity<Response> saveMoon(@Valid @RequestBody MoonDTO moonDTO){
         Response response = new Response();
@@ -59,11 +58,11 @@ public class MemberController {
     }
 
     @GetMapping("/moon/list")
-    public ResponseEntity<Response> getMoon(){
+    public ResponseEntity<Response> getMoon(@NotNull long memberId){
         Response response = new Response();
 
         Map<String,List<ResMoonDTO>> data = new HashMap<>();
-        data.put("moons", memberService.getMoon(1L));
+        data.put("moons", memberService.getMoon(memberId));
         response.setData(data);
 
         response.setStatus(Response.StatusEnum.OK);
@@ -73,18 +72,18 @@ public class MemberController {
     }
 
     @GetMapping("/room/list")
-    public ResponseEntity<Response> getRooms(){
+    public ResponseEntity<Response> getRooms(@NotNull long memberId){
         Response response = new Response();
-        response.setData(memberService.getRooms());
+        response.setData(memberService.getRooms(memberId));
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("참여 스터디룸 출력 성공");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/room/list/apply")
-    public ResponseEntity<Response> getApplyRooms(){
+    public ResponseEntity<Response> getApplyRooms(@NotNull long memberId){
         Response response = new Response();
-        List<RoomCardDTO>  roomCardDTOS = memberService.getRoomsIs(false);
+        List<RoomCardDTO>  roomCardDTOS = memberService.getRoomsIs(memberId, false);
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
         data.put("rooms", roomCardDTOS);
         response.setData(data);
@@ -95,9 +94,9 @@ public class MemberController {
 
 
     @GetMapping("/room/list/leader")
-    public ResponseEntity<Response> getLeaderRooms(){
+    public ResponseEntity<Response> getLeaderRooms(@NotNull long memberId){
         Response response = new Response();
-        List<RoomCardDTO>  roomCardDTOS = memberService.getRoomsIs(true);
+        List<RoomCardDTO>  roomCardDTOS = memberService.getRoomsIs(memberId, true);
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
         data.put("rooms", roomCardDTOS);
         response.setData(data);

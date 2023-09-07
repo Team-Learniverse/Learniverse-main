@@ -14,6 +14,7 @@ import learniverse.learniversemain.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -47,6 +48,8 @@ public class RoomService {
 
     @Transactional
     public long createRoom(RoomDTO roomDTO){
+        boolean existMember = memberRepository.existsByMemberId(roomDTO.getMemberId());
+        if(!existMember) throw new CustomBadRequestException("해당 멤버Id와 매칭되는 멤버를 찾을 수 없습니다.");
         //방 생성
         RoomEntity roomEntity = RoomEntity.toRoomEntity(roomDTO);
         roomRepository.save(roomEntity);
@@ -54,7 +57,7 @@ public class RoomService {
         saveHashtag(roomEntity.getRoomId(), roomDTO.getRoomHashtags());
         //방장 처리
         RoomMemberEntity roomMemberEntity
-                = new RoomMemberEntity(roomEntity.getRoomId(), 1L, true);
+                = new RoomMemberEntity(roomEntity.getRoomId(), roomDTO.getMemberId(), true);
         roomMemberRepository.save(roomMemberEntity);
         return roomEntity.getRoomId();
     }
@@ -67,7 +70,7 @@ public class RoomService {
         oldRoom.update(newRoom);
     }
 
-    public RoomEntity getRoomInfo(Long roomId){
+    public RoomEntity getRoomModifyInfo(Long roomId){
         RoomEntity findRoom = roomRepository.findById(roomId)
                 .orElseThrow(()-> new CannotFindRoomException());
         return roomRepository.findById(roomId).orElseThrow(() -> new RuntimeException());
@@ -181,10 +184,20 @@ public class RoomService {
         else return 0;
     }
 
-    public List<RoomCardDTO> getRooms() {
-        long memberId = 1;
+    public RoomCardDTO getRoom(long roomId, long memberId){
+        RoomEntity roomEntity = roomRepository.findById(roomId)
+                .orElseThrow(()->new CannotFindRoomException());
+        String isMember = getIsMember(roomId, memberId);
+        List<String> hashtags = getHashtags2String(roomId);
+        String roomCategory = getCategory(roomEntity.getRoomCategory());
+        int roomCount = getRoomCount(roomId);
+
+        return new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount);
+    }
+
+    public List<RoomCardDTO> getRooms(long memberId) {
         List<RoomCardDTO> resRooms = new ArrayList<>();
-        List<RoomEntity> roomEntities = roomRepository.findAll();
+        List<RoomEntity> roomEntities = roomRepository.findAll(Sort.by(Sort.Direction.DESC, "roomId"));
         for(RoomEntity roomEntity : roomEntities){
             long roomId = roomEntity.getRoomId();
             String isMember = getIsMember(roomId, memberId);
@@ -194,5 +207,22 @@ public class RoomService {
             resRooms.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
         }
         return resRooms;
+    }
+
+    @Transactional
+    public void deleteRoom(long roomId){
+        Optional<RoomEntity> roomEntity = roomRepository.findById(roomId);
+        if(roomEntity.isEmpty()) throw new CannotFindRoomException();
+        else roomRepository.delete(roomEntity.get());
+        //해시태그 삭제
+        List<HashtagEntity> hashtagEntities = hashtagRepository.findByRoomId(roomId);
+        for (HashtagEntity hashtagEntity : hashtagEntities){
+            hashtagRepository.delete(hashtagEntity);
+        }
+        //관련 멤버 삭제
+        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByRoomId(roomId);
+        for (RoomMemberEntity roomMemberEntity : roomMemberEntities){
+            roomMemberRepository.delete(roomMemberEntity);
+        }
     }
 }
