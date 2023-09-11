@@ -1,0 +1,1267 @@
+INFO  23-09-07 00:00:04[http-nio-127.0.0.1-8080-exec-10] [CustomOAuth2UserService:28] - djdjj
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - login=uujiinn
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - id=104304104
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - node_id=U_kgDOBjeN6A
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - gravatar_id=
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - url=https://api.github.com/users/uujiinn
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - html_url=https://github.com/uujiinn
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - followers_url=https://api.github.com/users/uujiinn/followers
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - following_url=https://api.github.com/users/uujiinn/following{/other_user}
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - subscriptions_url=https://api.github.com/users/uujiinn/subscriptions
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - organizations_url=https://api.github.com/users/uujiinn/orgs
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - repos_url=https://api.github.com/users/uujiinn/repos
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - events_url=https://api.github.com/users/uujiinn/events{/privacy}
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - received_events_url=https://api.github.com/users/uujiinn/received_events
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - type=User
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - site_admin=false
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - name=null
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - company=null
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - blog=
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - location=null
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - email=null
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - hireable=null
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - bio=null
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - twitter_username=null
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - public_repos=5
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - public_gists=0
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - followers=2
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - following=2
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - created_at=2022-04-24T11:15:19Z
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [OAuth2Attribute:36] - updated_at=2023-09-06T13:36:41Z
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [CustomOAuth2UserService:41] - OAuth2Attribute(attributes={login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=null, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T13:36:41Z}, attributeKey=id, email=null, name=null, id=104304104)
+INFO  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [CustomOAuth2UserService:42] - {login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=null, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T13:36:41Z}
+WARN  23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [SqlExceptionHelper:145] - SQL Error: 1048, SQLState: 23000
+ERROR 23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [SqlExceptionHelper:150] - Column 'member_email' cannot be null
+ERROR 23-09-07 00:00:05[http-nio-127.0.0.1-8080-exec-10] [[dispatcherServlet]:175] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [Column 'member_email' cannot be null] [insert into members (member_email,member_message,nickname) values (?,?,?)]; SQL [insert into members (member_email,member_message,nickname) values (?,?,?)]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:269)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:229)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:152)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:244)
+	at jdk.proxy4/jdk.proxy4.$Proxy116.save(Unknown Source)
+	at learniverse.learniversemain.service.MemberService.registerMember(MemberService.java:20)
+	at learniverse.learniversemain.oauth.CustomOAuth2UserService.loadUser(CustomOAuth2UserService.java:45)
+	at org.springframework.security.oauth2.client.authentication.OAuth2LoginAuthenticationProvider.authenticate(OAuth2LoginAuthenticationProvider.java:117)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:182)
+	at org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter.attemptAuthentication(OAuth2LoginAuthenticationFilter.java:195)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:231)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:181)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at learniverse.learniversemain.jwt.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:39)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Column 'member_email' cannot be null] [insert into members (member_email,member_message,nickname) values (?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:60)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:56)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:278)
+	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performInsert(GetGeneratedKeysDelegate.java:107)
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorPostInsertSingleTable.execute(MutationExecutorPostInsertSingleTable.java:101)
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.doStaticInserts(InsertCoordinator.java:170)
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.coordinateInsert(InsertCoordinator.java:112)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2756)
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81)
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:647)
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:278)
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:259)
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:309)
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:363)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:277)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:180)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:140)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:175)
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:93)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:77)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:54)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:755)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:739)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:311)
+	at jdk.proxy4/jdk.proxy4.$Proxy111.persist(Unknown Source)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:617)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:288)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:136)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:120)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:516)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:285)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:628)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:168)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:72)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:391)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	... 74 common frames omitted
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'member_email' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:275)
+	... 123 common frames omitted
+INFO  23-09-07 00:02:53[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 00:02:53[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 00:02:53[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+INFO  23-09-07 00:03:00[background-preinit] [Version:21] - HV000001: Hibernate Validator 8.0.0.Final
+INFO  23-09-07 00:03:00[restartedMain] [LearniverseMainApplication:51] - Starting LearniverseMainApplication using Java 17.0.7 with PID 51075 (/Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main/build/classes/java/main started by yujin.iris in /Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main)
+INFO  23-09-07 00:03:00[restartedMain] [LearniverseMainApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  23-09-07 00:03:00[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  23-09-07 00:03:00[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  23-09-07 00:03:00[restartedMain] [RepositoryConfigurationDelegate:138] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  23-09-07 00:03:00[restartedMain] [RepositoryConfigurationDelegate:208] - Finished Spring Data repository scanning in 24 ms. Found 9 JPA repository interfaces.
+INFO  23-09-07 00:03:00[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  23-09-07 00:03:00[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:03:00[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  23-09-07 00:03:00[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/10.1.10]
+INFO  23-09-07 00:03:00[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  23-09-07 00:03:00[restartedMain] [ServletWebServerApplicationContext:291] - Root WebApplicationContext: initialization completed in 532 ms
+INFO  23-09-07 00:03:01[restartedMain] [LogHelper:31] - HHH000204: Processing PersistenceUnitInfo [name: default]
+INFO  23-09-07 00:03:01[restartedMain] [Version:44] - HHH000412: Hibernate ORM core version 6.2.5.Final
+INFO  23-09-07 00:03:01[restartedMain] [Environment:191] - HHH000406: Using bytecode reflection optimizer
+INFO  23-09-07 00:03:01[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:03:01[restartedMain] [SpringPersistenceUnitInfo:87] - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  23-09-07 00:03:01[restartedMain] [HikariDataSource:110] - HikariPool-1 - Starting...
+INFO  23-09-07 00:03:01[restartedMain] [HikariPool:565] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@50324585
+INFO  23-09-07 00:03:01[restartedMain] [HikariDataSource:123] - HikariPool-1 - Start completed.
+INFO  23-09-07 00:03:01[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:03:01[restartedMain] [JtaPlatformInitiator:51] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+INFO  23-09-07 00:03:01[restartedMain] [LocalContainerEntityManagerFactoryBean:437] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  23-09-07 00:03:02[restartedMain] [JpaBaseConfiguration$JpaWebConfiguration:231] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+INFO  23-09-07 00:03:02[restartedMain] [WelcomePageHandlerMapping:57] - Adding welcome page: class path resource [static/index.html]
+INFO  23-09-07 00:03:02[restartedMain] [DefaultSecurityFilterChain:54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@479558f0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5108e826, org.springframework.security.web.context.SecurityContextHolderFilter@2b25c37b, org.springframework.security.web.header.HeaderWriterFilter@157cf6dd, org.springframework.web.filter.CorsFilter@67a6710d, org.springframework.security.web.authentication.logout.LogoutFilter@43310c75, learniverse.learniversemain.jwt.JwtAuthFilter@32f7d598, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@62ef7d4b, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@ad38b17, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@66a11d0f, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@72a065bd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@55682b53, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@76ff797c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1f1fe1c1, org.springframework.security.web.access.ExceptionTranslationFilter@2f8683f2, org.springframework.security.web.access.intercept.AuthorizationFilter@701c3070]
+WARN  23-09-07 00:03:02[restartedMain] [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:101] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+INFO  23-09-07 00:03:02[restartedMain] [OptionalLiveReloadServer:59] - LiveReload server is running on port 35729
+INFO  23-09-07 00:03:02[restartedMain] [Http11NioProtocol:173] - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:03:02[restartedMain] [[/]:173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+INFO  23-09-07 00:03:02[restartedMain] [DispatcherServlet:532] - Initializing Servlet 'dispatcherServlet'
+INFO  23-09-07 00:03:02[restartedMain] [DispatcherServlet:554] - Completed initialization in 0 ms
+INFO  23-09-07 00:03:02[restartedMain] [TomcatWebServer:220] - Tomcat started on port(s): 8080 (http) with context path ''
+INFO  23-09-07 00:03:02[restartedMain] [LearniverseMainApplication:57] - Started LearniverseMainApplication in 1.982 seconds (process running for 2.232)
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:28] - djdjj
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - login=uujiinn
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - id=104304104
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - node_id=U_kgDOBjeN6A
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gravatar_id=
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - url=https://api.github.com/users/uujiinn
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - html_url=https://github.com/uujiinn
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers_url=https://api.github.com/users/uujiinn/followers
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following_url=https://api.github.com/users/uujiinn/following{/other_user}
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - subscriptions_url=https://api.github.com/users/uujiinn/subscriptions
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - organizations_url=https://api.github.com/users/uujiinn/orgs
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - repos_url=https://api.github.com/users/uujiinn/repos
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - events_url=https://api.github.com/users/uujiinn/events{/privacy}
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - received_events_url=https://api.github.com/users/uujiinn/received_events
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - type=User
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - site_admin=false
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - name=null
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - company=null
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - blog=
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - location=null
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - email=null
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - hireable=null
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - bio=null
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - twitter_username=null
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_repos=5
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_gists=0
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers=2
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following=2
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - created_at=2022-04-24T11:15:19Z
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - updated_at=2023-09-06T13:36:41Z
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:41] - OAuth2Attribute(attributes={login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=null, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T13:36:41Z}, attributeKey=id, email=null, name=null, id=104304104)
+INFO  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:42] - {login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=null, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T13:36:41Z}
+WARN  23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [SqlExceptionHelper:145] - SQL Error: 1048, SQLState: 23000
+ERROR 23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [SqlExceptionHelper:150] - Column 'member_email' cannot be null
+ERROR 23-09-07 00:03:28[http-nio-127.0.0.1-8080-exec-3] [[dispatcherServlet]:175] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [Column 'member_email' cannot be null] [insert into members (member_email,member_message,nickname) values (?,?,?)]; SQL [insert into members (member_email,member_message,nickname) values (?,?,?)]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:269)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:229)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:152)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:244)
+	at jdk.proxy4/jdk.proxy4.$Proxy116.save(Unknown Source)
+	at learniverse.learniversemain.service.MemberService.registerMember(MemberService.java:20)
+	at learniverse.learniversemain.oauth.CustomOAuth2UserService.loadUser(CustomOAuth2UserService.java:45)
+	at org.springframework.security.oauth2.client.authentication.OAuth2LoginAuthenticationProvider.authenticate(OAuth2LoginAuthenticationProvider.java:117)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:182)
+	at org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter.attemptAuthentication(OAuth2LoginAuthenticationFilter.java:195)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:231)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:181)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at learniverse.learniversemain.jwt.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:39)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Column 'member_email' cannot be null] [insert into members (member_email,member_message,nickname) values (?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:60)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:56)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:278)
+	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performInsert(GetGeneratedKeysDelegate.java:107)
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorPostInsertSingleTable.execute(MutationExecutorPostInsertSingleTable.java:101)
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.doStaticInserts(InsertCoordinator.java:170)
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.coordinateInsert(InsertCoordinator.java:112)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2756)
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81)
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:647)
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:278)
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:259)
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:309)
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:363)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:277)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:180)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:140)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:175)
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:93)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:77)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:54)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:755)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:739)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:311)
+	at jdk.proxy4/jdk.proxy4.$Proxy111.persist(Unknown Source)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:617)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:288)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:136)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:120)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:516)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:285)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:628)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:168)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:72)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:391)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	... 74 common frames omitted
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'member_email' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:275)
+	... 123 common frames omitted
+INFO  23-09-07 00:04:28[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 00:04:28[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 00:04:28[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+INFO  23-09-07 00:04:38[background-preinit] [Version:21] - HV000001: Hibernate Validator 8.0.0.Final
+INFO  23-09-07 00:04:38[restartedMain] [LearniverseMainApplication:51] - Starting LearniverseMainApplication using Java 17.0.7 with PID 51511 (/Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main/build/classes/java/main started by yujin.iris in /Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main)
+INFO  23-09-07 00:04:38[restartedMain] [LearniverseMainApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  23-09-07 00:04:38[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  23-09-07 00:04:38[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  23-09-07 00:04:38[restartedMain] [RepositoryConfigurationDelegate:138] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  23-09-07 00:04:38[restartedMain] [RepositoryConfigurationDelegate:208] - Finished Spring Data repository scanning in 35 ms. Found 9 JPA repository interfaces.
+INFO  23-09-07 00:04:38[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  23-09-07 00:04:38[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:04:38[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  23-09-07 00:04:38[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/10.1.10]
+INFO  23-09-07 00:04:38[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  23-09-07 00:04:38[restartedMain] [ServletWebServerApplicationContext:291] - Root WebApplicationContext: initialization completed in 588 ms
+INFO  23-09-07 00:04:38[restartedMain] [LogHelper:31] - HHH000204: Processing PersistenceUnitInfo [name: default]
+INFO  23-09-07 00:04:38[restartedMain] [Version:44] - HHH000412: Hibernate ORM core version 6.2.5.Final
+INFO  23-09-07 00:04:38[restartedMain] [Environment:191] - HHH000406: Using bytecode reflection optimizer
+INFO  23-09-07 00:04:38[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:04:38[restartedMain] [SpringPersistenceUnitInfo:87] - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  23-09-07 00:04:38[restartedMain] [HikariDataSource:110] - HikariPool-1 - Starting...
+INFO  23-09-07 00:04:38[restartedMain] [HikariPool:565] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3c538255
+INFO  23-09-07 00:04:38[restartedMain] [HikariDataSource:123] - HikariPool-1 - Start completed.
+INFO  23-09-07 00:04:39[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:04:39[restartedMain] [JtaPlatformInitiator:51] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+INFO  23-09-07 00:04:39[restartedMain] [LocalContainerEntityManagerFactoryBean:437] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  23-09-07 00:04:39[restartedMain] [JpaBaseConfiguration$JpaWebConfiguration:231] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+INFO  23-09-07 00:04:39[restartedMain] [WelcomePageHandlerMapping:57] - Adding welcome page: class path resource [static/index.html]
+INFO  23-09-07 00:04:39[restartedMain] [DefaultSecurityFilterChain:54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3e0e0c98, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7cb5ceeb, org.springframework.security.web.context.SecurityContextHolderFilter@55d178ec, org.springframework.security.web.header.HeaderWriterFilter@868d570, org.springframework.web.filter.CorsFilter@1f484ed, org.springframework.security.web.authentication.logout.LogoutFilter@4bbf9883, learniverse.learniversemain.jwt.JwtAuthFilter@6bb04c2d, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@b1227e6, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@289d4c8e, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@45a77a17, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@6c37e8ff, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@315793c7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2b89eee0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2213532d, org.springframework.security.web.access.ExceptionTranslationFilter@3f36cdab, org.springframework.security.web.access.intercept.AuthorizationFilter@7efa7b6b]
+WARN  23-09-07 00:04:39[restartedMain] [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:101] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+INFO  23-09-07 00:04:40[restartedMain] [OptionalLiveReloadServer:59] - LiveReload server is running on port 35729
+INFO  23-09-07 00:04:40[restartedMain] [Http11NioProtocol:173] - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:04:40[restartedMain] [[/]:173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+INFO  23-09-07 00:04:40[restartedMain] [DispatcherServlet:532] - Initializing Servlet 'dispatcherServlet'
+INFO  23-09-07 00:04:40[restartedMain] [DispatcherServlet:554] - Completed initialization in 0 ms
+INFO  23-09-07 00:04:40[restartedMain] [TomcatWebServer:220] - Tomcat started on port(s): 8080 (http) with context path ''
+INFO  23-09-07 00:04:40[restartedMain] [LearniverseMainApplication:57] - Started LearniverseMainApplication in 2.189 seconds (process running for 2.4)
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [CustomOAuth2UserService:28] - djdjj
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - login=kangCoder
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - id=88529345
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - node_id=MDQ6VXNlcjg4NTI5MzQ1
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - avatar_url=https://avatars.githubusercontent.com/u/88529345?v=4
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - gravatar_id=
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - url=https://api.github.com/users/kangCoder
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - html_url=https://github.com/kangCoder
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - followers_url=https://api.github.com/users/kangCoder/followers
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - following_url=https://api.github.com/users/kangCoder/following{/other_user}
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - gists_url=https://api.github.com/users/kangCoder/gists{/gist_id}
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - starred_url=https://api.github.com/users/kangCoder/starred{/owner}{/repo}
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - subscriptions_url=https://api.github.com/users/kangCoder/subscriptions
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - organizations_url=https://api.github.com/users/kangCoder/orgs
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - repos_url=https://api.github.com/users/kangCoder/repos
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - events_url=https://api.github.com/users/kangCoder/events{/privacy}
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - received_events_url=https://api.github.com/users/kangCoder/received_events
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - type=User
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - site_admin=false
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - name=Hyunsu Kang
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - company=Konkuk univ.
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - blog=https://kangcoder.tistory.com/
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - location=Korea, Republic of.
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - email=khsofficial1213@gmail.com
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - hireable=null
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - bio=null
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - twitter_username=null
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - public_repos=10
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - public_gists=0
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - followers=26
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - following=33
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - created_at=2021-08-06T06:39:34Z
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - updated_at=2023-06-02T02:27:21Z
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [CustomOAuth2UserService:41] - OAuth2Attribute(attributes={login=kangCoder, id=88529345, node_id=MDQ6VXNlcjg4NTI5MzQ1, avatar_url=https://avatars.githubusercontent.com/u/88529345?v=4, gravatar_id=, url=https://api.github.com/users/kangCoder, html_url=https://github.com/kangCoder, followers_url=https://api.github.com/users/kangCoder/followers, following_url=https://api.github.com/users/kangCoder/following{/other_user}, gists_url=https://api.github.com/users/kangCoder/gists{/gist_id}, starred_url=https://api.github.com/users/kangCoder/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/kangCoder/subscriptions, organizations_url=https://api.github.com/users/kangCoder/orgs, repos_url=https://api.github.com/users/kangCoder/repos, events_url=https://api.github.com/users/kangCoder/events{/privacy}, received_events_url=https://api.github.com/users/kangCoder/received_events, type=User, site_admin=false, name=Hyunsu Kang, company=Konkuk univ., blog=https://kangcoder.tistory.com/, location=Korea, Republic of., email=khsofficial1213@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=10, public_gists=0, followers=26, following=33, created_at=2021-08-06T06:39:34Z, updated_at=2023-06-02T02:27:21Z}, attributeKey=id, email=khsofficial1213@gmail.com, name=null, id=88529345)
+INFO  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [CustomOAuth2UserService:42] - {login=kangCoder, id=88529345, node_id=MDQ6VXNlcjg4NTI5MzQ1, avatar_url=https://avatars.githubusercontent.com/u/88529345?v=4, gravatar_id=, url=https://api.github.com/users/kangCoder, html_url=https://github.com/kangCoder, followers_url=https://api.github.com/users/kangCoder/followers, following_url=https://api.github.com/users/kangCoder/following{/other_user}, gists_url=https://api.github.com/users/kangCoder/gists{/gist_id}, starred_url=https://api.github.com/users/kangCoder/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/kangCoder/subscriptions, organizations_url=https://api.github.com/users/kangCoder/orgs, repos_url=https://api.github.com/users/kangCoder/repos, events_url=https://api.github.com/users/kangCoder/events{/privacy}, received_events_url=https://api.github.com/users/kangCoder/received_events, type=User, site_admin=false, name=Hyunsu Kang, company=Konkuk univ., blog=https://kangcoder.tistory.com/, location=Korea, Republic of., email=khsofficial1213@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=10, public_gists=0, followers=26, following=33, created_at=2021-08-06T06:39:34Z, updated_at=2023-06-02T02:27:21Z}
+WARN  23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [SqlExceptionHelper:145] - SQL Error: 1048, SQLState: 23000
+ERROR 23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [SqlExceptionHelper:150] - Column 'member_message' cannot be null
+ERROR 23-09-07 00:06:01[http-nio-127.0.0.1-8080-exec-4] [[dispatcherServlet]:175] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [Column 'member_message' cannot be null] [insert into members (member_email,member_message,nickname) values (?,?,?)]; SQL [insert into members (member_email,member_message,nickname) values (?,?,?)]; constraint [null]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:269)
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:229)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550)
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:242)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:152)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:244)
+	at jdk.proxy4/jdk.proxy4.$Proxy116.save(Unknown Source)
+	at learniverse.learniversemain.service.MemberService.registerMember(MemberService.java:20)
+	at learniverse.learniversemain.oauth.CustomOAuth2UserService.loadUser(CustomOAuth2UserService.java:45)
+	at org.springframework.security.oauth2.client.authentication.OAuth2LoginAuthenticationProvider.authenticate(OAuth2LoginAuthenticationProvider.java:117)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:182)
+	at org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter.attemptAuthentication(OAuth2LoginAuthenticationFilter.java:195)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:231)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:181)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at learniverse.learniversemain.jwt.JwtAuthFilter.doFilterInternal(JwtAuthFilter.java:39)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Column 'member_message' cannot be null] [insert into members (member_email,member_message,nickname) values (?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:60)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:56)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:278)
+	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performInsert(GetGeneratedKeysDelegate.java:107)
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorPostInsertSingleTable.execute(MutationExecutorPostInsertSingleTable.java:101)
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.doStaticInserts(InsertCoordinator.java:170)
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.coordinateInsert(InsertCoordinator.java:112)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2756)
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81)
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:647)
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:278)
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:259)
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:309)
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:363)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:277)
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:180)
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:140)
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:175)
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:93)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:77)
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:54)
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:755)
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:739)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:311)
+	at jdk.proxy4/jdk.proxy4.$Proxy111.persist(Unknown Source)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:617)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:288)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:136)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:120)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:516)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:285)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:628)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:168)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:72)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:391)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	... 74 common frames omitted
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'member_message' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:275)
+	... 123 common frames omitted
+INFO  23-09-07 00:07:14[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 00:07:14[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 00:07:14[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+INFO  23-09-07 00:07:35[background-preinit] [Version:21] - HV000001: Hibernate Validator 8.0.0.Final
+INFO  23-09-07 00:07:35[restartedMain] [LearniverseMainApplication:51] - Starting LearniverseMainApplication using Java 17.0.7 with PID 52305 (/Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main/build/classes/java/main started by yujin.iris in /Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main)
+INFO  23-09-07 00:07:35[restartedMain] [LearniverseMainApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  23-09-07 00:07:35[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  23-09-07 00:07:35[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  23-09-07 00:07:35[restartedMain] [RepositoryConfigurationDelegate:138] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  23-09-07 00:07:35[restartedMain] [RepositoryConfigurationDelegate:208] - Finished Spring Data repository scanning in 30 ms. Found 9 JPA repository interfaces.
+INFO  23-09-07 00:07:36[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  23-09-07 00:07:36[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:07:36[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  23-09-07 00:07:36[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/10.1.10]
+INFO  23-09-07 00:07:36[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  23-09-07 00:07:36[restartedMain] [ServletWebServerApplicationContext:291] - Root WebApplicationContext: initialization completed in 518 ms
+INFO  23-09-07 00:07:36[restartedMain] [LogHelper:31] - HHH000204: Processing PersistenceUnitInfo [name: default]
+INFO  23-09-07 00:07:36[restartedMain] [Version:44] - HHH000412: Hibernate ORM core version 6.2.5.Final
+INFO  23-09-07 00:07:36[restartedMain] [Environment:191] - HHH000406: Using bytecode reflection optimizer
+INFO  23-09-07 00:07:36[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:07:36[restartedMain] [SpringPersistenceUnitInfo:87] - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  23-09-07 00:07:36[restartedMain] [HikariDataSource:110] - HikariPool-1 - Starting...
+INFO  23-09-07 00:07:36[restartedMain] [HikariPool:565] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@50324585
+INFO  23-09-07 00:07:36[restartedMain] [HikariDataSource:123] - HikariPool-1 - Start completed.
+INFO  23-09-07 00:07:36[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:07:36[restartedMain] [JtaPlatformInitiator:51] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+INFO  23-09-07 00:07:36[restartedMain] [LocalContainerEntityManagerFactoryBean:437] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  23-09-07 00:07:37[restartedMain] [JpaBaseConfiguration$JpaWebConfiguration:231] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+INFO  23-09-07 00:07:37[restartedMain] [WelcomePageHandlerMapping:57] - Adding welcome page: class path resource [static/index.html]
+INFO  23-09-07 00:07:37[restartedMain] [DefaultSecurityFilterChain:54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@112b7acd, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@45cd8fc4, org.springframework.security.web.context.SecurityContextHolderFilter@4e3b3905, org.springframework.security.web.header.HeaderWriterFilter@4782394c, org.springframework.web.filter.CorsFilter@295d910c, org.springframework.security.web.authentication.logout.LogoutFilter@1554f3d4, learniverse.learniversemain.jwt.JwtAuthFilter@32f7d598, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@7c1af451, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@385d8de9, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@7dd10c5f, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@56576011, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5091b224, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@21110e36, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1ce09504, org.springframework.security.web.access.ExceptionTranslationFilter@57e111b8, org.springframework.security.web.access.intercept.AuthorizationFilter@2db4d081]
+WARN  23-09-07 00:07:37[restartedMain] [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:101] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+INFO  23-09-07 00:07:37[restartedMain] [OptionalLiveReloadServer:59] - LiveReload server is running on port 35729
+INFO  23-09-07 00:07:37[restartedMain] [Http11NioProtocol:173] - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:07:37[restartedMain] [[/]:173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+INFO  23-09-07 00:07:37[restartedMain] [DispatcherServlet:532] - Initializing Servlet 'dispatcherServlet'
+INFO  23-09-07 00:07:37[restartedMain] [DispatcherServlet:554] - Completed initialization in 0 ms
+INFO  23-09-07 00:07:37[restartedMain] [TomcatWebServer:220] - Tomcat started on port(s): 8080 (http) with context path ''
+INFO  23-09-07 00:07:37[restartedMain] [LearniverseMainApplication:57] - Started LearniverseMainApplication in 2.042 seconds (process running for 2.244)
+INFO  23-09-07 00:08:30[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:28] - djdjj
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - login=kangCoder
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - id=88529345
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - node_id=MDQ6VXNlcjg4NTI5MzQ1
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - avatar_url=https://avatars.githubusercontent.com/u/88529345?v=4
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gravatar_id=
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - url=https://api.github.com/users/kangCoder
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - html_url=https://github.com/kangCoder
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers_url=https://api.github.com/users/kangCoder/followers
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following_url=https://api.github.com/users/kangCoder/following{/other_user}
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gists_url=https://api.github.com/users/kangCoder/gists{/gist_id}
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - starred_url=https://api.github.com/users/kangCoder/starred{/owner}{/repo}
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - subscriptions_url=https://api.github.com/users/kangCoder/subscriptions
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - organizations_url=https://api.github.com/users/kangCoder/orgs
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - repos_url=https://api.github.com/users/kangCoder/repos
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - events_url=https://api.github.com/users/kangCoder/events{/privacy}
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - received_events_url=https://api.github.com/users/kangCoder/received_events
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - type=User
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - site_admin=false
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - name=Hyunsu Kang
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - company=Konkuk univ.
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - blog=https://kangcoder.tistory.com/
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - location=Korea, Republic of.
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - email=khsofficial1213@gmail.com
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - hireable=null
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - bio=null
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - twitter_username=null
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_repos=10
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_gists=0
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers=26
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following=33
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - created_at=2021-08-06T06:39:34Z
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - updated_at=2023-09-06T15:08:29Z
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:41] - OAuth2Attribute(attributes={login=kangCoder, id=88529345, node_id=MDQ6VXNlcjg4NTI5MzQ1, avatar_url=https://avatars.githubusercontent.com/u/88529345?v=4, gravatar_id=, url=https://api.github.com/users/kangCoder, html_url=https://github.com/kangCoder, followers_url=https://api.github.com/users/kangCoder/followers, following_url=https://api.github.com/users/kangCoder/following{/other_user}, gists_url=https://api.github.com/users/kangCoder/gists{/gist_id}, starred_url=https://api.github.com/users/kangCoder/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/kangCoder/subscriptions, organizations_url=https://api.github.com/users/kangCoder/orgs, repos_url=https://api.github.com/users/kangCoder/repos, events_url=https://api.github.com/users/kangCoder/events{/privacy}, received_events_url=https://api.github.com/users/kangCoder/received_events, type=User, site_admin=false, name=Hyunsu Kang, company=Konkuk univ., blog=https://kangcoder.tistory.com/, location=Korea, Republic of., email=khsofficial1213@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=10, public_gists=0, followers=26, following=33, created_at=2021-08-06T06:39:34Z, updated_at=2023-09-06T15:08:29Z}, attributeKey=id, email=khsofficial1213@gmail.com, name=null, id=88529345)
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:42] - {login=kangCoder, id=88529345, node_id=MDQ6VXNlcjg4NTI5MzQ1, avatar_url=https://avatars.githubusercontent.com/u/88529345?v=4, gravatar_id=, url=https://api.github.com/users/kangCoder, html_url=https://github.com/kangCoder, followers_url=https://api.github.com/users/kangCoder/followers, following_url=https://api.github.com/users/kangCoder/following{/other_user}, gists_url=https://api.github.com/users/kangCoder/gists{/gist_id}, starred_url=https://api.github.com/users/kangCoder/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/kangCoder/subscriptions, organizations_url=https://api.github.com/users/kangCoder/orgs, repos_url=https://api.github.com/users/kangCoder/repos, events_url=https://api.github.com/users/kangCoder/events{/privacy}, received_events_url=https://api.github.com/users/kangCoder/received_events, type=User, site_admin=false, name=Hyunsu Kang, company=Konkuk univ., blog=https://kangcoder.tistory.com/, location=Korea, Republic of., email=khsofficial1213@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=10, public_gists=0, followers=26, following=33, created_at=2021-08-06T06:39:34Z, updated_at=2023-09-06T15:08:29Z}
+INFO  23-09-07 00:08:31[http-nio-127.0.0.1-8080-exec-3] [OAuth2SuccessHandler:35] - Name: [1], Granted Authorities: [[ROLE_USER]], User Attributes: [{id=1, key=id, email=khsofficial1213@gmail.com, Name=null}]
+INFO  23-09-07 00:13:24[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 00:13:24[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 00:13:24[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+INFO  23-09-07 00:13:28[background-preinit] [Version:21] - HV000001: Hibernate Validator 8.0.0.Final
+INFO  23-09-07 00:13:28[restartedMain] [LearniverseMainApplication:51] - Starting LearniverseMainApplication using Java 17.0.7 with PID 53828 (/Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main/build/classes/java/main started by yujin.iris in /Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main)
+INFO  23-09-07 00:13:28[restartedMain] [LearniverseMainApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  23-09-07 00:13:28[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  23-09-07 00:13:28[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  23-09-07 00:13:28[restartedMain] [RepositoryConfigurationDelegate:138] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  23-09-07 00:13:28[restartedMain] [RepositoryConfigurationDelegate:208] - Finished Spring Data repository scanning in 28 ms. Found 9 JPA repository interfaces.
+INFO  23-09-07 00:13:29[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  23-09-07 00:13:29[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:13:29[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  23-09-07 00:13:29[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/10.1.10]
+INFO  23-09-07 00:13:29[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  23-09-07 00:13:29[restartedMain] [ServletWebServerApplicationContext:291] - Root WebApplicationContext: initialization completed in 553 ms
+INFO  23-09-07 00:13:29[restartedMain] [LogHelper:31] - HHH000204: Processing PersistenceUnitInfo [name: default]
+INFO  23-09-07 00:13:29[restartedMain] [Version:44] - HHH000412: Hibernate ORM core version 6.2.5.Final
+INFO  23-09-07 00:13:29[restartedMain] [Environment:191] - HHH000406: Using bytecode reflection optimizer
+INFO  23-09-07 00:13:29[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:13:29[restartedMain] [SpringPersistenceUnitInfo:87] - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  23-09-07 00:13:29[restartedMain] [HikariDataSource:110] - HikariPool-1 - Starting...
+INFO  23-09-07 00:13:29[restartedMain] [HikariPool:565] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1b3464c0
+INFO  23-09-07 00:13:29[restartedMain] [HikariDataSource:123] - HikariPool-1 - Start completed.
+INFO  23-09-07 00:13:29[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:13:29[restartedMain] [JtaPlatformInitiator:51] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+INFO  23-09-07 00:13:29[restartedMain] [LocalContainerEntityManagerFactoryBean:437] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  23-09-07 00:13:30[restartedMain] [JpaBaseConfiguration$JpaWebConfiguration:231] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+INFO  23-09-07 00:13:30[restartedMain] [WelcomePageHandlerMapping:57] - Adding welcome page: class path resource [static/index.html]
+INFO  23-09-07 00:13:30[restartedMain] [DefaultSecurityFilterChain:54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1ab8d0f4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ec4ff9f, org.springframework.security.web.context.SecurityContextHolderFilter@55d9f96c, org.springframework.security.web.header.HeaderWriterFilter@28a1e3e8, org.springframework.web.filter.CorsFilter@468707c, org.springframework.security.web.authentication.logout.LogoutFilter@764038ef, learniverse.learniversemain.jwt.JwtAuthFilter@5f6ee95f, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@7325ece7, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@132cf488, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@455a7ec9, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@704a60a4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@875975f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3a29637e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2c293129, org.springframework.security.web.access.ExceptionTranslationFilter@750b8ef6, org.springframework.security.web.access.intercept.AuthorizationFilter@4f61cf6f]
+WARN  23-09-07 00:13:30[restartedMain] [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:101] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+INFO  23-09-07 00:13:30[restartedMain] [OptionalLiveReloadServer:59] - LiveReload server is running on port 35729
+INFO  23-09-07 00:13:30[restartedMain] [Http11NioProtocol:173] - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:13:30[restartedMain] [[/]:173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+INFO  23-09-07 00:13:30[restartedMain] [DispatcherServlet:532] - Initializing Servlet 'dispatcherServlet'
+INFO  23-09-07 00:13:30[restartedMain] [DispatcherServlet:554] - Completed initialization in 0 ms
+INFO  23-09-07 00:13:30[restartedMain] [TomcatWebServer:220] - Tomcat started on port(s): 8080 (http) with context path ''
+INFO  23-09-07 00:13:30[restartedMain] [LearniverseMainApplication:57] - Started LearniverseMainApplication in 2.041 seconds (process running for 2.265)
+INFO  23-09-07 00:14:22[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 00:14:22[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 00:14:22[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+INFO  23-09-07 00:14:23[background-preinit] [Version:21] - HV000001: Hibernate Validator 8.0.0.Final
+INFO  23-09-07 00:14:23[restartedMain] [LearniverseMainApplication:51] - Starting LearniverseMainApplication using Java 17.0.7 with PID 54074 (/Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main/build/classes/java/main started by yujin.iris in /Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main)
+INFO  23-09-07 00:14:23[restartedMain] [LearniverseMainApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  23-09-07 00:14:23[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  23-09-07 00:14:23[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  23-09-07 00:14:24[restartedMain] [RepositoryConfigurationDelegate:138] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  23-09-07 00:14:24[restartedMain] [RepositoryConfigurationDelegate:208] - Finished Spring Data repository scanning in 24 ms. Found 9 JPA repository interfaces.
+INFO  23-09-07 00:14:24[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  23-09-07 00:14:24[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:14:24[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  23-09-07 00:14:24[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/10.1.10]
+INFO  23-09-07 00:14:24[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  23-09-07 00:14:24[restartedMain] [ServletWebServerApplicationContext:291] - Root WebApplicationContext: initialization completed in 531 ms
+INFO  23-09-07 00:14:24[restartedMain] [LogHelper:31] - HHH000204: Processing PersistenceUnitInfo [name: default]
+INFO  23-09-07 00:14:24[restartedMain] [Version:44] - HHH000412: Hibernate ORM core version 6.2.5.Final
+INFO  23-09-07 00:14:24[restartedMain] [Environment:191] - HHH000406: Using bytecode reflection optimizer
+INFO  23-09-07 00:14:24[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:14:24[restartedMain] [SpringPersistenceUnitInfo:87] - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  23-09-07 00:14:24[restartedMain] [HikariDataSource:110] - HikariPool-1 - Starting...
+INFO  23-09-07 00:14:24[restartedMain] [HikariPool:565] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@42ce0b11
+INFO  23-09-07 00:14:24[restartedMain] [HikariDataSource:123] - HikariPool-1 - Start completed.
+INFO  23-09-07 00:14:24[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:14:25[restartedMain] [JtaPlatformInitiator:51] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+INFO  23-09-07 00:14:25[restartedMain] [LocalContainerEntityManagerFactoryBean:437] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  23-09-07 00:14:25[restartedMain] [JpaBaseConfiguration$JpaWebConfiguration:231] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+INFO  23-09-07 00:14:25[restartedMain] [WelcomePageHandlerMapping:57] - Adding welcome page: class path resource [static/index.html]
+INFO  23-09-07 00:14:25[restartedMain] [DefaultSecurityFilterChain:54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@72c8d8f4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@76759ffe, org.springframework.security.web.context.SecurityContextHolderFilter@345caed9, org.springframework.security.web.header.HeaderWriterFilter@20597a75, org.springframework.web.filter.CorsFilter@401757b8, org.springframework.security.web.authentication.logout.LogoutFilter@4601e824, learniverse.learniversemain.jwt.JwtAuthFilter@5636808a, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@70c3f453, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@677c78b3, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@46eee944, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@6bc96417, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@59b21fae, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@63aa442, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5f721ee2, org.springframework.security.web.access.ExceptionTranslationFilter@26fa9110, org.springframework.security.web.access.intercept.AuthorizationFilter@246322ed]
+WARN  23-09-07 00:14:25[restartedMain] [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:101] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+INFO  23-09-07 00:14:25[restartedMain] [OptionalLiveReloadServer:59] - LiveReload server is running on port 35729
+INFO  23-09-07 00:14:25[restartedMain] [Http11NioProtocol:173] - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:14:25[restartedMain] [[/]:173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+INFO  23-09-07 00:14:25[restartedMain] [DispatcherServlet:532] - Initializing Servlet 'dispatcherServlet'
+INFO  23-09-07 00:14:25[restartedMain] [DispatcherServlet:554] - Completed initialization in 1 ms
+INFO  23-09-07 00:14:25[restartedMain] [TomcatWebServer:220] - Tomcat started on port(s): 8080 (http) with context path ''
+INFO  23-09-07 00:14:25[restartedMain] [LearniverseMainApplication:57] - Started LearniverseMainApplication in 2.127 seconds (process running for 2.361)
+INFO  23-09-07 00:14:45[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:28] - djdjj
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - login=uujiinn
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - id=104304104
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - node_id=U_kgDOBjeN6A
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gravatar_id=
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - url=https://api.github.com/users/uujiinn
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - html_url=https://github.com/uujiinn
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers_url=https://api.github.com/users/uujiinn/followers
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following_url=https://api.github.com/users/uujiinn/following{/other_user}
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - subscriptions_url=https://api.github.com/users/uujiinn/subscriptions
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - organizations_url=https://api.github.com/users/uujiinn/orgs
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - repos_url=https://api.github.com/users/uujiinn/repos
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - events_url=https://api.github.com/users/uujiinn/events{/privacy}
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - received_events_url=https://api.github.com/users/uujiinn/received_events
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - type=User
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - site_admin=false
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - name=null
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - company=null
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - blog=
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - location=null
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - email=jane9994@gmail.com
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - hireable=null
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - bio=null
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - twitter_username=null
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_repos=5
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_gists=0
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers=2
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following=2
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - created_at=2022-04-24T11:15:19Z
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - updated_at=2023-09-06T15:14:14Z
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:41] - OAuth2Attribute(attributes={login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}, attributeKey=id, email=jane9994@gmail.com, name=null, id=104304104)
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:42] - {login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}
+INFO  23-09-07 00:14:46[http-nio-127.0.0.1-8080-exec-3] [OAuth2SuccessHandler:35] - Name: [1], Granted Authorities: [[ROLE_USER]], User Attributes: [{name=null, id=1, key=id, email=jane9994@gmail.com}]
+INFO  23-09-07 00:19:55[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 00:19:55[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 00:19:55[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+INFO  23-09-07 00:19:57[background-preinit] [Version:21] - HV000001: Hibernate Validator 8.0.0.Final
+INFO  23-09-07 00:19:57[restartedMain] [LearniverseMainApplication:51] - Starting LearniverseMainApplication using Java 17.0.7 with PID 55494 (/Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main/build/classes/java/main started by yujin.iris in /Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main)
+INFO  23-09-07 00:19:57[restartedMain] [LearniverseMainApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  23-09-07 00:19:57[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  23-09-07 00:19:57[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  23-09-07 00:19:57[restartedMain] [RepositoryConfigurationDelegate:138] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  23-09-07 00:19:57[restartedMain] [RepositoryConfigurationDelegate:208] - Finished Spring Data repository scanning in 30 ms. Found 9 JPA repository interfaces.
+INFO  23-09-07 00:19:57[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  23-09-07 00:19:57[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:19:57[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  23-09-07 00:19:57[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/10.1.10]
+INFO  23-09-07 00:19:57[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  23-09-07 00:19:57[restartedMain] [ServletWebServerApplicationContext:291] - Root WebApplicationContext: initialization completed in 523 ms
+INFO  23-09-07 00:19:58[restartedMain] [LogHelper:31] - HHH000204: Processing PersistenceUnitInfo [name: default]
+INFO  23-09-07 00:19:58[restartedMain] [Version:44] - HHH000412: Hibernate ORM core version 6.2.5.Final
+INFO  23-09-07 00:19:58[restartedMain] [Environment:191] - HHH000406: Using bytecode reflection optimizer
+INFO  23-09-07 00:19:58[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:19:58[restartedMain] [SpringPersistenceUnitInfo:87] - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  23-09-07 00:19:58[restartedMain] [HikariDataSource:110] - HikariPool-1 - Starting...
+INFO  23-09-07 00:19:58[restartedMain] [HikariPool:565] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@635b10b7
+INFO  23-09-07 00:19:58[restartedMain] [HikariDataSource:123] - HikariPool-1 - Start completed.
+INFO  23-09-07 00:19:58[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:19:58[restartedMain] [JtaPlatformInitiator:51] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+INFO  23-09-07 00:19:58[restartedMain] [LocalContainerEntityManagerFactoryBean:437] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  23-09-07 00:19:59[restartedMain] [JpaBaseConfiguration$JpaWebConfiguration:231] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+INFO  23-09-07 00:19:59[restartedMain] [WelcomePageHandlerMapping:57] - Adding welcome page: class path resource [static/index.html]
+INFO  23-09-07 00:19:59[restartedMain] [DefaultSecurityFilterChain:54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@b914ce, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2e9abb4a, org.springframework.security.web.context.SecurityContextHolderFilter@55fd1b8c, org.springframework.security.web.header.HeaderWriterFilter@a54f195, org.springframework.web.filter.CorsFilter@586a1e26, org.springframework.security.web.authentication.logout.LogoutFilter@57146de8, learniverse.learniversemain.jwt.JwtAuthFilter@33a7a43c, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@7cf300ce, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@4bdcba21, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4ce983fa, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@788d77fb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5636a956, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1e9084b1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@30da1340, org.springframework.security.web.access.ExceptionTranslationFilter@5308d3ee, org.springframework.security.web.access.intercept.AuthorizationFilter@64bf7c18]
+WARN  23-09-07 00:19:59[restartedMain] [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:101] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+INFO  23-09-07 00:19:59[restartedMain] [OptionalLiveReloadServer:59] - LiveReload server is running on port 35729
+INFO  23-09-07 00:19:59[restartedMain] [Http11NioProtocol:173] - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:19:59[restartedMain] [[/]:173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+INFO  23-09-07 00:19:59[restartedMain] [DispatcherServlet:532] - Initializing Servlet 'dispatcherServlet'
+INFO  23-09-07 00:19:59[restartedMain] [DispatcherServlet:554] - Completed initialization in 0 ms
+INFO  23-09-07 00:19:59[restartedMain] [TomcatWebServer:220] - Tomcat started on port(s): 8080 (http) with context path ''
+INFO  23-09-07 00:19:59[restartedMain] [LearniverseMainApplication:57] - Started LearniverseMainApplication in 1.942 seconds (process running for 2.222)
+INFO  23-09-07 00:20:20[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:28] - djdjj
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - login=uujiinn
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - id=104304104
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - node_id=U_kgDOBjeN6A
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gravatar_id=
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - url=https://api.github.com/users/uujiinn
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - html_url=https://github.com/uujiinn
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers_url=https://api.github.com/users/uujiinn/followers
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following_url=https://api.github.com/users/uujiinn/following{/other_user}
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - subscriptions_url=https://api.github.com/users/uujiinn/subscriptions
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - organizations_url=https://api.github.com/users/uujiinn/orgs
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - repos_url=https://api.github.com/users/uujiinn/repos
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - events_url=https://api.github.com/users/uujiinn/events{/privacy}
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - received_events_url=https://api.github.com/users/uujiinn/received_events
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - type=User
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - site_admin=false
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - name=null
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - company=null
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - blog=
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - location=null
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - email=jane9994@gmail.com
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - hireable=null
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - bio=null
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - twitter_username=null
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_repos=5
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_gists=0
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers=2
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following=2
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - created_at=2022-04-24T11:15:19Z
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - updated_at=2023-09-06T15:14:14Z
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:41] - OAuth2Attribute(attributes={login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}, attributeKey=id, email=jane9994@gmail.com, name=uujiinn, id=104304104)
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:42] - {login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}
+INFO  23-09-07 00:20:21[http-nio-127.0.0.1-8080-exec-3] [OAuth2SuccessHandler:35] - Name: [1], Granted Authorities: [[ROLE_USER]], User Attributes: [{name=uujiinn, id=1, key=id, email=jane9994@gmail.com}]
+INFO  23-09-07 00:21:08[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 00:21:08[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 00:21:08[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+INFO  23-09-07 00:21:09[background-preinit] [Version:21] - HV000001: Hibernate Validator 8.0.0.Final
+INFO  23-09-07 00:21:09[restartedMain] [LearniverseMainApplication:51] - Starting LearniverseMainApplication using Java 17.0.7 with PID 55809 (/Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main/build/classes/java/main started by yujin.iris in /Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main)
+INFO  23-09-07 00:21:09[restartedMain] [LearniverseMainApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  23-09-07 00:21:09[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  23-09-07 00:21:09[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  23-09-07 00:21:10[restartedMain] [RepositoryConfigurationDelegate:138] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  23-09-07 00:21:10[restartedMain] [RepositoryConfigurationDelegate:208] - Finished Spring Data repository scanning in 24 ms. Found 9 JPA repository interfaces.
+INFO  23-09-07 00:21:10[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  23-09-07 00:21:10[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:21:10[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  23-09-07 00:21:10[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/10.1.10]
+INFO  23-09-07 00:21:10[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  23-09-07 00:21:10[restartedMain] [ServletWebServerApplicationContext:291] - Root WebApplicationContext: initialization completed in 515 ms
+INFO  23-09-07 00:21:10[restartedMain] [LogHelper:31] - HHH000204: Processing PersistenceUnitInfo [name: default]
+INFO  23-09-07 00:21:10[restartedMain] [Version:44] - HHH000412: Hibernate ORM core version 6.2.5.Final
+INFO  23-09-07 00:21:10[restartedMain] [Environment:191] - HHH000406: Using bytecode reflection optimizer
+INFO  23-09-07 00:21:10[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:21:10[restartedMain] [SpringPersistenceUnitInfo:87] - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  23-09-07 00:21:10[restartedMain] [HikariDataSource:110] - HikariPool-1 - Starting...
+INFO  23-09-07 00:21:10[restartedMain] [HikariPool:565] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4c3cb3a0
+INFO  23-09-07 00:21:10[restartedMain] [HikariDataSource:123] - HikariPool-1 - Start completed.
+INFO  23-09-07 00:21:10[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:21:11[restartedMain] [JtaPlatformInitiator:51] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+INFO  23-09-07 00:21:11[restartedMain] [LocalContainerEntityManagerFactoryBean:437] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  23-09-07 00:21:11[restartedMain] [JpaBaseConfiguration$JpaWebConfiguration:231] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+INFO  23-09-07 00:21:11[restartedMain] [WelcomePageHandlerMapping:57] - Adding welcome page: class path resource [static/index.html]
+INFO  23-09-07 00:21:11[restartedMain] [DefaultSecurityFilterChain:54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@623b3713, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2822f054, org.springframework.security.web.context.SecurityContextHolderFilter@17d34de5, org.springframework.security.web.header.HeaderWriterFilter@61f2821d, org.springframework.web.filter.CorsFilter@55278dd5, org.springframework.security.web.authentication.logout.LogoutFilter@4a59cb36, learniverse.learniversemain.jwt.JwtAuthFilter@3357290c, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@4b96ff8e, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@7417c888, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@185b8573, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@25745d5f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@481f5cf4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1e69e36e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1ecc654d, org.springframework.security.web.access.ExceptionTranslationFilter@70278a50, org.springframework.security.web.access.intercept.AuthorizationFilter@112b7acd]
+WARN  23-09-07 00:21:11[restartedMain] [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:101] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+INFO  23-09-07 00:21:11[restartedMain] [OptionalLiveReloadServer:59] - LiveReload server is running on port 35729
+INFO  23-09-07 00:21:11[restartedMain] [Http11NioProtocol:173] - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:21:11[restartedMain] [[/]:173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+INFO  23-09-07 00:21:11[restartedMain] [DispatcherServlet:532] - Initializing Servlet 'dispatcherServlet'
+INFO  23-09-07 00:21:11[restartedMain] [DispatcherServlet:554] - Completed initialization in 1 ms
+INFO  23-09-07 00:21:11[restartedMain] [TomcatWebServer:220] - Tomcat started on port(s): 8080 (http) with context path ''
+INFO  23-09-07 00:21:11[restartedMain] [LearniverseMainApplication:57] - Started LearniverseMainApplication in 1.941 seconds (process running for 2.148)
+INFO  23-09-07 00:21:33[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:28] - djdjj
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - login=uujiinn
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - id=104304104
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - node_id=U_kgDOBjeN6A
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gravatar_id=
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - url=https://api.github.com/users/uujiinn
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - html_url=https://github.com/uujiinn
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers_url=https://api.github.com/users/uujiinn/followers
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following_url=https://api.github.com/users/uujiinn/following{/other_user}
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - subscriptions_url=https://api.github.com/users/uujiinn/subscriptions
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - organizations_url=https://api.github.com/users/uujiinn/orgs
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - repos_url=https://api.github.com/users/uujiinn/repos
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - events_url=https://api.github.com/users/uujiinn/events{/privacy}
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - received_events_url=https://api.github.com/users/uujiinn/received_events
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - type=User
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - site_admin=false
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - name=null
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - company=null
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - blog=
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - location=null
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - email=jane9994@gmail.com
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - hireable=null
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - bio=null
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - twitter_username=null
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_repos=5
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_gists=0
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers=2
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following=2
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - created_at=2022-04-24T11:15:19Z
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - updated_at=2023-09-06T15:14:14Z
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:41] - OAuth2Attribute(attributes={login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}, attributeKey=id, email=jane9994@gmail.com, name=uujiinn, id=104304104)
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:42] - {login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}
+INFO  23-09-07 00:21:34[http-nio-127.0.0.1-8080-exec-3] [OAuth2SuccessHandler:35] - Name: [1], Granted Authorities: [[ROLE_USER]], User Attributes: [{name=uujiinn, id=1, key=id, email=jane9994@gmail.com}]
+INFO  23-09-07 00:22:35[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 00:22:35[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 00:22:35[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+INFO  23-09-07 00:24:34[background-preinit] [Version:21] - HV000001: Hibernate Validator 8.0.0.Final
+INFO  23-09-07 00:24:34[restartedMain] [LearniverseMainApplication:51] - Starting LearniverseMainApplication using Java 17.0.7 with PID 56697 (/Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main/build/classes/java/main started by yujin.iris in /Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main)
+INFO  23-09-07 00:24:34[restartedMain] [LearniverseMainApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  23-09-07 00:24:34[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  23-09-07 00:24:34[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  23-09-07 00:24:34[restartedMain] [RepositoryConfigurationDelegate:138] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  23-09-07 00:24:34[restartedMain] [RepositoryConfigurationDelegate:208] - Finished Spring Data repository scanning in 25 ms. Found 9 JPA repository interfaces.
+INFO  23-09-07 00:24:34[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  23-09-07 00:24:34[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:24:34[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  23-09-07 00:24:34[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/10.1.10]
+INFO  23-09-07 00:24:34[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  23-09-07 00:24:34[restartedMain] [ServletWebServerApplicationContext:291] - Root WebApplicationContext: initialization completed in 518 ms
+INFO  23-09-07 00:24:34[restartedMain] [LogHelper:31] - HHH000204: Processing PersistenceUnitInfo [name: default]
+INFO  23-09-07 00:24:34[restartedMain] [Version:44] - HHH000412: Hibernate ORM core version 6.2.5.Final
+INFO  23-09-07 00:24:34[restartedMain] [Environment:191] - HHH000406: Using bytecode reflection optimizer
+INFO  23-09-07 00:24:34[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:24:35[restartedMain] [SpringPersistenceUnitInfo:87] - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  23-09-07 00:24:35[restartedMain] [HikariDataSource:110] - HikariPool-1 - Starting...
+INFO  23-09-07 00:24:35[restartedMain] [HikariPool:565] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@611729d8
+INFO  23-09-07 00:24:35[restartedMain] [HikariDataSource:123] - HikariPool-1 - Start completed.
+INFO  23-09-07 00:24:35[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 00:24:35[restartedMain] [JtaPlatformInitiator:51] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+INFO  23-09-07 00:24:35[restartedMain] [LocalContainerEntityManagerFactoryBean:437] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  23-09-07 00:24:35[restartedMain] [JpaBaseConfiguration$JpaWebConfiguration:231] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+INFO  23-09-07 00:24:35[restartedMain] [WelcomePageHandlerMapping:57] - Adding welcome page: class path resource [static/index.html]
+INFO  23-09-07 00:24:35[restartedMain] [DefaultSecurityFilterChain:54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4552f486, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1f872167, org.springframework.security.web.context.SecurityContextHolderFilter@3b7673b2, org.springframework.security.web.header.HeaderWriterFilter@a8179cb, org.springframework.web.filter.CorsFilter@6e2a9d80, org.springframework.security.web.authentication.logout.LogoutFilter@68780635, learniverse.learniversemain.jwt.JwtAuthFilter@37d19b3f, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@5cd3fb3f, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@2db1a99, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@4601e824, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@37034509, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@57ae11e6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7563ac57, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@652771ab, org.springframework.security.web.access.ExceptionTranslationFilter@46eee944, org.springframework.security.web.access.intercept.AuthorizationFilter@2c293129]
+WARN  23-09-07 00:24:36[restartedMain] [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:101] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+INFO  23-09-07 00:24:36[restartedMain] [OptionalLiveReloadServer:59] - LiveReload server is running on port 35729
+INFO  23-09-07 00:24:36[restartedMain] [Http11NioProtocol:173] - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 00:24:36[restartedMain] [[/]:173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+INFO  23-09-07 00:24:36[restartedMain] [DispatcherServlet:532] - Initializing Servlet 'dispatcherServlet'
+INFO  23-09-07 00:24:36[restartedMain] [DispatcherServlet:554] - Completed initialization in 1 ms
+INFO  23-09-07 00:24:36[restartedMain] [TomcatWebServer:220] - Tomcat started on port(s): 8080 (http) with context path ''
+INFO  23-09-07 00:24:36[restartedMain] [LearniverseMainApplication:57] - Started LearniverseMainApplication in 1.917 seconds (process running for 2.115)
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:28] - djdjj
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - login=uujiinn
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - id=104304104
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - node_id=U_kgDOBjeN6A
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gravatar_id=
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - url=https://api.github.com/users/uujiinn
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - html_url=https://github.com/uujiinn
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers_url=https://api.github.com/users/uujiinn/followers
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following_url=https://api.github.com/users/uujiinn/following{/other_user}
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - subscriptions_url=https://api.github.com/users/uujiinn/subscriptions
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - organizations_url=https://api.github.com/users/uujiinn/orgs
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - repos_url=https://api.github.com/users/uujiinn/repos
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - events_url=https://api.github.com/users/uujiinn/events{/privacy}
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - received_events_url=https://api.github.com/users/uujiinn/received_events
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - type=User
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - site_admin=false
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - name=null
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - company=null
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - blog=
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - location=null
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - email=jane9994@gmail.com
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - hireable=null
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - bio=null
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - twitter_username=null
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_repos=5
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - public_gists=0
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - followers=2
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - following=2
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - created_at=2022-04-24T11:15:19Z
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2Attribute:36] - updated_at=2023-09-06T15:14:14Z
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:41] - OAuth2Attribute(attributes={login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}, attributeKey=id, email=jane9994@gmail.com, name=uujiinn, id=104304104)
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [CustomOAuth2UserService:42] - {login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}
+INFO  23-09-07 00:24:54[http-nio-127.0.0.1-8080-exec-3] [OAuth2SuccessHandler:35] - Name: [1], Granted Authorities: [[ROLE_USER]], User Attributes: [{name=uujiinn, id=1, key=id, email=jane9994@gmail.com}]
+INFO  23-09-07 00:26:18[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 00:26:18[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 00:26:18[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+INFO  23-09-07 20:19:08[background-preinit] [Version:21] - HV000001: Hibernate Validator 8.0.0.Final
+INFO  23-09-07 20:19:08[restartedMain] [LearniverseMainApplication:51] - Starting LearniverseMainApplication using Java 17.0.7 with PID 66109 (/Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main/build/classes/java/main started by yujin.iris in /Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main)
+INFO  23-09-07 20:19:08[restartedMain] [LearniverseMainApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  23-09-07 20:19:08[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  23-09-07 20:19:08[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  23-09-07 20:19:08[restartedMain] [RepositoryConfigurationDelegate:138] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  23-09-07 20:19:08[restartedMain] [RepositoryConfigurationDelegate:208] - Finished Spring Data repository scanning in 29 ms. Found 9 JPA repository interfaces.
+INFO  23-09-07 20:19:08[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  23-09-07 20:19:08[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 20:19:08[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  23-09-07 20:19:08[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/10.1.10]
+INFO  23-09-07 20:19:08[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  23-09-07 20:19:08[restartedMain] [ServletWebServerApplicationContext:291] - Root WebApplicationContext: initialization completed in 530 ms
+INFO  23-09-07 20:19:08[restartedMain] [LogHelper:31] - HHH000204: Processing PersistenceUnitInfo [name: default]
+INFO  23-09-07 20:19:08[restartedMain] [Version:44] - HHH000412: Hibernate ORM core version 6.2.5.Final
+INFO  23-09-07 20:19:08[restartedMain] [Environment:191] - HHH000406: Using bytecode reflection optimizer
+INFO  23-09-07 20:19:09[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 20:19:09[restartedMain] [SpringPersistenceUnitInfo:87] - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  23-09-07 20:19:09[restartedMain] [HikariDataSource:110] - HikariPool-1 - Starting...
+INFO  23-09-07 20:19:09[restartedMain] [HikariPool:565] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@16411f6e
+INFO  23-09-07 20:19:09[restartedMain] [HikariDataSource:123] - HikariPool-1 - Start completed.
+INFO  23-09-07 20:19:09[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 20:19:09[restartedMain] [JtaPlatformInitiator:51] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+INFO  23-09-07 20:19:09[restartedMain] [LocalContainerEntityManagerFactoryBean:437] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  23-09-07 20:19:09[restartedMain] [JpaBaseConfiguration$JpaWebConfiguration:231] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+INFO  23-09-07 20:19:10[restartedMain] [WelcomePageHandlerMapping:57] - Adding welcome page: class path resource [static/index.html]
+INFO  23-09-07 20:19:10[restartedMain] [DefaultSecurityFilterChain:54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@45cd8fc4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@295d910c, org.springframework.security.web.context.SecurityContextHolderFilter@182531d7, org.springframework.security.web.header.HeaderWriterFilter@d58b49b, org.springframework.web.filter.CorsFilter@56576011, org.springframework.security.web.authentication.logout.LogoutFilter@2cdb0189, learniverse.learniversemain.jwt.JwtAuthFilter@1ed8013, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@385d8de9, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@29e8a28b, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@12b5402e, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@1ce09504, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5ab251bf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@69669c02, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@35fa9af3, org.springframework.security.web.access.ExceptionTranslationFilter@26f75766, org.springframework.security.web.access.intercept.AuthorizationFilter@344ff8f0]
+WARN  23-09-07 20:19:10[restartedMain] [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:101] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+INFO  23-09-07 20:19:10[restartedMain] [OptionalLiveReloadServer:59] - LiveReload server is running on port 35729
+INFO  23-09-07 20:19:10[restartedMain] [Http11NioProtocol:173] - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 20:19:10[restartedMain] [[/]:173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+INFO  23-09-07 20:19:10[restartedMain] [DispatcherServlet:532] - Initializing Servlet 'dispatcherServlet'
+INFO  23-09-07 20:19:10[restartedMain] [DispatcherServlet:554] - Completed initialization in 1 ms
+INFO  23-09-07 20:19:10[restartedMain] [TomcatWebServer:220] - Tomcat started on port(s): 8080 (http) with context path ''
+INFO  23-09-07 20:19:10[restartedMain] [LearniverseMainApplication:57] - Started LearniverseMainApplication in 2.006 seconds (process running for 2.236)
+INFO  23-09-07 20:19:54[http-nio-127.0.0.1-8080-exec-4] [CustomOAuth2UserService:28] - djdjj
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - login=uujiinn
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - id=104304104
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - node_id=U_kgDOBjeN6A
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - gravatar_id=
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - url=https://api.github.com/users/uujiinn
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - html_url=https://github.com/uujiinn
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - followers_url=https://api.github.com/users/uujiinn/followers
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - following_url=https://api.github.com/users/uujiinn/following{/other_user}
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - subscriptions_url=https://api.github.com/users/uujiinn/subscriptions
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - organizations_url=https://api.github.com/users/uujiinn/orgs
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - repos_url=https://api.github.com/users/uujiinn/repos
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - events_url=https://api.github.com/users/uujiinn/events{/privacy}
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - received_events_url=https://api.github.com/users/uujiinn/received_events
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - type=User
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - site_admin=false
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - name=null
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - company=null
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - blog=
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - location=null
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - email=jane9994@gmail.com
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - hireable=null
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - bio=null
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - twitter_username=null
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - public_repos=5
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - public_gists=0
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - followers=2
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - following=2
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - created_at=2022-04-24T11:15:19Z
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - updated_at=2023-09-06T15:14:14Z
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [CustomOAuth2UserService:41] - OAuth2Attribute(attributes={login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}, attributeKey=id, email=jane9994@gmail.com, name=uujiinn, id=104304104)
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [CustomOAuth2UserService:42] - {login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}
+INFO  23-09-07 20:19:55[http-nio-127.0.0.1-8080-exec-4] [OAuth2SuccessHandler:35] - Name: [1], Granted Authorities: [[ROLE_USER]], User Attributes: [{name=uujiinn, id=1, key=id, email=jane9994@gmail.com}]
+INFO  23-09-07 20:20:19[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 20:20:19[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 20:20:19[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+INFO  23-09-07 20:25:39[background-preinit] [Version:21] - HV000001: Hibernate Validator 8.0.0.Final
+INFO  23-09-07 20:25:39[restartedMain] [LearniverseMainApplication:51] - Starting LearniverseMainApplication using Java 17.0.7 with PID 3337 (/Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main/build/classes/java/main started by yujin.iris in /Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main)
+INFO  23-09-07 20:25:39[restartedMain] [LearniverseMainApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  23-09-07 20:25:39[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  23-09-07 20:25:39[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  23-09-07 20:25:39[restartedMain] [RepositoryConfigurationDelegate:138] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  23-09-07 20:25:39[restartedMain] [RepositoryConfigurationDelegate:208] - Finished Spring Data repository scanning in 40 ms. Found 9 JPA repository interfaces.
+INFO  23-09-07 20:25:40[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  23-09-07 20:25:40[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 20:25:40[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  23-09-07 20:25:40[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/10.1.10]
+INFO  23-09-07 20:25:40[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  23-09-07 20:25:40[restartedMain] [ServletWebServerApplicationContext:291] - Root WebApplicationContext: initialization completed in 765 ms
+INFO  23-09-07 20:25:40[restartedMain] [LogHelper:31] - HHH000204: Processing PersistenceUnitInfo [name: default]
+INFO  23-09-07 20:25:40[restartedMain] [Version:44] - HHH000412: Hibernate ORM core version 6.2.5.Final
+INFO  23-09-07 20:25:40[restartedMain] [Environment:191] - HHH000406: Using bytecode reflection optimizer
+INFO  23-09-07 20:25:40[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 20:25:40[restartedMain] [SpringPersistenceUnitInfo:87] - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  23-09-07 20:25:40[restartedMain] [HikariDataSource:110] - HikariPool-1 - Starting...
+INFO  23-09-07 20:25:40[restartedMain] [HikariPool:565] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@43366313
+INFO  23-09-07 20:25:40[restartedMain] [HikariDataSource:123] - HikariPool-1 - Start completed.
+INFO  23-09-07 20:25:40[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 20:25:40[restartedMain] [JtaPlatformInitiator:51] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+INFO  23-09-07 20:25:41[restartedMain] [LocalContainerEntityManagerFactoryBean:437] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  23-09-07 20:25:41[restartedMain] [JpaBaseConfiguration$JpaWebConfiguration:231] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+INFO  23-09-07 20:25:41[restartedMain] [WelcomePageHandlerMapping:57] - Adding welcome page: class path resource [static/index.html]
+INFO  23-09-07 20:25:41[restartedMain] [DefaultSecurityFilterChain:54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4109dfca, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4677c7f6, org.springframework.security.web.context.SecurityContextHolderFilter@1e6fbd41, org.springframework.security.web.header.HeaderWriterFilter@636d997b, org.springframework.web.filter.CorsFilter@5d80c05a, org.springframework.security.web.authentication.logout.LogoutFilter@1d8ae73, learniverse.learniversemain.jwt.JwtAuthFilter@5fdd3ced, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@680b35ec, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@1132c974, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@1b07adce, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@4c0ef42a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@53773221, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@25fb5bc4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@43f695ee, org.springframework.security.web.access.ExceptionTranslationFilter@764f442e, org.springframework.security.web.access.intercept.AuthorizationFilter@2077d3af]
+WARN  23-09-07 20:25:41[restartedMain] [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:101] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+INFO  23-09-07 20:25:41[restartedMain] [OptionalLiveReloadServer:59] - LiveReload server is running on port 35729
+INFO  23-09-07 20:25:41[restartedMain] [Http11NioProtocol:173] - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 20:25:41[restartedMain] [[/]:173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+INFO  23-09-07 20:25:41[restartedMain] [DispatcherServlet:532] - Initializing Servlet 'dispatcherServlet'
+INFO  23-09-07 20:25:41[restartedMain] [DispatcherServlet:554] - Completed initialization in 1 ms
+INFO  23-09-07 20:25:41[restartedMain] [TomcatWebServer:220] - Tomcat started on port(s): 8080 (http) with context path ''
+INFO  23-09-07 20:25:41[restartedMain] [LearniverseMainApplication:57] - Started LearniverseMainApplication in 2.487 seconds (process running for 3.148)
+INFO  23-09-07 20:26:00[http-nio-127.0.0.1-8080-exec-4] [CustomOAuth2UserService:28] - djdjj
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - login=uujiinn
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - id=104304104
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - node_id=U_kgDOBjeN6A
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - gravatar_id=
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - url=https://api.github.com/users/uujiinn
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - html_url=https://github.com/uujiinn
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - followers_url=https://api.github.com/users/uujiinn/followers
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - following_url=https://api.github.com/users/uujiinn/following{/other_user}
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - subscriptions_url=https://api.github.com/users/uujiinn/subscriptions
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - organizations_url=https://api.github.com/users/uujiinn/orgs
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - repos_url=https://api.github.com/users/uujiinn/repos
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - events_url=https://api.github.com/users/uujiinn/events{/privacy}
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - received_events_url=https://api.github.com/users/uujiinn/received_events
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - type=User
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - site_admin=false
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - name=null
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - company=null
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - blog=
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - location=null
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - email=jane9994@gmail.com
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - hireable=null
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - bio=null
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - twitter_username=null
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - public_repos=5
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - public_gists=0
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - followers=2
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - following=2
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - created_at=2022-04-24T11:15:19Z
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2Attribute:36] - updated_at=2023-09-06T15:14:14Z
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [CustomOAuth2UserService:41] - OAuth2Attribute(attributes={login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}, attributeKey=id, email=jane9994@gmail.com, name=uujiinn, id=104304104)
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [CustomOAuth2UserService:42] - {login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-06T15:14:14Z}
+INFO  23-09-07 20:26:01[http-nio-127.0.0.1-8080-exec-4] [OAuth2SuccessHandler:35] - Name: [1], Granted Authorities: [[ROLE_USER]], User Attributes: [{name=uujiinn, id=1, key=id, email=jane9994@gmail.com}]
+INFO  23-09-07 20:28:00[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 20:28:01[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 20:28:01[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.
+INFO  23-09-07 20:28:27[background-preinit] [Version:21] - HV000001: Hibernate Validator 8.0.0.Final
+INFO  23-09-07 20:28:27[restartedMain] [LearniverseMainApplication:51] - Starting LearniverseMainApplication using Java 17.0.7 with PID 4146 (/Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main/build/classes/java/main started by yujin.iris in /Users/yujin.iris/intellijfolder/Learniverse-login/Learniverse-main)
+INFO  23-09-07 20:28:27[restartedMain] [LearniverseMainApplication:634] - No active profile set, falling back to 1 default profile: "default"
+INFO  23-09-07 20:28:27[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+INFO  23-09-07 20:28:27[restartedMain] [DevToolsPropertyDefaultsPostProcessor:250] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+INFO  23-09-07 20:28:27[restartedMain] [RepositoryConfigurationDelegate:138] - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+INFO  23-09-07 20:28:27[restartedMain] [RepositoryConfigurationDelegate:208] - Finished Spring Data repository scanning in 27 ms. Found 9 JPA repository interfaces.
+INFO  23-09-07 20:28:27[restartedMain] [TomcatWebServer:108] - Tomcat initialized with port(s): 8080 (http)
+INFO  23-09-07 20:28:27[restartedMain] [Http11NioProtocol:173] - Initializing ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 20:28:27[restartedMain] [StandardService:173] - Starting service [Tomcat]
+INFO  23-09-07 20:28:27[restartedMain] [StandardEngine:173] - Starting Servlet engine: [Apache Tomcat/10.1.10]
+INFO  23-09-07 20:28:27[restartedMain] [[/]:173] - Initializing Spring embedded WebApplicationContext
+INFO  23-09-07 20:28:27[restartedMain] [ServletWebServerApplicationContext:291] - Root WebApplicationContext: initialization completed in 520 ms
+INFO  23-09-07 20:28:27[restartedMain] [LogHelper:31] - HHH000204: Processing PersistenceUnitInfo [name: default]
+INFO  23-09-07 20:28:27[restartedMain] [Version:44] - HHH000412: Hibernate ORM core version 6.2.5.Final
+INFO  23-09-07 20:28:27[restartedMain] [Environment:191] - HHH000406: Using bytecode reflection optimizer
+INFO  23-09-07 20:28:27[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 20:28:27[restartedMain] [SpringPersistenceUnitInfo:87] - No LoadTimeWeaver setup: ignoring JPA class transformer
+INFO  23-09-07 20:28:27[restartedMain] [HikariDataSource:110] - HikariPool-1 - Starting...
+INFO  23-09-07 20:28:27[restartedMain] [HikariPool:565] - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1b3464c0
+INFO  23-09-07 20:28:27[restartedMain] [HikariDataSource:123] - HikariPool-1 - Start completed.
+INFO  23-09-07 20:28:28[restartedMain] [BytecodeProviderInitiator:53] - HHH000021: Bytecode provider name : bytebuddy
+INFO  23-09-07 20:28:28[restartedMain] [JtaPlatformInitiator:51] - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+INFO  23-09-07 20:28:28[restartedMain] [LocalContainerEntityManagerFactoryBean:437] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+WARN  23-09-07 20:28:28[restartedMain] [JpaBaseConfiguration$JpaWebConfiguration:231] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+INFO  23-09-07 20:28:28[restartedMain] [WelcomePageHandlerMapping:57] - Adding welcome page: class path resource [static/index.html]
+INFO  23-09-07 20:28:28[restartedMain] [DefaultSecurityFilterChain:54] - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@63a13cff, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@46264e03, org.springframework.security.web.context.SecurityContextHolderFilter@55d9f96c, org.springframework.security.web.header.HeaderWriterFilter@28a1e3e8, org.springframework.web.filter.CorsFilter@1ab8d0f4, org.springframework.security.web.authentication.logout.LogoutFilter@764038ef, learniverse.learniversemain.jwt.JwtAuthFilter@5f6ee95f, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@54848f35, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@6446cc4, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@455a7ec9, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@6ec4ff9f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@875975f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3a29637e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@468707c, org.springframework.security.web.access.ExceptionTranslationFilter@750b8ef6, org.springframework.security.web.access.intercept.AuthorizationFilter@4f61cf6f]
+WARN  23-09-07 20:28:28[restartedMain] [ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration:101] - Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+INFO  23-09-07 20:28:28[restartedMain] [OptionalLiveReloadServer:59] - LiveReload server is running on port 35729
+INFO  23-09-07 20:28:28[restartedMain] [Http11NioProtocol:173] - Starting ProtocolHandler ["http-nio-127.0.0.1-8080"]
+INFO  23-09-07 20:28:28[restartedMain] [[/]:173] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+INFO  23-09-07 20:28:28[restartedMain] [DispatcherServlet:532] - Initializing Servlet 'dispatcherServlet'
+INFO  23-09-07 20:28:28[restartedMain] [DispatcherServlet:554] - Completed initialization in 0 ms
+INFO  23-09-07 20:28:28[restartedMain] [TomcatWebServer:220] - Tomcat started on port(s): 8080 (http) with context path ''
+INFO  23-09-07 20:28:28[restartedMain] [LearniverseMainApplication:57] - Started LearniverseMainApplication in 1.951 seconds (process running for 2.16)
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [CustomOAuth2UserService:28] - djdjj
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - login=uujiinn
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - id=104304104
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - node_id=U_kgDOBjeN6A
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - gravatar_id=
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - url=https://api.github.com/users/uujiinn
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - html_url=https://github.com/uujiinn
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - followers_url=https://api.github.com/users/uujiinn/followers
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - following_url=https://api.github.com/users/uujiinn/following{/other_user}
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - subscriptions_url=https://api.github.com/users/uujiinn/subscriptions
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - organizations_url=https://api.github.com/users/uujiinn/orgs
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - repos_url=https://api.github.com/users/uujiinn/repos
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - events_url=https://api.github.com/users/uujiinn/events{/privacy}
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - received_events_url=https://api.github.com/users/uujiinn/received_events
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - type=User
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - site_admin=false
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - name=null
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - company=null
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - blog=
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - location=null
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - email=jane9994@gmail.com
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - hireable=null
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - bio=null
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - twitter_username=null
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - public_repos=5
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - public_gists=0
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - followers=2
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - following=2
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - created_at=2022-04-24T11:15:19Z
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2Attribute:36] - updated_at=2023-09-07T11:32:01Z
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [CustomOAuth2UserService:41] - OAuth2Attribute(attributes={login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-07T11:32:01Z}, attributeKey=id, email=jane9994@gmail.com, name=uujiinn, id=104304104)
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [CustomOAuth2UserService:42] - {login=uujiinn, id=104304104, node_id=U_kgDOBjeN6A, avatar_url=https://avatars.githubusercontent.com/u/104304104?v=4, gravatar_id=, url=https://api.github.com/users/uujiinn, html_url=https://github.com/uujiinn, followers_url=https://api.github.com/users/uujiinn/followers, following_url=https://api.github.com/users/uujiinn/following{/other_user}, gists_url=https://api.github.com/users/uujiinn/gists{/gist_id}, starred_url=https://api.github.com/users/uujiinn/starred{/owner}{/repo}, subscriptions_url=https://api.github.com/users/uujiinn/subscriptions, organizations_url=https://api.github.com/users/uujiinn/orgs, repos_url=https://api.github.com/users/uujiinn/repos, events_url=https://api.github.com/users/uujiinn/events{/privacy}, received_events_url=https://api.github.com/users/uujiinn/received_events, type=User, site_admin=false, name=null, company=null, blog=, location=null, email=jane9994@gmail.com, hireable=null, bio=null, twitter_username=null, public_repos=5, public_gists=0, followers=2, following=2, created_at=2022-04-24T11:15:19Z, updated_at=2023-09-07T11:32:01Z}
+INFO  23-09-07 20:32:03[http-nio-127.0.0.1-8080-exec-5] [OAuth2SuccessHandler:35] - Name: [1], Granted Authorities: [[ROLE_USER]], User Attributes: [{name=uujiinn, id=1, key=id, email=jane9994@gmail.com}]
+INFO  23-09-07 20:33:32[SpringApplicationShutdownHook] [LocalContainerEntityManagerFactoryBean:650] - Closing JPA EntityManagerFactory for persistence unit 'default'
+INFO  23-09-07 20:33:32[SpringApplicationShutdownHook] [HikariDataSource:350] - HikariPool-1 - Shutdown initiated...
+INFO  23-09-07 20:33:32[SpringApplicationShutdownHook] [HikariDataSource:352] - HikariPool-1 - Shutdown completed.

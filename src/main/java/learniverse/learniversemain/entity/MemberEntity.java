@@ -2,6 +2,7 @@ package learniverse.learniversemain.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,12 @@ public class MemberEntity {
     private String memberEmail;
     @Column(name = "nickname", nullable = false)
     private String nickname;
-    @Column(name = "member_message", nullable = false)
+    @Column(name = "member_message", nullable = true)
     private String memberMessage;
+
+    @Builder
+    public MemberEntity(String nickname, String memberEmail){
+        this.nickname=nickname;
+        this.memberEmail=memberEmail;
+    }
 }
