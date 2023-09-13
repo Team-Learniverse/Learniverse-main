@@ -27,8 +27,8 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")
-@Validated
 @CrossOrigin(origins = "http://localhost:3000")
+@Validated
 public class MemberController {
 
     private final MemberService memberService;
@@ -115,5 +115,17 @@ public class MemberController {
         response.setMessage("스터디룸 고정 \'"+ change +"\' 로 변경 성공");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/profile")
+    public ResponseEntity<Response> getMember(@Valid @RequestParam Long memberId){
+        Response response = new Response();
+        Map<String, Map<String, String>> data = new HashMap<>();
+        data.put("member", memberService.getMember(memberId));
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("멤버 프로필 정보 출력 완료");
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
 }

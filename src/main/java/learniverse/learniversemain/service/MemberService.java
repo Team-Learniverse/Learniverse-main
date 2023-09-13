@@ -7,9 +7,11 @@ import learniverse.learniversemain.dto.MoonDTO;
 import learniverse.learniversemain.dto.ResMoonDTO;
 import learniverse.learniversemain.dto.RoomCardDTO;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
+import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.entity.MoonEntity;
 import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.entity.RoomMemberEntity;
+import learniverse.learniversemain.repository.MemberRepository;
 import learniverse.learniversemain.repository.MoonRepository;
 import learniverse.learniversemain.repository.RoomMemberRepository;
 import learniverse.learniversemain.repository.RoomRepository;
@@ -26,7 +28,9 @@ public class MemberService {
     private final RoomMemberRepository roomMemberRepository;
     private final RoomService roomService;
     private final RoomRepository roomRepository;
+    private final MemberRepository memberRepository;
 
+    @Transactional
     public void saveMoon(MoonDTO moonDTO){
         //memberId 체크
         //있는지 확인
@@ -81,6 +85,16 @@ public class MemberService {
             }
         });
         return resMoonDTOS;
+    }
+
+    public Map<String, String> getMember(long memberId){
+        Map<String, String> member = new HashMap<>();
+        MemberEntity memberEntity = memberRepository.findById(memberId)
+                .orElseThrow(()->new CustomBadRequestException("해당 memberId와 매칭되는 정보를 찾을 수 없습니다."));
+
+        member.put("nickname", memberEntity.getNickname());
+        member.put("imageUrl", memberEntity.getImageUrl());
+        return member;
     }
 
     public Map<String,List<RoomCardDTO>> getRooms(long memberId) {

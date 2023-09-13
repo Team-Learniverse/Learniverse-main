@@ -21,4 +21,6 @@ public class MemberEntity {
     private String nickname;
     @Column(name = "member_message", nullable = false)
     private String memberMessage;
+    @Column(name = "member_url", nullable = true)
+    private String imageUrl;
 }
