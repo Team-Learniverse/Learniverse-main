@@ -28,7 +28,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/member")
 @Validated
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MemberController {
 
     private final MemberService memberService;

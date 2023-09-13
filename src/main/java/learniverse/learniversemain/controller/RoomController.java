@@ -28,7 +28,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/room")
 @Validated
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RoomController {
     private final RoomService roomService;
 
