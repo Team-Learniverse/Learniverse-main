@@ -27,7 +27,6 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")
-@CrossOrigin(origins = "http://localhost:3000")
 @Validated
 public class MemberController {
 
