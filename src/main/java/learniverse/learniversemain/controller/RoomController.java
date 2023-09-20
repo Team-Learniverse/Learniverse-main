@@ -134,7 +134,6 @@ public class RoomController {
 
     }
 
-    @Hidden
     @GetMapping("/modify/info")
     public ResponseEntity<Response> getRoomModifyInfo(@NotNull @RequestParam long roomId){
         Response response = new Response();

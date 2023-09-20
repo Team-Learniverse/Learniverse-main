@@ -7,6 +7,7 @@ import learniverse.learniversemain.controller.Exception.CustomBadRequestExceptio
 import learniverse.learniversemain.dto.CoreTimeDTO;
 import learniverse.learniversemain.dto.RoomSettingDTO;
 import learniverse.learniversemain.dto.ScheduleDTO;
+import learniverse.learniversemain.dto.WorkspaceDTO;
 import learniverse.learniversemain.entity.CoreTimeEntity;
 import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.entity.ScheduleEntity;
@@ -96,7 +97,8 @@ public class RoomMainService {
         boolean existRoom = roomRepository.existsByRoomId(roomId);
         if(!existRoom) throw new CannotFindRoomException();
 
-        List<CoreTimeEntity> coreTimeEntities = coreTimeRepository.findByRoomId(roomId);
+        List<CoreTimeEntity> coreTimeEntities = coreTimeRepository
+                .findByRoomIdAndCoreEndTimeGreaterThanOrderByCoreStartTime(roomId, LocalDateTime.now());
         return coreTimeEntities;
     }
 
@@ -123,5 +125,17 @@ public class RoomMainService {
         CoreTimeEntity coreTimeEntity = coreTimeRepository.findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(roomId, LocalDateTime.now(), LocalDateTime.now());
         if(coreTimeEntity == null) throw new CustomBadRequestException("현재 코어타임이 아닙니다. 코어타임인 경우 해당 API를 호출해주세요.");
         else return coreTimeEntity.getCoreTimeId();
+    }
+
+    public void updateWorkspace(WorkspaceDTO workspaceDTO){
+        RoomEntity roomEntity = roomRepository.findById(workspaceDTO.getRoomId())
+                .orElseThrow(()-> new CannotFindRoomException());
+
+        if(workspaceDTO.getRoomGitOrg() != null) roomEntity.setRoomGitOrg(workspaceDTO.getRoomGitOrg());
+        if(workspaceDTO.getRoomFigma() != null) roomEntity.setRoomFigma(workspaceDTO.getRoomFigma());
+        if(workspaceDTO.getRoomNotion() != null) roomEntity.setRoomNotion(workspaceDTO.getRoomNotion());
+        if(workspaceDTO.getRoomGoogleDrive() != null) roomEntity.setRoomGoogleDrive(workspaceDTO.getRoomGoogleDrive());
+
+        roomRepository.save(roomEntity);
     }
 }

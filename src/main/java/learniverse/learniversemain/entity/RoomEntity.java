@@ -32,8 +32,6 @@ public class RoomEntity {
     private String roomGoogleDrive;
     @Column(name = "room_figma",nullable = true)
     private String roomFigma;
-    @Column(name = "room_language")
-    private String roomLanguage;
 
     public static RoomEntity toRoomEntity(RoomDTO roomDTO){
         RoomEntity roomEntity = new RoomEntity();

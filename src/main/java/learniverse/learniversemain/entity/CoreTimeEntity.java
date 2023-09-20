@@ -23,6 +23,8 @@ public class CoreTimeEntity {
     private LocalDateTime coreStartTime;
     @Column(name = "core_end_time", nullable = false)
     private LocalDateTime coreEndTime;
+    @Column(name = "capture_num", nullable = false)
+    private Integer captureNum;
 
     public CoreTimeEntity(CoreTimeDTO coreTimeDTO){
         this.roomId = coreTimeDTO.getRoomId();
@@ -30,6 +32,6 @@ public class CoreTimeEntity {
         System.out.println(coreStartTime);
         int min = coreTimeDTO.getCoreHour()*60 + coreTimeDTO.getCoreMinute();
         this.coreEndTime = coreTimeDTO.getCoreStartTime().plusMinutes(min);
-        System.out.println(coreEndTime);
+        this.captureNum = coreTimeDTO.getCaptureNum();
     }
 }
