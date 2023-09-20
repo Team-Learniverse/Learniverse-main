@@ -42,14 +42,20 @@ public class RoomEntity {
         roomEntity.setRoomCategory(roomDTO.getRoomCategory());
         roomEntity.setRoomIntro(roomDTO.getRoomIntro());
         roomEntity.setRoomLimit(roomDTO.getRoomLimit());
-        roomEntity.setRoomGitOrg(roomDTO.getRoomGitOrg());
-        roomEntity.setRoomNotion(roomDTO.getRoomNotion());
-        roomEntity.setRoomGoogleDrive(roomDTO.getRoomGoogleDrive());
-        roomEntity.setRoomFigma(roomDTO.getRoomFigma());
 
         return roomEntity;
     }
 
+    public RoomDTO toRoomDTO(){
+        RoomDTO roomDTO = new RoomDTO();
+        roomDTO.setRoomId(this.getRoomId());
+        roomDTO.setRoomName(this.getRoomName());
+        roomDTO.setRoomIntro(this.getRoomIntro());
+        roomDTO.setRoomCategory(this.getRoomCategory());
+        roomDTO.setRoomLimit(this.getRoomLimit());
+
+        return roomDTO;
+    }
 
     public void update(RoomEntity newRoom) {
         this.roomName = newRoom.getRoomName();

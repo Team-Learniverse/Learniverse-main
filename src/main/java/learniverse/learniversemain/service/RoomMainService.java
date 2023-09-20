@@ -57,26 +57,28 @@ public class RoomMainService {
     }
 
     public boolean createCore(CoreTimeDTO coreTimeDTO){
-        //중복체크
-        CoreTimeEntity coreTimeEntities = coreTimeRepository
-                .findOneByRoomIdAndCoreStartDateLessThanEqualAndCoreEndDateGreaterThan(coreTimeDTO.getRoomId(), coreTimeDTO.getCoreStartDate(), coreTimeDTO.getCoreStartDate());
-        if(coreTimeEntities != null) throw new CustomBadRequestException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
-
-        // end 기준으로도 진행
-        coreTimeEntities = coreTimeRepository
-                .findOneByRoomIdAndCoreStartDateLessThanEqualAndCoreEndDateGreaterThan(coreTimeDTO.getRoomId(), coreTimeDTO.getCoreEndDate(), coreTimeDTO.getCoreEndDate());
-        if(coreTimeEntities != null) throw new CustomBadRequestException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
-
-        if(coreTimeDTO.getCoreEndDate().isBefore(coreTimeDTO.getCoreStartDate()))
-            throw new CustomBadRequestException("coreEndTime은 coreStartTime 이후 datetime이어야 합니다.");
-
-        if(coreTimeDTO.getCoreEndDate().isEqual(coreTimeDTO.getCoreStartDate()))
-            throw new CustomBadRequestException("coreEndTime은 coreStartTime 이후 datetime이어야 합니다.");
-
+        CoreTimeEntity coreTimeEntity = new CoreTimeEntity(coreTimeDTO);
+        //방체크
         boolean existRoom = roomRepository.existsByRoomId(coreTimeDTO.getRoomId());
         if(!existRoom) throw new CannotFindRoomException();
 
-        CoreTimeEntity coreTimeEntity = new CoreTimeEntity(coreTimeDTO);
+        //중복체크
+        CoreTimeEntity coreTimeEntities = coreTimeRepository
+                .findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(coreTimeDTO.getRoomId(), coreTimeDTO.getCoreStartTime(), coreTimeDTO.getCoreStartTime());
+        if(coreTimeEntities != null) throw new CustomBadRequestException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
+
+        //중복체크 end 기준으로도 진행
+        coreTimeEntities = coreTimeRepository
+                .findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(coreTimeDTO.getRoomId(), coreTimeEntity.getCoreEndTime(), coreTimeEntity.getCoreEndTime());
+        if(coreTimeEntities != null) throw new CustomBadRequestException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
+
+//        if(coreTimeDTO.getCoreEndDate().isBefore(coreTimeDTO.getCoreStartDate()))
+//            throw new CustomBadRequestException("coreEndTime은 coreStartTime 이후 datetime이어야 합니다.");
+//
+//        if(coreTimeDTO.getCoreEndDate().isEqual(coreTimeDTO.getCoreStartDate()))
+//            throw new CustomBadRequestException("coreEndTime은 coreStartTime 이후 datetime이어야 합니다.");
+
+
         coreTimeRepository.save(coreTimeEntity);
         return true;
 
@@ -102,8 +104,24 @@ public class RoomMainService {
         boolean existRoom = roomRepository.existsByRoomId(roomId);
         if(!existRoom) throw new CannotFindRoomException();
 
-        CoreTimeEntity coreTimeEntities = coreTimeRepository.findOneByRoomIdAndCoreStartDateLessThanEqualAndCoreEndDateGreaterThan(roomId, LocalDateTime.now(), LocalDateTime.now());
-        if(coreTimeEntities == null) return false;
+        CoreTimeEntity coreTimeEntity = coreTimeRepository.findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(roomId, LocalDateTime.now(), LocalDateTime.now());
+        if(coreTimeEntity == null) return false;
         else return true;
+    }
+
+    public LocalDateTime getEndTime(Long coreTimeId){
+        CoreTimeEntity coreTimeEntity = coreTimeRepository.findById(coreTimeId)
+                .orElseThrow(() -> new CustomBadRequestException("해당 coreTimeId와 매칭되는 코어타임이 존재하지 않습니다."));
+
+        return coreTimeEntity.getCoreEndTime();
+    }
+
+    public long getNowId(Long roomId){
+        boolean existRoom = roomRepository.existsByRoomId(roomId);
+        if(!existRoom) throw new CannotFindRoomException();
+
+        CoreTimeEntity coreTimeEntity = coreTimeRepository.findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(roomId, LocalDateTime.now(), LocalDateTime.now());
+        if(coreTimeEntity == null) throw new CustomBadRequestException("현재 코어타임이 아닙니다. 코어타임인 경우 해당 API를 호출해주세요.");
+        else return coreTimeEntity.getCoreTimeId();
     }
 }

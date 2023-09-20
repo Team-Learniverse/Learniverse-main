@@ -64,16 +64,44 @@ public class RoomService {
 
     @Transactional
     public void updateRoom(RoomDTO roomDTO){
-        RoomEntity oldRoom = roomRepository.findById(roomDTO.getRoomId())
+        long roomId = roomDTO.getRoomId();
+        RoomEntity oldRoom = roomRepository.findById(roomId)
                 .orElseThrow(()-> new CannotFindRoomException());
         RoomEntity newRoom = RoomDTO.toRoomEntity(roomDTO);
         oldRoom.update(newRoom);
+
+        //해시태그 아이디
+        List<HashtagEntity> hashtagList = hashtagRepository.findByRoomId(roomId);
+        if(hashtagList != null){
+            for(String hashtag : roomDTO.getRoomHashtags()){
+                HashtagEntity tempHashtagEntity = new HashtagEntity(roomId, hashtag);
+                if(!hashtagList.contains(tempHashtagEntity)) {
+                    hashtagRepository.save(tempHashtagEntity);
+                }else {
+                    hashtagList.remove(tempHashtagEntity);
+                }
+            }
+        }
+
+        if(hashtagList != null) {
+            for (HashtagEntity hashtagEntity : hashtagList){
+                hashtagRepository.delete(hashtagEntity);
+            }
+        }
     }
 
-    public RoomEntity getRoomModifyInfo(Long roomId){
+    public RoomDTO getRoomModifyInfo(Long roomId){
         RoomEntity findRoom = roomRepository.findById(roomId)
                 .orElseThrow(()-> new CannotFindRoomException());
-        return roomRepository.findById(roomId).orElseThrow(() -> new RuntimeException());
+        RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(() -> new RuntimeException());
+        RoomDTO roomDTO = roomEntity.toRoomDTO();
+        List<String> hashtags2String = getHashtags2String(roomId);
+        String[] hashtags = new String[hashtags2String.size()];
+        for(int i=0;i<hashtags.length;i++){
+            hashtags[i] = hashtags2String.get(i);
+        }
+        roomDTO.setRoomHashtags(hashtags);
+        return roomDTO;
     }
 
     public boolean saveHashtags(long roomId, List<String> hashtags){

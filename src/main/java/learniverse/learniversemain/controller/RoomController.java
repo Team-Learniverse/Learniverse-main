@@ -7,8 +7,9 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.*;
+import learniverse.learniversemain.dto.validGroups.Create;
+import learniverse.learniversemain.dto.validGroups.Update;
 import learniverse.learniversemain.entity.HashtagEntity;
-import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +55,7 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Validated(Create.class)
     @PostMapping("/create")
     public ResponseEntity<Response> create(@Valid @RequestBody RoomDTO roomDTO) throws GeneralSecurityException, UnsupportedEncodingException {
         Response response = new Response();
@@ -69,10 +71,16 @@ public class RoomController {
     }
 
 
-    @Hidden
+    @Validated(Update.class)
     @PostMapping("/update")
-    public void update(@RequestBody RoomDTO roomDTO){
+    public ResponseEntity<Response> update(@Valid @RequestBody RoomDTO roomDTO){
+        Response response = new Response();
+
         roomService.updateRoom(roomDTO);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("업데이트 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Hidden
@@ -130,12 +138,12 @@ public class RoomController {
     @GetMapping("/modify/info")
     public ResponseEntity<Response> getRoomModifyInfo(@NotNull @RequestParam long roomId){
         Response response = new Response();
-        RoomEntity roomEntity = roomService.getRoomModifyInfo(roomId);
+        RoomDTO roomDTO = roomService.getRoomModifyInfo(roomId);
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("스터디룸 정보 출력 성공");
-        Map<String, RoomEntity> data = new HashMap<>();
-        data.put("info", roomEntity);
+        Map<String, RoomDTO> data = new HashMap<>();
+        data.put("info", roomDTO);
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -144,7 +152,8 @@ public class RoomController {
     public ResponseEntity<Response> getRoomInfo(@PathVariable String path,
                                                 @NotNull @RequestParam long roomId){
         Response response = new Response();
-        RoomEntity roomEntity = roomService.getRoomModifyInfo(roomId);
+        RoomDTO roomDTO = roomService.getRoomModifyInfo(roomId);
+        RoomEntity roomEntity = RoomEntity.toRoomEntity(roomDTO);
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("스터디룸 정보 출력 성공");

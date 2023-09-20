@@ -60,7 +60,6 @@ public class RoomMemberController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @Hidden
     @GetMapping("/isLeader")
     public ResponseEntity<Response> leaderMembers(@NotNull @RequestParam long roomId,
                                                   @NotNull @RequestParam long memberId){

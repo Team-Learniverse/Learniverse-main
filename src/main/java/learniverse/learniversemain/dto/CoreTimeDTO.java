@@ -12,7 +12,9 @@ public class CoreTimeDTO {
     @NotNull(message = "roomId 입력은 필수입니다.")
     private Long roomId;
     @NotNull(message = "coreStartDate 입력은 필수입니다.")
-    private LocalDateTime coreStartDate;
-    @NotNull(message = "coreEndDate 입력은 필수입니다.")
-    private LocalDateTime coreEndDate;
+    private LocalDateTime coreStartTime;
+    @NotNull(message = "coreHour 입력은 필수입니다.")
+    private int coreHour;
+    @NotNull(message = "coreMinute 입력은 필수입니다.")
+    private int coreMinute;
 }

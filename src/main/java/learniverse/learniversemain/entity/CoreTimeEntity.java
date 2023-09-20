@@ -19,14 +19,17 @@ public class CoreTimeEntity {
     private long coreTimeId;
     @Column(name = "room_id")
     private long roomId;
-    @Column(name = "core_start_date", nullable = false)
-    private LocalDateTime coreStartDate;
-    @Column(name = "core_end_date", nullable = false)
-    private LocalDateTime coreEndDate;
+    @Column(name = "core_start_time", nullable = false)
+    private LocalDateTime coreStartTime;
+    @Column(name = "core_end_time", nullable = false)
+    private LocalDateTime coreEndTime;
 
     public CoreTimeEntity(CoreTimeDTO coreTimeDTO){
         this.roomId = coreTimeDTO.getRoomId();
-        this.coreStartDate = coreTimeDTO.getCoreStartDate();
-        this.coreEndDate = coreTimeDTO.getCoreEndDate();
+        this.coreStartTime = coreTimeDTO.getCoreStartTime();
+        System.out.println(coreStartTime);
+        int min = coreTimeDTO.getCoreHour()*60 + coreTimeDTO.getCoreMinute();
+        this.coreEndTime = coreTimeDTO.getCoreStartTime().plusMinutes(min);
+        System.out.println(coreEndTime);
     }
 }

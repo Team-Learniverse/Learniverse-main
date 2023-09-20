@@ -9,5 +9,5 @@ import java.util.List;
 public interface CoreTimeRepository extends JpaRepository<CoreTimeEntity, Long> {
     public List<CoreTimeEntity> findByRoomId(Long roomId);
 
-    CoreTimeEntity findOneByRoomIdAndCoreStartDateLessThanEqualAndCoreEndDateGreaterThan(Long roomId, LocalDateTime now, LocalDateTime now1);
+    CoreTimeEntity findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(Long roomId, LocalDateTime now, LocalDateTime now1);
 }
