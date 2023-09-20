@@ -20,6 +20,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+import learniverse.learniversemain.entity.MemberEntity;
+import learniverse.learniversemain.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 
 @Service
 @RequiredArgsConstructor
@@ -148,4 +153,22 @@ public class MemberService {
         roomMemberRepository.save(roomMemberEntity.get());
         return roomMemberEntity.get().isPin();
     }
+    public void registerMember(MemberEntity member){
+        if(memberRepository.existsByMemberEmail(member.getMemberEmail())){
+            return;
+        }
+        memberRepository.save(member);
+    }
+    public Optional<MemberEntity> findMemberByEmail(String email){
+        return memberRepository.getByMemberEmail(email);
+    }
+
+    //MemberDTO getMemberById(Long id);
+    //MemberDTO updateMember(MemberDTO updateMember)
+
+    //Optional<MemberEntity> findById(Long id);
+
+    //List<MemberDTO> searchByKeyword(String keyword, int size);
+
+
 }
