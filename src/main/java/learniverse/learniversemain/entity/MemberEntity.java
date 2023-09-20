@@ -14,11 +14,13 @@ public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
-    private long memberId;
+    private Long memberId;
     @Column(name = "member_email", nullable = false)
     private String memberEmail;
     @Column(name = "nickname", nullable = false)
     private String nickname;
     @Column(name = "member_message", nullable = false)
     private String memberMessage;
+    @Column(name = "member_url", nullable = true)
+    private String imageUrl;
 }

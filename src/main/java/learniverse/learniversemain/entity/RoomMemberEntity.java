@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,30 +22,37 @@ public class RoomMemberEntity {
     @Column(name = "member_id")
     private long memberId;
     @Column(name = "is_leader", nullable = false)
-    private int isLeader;
+    private boolean isLeader;
     @Column(name = "is_wait", nullable = false)
-    private int isWait;
+    private boolean isWait;
+    @Column(name = "is_reject", nullable = false)
+    private boolean isReject;
     @Column(name = "is_pin", nullable = false)
-    private int isPin;
+    private boolean isPin;
+    @Column(name = "join_time", nullable = true)
+    private LocalDateTime joinTime;
 
-    public RoomMemberEntity(long room_id, long member_id, int is_leader) {
+    public RoomMemberEntity(long room_id, long member_id, boolean is_leader) {
         this.roomId = room_id;
         this.memberId = member_id;
         this.isLeader = is_leader;
-        this.isWait = (is_leader==0)? 1:0;
-        this.isPin = 0;
+        this.isWait = (is_leader==true)? false:true;
+        this.joinTime = LocalDateTime.now();
+        this.isReject = false;
+        this.isPin = false;
     }
 
-    public RoomMemberEntity(RoomMemberID roomMemberID, int is_leader) {
+    public RoomMemberEntity(RoomMemberID roomMemberID, boolean is_leader) {
         this.roomId = roomMemberID.getRoomId();
         this.memberId = roomMemberID.getMemberId();
         this.isLeader = is_leader;
-        this.isWait = (is_leader==0)? 1:0;
-        this.isPin = 0;
+        this.isWait = (is_leader==true)? false:true;
+        this.isReject = false;
+        this.isPin = false;
     }
 
     public void changePin(){
-        setIsPin((this.getIsPin()==0)? 1:0);
-
+        setPin((this.isPin()==false)? true:false);
     }
+
 }

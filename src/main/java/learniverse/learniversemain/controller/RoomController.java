@@ -1,32 +1,30 @@
 package learniverse.learniversemain.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
-import learniverse.learniversemain.dto.HashtagDTO;
-import learniverse.learniversemain.dto.MemberDTO;
-import learniverse.learniversemain.dto.RoomDTO;
+import learniverse.learniversemain.dto.*;
+import learniverse.learniversemain.dto.validGroups.Create;
+import learniverse.learniversemain.dto.validGroups.Update;
 import learniverse.learniversemain.entity.HashtagEntity;
-import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.service.RoomService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Tag(name = "room", description = "스터디룸 관련 api")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/room")
@@ -34,149 +32,146 @@ import java.util.Map;
 public class RoomController {
     private final RoomService roomService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Response> create(@Valid @RequestBody RoomDTO roomDTO){
+    @GetMapping("/setting/category")
+    public ResponseEntity<Response> getCategories(){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
-        roomService.createRoom(roomDTO);
+        Map<String, List<RoomSettingDTO>> data = new HashMap<>();
+        data.put("category",roomService.getSetting("category"));
+        response.setData(data);
+        response.setStatus(Response.StatusEnum.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
+    @Hidden
+    @GetMapping("/setting/language")
+    public ResponseEntity<Response> getLanguages(){
+        Response response = new Response();
+
+        Map<String, List<RoomSettingDTO>> data = new HashMap<>();
+        data.put("language",roomService.getSetting("language"));
+        response.setData(data);
+        response.setStatus(Response.StatusEnum.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Validated(Create.class)
+    @PostMapping("/create")
+    public ResponseEntity<Response> create(@Valid @RequestBody RoomDTO roomDTO) throws GeneralSecurityException, UnsupportedEncodingException {
+        Response response = new Response();
+
+        long roomId = roomService.createRoom(roomDTO);
         response.setStatus(Response.StatusEnum.CREATED);
+
+        Map<String,String> data = new HashMap<>();
+        data.put("encoded", roomService.getRoomEncoding(roomId));
+        response.setData(data);
         response.setMessage("방 생성 성공");
-        return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PostMapping("/application")
-    public void application(@RequestBody RoomMemberID roomMemberID){
-        //null 처리
-        roomService.application(roomMemberID);
-    }
 
-    @PostMapping("/join")
-    public void join(@RequestBody RoomMemberID roomMemberID){
-        //null 처리
-        roomService.join(roomMemberID);
-    }
-
+    @Validated(Update.class)
     @PostMapping("/update")
-    public void update(@RequestBody RoomDTO roomDTO){
+    public ResponseEntity<Response> update(@Valid @RequestBody RoomDTO roomDTO){
+        Response response = new Response();
+
         roomService.updateRoom(roomDTO);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("업데이트 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Hidden
     @GetMapping("/hashtags")
     public  ResponseEntity<Response> getHashtags(@NotNull @RequestParam Long roomId){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         List<HashtagEntity> hashtagEntities = roomService.getHashtags(roomId);
-        if(hashtagEntities.size() == 0){
-            response.setStatus(Response.StatusEnum.BAD_REQUEST);
-            response.setMessage("해당 방이 존재하지 않습니다. roomId 확인 필요");
-
-            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
-        }
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("해시태그 리스트 출력 성공");
         Map<String,List<HashtagEntity>> data = new HashMap<>();
         data.put("hashtags", hashtagEntities);
         response.setData(data);
-        return new ResponseEntity<>(response, headers, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Hidden
     @PostMapping("/hashtags/add")
     public ResponseEntity<Response> saveHashtags(@Valid @RequestBody HashtagDTO hashtagDTO){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         boolean existRoom = roomService.saveHashtags(hashtagDTO.getRoomId(), hashtagDTO.getHashtags());
         if(existRoom){
             response.setStatus(Response.StatusEnum.CREATED);
             response.setMessage("해시태그 저장 성공");
 
-            return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
         }
-        else{
-            response.setStatus(Response.StatusEnum.BAD_REQUEST);
-            response.setMessage("해당 방이 존재하지 않습니다. roomId 확인 필요");
-
-            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
-        }
+        else throw new RuntimeException();
     }
 
+    @Hidden
     @DeleteMapping("/hashtags/delete")
     public ResponseEntity<Response> deleteHashtags(@Valid @RequestParam @NotEmpty Long[] hashtagIds){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         boolean result = roomService.deleteHashtags(hashtagIds);
         if(result){
             response.setStatus(Response.StatusEnum.OK);
             response.setMessage("해시태그 삭제 성공");
 
-            return new ResponseEntity<>(response, headers, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
         else{
             response.setStatus(Response.StatusEnum.BAD_REQUEST);
             response.setMessage("해당 해시태그가 존재하지 않습니다. 해시태그 확인 필요");
 
-            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
 
     }
 
-    @PostMapping("/pin")
-    public void pin(@RequestBody RoomMemberID roomMemberID){
-        //null 처리
-        roomService.pin(roomMemberID);
-    }
-
-    @GetMapping("/members")
-    public ResponseEntity<Response> members(@NotNull @RequestParam long roomId){
+    @Hidden
+    @GetMapping("/modify/info")
+    public ResponseEntity<Response> getRoomModifyInfo(@NotNull @RequestParam long roomId){
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
-
-        List<MemberDTO> member_list = roomService.getMembers(roomId);
-        if(member_list.size() == 0){
-            response.setStatus(Response.StatusEnum.BAD_REQUEST);
-            response.setMessage("결과 값이 존재하지 않습니다. roomId 확인 필요");
-
-            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
-        }
+        RoomDTO roomDTO = roomService.getRoomModifyInfo(roomId);
 
         response.setStatus(Response.StatusEnum.OK);
-        response.setMessage("멤버 리스트 출력 성공");
-        Map<String,List<MemberDTO>> data = new HashMap<>();
-        data.put("members", member_list);
+        response.setMessage("스터디룸 정보 출력 성공");
+        Map<String, RoomDTO> data = new HashMap<>();
+        data.put("info", roomDTO);
         response.setData(data);
-        return new ResponseEntity<>(response, headers, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/info")
-    public RoomEntity getRoomInfo(@RequestParam long roomId){
-        return roomService.getRoomInfo(roomId);
+    @GetMapping("/info/{path}")
+    public ResponseEntity<Response> getRoomInfo(@PathVariable String path,
+                                                @NotNull @RequestParam long roomId){
+        Response response = new Response();
+        RoomDTO roomDTO = roomService.getRoomModifyInfo(roomId);
+        RoomEntity roomEntity = RoomEntity.toRoomEntity(roomDTO);
 
-        //return new ResponseEntity(roomService.getRoomInfo(roomId), HttpStatus.OK);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("스터디룸 정보 출력 성공");
+        Map<String, String> data = roomEntity.getPath(path);
+        if(data == null){
+            response.setStatus(Response.StatusEnum.BAD_REQUEST);
+            response.setMessage("잘못된 path 입력입니다. (roomName, workspace, roomIntro만 가능)");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/encode")
     public ResponseEntity<Response> getRoomEncoding(@NotNull @RequestParam long roomId) throws GeneralSecurityException, UnsupportedEncodingException {
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         String encoded = roomService.getRoomEncoding(roomId);
-        if(encoded == null){
-            response.setStatus(Response.StatusEnum.BAD_REQUEST);
-            response.setMessage("해당 방 정보 없음. roomId 확인 필요");
-
-            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
-        }
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("roomId 인코딩 성공");
@@ -184,21 +179,19 @@ public class RoomController {
         data.put("encoded", encoded);
         response.setData(data);
 
-        return new ResponseEntity<>(response, headers, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/decode")
     public ResponseEntity<Response> getRoomEncoding(@NotNull @RequestParam String encoded) throws GeneralSecurityException, UnsupportedEncodingException {
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
         long roomId = roomService.getRoomDecoding(encoded);
         if(roomId == 0){
             response.setStatus(Response.StatusEnum.BAD_REQUEST);
             response.setMessage("해당 방 정보 없음. encoded 확인 필요");
 
-            return new ResponseEntity<>(response, headers, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
 
         response.setStatus(Response.StatusEnum.OK);
@@ -206,8 +199,48 @@ public class RoomController {
         Map<String, Long> data = new HashMap<>();
         data.put("roomId", roomId);
         response.setData(data);
-        return new ResponseEntity<>(response, headers, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Hidden
+    @GetMapping("/search")
+    public ResponseEntity<Response> getSearch(@NotNull @RequestParam String str){
+        Response response = new Response();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("검색");
+        response.setData(roomService.getSearch(str, 0));
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/info")
+    public ResponseEntity<Response> getRoomInfo(@NotNull long roomId, @NotNull long memberId){
+        Response response = new Response();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("방 정보 조회");
+        Map<String, RoomCardDTO> data = new HashMap<>();
+        data.put("rooms", roomService.getRoom(roomId, memberId));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<Response> getRooms(@NotNull long memberId){
+        Response response = new Response();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("전체 방 조회");
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomService.getRooms(memberId));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("")
+    public ResponseEntity<Response> deleteRoom(@NotNull long roomId){
+        Response response = new Response();
+        roomService.deleteRoom(roomId);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("방 삭제 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

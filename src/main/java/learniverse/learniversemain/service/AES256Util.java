@@ -34,7 +34,9 @@ public class AES256Util {
         Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
         c.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));
         byte[] encrypted = c.doFinal(str.getBytes("UTF-8"));
-        return Base64.getEncoder().encodeToString(encrypted);
+        //return Base64.getEncoder().encodeToString(encrypted);
+        return Base64.getUrlEncoder().encodeToString(encrypted);
+
         //return enStr;
     }
 
@@ -43,7 +45,7 @@ public class AES256Util {
         Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
         c.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));
         //byte[] byteStr = Base64.decodeBase64(str);
-        byte[] byteStr = Base64.getDecoder().decode(str);
+        byte[] byteStr = Base64.getUrlDecoder().decode(str);
         return new String(c.doFinal(byteStr), "UTF-8");
     }
 }

@@ -24,4 +24,13 @@ public class HashtagEntity {
         this.roomId = roomId;
         this.hashtag = hashtag;
     }
+
+    @Override
+    public boolean equals(Object obj){
+        HashtagEntity hashtagEntity = (HashtagEntity) obj;
+        if(this.roomId == hashtagEntity.getRoomId() && this.hashtag.equals(hashtagEntity.getHashtag()))
+            return true;
+        else return false;
+
+    }
 }

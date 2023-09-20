@@ -1,0 +1,33 @@
+type
+language
+python
+java
+javascript
+html
+CSS
+C#
+C++
+Kotlin
+GO
+C
+Ruby
+SQL
+Swift
+XML
+YAML
+Assembly
+Scala
+Typescript
+Shell
+MATLAB
+Rust
+PHP
+R
+type
+category
+코딩테스트 대비
+사이드 프로젝트
+취업 준비
+개발 공부
+그룹/모임
+기타

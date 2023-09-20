@@ -1,10 +1,12 @@
 package learniverse.learniversemain.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.dto.RoomDTO;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -16,7 +18,7 @@ public class RoomEntity {
     private long roomId;
     @Column(name = "room_name", nullable = false)
     private String roomName;
-    @Column(name = "room_category",nullable = true)
+    @Column(name = "room_category",nullable = false)
     private int roomCategory;
     @Column(name = "room_intro",nullable = true)
     private String roomIntro;
@@ -30,6 +32,8 @@ public class RoomEntity {
     private String roomGoogleDrive;
     @Column(name = "room_figma",nullable = true)
     private String roomFigma;
+    @Column(name = "room_language")
+    private String roomLanguage;
 
     public static RoomEntity toRoomEntity(RoomDTO roomDTO){
         RoomEntity roomEntity = new RoomEntity();
@@ -38,14 +42,20 @@ public class RoomEntity {
         roomEntity.setRoomCategory(roomDTO.getRoomCategory());
         roomEntity.setRoomIntro(roomDTO.getRoomIntro());
         roomEntity.setRoomLimit(roomDTO.getRoomLimit());
-        roomEntity.setRoomGitOrg(roomDTO.getRoomGitOrg());
-        roomEntity.setRoomNotion(roomDTO.getRoomNotion());
-        roomEntity.setRoomGoogleDrive(roomDTO.getRoomGoogleDrive());
-        roomEntity.setRoomFigma(roomDTO.getRoomFigma());
 
         return roomEntity;
     }
 
+    public RoomDTO toRoomDTO(){
+        RoomDTO roomDTO = new RoomDTO();
+        roomDTO.setRoomId(this.getRoomId());
+        roomDTO.setRoomName(this.getRoomName());
+        roomDTO.setRoomIntro(this.getRoomIntro());
+        roomDTO.setRoomCategory(this.getRoomCategory());
+        roomDTO.setRoomLimit(this.getRoomLimit());
+
+        return roomDTO;
+    }
 
     public void update(RoomEntity newRoom) {
         this.roomName = newRoom.getRoomName();
@@ -56,5 +66,24 @@ public class RoomEntity {
         this.roomNotion = newRoom.getRoomNotion();
         this.roomGoogleDrive = newRoom.getRoomGoogleDrive();
         this.roomFigma = newRoom.getRoomFigma();
+    }
+
+    public Map<String, String> getPath(String path) {
+        System.out.println(path);
+        Map<String, String> data = new HashMap<>();
+        if(path.equals("workspace")){
+            data.put("roomGitOrg", this.roomGitOrg);
+            data.put("roomNotion", this.roomNotion);
+            data.put("roomGoogleDrive", this.roomGoogleDrive);
+            data.put("roomFigma", this.roomFigma);
+        }
+        else if (path.equals("roomName")) {
+            data.put("roomName", this.roomName);
+        }
+        else if (path.equals("roomIntro")) {
+            data.put("roomIntro", this.roomIntro);
+        }
+        else return  null;
+        return data;
     }
 }
