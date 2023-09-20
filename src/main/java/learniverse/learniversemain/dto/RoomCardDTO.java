@@ -10,7 +10,7 @@ public class RoomCardDTO {
     private Long roomId;
     private String roomName;
     private String roomIntro;
-    private List<String> hashtags;
+    private List<String> roomHashtags;
     private String roomCategory;
     private int roomCount; // 참여 인원
     private int roomLimit; // 제한 인원
@@ -20,7 +20,7 @@ public class RoomCardDTO {
         this.roomId = roomEntity.getRoomId();
         this.roomName = roomEntity.getRoomName();
         this.roomIntro = roomEntity.getRoomIntro();
-        this.hashtags = hashtags;
+        this.roomHashtags = hashtags;
         this.roomCategory = roomCategory;
         this.roomCount = roomCount;
         this.roomLimit = roomEntity.getRoomLimit();
