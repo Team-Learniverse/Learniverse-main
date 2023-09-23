@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
+import learniverse.learniversemain.dto.BoardDTO;
 import learniverse.learniversemain.dto.CoreTimeDTO;
 import learniverse.learniversemain.dto.ScheduleDTO;
 import learniverse.learniversemain.dto.WorkspaceDTO;
@@ -26,7 +27,6 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.List;
 import java.util.Optional;
 
 @Tag(name = "roomMain", description = "스터디룸 입장 시 필요한 정보와 관련된 api")
@@ -165,17 +165,18 @@ public class RoomMainController {
     }
 
     @PostMapping("/board/create")
-    public ResponseEntity<Response>  createBoardPost(@RequestBody BoardEntity boardEntity){
+    public ResponseEntity<Response>  createBoardPost(@Valid @RequestBody BoardDTO boardDTO){
         Response response = new Response();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
-        roomMainService.createBoard(boardEntity);
 
-        response.setStatus(Response.StatusEnum.CREATED);
-        response.setMessage("게시물 생성 성공");
-        response.setData(boardEntity);
-
-        return new ResponseEntity<>(response, headers, HttpStatus.CREATED);
+        if(roomMainService.createBoard(boardDTO)){
+            response.setStatus(Response.StatusEnum.CREATED);
+            response.setMessage("게시물 생성 성공");
+            response.setData(boardDTO);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        }
+        else throw new RuntimeException();
     }
 
     @DeleteMapping("/board/delete")

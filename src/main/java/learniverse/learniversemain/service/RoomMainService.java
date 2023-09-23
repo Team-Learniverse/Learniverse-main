@@ -3,6 +3,7 @@ package learniverse.learniversemain.service;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.dto.BoardDTO;
 import learniverse.learniversemain.dto.CoreTimeDTO;
 import learniverse.learniversemain.dto.ScheduleDTO;
 import learniverse.learniversemain.dto.WorkspaceDTO;
@@ -137,8 +138,10 @@ public class RoomMainService {
         roomRepository.save(roomEntity);
     }
 
-    public void createBoard(BoardEntity boardEntity){
+    public boolean createBoard(BoardDTO boardDTO){
+        BoardEntity boardEntity = new BoardEntity(boardDTO);
         boardRepository.save(boardEntity);
+        return true;
     }
 
     public void deleteBoardPost(Long boardPostId){
