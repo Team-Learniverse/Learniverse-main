@@ -106,7 +106,7 @@ public class RoomMainController {
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("코어타임 endTime 출력 성공");
         Map<String, LocalDateTime> data = new HashMap<>();
-        data.put("coreEndDTime", roomMainService.getEndTime(coreTimeId));
+        data.put("coreEndTime", roomMainService.getEndTime(coreTimeId));
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
