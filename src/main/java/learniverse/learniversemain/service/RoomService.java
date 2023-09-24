@@ -91,9 +91,7 @@ public class RoomService {
     }
 
     public RoomDTO getRoomModifyInfo(Long roomId){
-        RoomEntity findRoom = roomRepository.findById(roomId)
-                .orElseThrow(()-> new CannotFindRoomException());
-        RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(() -> new RuntimeException());
+        RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(() -> new CannotFindRoomException());
         RoomDTO roomDTO = roomEntity.toRoomDTO();
         List<String> hashtags2String = getHashtags2String(roomId);
         String[] hashtags = new String[hashtags2String.size()];
@@ -102,6 +100,13 @@ public class RoomService {
         }
         roomDTO.setRoomHashtags(hashtags);
         return roomDTO;
+    }
+
+    public RoomEntity getRoomInfo(Long roomId){
+        RoomEntity roomEntity = roomRepository.findById(roomId)
+                .orElseThrow(()-> new CannotFindRoomException());
+
+        return roomEntity;
     }
 
     public boolean saveHashtags(long roomId, List<String> hashtags){

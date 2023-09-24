@@ -151,9 +151,7 @@ public class RoomController {
     public ResponseEntity<Response> getRoomInfo(@PathVariable String path,
                                                 @NotNull @RequestParam long roomId){
         Response response = new Response();
-        RoomDTO roomDTO = roomService.getRoomModifyInfo(roomId);
-        RoomEntity roomEntity = RoomEntity.toRoomEntity(roomDTO);
-
+        RoomEntity roomEntity = roomService.getRoomInfo(roomId);
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("스터디룸 정보 출력 성공");
         Map<String, String> data = roomEntity.getPath(path);
