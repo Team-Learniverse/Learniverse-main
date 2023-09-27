@@ -3,6 +3,7 @@ package learniverse.learniversemain.service;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.MoonDTO;
 import learniverse.learniversemain.dto.ResMoonDTO;
 import learniverse.learniversemain.dto.RoomCardDTO;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
+
 import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,73 +38,73 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void saveMoon(MoonDTO moonDTO){
+    public void saveMoon(MoonDTO moonDTO) {
         //memberId 체크
         //있는지 확인
         MoonEntity moonEntity
                 = moonRepository.findOneByMemberIdAndMoonDate(moonDTO.getMemberId(), moonDTO.getMoonDate());
-        if(moonEntity == null) { // 새로 저장
+        if (moonEntity == null) { // 새로 저장
             moonEntity = new MoonEntity(moonDTO);
-        }else { // score + 1
+        } else { // score + 1
             moonEntity.setMoonScore(moonEntity.getMoonScore() + 1);
-            if(moonEntity.getMoonScore() > 4)
+            if (moonEntity.getMoonScore() > 4)
                 throw new CustomBadRequestException("이미 moomScore가 4단계 입니다.");
         }
 
         moonRepository.save(moonEntity);
     }
 
-    public void deleteMoon(MoonDTO moonDTO){
+    public void deleteMoon(MoonDTO moonDTO) {
         MoonEntity moonEntity
                 = moonRepository.findOneByMemberIdAndMoonDate(moonDTO.getMemberId(), moonDTO.getMoonDate());
-        if(moonEntity == null) throw new CustomBadRequestException("입력한 정보와 관련해 달이 저장된 기록이 없습니다.");
+        if (moonEntity == null) throw new CustomBadRequestException("입력한 정보와 관련해 달이 저장된 기록이 없습니다.");
 
         moonEntity.setMoonScore(moonEntity.getMoonScore() - 1);
-        if(moonEntity.getMoonScore() > 0)
+        if (moonEntity.getMoonScore() > 0)
             moonRepository.save(moonEntity);
         else
             moonRepository.delete(moonEntity);
     }
 
-    public List<ResMoonDTO> getMoon(long memberId){
+    public List<ResMoonDTO> getMoon(long memberId) {
         //memberId 체크
         //
         Map<LocalDate, Integer> resMoon = new HashMap<>();
-        for(int i=0;i<30;i++){
+        for (int i = 0; i < 30; i++) {
             resMoon.put(LocalDate.now().minusDays(i), 0);
         }
         List<MoonEntity> moonEntities = moonRepository.findByMemberIdAndMoonDateGreaterThan(memberId, LocalDate.now().minusDays(30));
-        if(moonEntities != null) {
-            for(MoonEntity moonEntity : moonEntities){
+        if (moonEntities != null) {
+            for (MoonEntity moonEntity : moonEntities) {
                 resMoon.replace(moonEntity.getMoonDate(), moonEntity.getMoonScore());
             }
         }
 
         List<ResMoonDTO> resMoonDTOS = new ArrayList<>();
-        for(LocalDate date : resMoon.keySet()){
+        for (LocalDate date : resMoon.keySet()) {
             resMoonDTOS.add(new ResMoonDTO(date, resMoon.get(date)));
         }
         Collections.sort(resMoonDTOS, new Comparator<ResMoonDTO>() {
             @Override
             public int compare(ResMoonDTO o1, ResMoonDTO o2) {
-                if(o2.getMoonDate().isAfter( o1.getMoonDate())) return 1;
+                if (o2.getMoonDate().isAfter(o1.getMoonDate())) return 1;
                 return -1;
             }
         });
         return resMoonDTOS;
     }
 
-    public Map<String, String> getMember(long memberId){
+    public Map<String, String> getMember(long memberId) {
         Map<String, String> member = new HashMap<>();
         MemberEntity memberEntity = memberRepository.findById(memberId)
-                .orElseThrow(()->new CustomBadRequestException("해당 memberId와 매칭되는 정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new CustomBadRequestException("해당 memberId와 매칭되는 정보를 찾을 수 없습니다."));
 
         member.put("nickname", memberEntity.getNickname());
         member.put("imageUrl", memberEntity.getImageUrl());
         return member;
     }
 
-    public Map<String,List<RoomCardDTO>> getRooms(long memberId) {
+    public Map<String, List<RoomCardDTO>> getRooms(long memberId) {
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
         List<RoomCardDTO> rooms = new ArrayList<>();
         List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByMemberIdOrderByJoinTimeDesc(memberId);
@@ -124,7 +126,7 @@ public class MemberService {
         return data;
     }
 
-    public List<RoomCardDTO> getRoomsIs (long memberId, boolean isLeader) {
+    public List<RoomCardDTO> getRoomsIs(long memberId, boolean isLeader) {
         List<RoomCardDTO> rooms = new ArrayList<>();
         List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByMemberId(memberId);
         if (roomMemberEntities != null)
@@ -145,28 +147,36 @@ public class MemberService {
     }
 
     @Transactional
-    public boolean updatePin(RoomMemberID roomMemberID){
+    public boolean updatePin(RoomMemberID roomMemberID) {
         Optional<RoomMemberEntity> roomMemberEntity = roomMemberRepository.findById(roomMemberID);
-        if(roomMemberEntity.isEmpty()) throw new CustomBadRequestException("해당 roomId, memberId 조합에 대한 결과가 존재하지 않습니다.");
-        if(roomMemberEntity.get().isWait()) throw new CustomBadRequestException("대기중인 스터디룸은 고정핀을 사용할 수 없습니다.");
+        if (roomMemberEntity.isEmpty())
+            throw new CustomBadRequestException("해당 roomId, memberId 조합에 대한 결과가 존재하지 않습니다.");
+        if (roomMemberEntity.get().isWait()) throw new CustomBadRequestException("대기중인 스터디룸은 고정핀을 사용할 수 없습니다.");
         roomMemberEntity.get().changePin();
         roomMemberRepository.save(roomMemberEntity.get());
         return roomMemberEntity.get().isPin();
     }
-    public void registerMember(MemberEntity member){
-        if(memberRepository.existsByMemberEmail(member.getMemberEmail())){
-            return;
+
+    @Transactional
+    public void registerMember(MemberEntity member) {
+        if (!memberRepository.existsByGithubId(member.getGithubId())) {
+            memberRepository.save(member);
         }
-        memberRepository.save(member);
     }
-    public Optional<MemberEntity> findMemberByEmail(String email){
-        return memberRepository.getByMemberEmail(email);
+
+    @Transactional
+    public Optional<MemberEntity> findMemberByGithubId(String githubId) {
+        return memberRepository.getByGithubId(githubId);
     }
+
+    //public MemberDTO updateMember(MemberDTO updateMember);
+
+    // public Optional<MemberEntity> findMemberByEmail(String email){
+    //     return memberRepository.getByMemberEmail(email);
+    //}
 
     //MemberDTO getMemberById(Long id);
-    //MemberDTO updateMember(MemberDTO updateMember)
 
-    //Optional<MemberEntity> findById(Long id);
 
     //List<MemberDTO> searchByKeyword(String keyword, int size);
 

@@ -36,6 +36,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         Token token = tokenService.generateToken(Math.toIntExact(oAuth2User.getAttribute("id")), "USER");
 
+        //토큰 생성
         makeTokenResponse(response, token);
         String targetUrl = request.getHeader("referer");
 
@@ -44,12 +45,15 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
                     "Response has already been committed. Unable to redirect to " + targetUrl
             );
         }
+
         //redirectUri 만들기
-        String redirectUrl = UriComponentsBuilder.fromUriString("http://localhost:8080/redirect")
+        String redirectUrl = UriComponentsBuilder.fromUriString("http://localhost:3004/login")
                 .queryParam("token", token.getAccessToken())
                 .build().toUriString();
         redirectStrategy.sendRedirect(request, response, redirectUrl);
     }
+
+    //access Token, refresh Token 생성
         private void makeTokenResponse(HttpServletResponse response, Token token) throws IOException{
             response.addHeader(HttpHeaders.AUTHORIZATION, token.getAccessToken());
             response.addHeader("Refresh", token.getRefreshToken());
