@@ -26,13 +26,13 @@ public class CustomOAuth2UserService implements OAuth2UserService <OAuth2UserReq
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         log.info("djdjj");
-        // DefaultOAuth2UserService 객체를 성공정보를 바탕으로 만듦
+
         OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService = new DefaultOAuth2UserService();
 
         // 생성된 Service 객체로부터 User를 받는다
         OAuth2User oAuth2User = oAuth2UserService.loadUser(userRequest);
 
-        String registrationId = userRequest.getClientRegistration().getRegistrationId();
+        String registrationId = userRequest.getClientRegistration().getRegistrationId(); // github
 
         // SuccessHandler가 사용할 수 있도록 등록해준다
         OAuth2Attribute oAuth2Attribute =
@@ -42,8 +42,8 @@ public class CustomOAuth2UserService implements OAuth2UserService <OAuth2UserReq
         log.info(oAuth2User.getAttributes().toString());
 
         MemberEntity requestMember = oAuth2Attribute.toMember();
-        memberService.registerMember(requestMember); // email로 멤버가 있는지 확인후 없으면 생성
-        Optional<MemberEntity> findMember = memberService.findMemberByEmail(requestMember.getMemberEmail());
+        memberService.registerMember(requestMember); // login(닉네임)로 멤버가 있는지 확인후 없으면 생성
+        Optional<MemberEntity> findMember = memberService.findMemberByGithubId(requestMember.getGithubId());
 
         return new DefaultOAuth2User(Collections.singleton(
                 new SimpleGrantedAuthority("ROLE_USER")),

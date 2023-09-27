@@ -16,8 +16,9 @@ import java.util.Map;
 public class OAuth2Attribute {
     private Map<String, Object> attributes;
     private String attributeKey;
+    private String nickname; //수정 가능
     private String email;
-    private String name;
+    private String imageUrl;
 
     private Integer id;
 
@@ -37,23 +38,25 @@ public class OAuth2Attribute {
         }
         return OAuth2Attribute.builder()
                 .id((Integer) attributes.get("id"))
-                .name((String) attributes.get("login"))
+                .nickname((String) attributes.get("login"))
                 .email((String) attributes.get("email"))
+                .imageUrl((String) attributes.get("avatar_url"))
                 .attributes(attributes)
                 .attributeKey("id")
                 .build();
     }
 
     public MemberEntity toMember(){
-        return new MemberEntity(name,email);
+        return new MemberEntity(nickname,nickname,email,imageUrl); //nickname, githubId, email, imageurl
     }
 
     public Map<String, Object> toMap(long id) {
         Map<String, Object> map = new HashMap<>();
-        map.put("id", id);
-        map.put("key", attributeKey);
-        map.put("name", name);
-        map.put("email", email);
+        map.put("id", id); //(Member Id)
+        map.put("key", attributeKey); //Github id
+        map.put("nickname", nickname); //Github login(Member Nickname)
+        map.put("email", email); //Github email
+        map.put("imageUrl", imageUrl); //Github avatar_url
 
         return map;
     }

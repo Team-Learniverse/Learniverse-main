@@ -11,6 +11,7 @@ public class MemberDTO {
     private String memberEmail;
     private String nickname;
     private String memberMessage;
+    private String imageUrl;
     private boolean status;
     private String isMember; // "팀장" "대기" "승인" "거절"
 
@@ -20,6 +21,7 @@ public class MemberDTO {
         memberDTO.setMemberEmail(memberEntity.getMemberEmail());
         memberDTO.setNickname(memberEntity.getNickname());
         memberDTO.setMemberMessage(memberEntity.getMemberMessage());
+        memberDTO.setImageUrl(memberEntity.getImageUrl());
         memberDTO.setStatus(memberStatusEntity.getMemberStatus());
         if(roomMemberEntity.isLeader()) memberDTO.setIsMember("팀장");
         else if(roomMemberEntity.isReject()) memberDTO.setIsMember("거절");
