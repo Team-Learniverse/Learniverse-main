@@ -18,7 +18,8 @@ public class Response {
         CREATED(201, "CREATED"),
         BAD_REQUEST(400, "BAD_REQUEST"),
         NOT_FOUND(404, "NOT_FOUND"),
-        INTERNAL_SERVER_ERROR(500, "INTERNAL_SERVER_ERROR");
+        INTERNAL_SERVER_ERROR(500, "INTERNAL_SERVER_ERROR"),
+        UNPROCESSABLE_ENTITY(422, "UNPROCESSABLE_ENTITY");
 
         int statusCode;
         String code;

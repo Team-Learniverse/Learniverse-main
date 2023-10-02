@@ -28,10 +28,10 @@ public class CoreTimeEntity {
 
     public CoreTimeEntity(CoreTimeDTO coreTimeDTO){
         this.roomId = coreTimeDTO.getRoomId();
-        this.coreStartTime = coreTimeDTO.getCoreStartTime();
+        this.coreStartTime = coreTimeDTO.getCoreStartTime().plusHours(9);
         System.out.println(coreStartTime);
         int min = coreTimeDTO.getCoreHour()*60 + coreTimeDTO.getCoreMinute();
-        this.coreEndTime = coreTimeDTO.getCoreStartTime().plusMinutes(min);
+        this.coreEndTime = coreTimeDTO.getCoreStartTime().plusMinutes(min).plusHours(9);
         this.captureNum = coreTimeDTO.getCaptureNum();
     }
 }

@@ -123,6 +123,7 @@ public class RoomMainController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /*
     @Hidden
     @PostMapping("/schedule/create")
     public ResponseEntity<Response> createSchedule(@Valid @RequestBody ScheduleDTO scheduleDTO){
@@ -163,6 +164,7 @@ public class RoomMainController {
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+     */
 
     @PostMapping("/board/create")
     public ResponseEntity<Response>  createBoardPost(@Valid @RequestBody BoardDTO boardDTO){

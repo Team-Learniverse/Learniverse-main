@@ -210,13 +210,15 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Hidden
-    @GetMapping("/search")
-    public ResponseEntity<Response> getSearch(@NotNull @RequestParam String str){
+
+    @GetMapping("/search/hashtag")
+    public ResponseEntity<Response> getSearchHashtag(@NotNull String hashtag, @NotNull long memberId){
         Response response = new Response();
         response.setStatus(Response.StatusEnum.OK);
-        response.setMessage("검색");
-        response.setData(roomService.getSearch(str, 0));
+        response.setMessage("해시태그 검색");
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomService.getSearchHashtag(hashtag, memberId, 0));
+        response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

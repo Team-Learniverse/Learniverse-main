@@ -3,6 +3,7 @@ package learniverse.learniversemain.service;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
 import learniverse.learniversemain.dto.BoardDTO;
 import learniverse.learniversemain.dto.CoreTimeDTO;
 import learniverse.learniversemain.dto.ScheduleDTO;
@@ -32,6 +33,7 @@ public class RoomMainService {
 
 
 
+    /*
     public boolean createSchedule(ScheduleDTO scheduleDTO){
         //roomId 확인
         boolean existRoom = roomRepository.existsByRoomId(scheduleDTO.getRoomId());
@@ -56,6 +58,7 @@ public class RoomMainService {
         List<ScheduleEntity> scheduleEntities = scheduleRepository.findByRoomId(roomId);
         return scheduleEntities;
     }
+    */
 
     public boolean createCore(CoreTimeDTO coreTimeDTO){
         CoreTimeEntity coreTimeEntity = new CoreTimeEntity(coreTimeDTO);
@@ -65,13 +68,13 @@ public class RoomMainService {
 
         //중복체크
         CoreTimeEntity coreTimeEntities = coreTimeRepository
-                .findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(coreTimeDTO.getRoomId(), coreTimeDTO.getCoreStartTime(), coreTimeDTO.getCoreStartTime());
-        if(coreTimeEntities != null) throw new CustomBadRequestException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
+                .findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(coreTimeEntity.getRoomId(), coreTimeEntity.getCoreStartTime(), coreTimeEntity.getCoreStartTime());
+        if(coreTimeEntities != null) throw new CustomUnprocessableException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
 
         //중복체크 end 기준으로도 진행
         coreTimeEntities = coreTimeRepository
-                .findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(coreTimeDTO.getRoomId(), coreTimeEntity.getCoreEndTime(), coreTimeEntity.getCoreEndTime());
-        if(coreTimeEntities != null) throw new CustomBadRequestException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
+                .findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(coreTimeEntity.getRoomId(), coreTimeEntity.getCoreEndTime(), coreTimeEntity.getCoreEndTime());
+        if(coreTimeEntities != null) throw new CustomUnprocessableException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
 
 //        if(coreTimeDTO.getCoreEndDate().isBefore(coreTimeDTO.getCoreStartDate()))
 //            throw new CustomBadRequestException("coreEndTime은 coreStartTime 이후 datetime이어야 합니다.");

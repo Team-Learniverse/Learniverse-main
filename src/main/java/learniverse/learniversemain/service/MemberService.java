@@ -107,6 +107,7 @@ public class MemberService {
     public Map<String, List<RoomCardDTO>> getRooms(long memberId) {
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
         List<RoomCardDTO> rooms = new ArrayList<>();
+        List<RoomCardDTO> pinRooms = new ArrayList<>();
         List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByMemberIdOrderByJoinTimeDesc(memberId);
         if (roomMemberEntities != null)
             for (RoomMemberEntity roomMemberEntity : roomMemberEntities) {
@@ -118,10 +119,13 @@ public class MemberService {
                     List<String> hashtags = roomService.getHashtags2String(roomId);
                     String roomCategory = roomService.getCategory(roomEntity.get().getRoomCategory());
                     int roomCount = roomService.getRoomCount(roomId);
-                    rooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
+                    if(roomMemberEntity.isPin())
+                        pinRooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
+                    else rooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
                 }
             }
 
+        data.put("pinRooms", pinRooms);
         data.put("rooms", rooms);
         return data;
     }

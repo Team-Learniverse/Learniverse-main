@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.dto.ResMoonDTO;
 import learniverse.learniversemain.dto.RoomCardDTO;
 import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.dto.RoomSettingDTO;
@@ -20,9 +21,7 @@ import org.springframework.stereotype.Service;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -195,12 +194,29 @@ public class RoomService {
         return roomId;
     }
 
-    public Page<RoomEntity> getSearch (String str, int page){
-        //List<RoomDTO> result = new ArrayList<>();
-        PageRequest pageRequest = PageRequest.of(page,10);
-        Page<RoomEntity> roomList1 = roomRepository.findByRoomNameContainingOrRoomIntroContaining(str, str, pageRequest);
-        //List<HashtagEntity> roomList3 = hashtagRepository.findByHashtagContaining(str);
-        return roomList1;
+    public List<RoomCardDTO> getSearchHashtag (String str, long memberId, int page){
+        List<RoomCardDTO> result = new ArrayList<>();
+        //PageRequest pageRequest = PageRequest.of(page,10);
+        //Page<RoomEntity> roomList1 = roomRepository.findByRoomNameContainingOrRoomIntroContaining(str, str, pageRequest);
+        List<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str);
+        for (HashtagEntity hashtagEntity : roomList){
+            long roomId = hashtagEntity.getRoomId();
+            RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(()-> new CannotFindRoomException());
+            String isMember = getIsMember(roomId, memberId);
+            List<String> hashtags = getHashtags2String(roomId);
+            String roomCategory = getCategory(roomEntity.getRoomCategory());
+            int roomCount = getRoomCount(roomId);
+            result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+        }
+
+        Collections.sort(result, new Comparator<RoomCardDTO>() {
+            @Override
+            public int compare(RoomCardDTO o1, RoomCardDTO o2) {
+                if(o2.getRoomId() > o1.getRoomId()) return 1;
+                else return -1;
+            }
+        });
+        return result;
     }
 
     public String getCategory(int settingId){
