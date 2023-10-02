@@ -6,20 +6,15 @@ import learniverse.learniversemain.controller.Exception.CustomBadRequestExceptio
 import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
 import learniverse.learniversemain.dto.BoardDTO;
 import learniverse.learniversemain.dto.CoreTimeDTO;
-import learniverse.learniversemain.dto.ScheduleDTO;
+import learniverse.learniversemain.dto.FcmTokenDTO;
 import learniverse.learniversemain.dto.WorkspaceDTO;
-import learniverse.learniversemain.entity.BoardEntity;
-import learniverse.learniversemain.entity.CoreTimeEntity;
-import learniverse.learniversemain.entity.RoomEntity;
-import learniverse.learniversemain.entity.ScheduleEntity;
-import learniverse.learniversemain.repository.BoardRepository;
-import learniverse.learniversemain.repository.CoreTimeRepository;
-import learniverse.learniversemain.repository.RoomRepository;
-import learniverse.learniversemain.repository.ScheduleRepository;
+import learniverse.learniversemain.entity.*;
+import learniverse.learniversemain.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +25,8 @@ public class RoomMainService {
     private final CoreTimeRepository coreTimeRepository;
     private final RoomRepository roomRepository;
     private final BoardRepository boardRepository;
-
+    private final FcmTokenRepository fcmTokenRepository;
+    private final RoomMemberRepository roomMemberRepository;
 
 
     /*
@@ -167,4 +163,44 @@ public class RoomMainService {
         Optional<BoardEntity> boardsEntity = boardRepository.findById(boardId);
         return boardsEntity;
     }
+
+
+    public boolean createToken(FcmTokenDTO fcmTokenDTO){
+        FcmTokenEntity fcmTokenEntity = new FcmTokenEntity(fcmTokenDTO);
+        fcmTokenRepository.save(fcmTokenEntity);
+        return true;
+    }
+
+    @Transactional
+    public void updateToken(FcmTokenEntity fcmTokenEntity){
+        FcmTokenEntity exitedToken = fcmTokenRepository.findById(fcmTokenEntity.getMemberId())
+                .orElseThrow(()-> new IllegalArgumentException("해당 사용자의 토큰이 없습니다."));
+        exitedToken.update(fcmTokenEntity);
+    }
+
+    public FcmTokenEntity getTokenByMemberId(Long memberId){
+        FcmTokenEntity fcmTokenEntity = fcmTokenRepository.findByMemberId(memberId);
+        return fcmTokenEntity;
+    }
+
+    public List<FcmTokenEntity> getTokenList(long roomId, boolean isWait){
+        List<FcmTokenEntity> tokenList = new ArrayList<>();
+        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByRoomId(roomId);
+        if (roomMemberEntities.isEmpty()) throw new CannotFindRoomException();
+
+        if(isWait){
+            roomMemberEntities.removeIf(entity -> entity.isLeader() == true);
+        }else{
+            roomMemberEntities.removeIf(entity -> entity.isWait() == true);
+        }
+
+
+        for(RoomMemberEntity roomMemberEntity : roomMemberEntities){
+            long memberId = roomMemberEntity.getMemberId();
+            FcmTokenEntity fcmTokenEntity = fcmTokenRepository.findByMemberId(memberId);
+            tokenList.add(fcmTokenEntity);
+        }
+        return tokenList;
+    }
+
 }
