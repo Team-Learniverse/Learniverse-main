@@ -37,13 +37,25 @@ public class RoomService {
     private final MemberStatusRepository memberStatusRepository;
     private final RoomSettingRepository roomSettingRepository;
 
-    public List<RoomSettingDTO> getSetting(String type){
+    public List<String> getSetting(String type){
         List<RoomSettingEntity> roomSettingEntities = roomSettingRepository.findByType(type);
-        List<RoomSettingDTO> roomSettingDTOS = new ArrayList<>();
-        for(int i=0;i<roomSettingEntities.size();i++){
-            roomSettingDTOS.add(new RoomSettingDTO(i, roomSettingEntities.get(i).getName()));
+        List<String> strings = new ArrayList<>();
+        for (RoomSettingEntity roomSettingEntity : roomSettingEntities){
+            strings.add(roomSettingEntity.getName());
         }
-        return roomSettingDTOS;
+        return strings;
+    }
+
+    public void setLanguage(RoomSettingDTO roomSettingDTO){
+        RoomEntity updateRoom = roomRepository.findById(roomSettingDTO.getRoomId())
+                .orElseThrow(()-> new CannotFindRoomException());
+        String languages = "";
+        for(String language : roomSettingDTO.getLanguages()){
+            languages += language+" ";
+        }
+        System.out.println(languages);
+        updateRoom.setRoomLanguages(languages);
+        roomRepository.save(updateRoom);
     }
 
     @Transactional

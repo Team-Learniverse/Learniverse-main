@@ -32,27 +32,38 @@ import java.util.Map;
 public class RoomController {
     private final RoomService roomService;
 
-    @GetMapping("/setting/category")
+    @Hidden
+    @GetMapping("/category")
     public ResponseEntity<Response> getCategories(){
         Response response = new Response();
 
-        Map<String, List<RoomSettingDTO>> data = new HashMap<>();
+        Map<String, List<String>> data = new HashMap<>();
         data.put("category",roomService.getSetting("category"));
         response.setData(data);
         response.setStatus(Response.StatusEnum.OK);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Hidden
-    @GetMapping("/setting/language")
+    @GetMapping("/languages")
     public ResponseEntity<Response> getLanguages(){
         Response response = new Response();
 
-        Map<String, List<RoomSettingDTO>> data = new HashMap<>();
-        data.put("language",roomService.getSetting("language"));
+        Map<String, List<String>> data = new HashMap<>();
+        data.put("languages",roomService.getSetting("language"));
         response.setData(data);
+        response.setMessage("개발 언어 출력 성공");
         response.setStatus(Response.StatusEnum.OK);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/languages")
+    public ResponseEntity<Response> setLanguages(@Valid @RequestBody RoomSettingDTO roomSettingDTO){
+        Response response = new Response();
+        roomService.setLanguage(roomSettingDTO);
+        response.setMessage("개발 언어 저장 성공");
+        response.setStatus(Response.StatusEnum.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     @Validated(Create.class)

@@ -32,6 +32,8 @@ public class RoomEntity {
     private String roomGoogleDrive;
     @Column(name = "room_figma",nullable = true)
     private String roomFigma;
+    @Column(name = "room_languages", nullable = true)
+    private String roomLanguages = "";
 
     public static RoomEntity toRoomEntity(RoomDTO roomDTO){
         RoomEntity roomEntity = new RoomEntity();
@@ -40,7 +42,7 @@ public class RoomEntity {
         roomEntity.setRoomCategory(roomDTO.getRoomCategory());
         roomEntity.setRoomIntro(roomDTO.getRoomIntro());
         roomEntity.setRoomLimit(roomDTO.getRoomLimit());
-
+        roomEntity.setRoomLanguages("");
         return roomEntity;
     }
 
