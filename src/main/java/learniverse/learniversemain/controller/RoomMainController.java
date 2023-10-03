@@ -6,12 +6,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
-import learniverse.learniversemain.dto.BoardDTO;
-import learniverse.learniversemain.dto.CoreTimeDTO;
-import learniverse.learniversemain.dto.ScheduleDTO;
-import learniverse.learniversemain.dto.WorkspaceDTO;
+import learniverse.learniversemain.dto.*;
 import learniverse.learniversemain.entity.BoardEntity;
 import learniverse.learniversemain.entity.CoreTimeEntity;
+import learniverse.learniversemain.entity.IssueEntity;
 import learniverse.learniversemain.entity.ScheduleEntity;
 import learniverse.learniversemain.service.RoomMainService;
 import lombok.RequiredArgsConstructor;
@@ -213,4 +211,45 @@ public class RoomMainController {
     public Optional<BoardEntity> getBoardById(@RequestParam Long boardId){
         return roomMainService.getBoardById(boardId);
     }
+
+    @PostMapping("/issue/create")
+    public ResponseEntity<Response>  createIssue(@Valid @RequestBody IssueDTO issueDTO){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        if(roomMainService.createIssue(issueDTO)){
+            response.setStatus(Response.StatusEnum.CREATED);
+            response.setMessage("이슈 생성 성공");
+            response.setData(issueDTO);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        }
+        else throw new RuntimeException();
+    }
+
+    //이슈 클로즈
+    @PostMapping("/issue/update")
+    public ResponseEntity<Response> updateIssue(@RequestBody IssueEntity issueEntity){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        roomMainService.updateIssue(issueEntity);
+        response.setMessage("issue 클로즈 성공");
+        response.setData(issueEntity);
+
+        return new ResponseEntity<>(response, headers, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/issues")
+    public List<IssueEntity> getIssues(@RequestParam Long roomId){
+        return roomMainService.getIssues(roomId);
+    }
+
+    @GetMapping("/issue")
+    public Optional<IssueEntity> getIssueById(@RequestParam Long issueId){
+        return roomMainService.getIssueById(issueId);
+    }
+
+
 }
