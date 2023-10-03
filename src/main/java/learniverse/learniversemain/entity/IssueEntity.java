@@ -26,10 +26,8 @@ public class IssueEntity {
     private String issueTitle;
     @Column(name = "issue_description", nullable = false)
     private String issueDescription;
-    @Column(name = "issue_git_owner", nullable = false)
-    private String issueGitOwner;
-    @Column(name = "issue_git_Repo", nullable = false)
-    private String issueGitRepo;
+    @Column(name = "issue_git_url", nullable = false)
+    private String issueGitUrl;
     @Column(name = "git_file_name", nullable = false)
     private String gitFileName;
     @Column(name = "git_code", nullable = true)
@@ -47,8 +45,7 @@ public class IssueEntity {
         this.roomId=issueDTO.getRoomId();
         this.issueTitle=issueDTO.getIssueTitle();
         this.issueDescription=issueDTO.getIssueDescription();
-        this.issueGitOwner=issueDTO.getIssueGitOwner();
-        this.issueGitRepo=issueDTO.getIssueGitRepo();
+        this.issueGitUrl=issueDTO.getIssueGitUrl();
         this.gitFileName=issueDTO.getGitFileName();
         this.createdDate = now;
 
