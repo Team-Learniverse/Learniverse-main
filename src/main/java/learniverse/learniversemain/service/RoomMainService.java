@@ -316,12 +316,12 @@ public class RoomMainService {
     }
 
     @Transactional
-    public void updateIssue(IssueEntity issueEntity){ //이슈 클로즈하기
-        IssueEntity existedIssue = issueRepository.findById(issueEntity.getIssueId())
+    public void updateIssue(Long issueId){ //이슈 클로즈하기
+        IssueEntity existedIssue = issueRepository.findById(issueId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 이슈가 없습니다."));
-
         changeIssue(existedIssue);
-        existedIssue.update(issueEntity);
+
+        existedIssue.update(existedIssue);
     }
 
     public void changeIssue(IssueEntity issueEntity){ //깃헙에 이슈 업데이트
