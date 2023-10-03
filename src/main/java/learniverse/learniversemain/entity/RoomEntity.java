@@ -42,7 +42,13 @@ public class RoomEntity {
         roomEntity.setRoomCategory(roomDTO.getRoomCategory());
         roomEntity.setRoomIntro(roomDTO.getRoomIntro());
         roomEntity.setRoomLimit(roomDTO.getRoomLimit());
-        roomEntity.setRoomLanguages("");
+        if(roomDTO.getRoomLanguages() != null){
+            String languages = " ";
+            for(String language : roomDTO.getRoomLanguages()){
+                languages += language+" ";
+            }
+            roomEntity.setRoomLanguages(languages);
+        }
         return roomEntity;
     }
 

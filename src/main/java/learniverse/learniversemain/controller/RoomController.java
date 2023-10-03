@@ -57,16 +57,6 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/languages")
-    public ResponseEntity<Response> setLanguages(@Valid @RequestBody RoomSettingDTO roomSettingDTO){
-        Response response = new Response();
-        roomService.setLanguage(roomSettingDTO);
-        response.setMessage("개발 언어 저장 성공");
-        response.setStatus(Response.StatusEnum.OK);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-
-    }
-
     @Validated(Create.class)
     @PostMapping("/create")
     public ResponseEntity<Response> create(@Valid @RequestBody RoomDTO roomDTO) throws GeneralSecurityException, UnsupportedEncodingException {

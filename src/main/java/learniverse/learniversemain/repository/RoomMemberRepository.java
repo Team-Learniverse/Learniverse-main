@@ -15,4 +15,6 @@ public interface RoomMemberRepository extends JpaRepository<RoomMemberEntity, Ro
     List<RoomMemberEntity> findByMemberIdOrderByJoinTimeDesc(long memberId);
     List<RoomMemberEntity> findByMemberIdAndIsWaitAndIsPinOrderByJoinTimeDesc(long memberId, boolean b, boolean b1);
     List<RoomMemberEntity> findByMemberIdAndIsWaitAndIsPinOrderByPinTimeDesc(long memberId, boolean b, boolean b1);
+
+    long countByMemberIdAndIsPin(Long memberId, boolean b);
 }

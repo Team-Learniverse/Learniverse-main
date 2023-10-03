@@ -5,10 +5,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
-import learniverse.learniversemain.dto.ResMoonDTO;
 import learniverse.learniversemain.dto.RoomCardDTO;
 import learniverse.learniversemain.dto.RoomDTO;
-import learniverse.learniversemain.dto.RoomSettingDTO;
 import learniverse.learniversemain.dto.mongoDB.DefaultRoomsDTO;
 import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
@@ -17,8 +15,6 @@ import learniverse.learniversemain.repository.*;
 import learniverse.learniversemain.repository.mongoDB.DefaultMongoDBRepository;
 import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -51,17 +47,6 @@ public class RoomService {
         return strings;
     }
 
-    public void setLanguage(RoomSettingDTO roomSettingDTO){
-        RoomEntity updateRoom = roomRepository.findById(roomSettingDTO.getRoomId())
-                .orElseThrow(()-> new CannotFindRoomException());
-        String languages = "";
-        for(String language : roomSettingDTO.getLanguages()){
-            languages += language+" ";
-        }
-        System.out.println(languages);
-        updateRoom.setRoomLanguages(languages);
-        roomRepository.save(updateRoom);
-    }
 
     @Transactional
     public long createRoom(RoomDTO roomDTO){
