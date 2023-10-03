@@ -9,9 +9,13 @@ import learniverse.learniversemain.dto.ResMoonDTO;
 import learniverse.learniversemain.dto.RoomCardDTO;
 import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.dto.RoomSettingDTO;
+import learniverse.learniversemain.dto.mongoDB.DefaultRoomsDTO;
 import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
+import learniverse.learniversemain.entity.mongoDB.JoinsEntity;
 import learniverse.learniversemain.repository.*;
+import learniverse.learniversemain.repository.mongoDB.DefaultMongoDBRepository;
+import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +39,8 @@ public class RoomService {
     private final MemberRepository memberRepository;
     private final MemberStatusRepository memberStatusRepository;
     private final RoomSettingRepository roomSettingRepository;
+    private final JoinsMongoDBRepository joinsMongoDBRepository;
+    private final DefaultMongoDBRepository defaultMongoDBRepository;
 
     public List<String> getSetting(String type){
         List<RoomSettingEntity> roomSettingEntities = roomSettingRepository.findByType(type);
@@ -118,6 +124,23 @@ public class RoomService {
                 .orElseThrow(()-> new CannotFindRoomException());
 
         return roomEntity;
+    }
+
+    public void saveDefaultJoins(Long memberId, Long[] roomIds, boolean isDefault){
+        for(long roomId : roomIds){
+            JoinsEntity joinsEntity = new JoinsEntity(memberId, roomId, isDefault);
+            joinsMongoDBRepository.save(joinsEntity);
+        }
+    }
+
+    public List<RoomCardDTO> getDefaultRooms(){
+        List<DefaultRoomsDTO> defaultRoomsDTOS = defaultMongoDBRepository.findAll();
+        List<RoomCardDTO> rooms = new ArrayList<>();
+        for(DefaultRoomsDTO defaultRoomsDTO : defaultRoomsDTOS){
+            rooms.add(new RoomCardDTO(defaultRoomsDTO));
+        }
+        return rooms;
+
     }
 
     public boolean saveHashtags(long roomId, List<String> hashtags){
