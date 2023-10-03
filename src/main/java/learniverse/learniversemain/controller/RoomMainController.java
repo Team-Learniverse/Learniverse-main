@@ -279,11 +279,11 @@ public class RoomMainController {
       //이슈 클로즈
    @PostMapping("/issue/update")
     public ResponseEntity<Response> updateIssue(@RequestBody IssueEntity issueEntity){
-        Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+       Response response = new Response();
+       HttpHeaders headers = new HttpHeaders();
+       headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
 
-        roomMainService.updateIssue(issueEntity);
+       roomMainService.updateIssue(issueEntity);
         response.setMessage("issue 클로즈 성공");
         response.setData(issueEntity);
 

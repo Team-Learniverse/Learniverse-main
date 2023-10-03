@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
@@ -32,12 +33,23 @@ public class IssueEntity {
     private String gitFileName;
     @Column(name = "git_code", nullable = true)
     private String gitCode;
+    @Column(name = "git_issue_number", nullable = true)
+    private String gitIssueNumber;
     @CreatedDate
     private LocalDateTime createdDate;
+    @LastModifiedDate
+    private LocalDateTime updatedDate;
 
+    public void update(IssueEntity newIssue) {
+        LocalDateTime now = LocalDateTime.now();
 
-
-
+        this.issueId = newIssue.getIssueId();
+        this.roomId = newIssue.getRoomId();
+        this.memberId = newIssue.getMemberId();
+        this.issueTitle = newIssue.getIssueTitle();
+        this.issueDescription = newIssue.getIssueDescription();
+        this.updatedDate = now;
+    }
     public IssueEntity(IssueDTO issueDTO) {
         LocalDateTime now = LocalDateTime.now();
 
