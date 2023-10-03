@@ -3,20 +3,29 @@ package learniverse.learniversemain.service;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.dto.*;
 import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
 import learniverse.learniversemain.dto.BoardDTO;
-import learniverse.learniversemain.dto.CoreTimeDTO;
-import learniverse.learniversemain.dto.FcmTokenDTO;
-import learniverse.learniversemain.dto.WorkspaceDTO;
 import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.repository.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+@Slf4j
 
 @Service
 @RequiredArgsConstructor
@@ -25,9 +34,9 @@ public class RoomMainService {
     private final CoreTimeRepository coreTimeRepository;
     private final RoomRepository roomRepository;
     private final BoardRepository boardRepository;
+    private final IssueRepository issueRepository;
     private final FcmTokenRepository fcmTokenRepository;
     private final RoomMemberRepository roomMemberRepository;
-
 
     /*
     public boolean createSchedule(ScheduleDTO scheduleDTO){
@@ -163,9 +172,8 @@ public class RoomMainService {
         Optional<BoardEntity> boardsEntity = boardRepository.findById(boardId);
         return boardsEntity;
     }
-
-
-    public boolean createToken(FcmTokenDTO fcmTokenDTO){
+  
+  public boolean createToken(FcmTokenDTO fcmTokenDTO){
         FcmTokenEntity fcmTokenEntity = new FcmTokenEntity(fcmTokenDTO);
         fcmTokenRepository.save(fcmTokenEntity);
         return true;
@@ -201,6 +209,148 @@ public class RoomMainService {
             tokenList.add(fcmTokenEntity);
         }
         return tokenList;
+    }
+
+    public boolean createIssue(IssueDTO issueDTO){ //디비에 이슈 등록
+        IssueEntity issueEntity = new IssueEntity(issueDTO);
+
+        //깃헙에 이슈 업로드
+        uploadIssue(issueEntity);
+        //깃헙에서 코드 가져오기
+        String gitCode = getCodeFromGit(issueEntity);
+        issueEntity.setGitCode(gitCode);
+        log.info("Decoded issueEntity.getGitCode1: " + issueEntity.getGitCode());
+
+        issueRepository.save(issueEntity);
+
+        log.info("Decoded issueEntity.getGitCode2: " + issueEntity.getGitCode());
+
+        return true;
+    }
+
+
+    public void uploadIssue(IssueEntity issueEntity){ //깃헙에 이슈 업로드
+        log.info("uploadIssue");
+
+        String issueGitOwner=issueEntity.getIssueGitOwner();
+        String issueGitRepo=issueEntity.getIssueGitRepo();
+        String issueTitle=issueEntity.getIssueTitle();
+        String issueDescription=issueEntity.getIssueDescription();
+
+        String addIssueUrl= "https://api.github.com/repos/"+issueGitOwner + "/"+ issueGitRepo+"/issues";
+
+        WebClient webClient = WebClient.builder()
+                .baseUrl(addIssueUrl)
+                .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
+                .build();
+
+        String requestBody = String.format("{\"title\":\"%s\",\"body\":\"%s\"}", issueTitle, issueDescription);
+
+        Mono<Void> response = webClient.post()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(requestBody)
+                .retrieve()
+                .bodyToMono(Void.class);
+
+        //요청 실행 및 응답 처리
+        response.block(); //블로킹 방식으로 요청 보내고 응답 기다림
+
+    }
+
+    public String getCodeFromGit(IssueEntity issueEntity){
+        log.info("GitCode");
+
+        String gitCode="";
+        String issueGitOwner=issueEntity.getIssueGitOwner();
+        String issueGitRepo=issueEntity.getIssueGitRepo();
+        String gitFileName=issueEntity.getGitFileName();
+
+        String getGitUrl= "https://api.github.com/repos/"+issueGitOwner + "/"+ issueGitRepo+"/contents/"+gitFileName;
+
+        WebClient webClient = WebClient.builder()
+                .baseUrl(getGitUrl)
+                .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
+                .build();
+
+        // GitHub API에 GET 요청 보내기
+        Mono<Map<String, Object>> response = webClient.get()
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {});
+
+        Map<String, Object> responseBody = response.block();
+
+        if (responseBody != null && responseBody.containsKey("content")) {
+            String base64Content = (String) responseBody.get("content");
+            base64Content = base64Content.replaceAll("\\s", ""); // 공백 제거
+            //base64Content = base64Content.replaceAll("^(.*?)base64,", ""); // "base64," 이전 문자열 제거
+
+            try {
+                byte[] decodedBytes = Base64.getDecoder().decode(base64Content);
+                String decodedContent = new String(decodedBytes, StandardCharsets.UTF_8);
+                log.info("Decoded Content: " + decodedContent);
+
+                gitCode = decodedContent;
+
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return gitCode;
+    }
+
+    @Transactional
+    public void updateIssue(IssueEntity issueEntity){
+        IssueEntity existedIssue = issueRepository.findById(issueEntity.getIssueId())
+                .orElseThrow(()-> new IllegalArgumentException("해당 방이 없습니다."));
+
+        changeIssue(existedIssue);
+    }
+
+    public void changeIssue(IssueEntity issueEntity){ //깃헙에 이슈 업로드
+        log.info("uploadIssue");
+
+        String issueGitOwner=issueEntity.getIssueGitOwner();
+        String issueGitRepo=issueEntity.getIssueGitRepo();
+        String issueTitle=issueEntity.getIssueTitle();
+        String issueDescription=issueEntity.getIssueDescription();
+
+        String addIssueUrl= "https://api.github.com/repos/"+issueGitOwner + "/"+ issueGitRepo+"/issues";
+
+        WebClient webClient = WebClient.builder()
+                .baseUrl(addIssueUrl)
+                .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
+                .build();
+
+        String requestBody = String.format("{\"title\":\"%s\",\"body\":\"%s\"}", issueTitle, issueDescription);
+
+        Mono<Void> response = webClient.post()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(requestBody)
+                .retrieve()
+                .bodyToMono(Void.class);
+
+        //요청 실행 및 응답 처리
+        response.block(); //블로킹 방식으로 요청 보내고 응답 기다림
+
+    }
+
+
+    public List<IssueEntity> getIssues(Long roomId){
+        List<IssueEntity> issuesEntites = issueRepository.findByRoomId(roomId);
+        return issuesEntites;
+    }
+
+    public Optional<IssueEntity> getIssueById(Long issueId){
+        Optional<IssueEntity> issueEntity = issueRepository.findById(issueId);
+        return issueEntity;
     }
 
 }

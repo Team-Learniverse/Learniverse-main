@@ -37,8 +37,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .anyRequest().permitAll()
                 )
-                .oauth2Login(oauth2 -> oauth2.
-                        userInfoEndpoint(userInfo ->
+                .oauth2Login(oauth2 -> oauth2
+                        .userInfoEndpoint(userInfo ->
                                 userInfo.userService(oAuth2UserService)
                         )
                         .successHandler(oAuth2SuccessHandler)
