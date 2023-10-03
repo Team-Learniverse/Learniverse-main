@@ -170,10 +170,10 @@ public class MemberService {
         if (roomMemberEntity.isEmpty())
             throw new CustomBadRequestException("해당 roomId, memberId 조합에 대한 결과가 존재하지 않습니다.");
         if (roomMemberEntity.get().isWait()) throw new CustomBadRequestException("대기중인 스터디룸은 고정핀을 사용할 수 없습니다.");
-        if (!roomMemberEntity.get().isPin()){
-            long cnt = roomMemberRepository.countByMemberIdAndIsPin(roomMemberID.getMemberId(), true);
-            if(cnt == 5) throw new CustomUnprocessableException("핀 설정은 최대 5개까지 가능합니다.");
-        }
+//        if (!roomMemberEntity.get().isPin()){
+//            long cnt = roomMemberRepository.countByMemberIdAndIsPin(roomMemberID.getMemberId(), true);
+//            if(cnt == 5) throw new CustomUnprocessableException("핀 설정은 최대 5개까지 가능합니다.");
+//        }
         roomMemberEntity.get().changePin();
         roomMemberEntity.get().setPinTime(LocalDateTime.now());
         roomMemberRepository.save(roomMemberEntity.get());
