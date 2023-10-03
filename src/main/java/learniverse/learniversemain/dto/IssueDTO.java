@@ -13,10 +13,8 @@ public class IssueDTO {
     private String issueTitle;
     @NotNull(message = "issueDescription 입력은 필수입니다.")
     private String issueDescription;
-    @NotNull(message = "issueGitOwner 입력은 필수입니다.")
-    private String issueGitOwner;
-    @NotNull(message = "issueGitRepo 입력은 필수입니다.")
-    private String issueGitRepo;
+    @NotNull(message = "issueGitUrl 입력은 필수입니다.")
+    private String issueGitUrl;
     @NotNull(message = "gitFileName 입력은 필수입니다.")
     private String gitFileName;
 

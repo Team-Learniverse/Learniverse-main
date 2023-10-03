@@ -232,12 +232,11 @@ public class RoomMainService {
     public void uploadIssue(IssueEntity issueEntity){ //깃헙에 이슈 업로드
         log.info("uploadIssue");
 
-        String issueGitOwner=issueEntity.getIssueGitOwner();
-        String issueGitRepo=issueEntity.getIssueGitRepo();
+        String issueGitUrl=issueEntity.getIssueGitUrl();
         String issueTitle=issueEntity.getIssueTitle();
         String issueDescription=issueEntity.getIssueDescription();
 
-        String addIssueUrl= "https://api.github.com/repos/"+issueGitOwner + "/"+ issueGitRepo+"/issues";
+        String addIssueUrl= "https://api.github.com/repos/"+issueGitUrl+"/issues";
 
         WebClient webClient = WebClient.builder()
                 .baseUrl(addIssueUrl)
@@ -263,11 +262,10 @@ public class RoomMainService {
         log.info("GitCode");
 
         String gitCode="";
-        String issueGitOwner=issueEntity.getIssueGitOwner();
-        String issueGitRepo=issueEntity.getIssueGitRepo();
+        String issueGitUrl=issueEntity.getIssueGitUrl();
         String gitFileName=issueEntity.getGitFileName();
 
-        String getGitUrl= "https://api.github.com/repos/"+issueGitOwner + "/"+ issueGitRepo+"/contents/"+gitFileName;
+        String getGitUrl= "https://api.github.com/repos/"+issueGitUrl+"/contents/"+gitFileName;
 
         WebClient webClient = WebClient.builder()
                 .baseUrl(getGitUrl)
@@ -315,12 +313,11 @@ public class RoomMainService {
     public void changeIssue(IssueEntity issueEntity){ //깃헙에 이슈 업로드
         log.info("uploadIssue");
 
-        String issueGitOwner=issueEntity.getIssueGitOwner();
-        String issueGitRepo=issueEntity.getIssueGitRepo();
+        String issueGitUrl=issueEntity.getIssueGitUrl();
         String issueTitle=issueEntity.getIssueTitle();
         String issueDescription=issueEntity.getIssueDescription();
 
-        String addIssueUrl= "https://api.github.com/repos/"+issueGitOwner + "/"+ issueGitRepo+"/issues";
+        String addIssueUrl= "https://api.github.com/repos/"+ issueGitUrl+"/issues";
 
         WebClient webClient = WebClient.builder()
                 .baseUrl(addIssueUrl)
