@@ -35,6 +35,7 @@ public class RoomMainService {
     private final RoomRepository roomRepository;
     private final BoardRepository boardRepository;
     private final IssueRepository issueRepository;
+    private final IssueOpinionRepository issueOpinionRepository;
     private final FcmTokenRepository fcmTokenRepository;
     private final RoomMemberRepository roomMemberRepository;
 
@@ -363,6 +364,17 @@ public class RoomMainService {
     public Optional<IssueEntity> getIssueById(Long issueId){
         Optional<IssueEntity> issueEntity = issueRepository.findById(issueId);
         return issueEntity;
+    }
+
+    public boolean createOpinion(IssueOpinionDTO issueOpinionDTO){ //디비에 이슈 디스커션 등록
+        IssueOpinionEntity issueOpinionEntity = new IssueOpinionEntity(issueOpinionDTO);
+        issueOpinionRepository.save(issueOpinionEntity);
+        return true;
+    }
+
+    public List<IssueOpinionEntity> getOpinions(Long issueId){
+        List<IssueOpinionEntity> issuesOpinionEntites = issueOpinionRepository.findByIssueId(issueId);
+        return issuesOpinionEntites;
     }
 
 }

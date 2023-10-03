@@ -6,11 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.*;
-import learniverse.learniversemain.entity.IssueEntity;
-import learniverse.learniversemain.entity.ScheduleEntity;
-import learniverse.learniversemain.entity.BoardEntity;
-import learniverse.learniversemain.entity.CoreTimeEntity;
-import learniverse.learniversemain.entity.FcmTokenEntity;
+import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.service.RoomMainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -302,5 +298,27 @@ public class RoomMainController {
     public Optional<IssueEntity> getIssueById(@RequestParam Long issueId){
         return roomMainService.getIssueById(issueId);
     }
+
+    @PostMapping("/discussion/create")
+    public ResponseEntity<Response>  createOpinion(@Valid @RequestBody IssueOpinionDTO issueOpinionDTO){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        if(roomMainService.createOpinion(issueOpinionDTO)){
+            response.setStatus(Response.StatusEnum.CREATED);
+            response.setMessage("디스커션 생성 성공");
+            response.setData(issueOpinionDTO);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        }
+        else throw new RuntimeException();
+    }
+
+    @GetMapping("/discussions")
+    public List<IssueOpinionEntity> getOpinions(@RequestParam Long issueId){
+        return roomMainService.getOpinions(issueId);
+    }
+
+
 
 }
