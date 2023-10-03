@@ -214,23 +214,24 @@ public class RoomMainService {
     public boolean createIssue(IssueDTO issueDTO){ //디비에 이슈 등록
         IssueEntity issueEntity = new IssueEntity(issueDTO);
 
-        //깃헙에 이슈 업로드
-        uploadIssue(issueEntity);
-        //깃헙에서 코드 가져오기
+        //깃헙에 이슈 업로드 후 이슈 넘버 저장
+        String gitIssueNumber = uploadIssue(issueEntity);
+        issueEntity.setGitIssueNumber(gitIssueNumber);
+
+        //깃헙에서 코드 가져와서 파일에 있는 코드 저장
         String gitCode = getCodeFromGit(issueEntity);
         issueEntity.setGitCode(gitCode);
-        log.info("Decoded issueEntity.getGitCode1: " + issueEntity.getGitCode());
 
         issueRepository.save(issueEntity);
-
-        log.info("Decoded issueEntity.getGitCode2: " + issueEntity.getGitCode());
 
         return true;
     }
 
 
-    public void uploadIssue(IssueEntity issueEntity){ //깃헙에 이슈 업로드
+    public String uploadIssue(IssueEntity issueEntity){ //깃헙에 이슈 업로드
         log.info("uploadIssue");
+
+        String issueNumberinGit="";
 
         String issueGitUrl=issueEntity.getIssueGitUrl();
         String issueTitle=issueEntity.getIssueTitle();
@@ -247,18 +248,27 @@ public class RoomMainService {
 
         String requestBody = String.format("{\"title\":\"%s\",\"body\":\"%s\"}", issueTitle, issueDescription);
 
-        Mono<Void> response = webClient.post()
+        Mono<Map<String, Object>> response = webClient.post()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(requestBody)
                 .retrieve()
-                .bodyToMono(Void.class);
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {});
 
         //요청 실행 및 응답 처리
-        response.block(); //블로킹 방식으로 요청 보내고 응답 기다림
+        Map<String, Object> responseBody = response.block();
 
+        if (responseBody != null && responseBody.containsKey("number")) {
+            try {
+                issueNumberinGit = responseBody.get("number").toString();
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return issueNumberinGit;
     }
 
-    public String getCodeFromGit(IssueEntity issueEntity){
+    public String getCodeFromGit(IssueEntity issueEntity){ //깃헙 파일에서 코드 가져오기
         log.info("GitCode");
 
         String gitCode="";
@@ -303,21 +313,22 @@ public class RoomMainService {
     }
 
     @Transactional
-    public void updateIssue(IssueEntity issueEntity){
+    public void updateIssue(IssueEntity issueEntity){ //이슈 클로즈하기
         IssueEntity existedIssue = issueRepository.findById(issueEntity.getIssueId())
-                .orElseThrow(()-> new IllegalArgumentException("해당 방이 없습니다."));
+                .orElseThrow(()-> new IllegalArgumentException("해당 이슈가 없습니다."));
 
         changeIssue(existedIssue);
+        existedIssue.update(issueEntity);
     }
 
-    public void changeIssue(IssueEntity issueEntity){ //깃헙에 이슈 업로드
-        log.info("uploadIssue");
+    public void changeIssue(IssueEntity issueEntity){ //깃헙에 이슈 업데이트
+        log.info("changeIssue");
 
         String issueGitUrl=issueEntity.getIssueGitUrl();
-        String issueTitle=issueEntity.getIssueTitle();
-        String issueDescription=issueEntity.getIssueDescription();
 
-        String addIssueUrl= "https://api.github.com/repos/"+ issueGitUrl+"/issues";
+        String issueNumberinGit=issueEntity.getGitIssueNumber();
+
+        String addIssueUrl= "https://api.github.com/repos/"+ issueGitUrl+"/issues/"+issueNumberinGit;
 
         WebClient webClient = WebClient.builder()
                 .baseUrl(addIssueUrl)
@@ -326,9 +337,10 @@ public class RoomMainService {
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 
-        String requestBody = String.format("{\"title\":\"%s\",\"body\":\"%s\"}", issueTitle, issueDescription);
+        //이슈 클로즈
+        String requestBody = String.format("{\"state\":\"closed\"}");
 
-        Mono<Void> response = webClient.post()
+        Mono<Void> response = webClient.patch()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(requestBody)
                 .retrieve()
