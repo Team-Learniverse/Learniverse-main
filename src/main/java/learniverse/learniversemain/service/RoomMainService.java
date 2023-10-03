@@ -131,7 +131,8 @@ public class RoomMainService {
         boolean existRoom = roomRepository.existsByRoomId(roomId);
         if(!existRoom) throw new CannotFindRoomException();
 
-        CoreTimeEntity coreTimeEntity = coreTimeRepository.findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(roomId, LocalDateTime.now(), LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now().plusHours(9);
+        CoreTimeEntity coreTimeEntity = coreTimeRepository.findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(roomId, now, now);
         if(coreTimeEntity == null) throw new CustomBadRequestException("현재 코어타임이 아닙니다. 코어타임인 경우 해당 API를 호출해주세요.");
         else return coreTimeEntity.getCoreTimeId();
     }
