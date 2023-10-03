@@ -66,7 +66,7 @@ public class RoomMainService {
     }
     */
 
-    public boolean createCore(CoreTimeDTO coreTimeDTO){
+    public long createCore(CoreTimeDTO coreTimeDTO){
         CoreTimeEntity coreTimeEntity = new CoreTimeEntity(coreTimeDTO);
         //방체크
         boolean existRoom = roomRepository.existsByRoomId(coreTimeDTO.getRoomId());
@@ -89,8 +89,7 @@ public class RoomMainService {
 //            throw new CustomBadRequestException("coreEndTime은 coreStartTime 이후 datetime이어야 합니다.");
 
 
-        coreTimeRepository.save(coreTimeEntity);
-        return true;
+        return coreTimeRepository.save(coreTimeEntity).getCoreTimeId();
     }
 
     public boolean deleteCore(Long coreId){
