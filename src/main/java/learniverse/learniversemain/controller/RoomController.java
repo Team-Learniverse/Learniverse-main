@@ -32,27 +32,38 @@ import java.util.Map;
 public class RoomController {
     private final RoomService roomService;
 
-    @GetMapping("/setting/category")
+    @Hidden
+    @GetMapping("/category")
     public ResponseEntity<Response> getCategories(){
         Response response = new Response();
 
-        Map<String, List<RoomSettingDTO>> data = new HashMap<>();
+        Map<String, List<String>> data = new HashMap<>();
         data.put("category",roomService.getSetting("category"));
         response.setData(data);
         response.setStatus(Response.StatusEnum.OK);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Hidden
-    @GetMapping("/setting/language")
+    @GetMapping("/languages")
     public ResponseEntity<Response> getLanguages(){
         Response response = new Response();
 
-        Map<String, List<RoomSettingDTO>> data = new HashMap<>();
-        data.put("language",roomService.getSetting("language"));
+        Map<String, List<String>> data = new HashMap<>();
+        data.put("languages",roomService.getSetting("language"));
         response.setData(data);
+        response.setMessage("개발 언어 출력 성공");
         response.setStatus(Response.StatusEnum.OK);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/languages")
+    public ResponseEntity<Response> setLanguages(@Valid @RequestBody RoomSettingDTO roomSettingDTO){
+        Response response = new Response();
+        roomService.setLanguage(roomSettingDTO);
+        response.setMessage("개발 언어 저장 성공");
+        response.setStatus(Response.StatusEnum.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     @Validated(Create.class)
@@ -199,13 +210,15 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Hidden
-    @GetMapping("/search")
-    public ResponseEntity<Response> getSearch(@NotNull @RequestParam String str){
+
+    @GetMapping("/search/hashtag")
+    public ResponseEntity<Response> getSearchHashtag(@NotNull String hashtag, @NotNull long memberId){
         Response response = new Response();
         response.setStatus(Response.StatusEnum.OK);
-        response.setMessage("검색");
-        response.setData(roomService.getSearch(str, 0));
+        response.setMessage("해시태그 검색");
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomService.getSearchHashtag(hashtag, memberId, 0));
+        response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

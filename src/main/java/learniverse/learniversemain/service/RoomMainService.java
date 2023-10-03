@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
 import learniverse.learniversemain.dto.*;
+import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
+import learniverse.learniversemain.dto.BoardDTO;
 import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import reactor.core.publisher.Mono;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Base64;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -32,8 +35,10 @@ public class RoomMainService {
     private final RoomRepository roomRepository;
     private final BoardRepository boardRepository;
     private final IssueRepository issueRepository;
+    private final FcmTokenRepository fcmTokenRepository;
+    private final RoomMemberRepository roomMemberRepository;
 
-
+    /*
     public boolean createSchedule(ScheduleDTO scheduleDTO){
         //roomId 확인
         boolean existRoom = roomRepository.existsByRoomId(scheduleDTO.getRoomId());
@@ -58,6 +63,7 @@ public class RoomMainService {
         List<ScheduleEntity> scheduleEntities = scheduleRepository.findByRoomId(roomId);
         return scheduleEntities;
     }
+    */
 
     public boolean createCore(CoreTimeDTO coreTimeDTO){
         CoreTimeEntity coreTimeEntity = new CoreTimeEntity(coreTimeDTO);
@@ -67,13 +73,13 @@ public class RoomMainService {
 
         //중복체크
         CoreTimeEntity coreTimeEntities = coreTimeRepository
-                .findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(coreTimeDTO.getRoomId(), coreTimeDTO.getCoreStartTime(), coreTimeDTO.getCoreStartTime());
-        if(coreTimeEntities != null) throw new CustomBadRequestException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
+                .findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(coreTimeEntity.getRoomId(), coreTimeEntity.getCoreStartTime(), coreTimeEntity.getCoreStartTime());
+        if(coreTimeEntities != null) throw new CustomUnprocessableException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
 
         //중복체크 end 기준으로도 진행
         coreTimeEntities = coreTimeRepository
-                .findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(coreTimeDTO.getRoomId(), coreTimeEntity.getCoreEndTime(), coreTimeEntity.getCoreEndTime());
-        if(coreTimeEntities != null) throw new CustomBadRequestException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
+                .findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(coreTimeEntity.getRoomId(), coreTimeEntity.getCoreEndTime(), coreTimeEntity.getCoreEndTime());
+        if(coreTimeEntities != null) throw new CustomUnprocessableException("해당 시간과 겹치는 코어타임 시간이 이미 존재합니다.");
 
 //        if(coreTimeDTO.getCoreEndDate().isBefore(coreTimeDTO.getCoreStartDate()))
 //            throw new CustomBadRequestException("coreEndTime은 coreStartTime 이후 datetime이어야 합니다.");
@@ -165,6 +171,44 @@ public class RoomMainService {
     public Optional<BoardEntity> getBoardById(Long boardId){
         Optional<BoardEntity> boardsEntity = boardRepository.findById(boardId);
         return boardsEntity;
+    }
+  
+  public boolean createToken(FcmTokenDTO fcmTokenDTO){
+        FcmTokenEntity fcmTokenEntity = new FcmTokenEntity(fcmTokenDTO);
+        fcmTokenRepository.save(fcmTokenEntity);
+        return true;
+    }
+
+    @Transactional
+    public void updateToken(FcmTokenEntity fcmTokenEntity){
+        FcmTokenEntity exitedToken = fcmTokenRepository.findById(fcmTokenEntity.getMemberId())
+                .orElseThrow(()-> new IllegalArgumentException("해당 사용자의 토큰이 없습니다."));
+        exitedToken.update(fcmTokenEntity);
+    }
+
+    public FcmTokenEntity getTokenByMemberId(Long memberId){
+        FcmTokenEntity fcmTokenEntity = fcmTokenRepository.findByMemberId(memberId);
+        return fcmTokenEntity;
+    }
+
+    public List<FcmTokenEntity> getTokenList(long roomId, boolean isWait){
+        List<FcmTokenEntity> tokenList = new ArrayList<>();
+        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByRoomId(roomId);
+        if (roomMemberEntities.isEmpty()) throw new CannotFindRoomException();
+
+        if(isWait){
+            roomMemberEntities.removeIf(entity -> entity.isLeader() == true);
+        }else{
+            roomMemberEntities.removeIf(entity -> entity.isWait() == true);
+        }
+
+
+        for(RoomMemberEntity roomMemberEntity : roomMemberEntities){
+            long memberId = roomMemberEntity.getMemberId();
+            FcmTokenEntity fcmTokenEntity = fcmTokenRepository.findByMemberId(memberId);
+            tokenList.add(fcmTokenEntity);
+        }
+        return tokenList;
     }
 
     public boolean createIssue(IssueDTO issueDTO){ //디비에 이슈 등록
@@ -308,4 +352,5 @@ public class RoomMainService {
         Optional<IssueEntity> issueEntity = issueRepository.findById(issueId);
         return issueEntity;
     }
+
 }

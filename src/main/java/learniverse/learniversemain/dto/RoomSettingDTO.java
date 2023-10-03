@@ -1,5 +1,8 @@
 package learniverse.learniversemain.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import learniverse.learniversemain.dto.validGroups.Update;
 import learniverse.learniversemain.entity.RoomSettingEntity;
 import lombok.Data;
 
@@ -7,16 +10,9 @@ import java.util.Arrays;
 
 @Data
 public class RoomSettingDTO {
-    private int settingId;
-    private String name;
+    @NotNull(groups = Update.class, message = "roomId 입력은 필수입니다.")
+    private long roomId;
+    @NotNull(message = "languages 배열 입력은 필수입니다.")
+    private String[] languages;
 
-    public RoomSettingDTO(RoomSettingEntity roomSettingEntity) {
-        this.settingId = roomSettingEntity.getSettingId();
-        this.name = roomSettingEntity.getName();
-    }
-
-    public RoomSettingDTO(int i, String name) {
-        this.settingId = i;
-        this.name = name;
-    }
 }

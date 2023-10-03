@@ -1,16 +1,16 @@
 package learniverse.learniversemain.controller;
 
 
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.*;
-import learniverse.learniversemain.entity.BoardEntity;
-import learniverse.learniversemain.entity.CoreTimeEntity;
 import learniverse.learniversemain.entity.IssueEntity;
 import learniverse.learniversemain.entity.ScheduleEntity;
+import learniverse.learniversemain.entity.BoardEntity;
+import learniverse.learniversemain.entity.CoreTimeEntity;
+import learniverse.learniversemain.entity.FcmTokenEntity;
 import learniverse.learniversemain.service.RoomMainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -121,6 +121,7 @@ public class RoomMainController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /*
     @Hidden
     @PostMapping("/schedule/create")
     public ResponseEntity<Response> createSchedule(@Valid @RequestBody ScheduleDTO scheduleDTO){
@@ -161,6 +162,7 @@ public class RoomMainController {
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+     */
 
     @PostMapping("/board/create")
     public ResponseEntity<Response>  createBoardPost(@Valid @RequestBody BoardDTO boardDTO){
@@ -212,6 +214,53 @@ public class RoomMainController {
         return roomMainService.getBoardById(boardId);
     }
 
+
+    @PostMapping("/alarm/createToken")
+    public ResponseEntity<Response>  createFcmToken(@Valid @RequestBody FcmTokenDTO fcmTokenDTO){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+
+        if(roomMainService.createToken(fcmTokenDTO)){
+            response.setStatus(Response.StatusEnum.CREATED);
+            response.setMessage("토큰 생성 성공");
+            response.setData(fcmTokenDTO);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        }
+        else throw new RuntimeException();
+    }
+  
+    @PostMapping("/alarm/updateToken")
+    public ResponseEntity<Response> updateFcmToken(@RequestBody FcmTokenEntity fcmTokenEntity){
+        Response response = new Response();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType((new MediaType("application","json", Charset.forName("UTF-8"))));
+      
+        roomMainService.updateToken(fcmTokenEntity);
+        response.setMessage("토큰 업데이트 성공");
+        response.setData(fcmTokenEntity);
+      
+       return new ResponseEntity<>(response, headers, HttpStatus.ACCEPTED);
+    }
+  
+    @GetMapping("/getTokenByMemberId")
+    public Optional<FcmTokenEntity> getTokenByMemberId(@RequestParam Long memberId){
+        return Optional.ofNullable(roomMainService.getTokenByMemberId(memberId));
+    }
+
+    @GetMapping("/tokenList")
+    public ResponseEntity<Response> getTokenList(@NotNull @RequestParam long roomId){
+        Response response = new Response();
+
+        List<FcmTokenEntity> tokenList = roomMainService.getTokenList(roomId,false);
+        if(tokenList == null) throw new RuntimeException();
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("토큰 리스트 출력 성공");
+        response.setData(tokenList);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+          
     @PostMapping("/issue/create")
     public ResponseEntity<Response>  createIssue(@Valid @RequestBody IssueDTO issueDTO){
         Response response = new Response();
@@ -227,8 +276,8 @@ public class RoomMainController {
         else throw new RuntimeException();
     }
 
-    //이슈 클로즈
-    @PostMapping("/issue/update")
+      //이슈 클로즈
+   @PostMapping("/issue/update")
     public ResponseEntity<Response> updateIssue(@RequestBody IssueEntity issueEntity){
         Response response = new Response();
         HttpHeaders headers = new HttpHeaders();
@@ -250,6 +299,5 @@ public class RoomMainController {
     public Optional<IssueEntity> getIssueById(@RequestParam Long issueId){
         return roomMainService.getIssueById(issueId);
     }
-
 
 }

@@ -104,7 +104,6 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Hidden
     @PostMapping("/pin")
     public ResponseEntity<Response> addPin(@Valid @RequestBody RoomMemberID roomMemberID){
         Response response = new Response();
