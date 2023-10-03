@@ -48,6 +48,9 @@ dependencies {
 	//webCLient
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'io.netty:netty-resolver-dns-native-macos'
+
+	//mongoDB
+	implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
 }
 
 tasks.named('test') {
