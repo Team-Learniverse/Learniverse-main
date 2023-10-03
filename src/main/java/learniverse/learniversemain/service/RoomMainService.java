@@ -104,8 +104,9 @@ public class RoomMainService {
         boolean existRoom = roomRepository.existsByRoomId(roomId);
         if(!existRoom) throw new CannotFindRoomException();
 
+        LocalDateTime now = LocalDateTime.now().plusHours(9);
         List<CoreTimeEntity> coreTimeEntities = coreTimeRepository
-                .findByRoomIdAndCoreEndTimeGreaterThanOrderByCoreStartTime(roomId, LocalDateTime.now());
+                .findByRoomIdAndCoreEndTimeGreaterThanOrderByCoreStartTime(roomId, now);
         return coreTimeEntities;
     }
 
@@ -113,7 +114,8 @@ public class RoomMainService {
         boolean existRoom = roomRepository.existsByRoomId(roomId);
         if(!existRoom) throw new CannotFindRoomException();
 
-        CoreTimeEntity coreTimeEntity = coreTimeRepository.findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(roomId, LocalDateTime.now(), LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now().plusHours(9);
+        CoreTimeEntity coreTimeEntity = coreTimeRepository.findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(roomId, now, now);
         if(coreTimeEntity == null) return false;
         else return true;
     }
