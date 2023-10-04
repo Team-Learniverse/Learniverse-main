@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
     boolean existsByRoomId(long roomId);
-    Page<RoomEntity> findByRoomNameContainingOrRoomIntroContaining(String str, String str2, Pageable pageable);
-
+    //Page<RoomEntity> findByRoomNameContainingOrRoomIntroContaining(String str, String str2, Pageable pageable);
+    List<RoomEntity> findByRoomNameContainingOrRoomIntroContaining(String str, String str2);
 }

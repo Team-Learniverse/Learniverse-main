@@ -234,6 +234,17 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<Response> getSearch(@NotNull String search, @NotNull long memberId){
+        Response response = new Response();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("방 이름/소개 검색");
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomService.getSearch(search, memberId, 0));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @GetMapping("/info")
     public ResponseEntity<Response> getRoomInfo(@NotNull long roomId, @NotNull long memberId){
         Response response = new Response();

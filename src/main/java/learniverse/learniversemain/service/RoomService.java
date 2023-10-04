@@ -227,6 +227,28 @@ public class RoomService {
         return result;
     }
 
+    public List<RoomCardDTO> getSearch (String str, long memberId, int page){
+        List<RoomCardDTO> result = new ArrayList<>();
+        List<RoomEntity> roomList = roomRepository.findByRoomNameContainingOrRoomIntroContaining(str, str);
+        for (RoomEntity roomEntity : roomList){
+            long roomId = roomEntity.getRoomId();
+            String isMember = getIsMember(roomId, memberId);
+            List<String> hashtags = getHashtags2String(roomId);
+            String roomCategory = getCategory(roomEntity.getRoomCategory());
+            int roomCount = getRoomCount(roomId);
+            result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+        }
+
+        Collections.sort(result, new Comparator<RoomCardDTO>() {
+            @Override
+            public int compare(RoomCardDTO o1, RoomCardDTO o2) {
+                if(o2.getRoomId() > o1.getRoomId()) return 1;
+                else return -1;
+            }
+        });
+        return result;
+    }
+
     public String getCategory(int settingId){
         RoomSettingEntity roomCategoryEntity = roomSettingRepository.findFirstByTypeOrderBySettingIdAsc("category");
         System.out.println(settingId + roomCategoryEntity.getSettingId());
