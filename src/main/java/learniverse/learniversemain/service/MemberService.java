@@ -119,7 +119,7 @@ public class MemberService {
                     List<String> hashtags = roomService.getHashtags2String(roomId);
                     String roomCategory = roomService.getCategory(roomEntity.get().getRoomCategory());
                     int roomCount = roomService.getRoomCount(roomId);
-                    if(roomMemberEntity.isPin())
+                    if (roomMemberEntity.isPin())
                         pinRooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
                     else rooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
                 }

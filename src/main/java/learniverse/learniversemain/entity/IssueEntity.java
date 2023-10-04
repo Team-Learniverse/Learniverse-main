@@ -35,6 +35,8 @@ public class IssueEntity {
     private String gitCode;
     @Column(name = "git_issue_number", nullable = true)
     private String gitIssueNumber;
+    @Column(name = "issue_isOpen", nullable = false)
+    private Boolean issueOpen;
     @CreatedDate
     private LocalDateTime createdDate;
     @LastModifiedDate
@@ -48,17 +50,19 @@ public class IssueEntity {
         this.memberId = newIssue.getMemberId();
         this.issueTitle = newIssue.getIssueTitle();
         this.issueDescription = newIssue.getIssueDescription();
+        this.issueOpen = newIssue.getIssueOpen();
         this.updatedDate = now;
     }
+
     public IssueEntity(IssueDTO issueDTO) {
         LocalDateTime now = LocalDateTime.now();
 
-        this.memberId=issueDTO.getMemberId();
-        this.roomId=issueDTO.getRoomId();
-        this.issueTitle=issueDTO.getIssueTitle();
-        this.issueDescription=issueDTO.getIssueDescription();
-        this.issueGitUrl=issueDTO.getIssueGitUrl();
-        this.gitFileName=issueDTO.getGitFileName();
+        this.memberId = issueDTO.getMemberId();
+        this.roomId = issueDTO.getRoomId();
+        this.issueTitle = issueDTO.getIssueTitle();
+        this.issueDescription = issueDTO.getIssueDescription();
+        this.issueGitUrl = issueDTO.getIssueGitUrl();
+        this.gitFileName = issueDTO.getGitFileName();
         this.createdDate = now;
 
     }
