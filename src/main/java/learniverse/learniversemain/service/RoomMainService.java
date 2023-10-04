@@ -178,8 +178,13 @@ public class RoomMainService {
     }
 
     public boolean createToken(FcmTokenDTO fcmTokenDTO) {
-        FcmTokenEntity fcmTokenEntity = new FcmTokenEntity(fcmTokenDTO);
-        fcmTokenRepository.save(fcmTokenEntity);
+        long memberId =fcmTokenDTO.getMemberId();
+        FcmTokenEntity fcmTokenEntity = fcmTokenRepository.findByMemberId(memberId);
+        if (fcmTokenEntity != null) throw new CustomUnprocessableException("해당 멤버의 토큰이 이미 존재합니다.");
+
+        FcmTokenEntity newfcmTokenEntity = new FcmTokenEntity(fcmTokenDTO);
+
+        fcmTokenRepository.save(newfcmTokenEntity);
         return true;
     }
 
