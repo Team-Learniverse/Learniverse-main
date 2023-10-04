@@ -28,10 +28,10 @@ public class MemberEntity {
     private String imageUrl;
 
     @Builder
-    public MemberEntity(String nickname, String githubId, String memberEmail, String imageUrl){
-        this.nickname=nickname;
-        this.githubId=githubId;
-        this.memberEmail=memberEmail;
-        this.imageUrl=imageUrl;
+    public MemberEntity(String nickname, String githubId, String memberEmail, String imageUrl) {
+        this.nickname = nickname;
+        this.githubId = githubId;
+        this.memberEmail = memberEmail;
+        this.imageUrl = imageUrl;
     }
 }

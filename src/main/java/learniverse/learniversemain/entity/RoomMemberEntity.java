@@ -38,7 +38,7 @@ public class RoomMemberEntity {
         this.roomId = room_id;
         this.memberId = member_id;
         this.isLeader = is_leader;
-        this.isWait = (is_leader==true)? false:true;
+        this.isWait = (is_leader == true) ? false : true;
         this.joinTime = LocalDateTime.now();
         this.isReject = false;
         this.isPin = false;
@@ -48,13 +48,13 @@ public class RoomMemberEntity {
         this.roomId = roomMemberID.getRoomId();
         this.memberId = roomMemberID.getMemberId();
         this.isLeader = is_leader;
-        this.isWait = (is_leader==true)? false:true;
+        this.isWait = (is_leader == true) ? false : true;
         this.isReject = false;
         this.isPin = false;
     }
 
-    public void changePin(){
-        setPin((this.isPin()==false)? true:false);
+    public void changePin() {
+        setPin((this.isPin() == false) ? true : false);
     }
 
 }

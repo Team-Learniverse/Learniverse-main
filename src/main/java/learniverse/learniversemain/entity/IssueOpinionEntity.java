@@ -32,10 +32,10 @@ public class IssueOpinionEntity {
     public IssueOpinionEntity(IssueOpinionDTO issueOpinionDTO) {
         LocalDateTime now = LocalDateTime.now();
 
-        this.issueId=issueOpinionDTO.getIssueId();
-        this.memberId=issueOpinionDTO.getMemberId();
-        this.issueOpinion=issueOpinionDTO.getIssueOpinion();
-        this.issueOpinionLine=issueOpinionDTO.getIssueOpinionLine();
+        this.issueId = issueOpinionDTO.getIssueId();
+        this.memberId = issueOpinionDTO.getMemberId();
+        this.issueOpinion = issueOpinionDTO.getIssueOpinion();
+        this.issueOpinionLine = issueOpinionDTO.getIssueOpinionLine();
         this.createdDate = now;
 
     }

@@ -33,7 +33,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/moon/add")
-    public ResponseEntity<Response> saveMoon(@Valid @RequestBody MoonDTO moonDTO){
+    public ResponseEntity<Response> saveMoon(@Valid @RequestBody MoonDTO moonDTO) {
         Response response = new Response();
 
         memberService.saveMoon(moonDTO);
@@ -46,7 +46,7 @@ public class MemberController {
 
     @Hidden
     @PostMapping("/moon/minus")
-    public ResponseEntity<Response> deleteMoon(@Valid @RequestBody MoonDTO moonDTO){
+    public ResponseEntity<Response> deleteMoon(@Valid @RequestBody MoonDTO moonDTO) {
         Response response = new Response();
 
         memberService.deleteMoon(moonDTO);
@@ -57,10 +57,10 @@ public class MemberController {
     }
 
     @GetMapping("/moon/list")
-    public ResponseEntity<Response> getMoon(@NotNull long memberId){
+    public ResponseEntity<Response> getMoon(@NotNull long memberId) {
         Response response = new Response();
 
-        Map<String,List<ResMoonDTO>> data = new HashMap<>();
+        Map<String, List<ResMoonDTO>> data = new HashMap<>();
         data.put("moons", memberService.getMoon(memberId));
         response.setData(data);
 
@@ -71,7 +71,7 @@ public class MemberController {
     }
 
     @GetMapping("/room/list")
-    public ResponseEntity<Response> getRooms(@NotNull long memberId){
+    public ResponseEntity<Response> getRooms(@NotNull long memberId) {
         Response response = new Response();
         response.setData(memberService.getRooms(memberId));
         response.setStatus(Response.StatusEnum.OK);
@@ -80,9 +80,9 @@ public class MemberController {
     }
 
     @GetMapping("/room/list/apply")
-    public ResponseEntity<Response> getApplyRooms(@NotNull long memberId){
+    public ResponseEntity<Response> getApplyRooms(@NotNull long memberId) {
         Response response = new Response();
-        List<RoomCardDTO>  roomCardDTOS = memberService.getRoomsIs(memberId, false);
+        List<RoomCardDTO> roomCardDTOS = memberService.getRoomsIs(memberId, false);
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
         data.put("rooms", roomCardDTOS);
         response.setData(data);
@@ -93,9 +93,9 @@ public class MemberController {
 
 
     @GetMapping("/room/list/leader")
-    public ResponseEntity<Response> getLeaderRooms(@NotNull long memberId){
+    public ResponseEntity<Response> getLeaderRooms(@NotNull long memberId) {
         Response response = new Response();
-        List<RoomCardDTO>  roomCardDTOS = memberService.getRoomsIs(memberId, true);
+        List<RoomCardDTO> roomCardDTOS = memberService.getRoomsIs(memberId, true);
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
         data.put("rooms", roomCardDTOS);
         response.setData(data);
@@ -105,17 +105,17 @@ public class MemberController {
     }
 
     @PostMapping("/pin")
-    public ResponseEntity<Response> addPin(@Valid @RequestBody RoomMemberID roomMemberID){
+    public ResponseEntity<Response> addPin(@Valid @RequestBody RoomMemberID roomMemberID) {
         Response response = new Response();
 
         boolean change = memberService.updatePin(roomMemberID);
         response.setStatus(Response.StatusEnum.OK);
-        response.setMessage("스터디룸 고정 \'"+ change +"\' 로 변경 성공");
+        response.setMessage("스터디룸 고정 \'" + change + "\' 로 변경 성공");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<Response> getMember(@Valid @RequestParam Long memberId){
+    public ResponseEntity<Response> getMember(@Valid @RequestParam Long memberId) {
         Response response = new Response();
         Map<String, Map<String, String>> data = new HashMap<>();
         data.put("member", memberService.getMember(memberId));

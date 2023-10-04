@@ -23,9 +23,9 @@ public class MemberDTO {
         memberDTO.setMemberMessage(memberEntity.getMemberMessage());
         memberDTO.setImageUrl(memberEntity.getImageUrl());
         memberDTO.setStatus(memberStatusEntity.getMemberStatus());
-        if(roomMemberEntity.isLeader()) memberDTO.setIsMember("팀장");
-        else if(roomMemberEntity.isReject()) memberDTO.setIsMember("거절");
-        else if(!roomMemberEntity.isWait()) memberDTO.setIsMember("승인");
+        if (roomMemberEntity.isLeader()) memberDTO.setIsMember("팀장");
+        else if (roomMemberEntity.isReject()) memberDTO.setIsMember("거절");
+        else if (!roomMemberEntity.isWait()) memberDTO.setIsMember("승인");
         else memberDTO.setIsMember("대기");
         return memberDTO;
     }

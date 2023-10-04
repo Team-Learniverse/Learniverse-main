@@ -23,7 +23,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     private final TokenService tokenService;
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-    public OAuth2SuccessHandler(TokenService tokenService){
+    public OAuth2SuccessHandler(TokenService tokenService) {
         this.tokenService = tokenService;
     }
 
@@ -54,8 +54,8 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     }
 
     //access Token, refresh Token 생성
-        private void makeTokenResponse(HttpServletResponse response, Token token) throws IOException{
-            response.addHeader(HttpHeaders.AUTHORIZATION, token.getAccessToken());
-            response.addHeader("Refresh", token.getRefreshToken());
-        }
+    private void makeTokenResponse(HttpServletResponse response, Token token) throws IOException {
+        response.addHeader(HttpHeaders.AUTHORIZATION, token.getAccessToken());
+        response.addHeader("Refresh", token.getRefreshToken());
     }
+}

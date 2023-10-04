@@ -115,6 +115,7 @@ public class MemberService {
         List<RoomMemberEntity> roomMemberPinEntities = roomMemberRepository.findByMemberIdAndIsWaitAndIsPinOrderByPinTimeDesc(memberId, false, true);
         if (roomMemberEntities != null) {
             for (RoomMemberEntity roomMemberEntity : roomMemberEntities) {
+
                 long roomId = roomMemberEntity.getRoomId();
                 Optional<RoomEntity> roomEntity = roomRepository.findById(roomId);
                 if (roomEntity.isEmpty()) throw new CannotFindRoomException();
