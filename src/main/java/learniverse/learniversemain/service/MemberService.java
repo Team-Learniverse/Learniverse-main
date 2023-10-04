@@ -3,6 +3,7 @@ package learniverse.learniversemain.service;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
 import learniverse.learniversemain.dto.MemberDTO;
 import learniverse.learniversemain.dto.MoonDTO;
 import learniverse.learniversemain.dto.ResMoonDTO;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import learniverse.learniversemain.entity.MemberEntity;
@@ -108,22 +110,35 @@ public class MemberService {
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
         List<RoomCardDTO> rooms = new ArrayList<>();
         List<RoomCardDTO> pinRooms = new ArrayList<>();
-        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByMemberIdOrderByJoinTimeDesc(memberId);
-        if (roomMemberEntities != null)
+
+        List<RoomMemberEntity> roomMemberEntities = roomMemberRepository.findByMemberIdAndIsWaitAndIsPinOrderByJoinTimeDesc(memberId, false, false);
+        List<RoomMemberEntity> roomMemberPinEntities = roomMemberRepository.findByMemberIdAndIsWaitAndIsPinOrderByPinTimeDesc(memberId, false, true);
+        if (roomMemberEntities != null) {
             for (RoomMemberEntity roomMemberEntity : roomMemberEntities) {
-                if (!roomMemberEntity.isWait()) {
-                    long roomId = roomMemberEntity.getRoomId();
-                    Optional<RoomEntity> roomEntity = roomRepository.findById(roomId);
-                    if (roomEntity.isEmpty()) throw new CannotFindRoomException();
-                    String isMember = roomService.getIsMember(roomId, memberId);
-                    List<String> hashtags = roomService.getHashtags2String(roomId);
-                    String roomCategory = roomService.getCategory(roomEntity.get().getRoomCategory());
-                    int roomCount = roomService.getRoomCount(roomId);
-                    if (roomMemberEntity.isPin())
-                        pinRooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
-                    else rooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
-                }
+
+                long roomId = roomMemberEntity.getRoomId();
+                Optional<RoomEntity> roomEntity = roomRepository.findById(roomId);
+                if (roomEntity.isEmpty()) throw new CannotFindRoomException();
+                String isMember = roomService.getIsMember(roomId, memberId);
+                List<String> hashtags = roomService.getHashtags2String(roomId);
+                String roomCategory = roomService.getCategory(roomEntity.get().getRoomCategory());
+                int roomCount = roomService.getRoomCount(roomId);
+                rooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
             }
+        }
+
+        if (roomMemberPinEntities != null) {
+            for (RoomMemberEntity roomMemberEntity : roomMemberPinEntities) {
+                long roomId = roomMemberEntity.getRoomId();
+                Optional<RoomEntity> roomEntity = roomRepository.findById(roomId);
+                if (roomEntity.isEmpty()) throw new CannotFindRoomException();
+                String isMember = roomService.getIsMember(roomId, memberId);
+                List<String> hashtags = roomService.getHashtags2String(roomId);
+                String roomCategory = roomService.getCategory(roomEntity.get().getRoomCategory());
+                int roomCount = roomService.getRoomCount(roomId);
+                pinRooms.add(new RoomCardDTO(roomEntity.get(), hashtags, roomCategory, isMember, roomCount));
+            }
+        }
 
         data.put("pinRooms", pinRooms);
         data.put("rooms", rooms);
@@ -156,7 +171,12 @@ public class MemberService {
         if (roomMemberEntity.isEmpty())
             throw new CustomBadRequestException("해당 roomId, memberId 조합에 대한 결과가 존재하지 않습니다.");
         if (roomMemberEntity.get().isWait()) throw new CustomBadRequestException("대기중인 스터디룸은 고정핀을 사용할 수 없습니다.");
+//        if (!roomMemberEntity.get().isPin()){
+//            long cnt = roomMemberRepository.countByMemberIdAndIsPin(roomMemberID.getMemberId(), true);
+//            if(cnt == 5) throw new CustomUnprocessableException("핀 설정은 최대 5개까지 가능합니다.");
+//        }
         roomMemberEntity.get().changePin();
+        roomMemberEntity.get().setPinTime(LocalDateTime.now());
         roomMemberRepository.save(roomMemberEntity.get());
         return roomMemberEntity.get().isPin();
     }

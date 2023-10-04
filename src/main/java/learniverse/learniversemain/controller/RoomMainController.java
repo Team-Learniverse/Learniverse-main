@@ -47,11 +47,13 @@ public class RoomMainController {
     public ResponseEntity<Response> createCoreTime(@Valid @RequestBody CoreTimeDTO coreTimeDTO) {
         Response response = new Response();
 
-        if (roomMainService.createCore(coreTimeDTO)) {
-            response.setStatus(Response.StatusEnum.CREATED);
-            response.setMessage("코어타임 생성 성공");
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
-        } else throw new RuntimeException();
+        long id = roomMainService.createCore(coreTimeDTO);
+        Map<String, Long> data = new HashMap<>();
+        data.put("coreTimeId", id);
+        response.setData(data);
+        response.setStatus(Response.StatusEnum.CREATED);
+        response.setMessage("코어타임 생성 성공");
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/core/delete")

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.*;
+import learniverse.learniversemain.dto.mongoDB.JoinsDTO;
 import learniverse.learniversemain.dto.validGroups.Create;
 import learniverse.learniversemain.dto.validGroups.Update;
 import learniverse.learniversemain.entity.HashtagEntity;
@@ -56,16 +57,6 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/languages")
-    public ResponseEntity<Response> setLanguages(@Valid @RequestBody RoomSettingDTO roomSettingDTO){
-        Response response = new Response();
-        roomService.setLanguage(roomSettingDTO);
-        response.setMessage("개발 언어 저장 성공");
-        response.setStatus(Response.StatusEnum.OK);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-
-    }
-
     @Validated(Create.class)
     @PostMapping("/create")
     public ResponseEntity<Response> create(@Valid @RequestBody RoomDTO roomDTO) throws GeneralSecurityException, UnsupportedEncodingException {
@@ -81,6 +72,27 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @PostMapping("/create/interest")
+    public ResponseEntity<Response> saveDefault(@Valid @RequestBody JoinsDTO joinsDTO){
+        Response response = new Response();
+
+        roomService.saveDefaultJoins(joinsDTO.getMemberId(), joinsDTO.getRoomIds(), true);
+        response.setStatus(Response.StatusEnum.CREATED);
+        response.setMessage("관심 있는 방 저장 성공");
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/create/interest")
+    public ResponseEntity<Response> getDefault(){
+        Response response = new Response();
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomService.getDefaultRooms());
+        response.setData(data);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("관심있는 방 출력 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+    }
 
     @Validated(Update.class)
     @PostMapping("/update")

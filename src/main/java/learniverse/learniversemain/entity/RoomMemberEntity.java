@@ -31,6 +31,8 @@ public class RoomMemberEntity {
     private boolean isPin;
     @Column(name = "join_time", nullable = true)
     private LocalDateTime joinTime;
+    @Column(name = "pin_time", nullable = true)
+    private LocalDateTime pinTime;
 
     public RoomMemberEntity(long room_id, long member_id, boolean is_leader) {
         this.roomId = room_id;

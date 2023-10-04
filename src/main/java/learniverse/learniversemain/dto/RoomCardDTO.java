@@ -1,8 +1,10 @@
 package learniverse.learniversemain.dto;
 
+import learniverse.learniversemain.dto.mongoDB.DefaultRoomsDTO;
 import learniverse.learniversemain.entity.RoomEntity;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -26,5 +28,16 @@ public class RoomCardDTO {
         this.roomLimit = roomEntity.getRoomLimit();
         this.isMember = isMember;
 
+    }
+
+    public RoomCardDTO(DefaultRoomsDTO defaultRoomsDTO) {
+        this.roomId = defaultRoomsDTO.getRoomId();
+        this.roomName = defaultRoomsDTO.getRoomName();
+        this.roomIntro = defaultRoomsDTO.getRoomIntro();
+        String[] hashtags = defaultRoomsDTO.getRoomHashtags().split(" ");
+        List<String> hashtagList = new ArrayList<>();
+        for(String hashtag : hashtags) hashtagList.add(hashtag);
+        this.roomHashtags = hashtagList;
+        this.roomCategory = defaultRoomsDTO.getRoomCategory();
     }
 }
