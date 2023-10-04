@@ -181,12 +181,14 @@ public class RoomMainService {
     public boolean createToken(FcmTokenDTO fcmTokenDTO) {
         long memberId =fcmTokenDTO.getMemberId();
         FcmTokenEntity existedToken = fcmTokenRepository.findByMemberId(memberId);
+        FcmTokenEntity newfcmTokenEntity = new FcmTokenEntity(fcmTokenDTO);
 
         if (existedToken != null){
-            fcmTokenRepository.delete(existedToken);
+            existedToken.update(newfcmTokenEntity);
         }
-        FcmTokenEntity newfcmTokenEntity = new FcmTokenEntity(fcmTokenDTO);
-        fcmTokenRepository.save(newfcmTokenEntity);
+        else{
+            fcmTokenRepository.save(newfcmTokenEntity);
+        }
         return true;
     }
 
