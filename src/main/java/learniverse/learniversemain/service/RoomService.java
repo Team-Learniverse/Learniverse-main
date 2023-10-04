@@ -15,6 +15,9 @@ import learniverse.learniversemain.repository.*;
 import learniverse.learniversemain.repository.mongoDB.DefaultMongoDBRepository;
 import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -204,9 +207,9 @@ public class RoomService {
 
     public List<RoomCardDTO> getSearchHashtag (String str, long memberId, int page){
         List<RoomCardDTO> result = new ArrayList<>();
-        //PageRequest pageRequest = PageRequest.of(page,10);
-        //Page<RoomEntity> roomList1 = roomRepository.findByRoomNameContainingOrRoomIntroContaining(str, str, pageRequest);
-        List<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str);
+        Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
+        Page<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str,pageable);
+        //List<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str);
         for (HashtagEntity hashtagEntity : roomList){
             long roomId = hashtagEntity.getRoomId();
             RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(()-> new CannotFindRoomException());
@@ -217,13 +220,36 @@ public class RoomService {
             result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
         }
 
-        Collections.sort(result, new Comparator<RoomCardDTO>() {
-            @Override
-            public int compare(RoomCardDTO o1, RoomCardDTO o2) {
-                if(o2.getRoomId() > o1.getRoomId()) return 1;
-                else return -1;
-            }
-        });
+//        Collections.sort(result, new Comparator<RoomCardDTO>() {
+//            @Override
+//            public int compare(RoomCardDTO o1, RoomCardDTO o2) {
+//                if(o2.getRoomId() > o1.getRoomId()) return 1;
+//                else return -1;
+//            }
+//        });
+        return result;
+    }
+
+    public List<RoomCardDTO> getSearch (String str, long memberId, int page){
+        List<RoomCardDTO> result = new ArrayList<>();
+        Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
+        Page<RoomEntity> roomList = roomRepository.findByRoomNameContainingOrRoomIntroContaining(str, str, pageable);
+        for (RoomEntity roomEntity : roomList){
+            long roomId = roomEntity.getRoomId();
+            String isMember = getIsMember(roomId, memberId);
+            List<String> hashtags = getHashtags2String(roomId);
+            String roomCategory = getCategory(roomEntity.getRoomCategory());
+            int roomCount = getRoomCount(roomId);
+            result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+        }
+
+//        Collections.sort(result, new Comparator<RoomCardDTO>() {
+//            @Override
+//            public int compare(RoomCardDTO o1, RoomCardDTO o2) {
+//                if(o2.getRoomId() > o1.getRoomId()) return 1;
+//                else return -1;
+//            }
+//        });
         return result;
     }
 
@@ -264,9 +290,24 @@ public class RoomService {
         return new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount);
     }
 
-    public List<RoomCardDTO> getRooms(long memberId) {
+    public List<RoomEntity> getPageRooms(int page, int num){
+        List<RoomEntity> roomEntities = new ArrayList<>();
+        for(int i = 0; i<num;i++){
+            Pageable pageable = PageRequest.of(page+i, 3, Sort.by(Sort.Direction.DESC, "roomId"));
+            Page<RoomEntity> roomPageEntities = roomRepository.findAll(pageable);
+            for(RoomEntity roomPageEntity : roomPageEntities)
+                roomEntities.add(roomPageEntity);
+        }
+        return roomEntities;
+    }
+
+
+    public List<RoomCardDTO> getRooms(long memberId, int page) {
         List<RoomCardDTO> resRooms = new ArrayList<>();
-        List<RoomEntity> roomEntities = roomRepository.findAll(Sort.by(Sort.Direction.DESC, "roomId"));
+        List<RoomEntity> roomEntities;
+        if(page == 0) roomEntities = getPageRooms(page, 3);
+        else roomEntities = getPageRooms(3 + (page-1)*5, 3);
+
         for(RoomEntity roomEntity : roomEntities){
             long roomId = roomEntity.getRoomId();
             String isMember = getIsMember(roomId, memberId);
