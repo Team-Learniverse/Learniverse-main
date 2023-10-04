@@ -224,12 +224,23 @@ public class RoomController {
 
 
     @GetMapping("/search/hashtag")
-    public ResponseEntity<Response> getSearchHashtag(@NotNull String hashtag, @NotNull long memberId){
+    public ResponseEntity<Response> getSearchHashtag(@NotNull String hashtag, @NotNull long memberId, @NotNull int page){
         Response response = new Response();
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("해시태그 검색");
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
-        data.put("rooms", roomService.getSearchHashtag(hashtag, memberId, 0));
+        data.put("rooms", roomService.getSearchHashtag(hashtag, memberId, page));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Response> getSearch(@NotNull String search, @NotNull long memberId, @NotNull int page){
+        Response response = new Response();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("방 이름/소개 검색");
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomService.getSearch(search, memberId, page));
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -246,12 +257,12 @@ public class RoomController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getRooms(@NotNull long memberId){
+    public ResponseEntity<Response> getRooms(@NotNull long memberId, @NotNull int page){
         Response response = new Response();
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("전체 방 조회");
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
-        data.put("rooms", roomService.getRooms(memberId));
+        data.put("rooms", roomService.getRooms(memberId, page));
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
