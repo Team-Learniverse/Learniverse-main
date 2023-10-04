@@ -177,6 +177,7 @@ public class RoomMainService {
         return boardsEntity;
     }
 
+    @Transactional
     public boolean createToken(FcmTokenDTO fcmTokenDTO) {
         long memberId =fcmTokenDTO.getMemberId();
         FcmTokenEntity existedToken = fcmTokenRepository.findByMemberId(memberId);
