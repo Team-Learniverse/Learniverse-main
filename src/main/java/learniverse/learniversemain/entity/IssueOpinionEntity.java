@@ -26,6 +26,8 @@ public class IssueOpinionEntity {
     private String issueOpinion;
     @Column(name = "issue_opinion_line", nullable = false)
     private Integer issueOpinionLine;
+    @Column(name = "issue_opinion_code", nullable = true)
+    private String issueOpinionCode;
     @CreatedDate
     private LocalDateTime createdDate;
 
@@ -36,6 +38,7 @@ public class IssueOpinionEntity {
         this.memberId = issueOpinionDTO.getMemberId();
         this.issueOpinion = issueOpinionDTO.getIssueOpinion();
         this.issueOpinionLine = issueOpinionDTO.getIssueOpinionLine();
+        this.issueOpinionCode = issueOpinionDTO.getIssueOpinionCode();
         this.createdDate = now;
 
     }

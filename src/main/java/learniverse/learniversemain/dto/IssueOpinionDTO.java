@@ -13,5 +13,7 @@ public class IssueOpinionDTO {
     private String issueOpinion;
     @NotNull(message = "issueOpinionLine 입력은 필수입니다.")
     private Integer issueOpinionLine;
+    private String issueOpinionCode;
+
 
 }

@@ -67,7 +67,7 @@ public class RoomMainService {
     */
 
 
-    public long createCore(CoreTimeDTO coreTimeDTO){
+    public long createCore(CoreTimeDTO coreTimeDTO) {
         CoreTimeEntity coreTimeEntity = new CoreTimeEntity(coreTimeDTO);
         //방체크
         boolean existRoom = roomRepository.existsByRoomId(coreTimeDTO.getRoomId());
@@ -257,6 +257,9 @@ public class RoomMainService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(requestBody)
                 .retrieve()
+                .onStatus(httpStatusCode -> httpStatusCode.is4xxClientError(), clientResponse -> {
+                    return Mono.error(new CustomBadRequestException("레포지토리를 잘못 입력했습니다."));
+                })
                 .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
                 });
 
@@ -294,6 +297,9 @@ public class RoomMainService {
         Mono<Map<String, Object>> response = webClient.get()
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
+                .onStatus(httpStatusCode -> httpStatusCode.is4xxClientError(), clientResponse -> {
+                    return Mono.error(new CustomBadRequestException("레포지토리에 해당 파일이 없습니다. 파일명을 확인해주세요"));
+                })
                 .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
                 });
 
@@ -324,7 +330,7 @@ public class RoomMainService {
         IssueEntity existedIssue = issueRepository.findById(issueId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 이슈가 없습니다."));
         //열려있으면 issueOpen false로
-        if(existedIssue.getIssueOpen()){
+        if (existedIssue.getIssueOpen()) {
             changeIssue(existedIssue);
             existedIssue.setIssueOpen(false);
         }
@@ -364,7 +370,9 @@ public class RoomMainService {
 
 
     public List<IssueEntity> getIssues(Long roomId) {
-        List<IssueEntity> issuesEntites = issueRepository.findByRoomId(roomId);
+        LocalDateTime now = LocalDateTime.now().plusHours(9);
+
+        List<IssueEntity> issuesEntites = issueRepository.findByRoomIdOrderByCreatedDateDesc(roomId);
         return issuesEntites;
     }
 
