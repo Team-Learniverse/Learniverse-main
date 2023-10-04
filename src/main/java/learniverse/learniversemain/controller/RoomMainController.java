@@ -326,9 +326,17 @@ public class RoomMainController {
     }
 
     @GetMapping("/discussions")
-    public List<IssueOpinionEntity> getOpinions(@RequestParam Long issueId) {
-        return roomMainService.getOpinions(issueId);
-    }
+    public ResponseEntity<Response> getOpinions(@RequestParam Long issueId) {
+        Response response = new Response();
 
+        List<IssueOpinionEntity> issueOpinionEntities = roomMainService.getOpinions(issueId);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("이슈디스커션 리스트 출력 성공");
+        Map<String, Object> data = new HashMap<>();
+        data.put("opinions", issueOpinionEntities);
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }
