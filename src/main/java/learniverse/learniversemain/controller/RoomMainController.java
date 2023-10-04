@@ -285,13 +285,30 @@ public class RoomMainController {
 
 
     @GetMapping("/issues")
-    public List<IssueEntity> getIssues(@RequestParam Long roomId) {
-        return roomMainService.getIssues(roomId);
+    public ResponseEntity<Response> getIssues(@RequestParam Long roomId) {
+        Response response = new Response();
+
+        List<IssueEntity> issueEntities = roomMainService.getIssues(roomId);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("이슈 리스트 출력 성공");
+        Map<String, Object> data = new HashMap<>();
+        data.put("issues", issueEntities);
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/issue")
-    public Optional<IssueEntity> getIssueById(@RequestParam Long issueId) {
-        return roomMainService.getIssueById(issueId);
+    public ResponseEntity<Response> getIssueById(@RequestParam Long issueId) {
+        Response response = new Response();
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("issue 출력 성공");
+        Map<String, Object> data = new HashMap<>();
+        data.put("issue", roomMainService.getIssueById(issueId));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     @PostMapping("/discussion/create")
