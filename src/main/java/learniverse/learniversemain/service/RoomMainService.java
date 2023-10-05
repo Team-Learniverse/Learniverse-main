@@ -335,7 +335,7 @@ public class RoomMainService {
     }
 
     @Transactional
-    public void updateIssue(Long issueId) { //이슈 클로즈하기
+    public void closeIssue(Long issueId) { //이슈 클로즈하기
         IssueEntity existedIssue = issueRepository.findById(issueId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 이슈가 없습니다."));
         //열려있으면 issueOpen false로
@@ -375,6 +375,19 @@ public class RoomMainService {
         //요청 실행 및 응답 처리
         response.block(); //블로킹 방식으로 요청 보내고 응답 기다림
 
+    }
+
+
+    @Transactional
+    public void updateIssue(IssueDTO issueDTO) { //이슈 업데이트
+        IssueEntity existedIssue = issueRepository.findById(issueDTO.getIssueId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 이슈가 없습니다."));
+
+        if (issueDTO.getGitCode() != null) existedIssue.setGitCode(issueDTO.getGitCode());
+
+        existedIssue.update(existedIssue);
+
+        issueRepository.save(existedIssue);
     }
 
 
