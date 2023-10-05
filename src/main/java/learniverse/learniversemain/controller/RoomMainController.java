@@ -40,7 +40,6 @@ public class RoomMainController {
         response.setStatus(Response.StatusEnum.CREATED);
         response.setMessage("워크스페이스 수정 성공");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
-
     }
 
     @PostMapping("/core/create")
@@ -270,19 +269,29 @@ public class RoomMainController {
     }
 
     //이슈 클로즈
-    @PostMapping("/issue/update")
-    public ResponseEntity<Response> updateIssue(@Valid @RequestBody IssueEntity issueEntity) {
+    @PostMapping("/issue/close")
+    public ResponseEntity<Response> closeIssue(@Valid @RequestBody IssueEntity issueEntity) {
         Response response = new Response();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType((new MediaType("application", "json", Charset.forName("UTF-8"))));
 
-        roomMainService.updateIssue(issueEntity.getIssueId());
-        response.setMessage("issue 클로즈 성공");
+        roomMainService.closeIssue(issueEntity.getIssueId());
+        response.setMessage("깃허브에 이슈 클로즈 성공");
         response.setData(issueEntity);
 
-        return new ResponseEntity<>(response, headers, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
+    //이슈 수정
+    @PostMapping("/issue/update")
+    public ResponseEntity<Response> updateIssue(@Valid @RequestBody IssueDTO issueDTO) {
+        Response response = new Response();
+
+        roomMainService.updateIssue(issueDTO);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("gitCode 수정 성공");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @GetMapping("/issues")
     public ResponseEntity<Response> getIssues(@RequestParam Long roomId) {
@@ -291,7 +300,7 @@ public class RoomMainController {
         List<IssueEntity> issueEntities = roomMainService.getIssues(roomId);
 
         response.setStatus(Response.StatusEnum.OK);
-        response.setMessage("이슈 리스트 출력 성공");
+        response.setMessage("issue 리스트 출력 성공");
         Map<String, Object> data = new HashMap<>();
         data.put("issues", issueEntities);
         response.setData(data);

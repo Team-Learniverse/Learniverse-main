@@ -50,6 +50,7 @@ public class IssueEntity {
         this.memberId = newIssue.getMemberId();
         this.issueTitle = newIssue.getIssueTitle();
         this.issueDescription = newIssue.getIssueDescription();
+        this.gitCode = newIssue.getGitCode();
         this.issueOpen = newIssue.getIssueOpen();
         this.updatedDate = now;
     }

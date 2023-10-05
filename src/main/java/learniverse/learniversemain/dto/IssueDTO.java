@@ -1,6 +1,8 @@
 package learniverse.learniversemain.dto;
 
 import jakarta.validation.constraints.NotNull;
+import learniverse.learniversemain.entity.IssueEntity;
+import learniverse.learniversemain.entity.RoomEntity;
 import lombok.Data;
 
 @Data
@@ -17,5 +19,6 @@ public class IssueDTO {
     private String issueGitUrl;
     @NotNull(message = "gitFileName 입력은 필수입니다.")
     private String gitFileName;
-
+    private String gitCode;
+    private long issueId;
 }
