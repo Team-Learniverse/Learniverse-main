@@ -10,10 +10,14 @@ import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.dto.mongoDB.DefaultRoomsDTO;
 import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
+import learniverse.learniversemain.entity.mongoDB.HistoryEntity;
 import learniverse.learniversemain.entity.mongoDB.JoinsEntity;
+import learniverse.learniversemain.entity.mongoDB.RoomsEntity;
 import learniverse.learniversemain.repository.*;
 import learniverse.learniversemain.repository.mongoDB.DefaultMongoDBRepository;
+import learniverse.learniversemain.repository.mongoDB.HistoryMongoDBRepository;
 import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
+import learniverse.learniversemain.repository.mongoDB.RoomsMongoDBRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +28,7 @@ import org.springframework.stereotype.Service;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -40,6 +45,8 @@ public class RoomService {
     private final RoomSettingRepository roomSettingRepository;
     private final JoinsMongoDBRepository joinsMongoDBRepository;
     private final DefaultMongoDBRepository defaultMongoDBRepository;
+    private final HistoryMongoDBRepository historyRepository;
+    private final RoomsMongoDBRepository roomMongoRepository;
 
     public List<String> getSetting(String type){
         List<RoomSettingEntity> roomSettingEntities = roomSettingRepository.findByType(type);
@@ -64,6 +71,8 @@ public class RoomService {
         RoomMemberEntity roomMemberEntity
                 = new RoomMemberEntity(roomEntity.getRoomId(), roomDTO.getMemberId(), true);
         roomMemberRepository.save(roomMemberEntity);
+        roomMongoRepository.save(new RoomsEntity(roomEntity, getCategory(roomEntity.getRoomCategory()), roomDTO.getRoomHashtags()));
+        joinsMongoDBRepository.save(new JoinsEntity(roomDTO.getMemberId(), roomEntity.getRoomId(), false));
         return roomEntity.getRoomId();
     }
 
@@ -210,6 +219,7 @@ public class RoomService {
         Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
         Page<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str,pageable);
         //List<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str);
+        historyRepository.save(new HistoryEntity(memberId, str, LocalDate.now()));
         for (HashtagEntity hashtagEntity : roomList){
             long roomId = hashtagEntity.getRoomId();
             RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(()-> new CannotFindRoomException());

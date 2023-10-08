@@ -7,10 +7,12 @@ import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.entity.MemberStatusEntity;
 import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.entity.RoomMemberEntity;
+import learniverse.learniversemain.entity.mongoDB.JoinsEntity;
 import learniverse.learniversemain.repository.MemberRepository;
 import learniverse.learniversemain.repository.MemberStatusRepository;
 import learniverse.learniversemain.repository.RoomMemberRepository;
 import learniverse.learniversemain.repository.RoomRepository;
+import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
@@ -31,7 +33,7 @@ public class RoomMemberService {
     private final RoomMemberRepository roomMemberRepository;
     private final MemberRepository memberRepository;
     private final MemberStatusRepository memberStatusRepository;
-
+    private final JoinsMongoDBRepository joinsMongoDBRepository;
     private final RoomService roomService;
 
     public boolean apply(RoomMemberID roomMemberID){
@@ -71,6 +73,7 @@ public class RoomMemberService {
         roomMemberEntity.setWait(false);
         roomMemberEntity.setJoinTime(LocalDateTime.now());
         roomMemberRepository.save(roomMemberEntity);
+        joinsMongoDBRepository.save(new JoinsEntity(roomMemberEntity.getMemberId(), roomMemberEntity.getRoomId(), false));
         return true;
     }
 
