@@ -13,10 +13,12 @@ import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.entity.MoonEntity;
 import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.entity.RoomMemberEntity;
+import learniverse.learniversemain.entity.mongoDB.JoinsEntity;
 import learniverse.learniversemain.repository.MemberRepository;
 import learniverse.learniversemain.repository.MoonRepository;
 import learniverse.learniversemain.repository.RoomMemberRepository;
 import learniverse.learniversemain.repository.RoomRepository;
+import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,7 @@ public class MemberService {
     private final RoomService roomService;
     private final RoomRepository roomRepository;
     private final MemberRepository memberRepository;
+    private final JoinsMongoDBRepository joinsMongoDBRepository;
 
     @Transactional
     public void saveMoon(MoonDTO moonDTO) {
@@ -178,6 +181,9 @@ public class MemberService {
         roomMemberEntity.get().changePin();
         roomMemberEntity.get().setPinTime(LocalDateTime.now());
         roomMemberRepository.save(roomMemberEntity.get());
+        List<JoinsEntity> joinsEntity = joinsMongoDBRepository.findByMemberIdAndRoomId(roomMemberID.getMemberId(),roomMemberID.getRoomId());
+        joinsEntity.get(0).setPinDate(LocalDate.now());
+        joinsMongoDBRepository.save(joinsEntity.get(0));
         return roomMemberEntity.get().isPin();
     }
 
