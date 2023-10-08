@@ -306,7 +306,7 @@ public class RoomService {
         List<RoomCardDTO> resRooms = new ArrayList<>();
         List<RoomEntity> roomEntities;
         if(page == 0) roomEntities = getPageRooms(page, 3);
-        else roomEntities = getPageRooms(3 + (page-1)*5, 3);
+        else roomEntities = getPageRooms(3 + (page-1)*5, 5);
 
         for(RoomEntity roomEntity : roomEntities){
             long roomId = roomEntity.getRoomId();
