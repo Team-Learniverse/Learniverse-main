@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.MoonDTO;
+import learniverse.learniversemain.dto.ProfileDTO;
 import learniverse.learniversemain.dto.ResMoonDTO;
 import learniverse.learniversemain.dto.RoomCardDTO;
 import learniverse.learniversemain.entity.HashtagEntity;
@@ -31,6 +32,18 @@ import java.util.Map;
 public class MemberController {
 
     private final MemberService memberService;
+
+    @PostMapping("/profile/update")
+    public ResponseEntity<Response> updateProfile(@Valid @RequestBody ProfileDTO profileDTO){
+        Response response = new Response();
+
+        memberService.updateProfile(profileDTO);
+
+        response.setStatus(Response.StatusEnum.CREATED);
+        response.setMessage("프로필 정보 저장 성공");
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+
+    }
 
     @PostMapping("/moon/add")
     public ResponseEntity<Response> saveMoon(@Valid @RequestBody MoonDTO moonDTO) {

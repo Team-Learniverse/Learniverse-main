@@ -4,10 +4,7 @@ import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
 import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
-import learniverse.learniversemain.dto.MemberDTO;
-import learniverse.learniversemain.dto.MoonDTO;
-import learniverse.learniversemain.dto.ResMoonDTO;
-import learniverse.learniversemain.dto.RoomCardDTO;
+import learniverse.learniversemain.dto.*;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.entity.MoonEntity;
@@ -41,6 +38,18 @@ public class MemberService {
     private final RoomRepository roomRepository;
     private final MemberRepository memberRepository;
     private final JoinsMongoDBRepository joinsMongoDBRepository;
+
+    public void updateProfile(ProfileDTO profileDTO){
+        MemberEntity memberEntity = memberRepository.findById(profileDTO.getMemberId())
+                .orElseThrow( () -> new CustomBadRequestException("존재하지 않는 memberId 입니다."));
+
+        if(profileDTO.getNickname() != null){
+            memberEntity.setNickname(profileDTO.getNickname());
+        }
+
+        memberEntity.setMemberMessage(profileDTO.getMemberMessage());
+        memberRepository.save(memberEntity);
+    }
 
     @Transactional
     public void saveMoon(MoonDTO moonDTO) {
@@ -123,6 +132,7 @@ public class MemberService {
 
         member.put("nickname", memberEntity.getNickname());
         member.put("imageUrl", memberEntity.getImageUrl());
+        member.put("memberMessage", memberEntity.getMemberMessage());
         return member;
     }
 
