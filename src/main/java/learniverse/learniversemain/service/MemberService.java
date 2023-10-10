@@ -57,7 +57,9 @@ public class MemberService {
             memberEntity.setNickname(profileDTO.getNickname());
         }
 
-        memberEntity.setMemberMessage(profileDTO.getMemberMessage());
+        if(profileDTO.getMemberMessage() != null){
+            memberEntity.setMemberMessage(profileDTO.getMemberMessage());
+        }
         memberRepository.save(memberEntity);
     }
 
