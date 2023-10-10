@@ -11,6 +11,7 @@ import learniverse.learniversemain.dto.mongoDB.JoinsDTO;
 import learniverse.learniversemain.dto.validGroups.Create;
 import learniverse.learniversemain.dto.validGroups.Update;
 import learniverse.learniversemain.entity.HashtagEntity;
+import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -273,6 +274,15 @@ public class RoomController {
         roomService.deleteRoom(roomId);
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("방 삭제 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/enter")
+    public ResponseEntity<Response> enterRoom(@Valid @RequestBody RoomMemberID roomMemberID){
+        Response response = new Response();
+        roomService.enterRoom(roomMemberID);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("방 입장 기록 성공");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

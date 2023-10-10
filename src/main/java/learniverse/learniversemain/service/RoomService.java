@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
 import learniverse.learniversemain.dto.RoomCardDTO;
 import learniverse.learniversemain.dto.RoomDTO;
 import learniverse.learniversemain.dto.mongoDB.DefaultRoomsDTO;
@@ -344,5 +345,15 @@ public class RoomService {
         for (RoomMemberEntity roomMemberEntity : roomMemberEntities){
             roomMemberRepository.delete(roomMemberEntity);
         }
+    }
+
+    @Transactional
+    public void enterRoom(RoomMemberID roomMemberID){
+        List<JoinsEntity> joinsEntities = joinsMongoDBRepository.findByMemberIdAndRoomId(roomMemberID.getMemberId(), roomMemberID.getRoomId());
+        if(joinsEntities.size()==0) throw new CustomUnprocessableException("해당 멤버와 roomId 조합이 없습니다.");
+        JoinsEntity joinsEntity =  joinsEntities.get(0);
+        int enter = joinsEntity.getEnterRoom();
+        joinsEntity.setEnterRoom(enter+1);
+        joinsMongoDBRepository.save(joinsEntity);
     }
 }
