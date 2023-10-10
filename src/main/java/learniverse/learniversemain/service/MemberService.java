@@ -59,6 +59,23 @@ public class MemberService {
         moonRepository.save(moonEntity);
     }
 
+    @Transactional
+    public void saveCoreMoon(MoonDTO moonDTO){
+        //있는지 확인
+        MoonEntity moonEntity
+                = moonRepository.findOneByMemberIdAndMoonDate(moonDTO.getMemberId(), moonDTO.getMoonDate());
+        if(moonEntity == null) throw new CustomBadRequestException("해당 memberId와 date 조합이 없습니다.");
+        else if(moonEntity.isCore()) throw new CustomUnprocessableException("코어타임 접속에 대한 달 추가가 이미 처리되었습니다.");
+        else{
+            moonEntity.setCore(true);
+            moonEntity.setMoonScore(moonEntity.getMoonScore() + 1);
+            if (moonEntity.getMoonScore() > 4)
+                throw new CustomBadRequestException("이미 moomScore가 4단계 입니다.");
+        }
+
+        moonRepository.save(moonEntity);
+    }
+
     public void deleteMoon(MoonDTO moonDTO) {
         MoonEntity moonEntity
                 = moonRepository.findOneByMemberIdAndMoonDate(moonDTO.getMemberId(), moonDTO.getMoonDate());

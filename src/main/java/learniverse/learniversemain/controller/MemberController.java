@@ -44,6 +44,18 @@ public class MemberController {
 
     }
 
+    @PostMapping("/moon/add/core")
+    public ResponseEntity<Response> saveCoreMoon(@Valid @RequestBody MoonDTO moonDTO) {
+        Response response = new Response();
+
+        memberService.saveCoreMoon(moonDTO);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("달 추가 성공(코어타입 접속)");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+    }
+
     @Hidden
     @PostMapping("/moon/minus")
     public ResponseEntity<Response> deleteMoon(@Valid @RequestBody MoonDTO moonDTO) {
