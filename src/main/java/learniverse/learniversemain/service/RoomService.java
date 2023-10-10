@@ -231,13 +231,6 @@ public class RoomService {
             result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
         }
 
-//        Collections.sort(result, new Comparator<RoomCardDTO>() {
-//            @Override
-//            public int compare(RoomCardDTO o1, RoomCardDTO o2) {
-//                if(o2.getRoomId() > o1.getRoomId()) return 1;
-//                else return -1;
-//            }
-//        });
         return result;
     }
 
@@ -253,14 +246,23 @@ public class RoomService {
             int roomCount = getRoomCount(roomId);
             result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
         }
+        return result;
+    }
 
-//        Collections.sort(result, new Comparator<RoomCardDTO>() {
-//            @Override
-//            public int compare(RoomCardDTO o1, RoomCardDTO o2) {
-//                if(o2.getRoomId() > o1.getRoomId()) return 1;
-//                else return -1;
-//            }
-//        });
+    public List<RoomCardDTO> getSearchbyCategory (String str, long memberId, int category, int page){
+        List<RoomCardDTO> result = new ArrayList<>();
+        Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
+        //Page<RoomEntity> roomList = roomRepository.findByRoomCategoryAndRoomNameContainingOrRoomIntroContaining(category, str, str, pageable);
+        Page<RoomEntity> roomList = roomRepository.findByRoomCategoryAndRoomNameContainingOrRoomCategoryAndRoomIntroContaining(
+                category, str, category, str, pageable);
+        for (RoomEntity roomEntity : roomList){
+            long roomId = roomEntity.getRoomId();
+            String isMember = getIsMember(roomId, memberId);
+            List<String> hashtags = getHashtags2String(roomId);
+            String roomCategory = getCategory(roomEntity.getRoomCategory());
+            int roomCount = getRoomCount(roomId);
+            result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+        }
         return result;
     }
 

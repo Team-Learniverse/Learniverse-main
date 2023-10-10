@@ -150,5 +150,13 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<Response> addPin(@Valid @RequestBody long memberId) {
+        Response response = new Response();
 
+        memberService.login(memberId);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("최근 로그인 정보 업데이트 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

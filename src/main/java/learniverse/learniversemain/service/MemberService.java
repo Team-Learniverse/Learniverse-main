@@ -11,11 +11,13 @@ import learniverse.learniversemain.entity.MoonEntity;
 import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.entity.RoomMemberEntity;
 import learniverse.learniversemain.entity.mongoDB.JoinsEntity;
+import learniverse.learniversemain.entity.mongoDB.MembersEntity;
 import learniverse.learniversemain.repository.MemberRepository;
 import learniverse.learniversemain.repository.MoonRepository;
 import learniverse.learniversemain.repository.RoomMemberRepository;
 import learniverse.learniversemain.repository.RoomRepository;
 import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
+import learniverse.learniversemain.repository.mongoDB.MembersMongoDBRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +40,15 @@ public class MemberService {
     private final RoomRepository roomRepository;
     private final MemberRepository memberRepository;
     private final JoinsMongoDBRepository joinsMongoDBRepository;
+    private final MembersMongoDBRepository membersMongoDBRepository;
 
+    public void login(long memberId){
+        MembersEntity membersEntity = membersMongoDBRepository.findByMemberId(memberId);
+        if(membersEntity == null) throw new CustomBadRequestException("memberId 정보가 mongoDB에 존재하지 않습니다");
+        membersEntity.setLastLoginDate(LocalDate.now());
+        membersMongoDBRepository.save(membersEntity);
+
+    }
     public void updateProfile(ProfileDTO profileDTO){
         MemberEntity memberEntity = memberRepository.findById(profileDTO.getMemberId())
                 .orElseThrow( () -> new CustomBadRequestException("존재하지 않는 memberId 입니다."));

@@ -8,6 +8,8 @@ import java.time.LocalDate;
 @Data
 @Document(collection = "members")
 public class MembersEntity {
+    private String id;
     private long memberId;
     private LocalDate lastLoginDate;
+    private LocalDate createdDate;
 }
