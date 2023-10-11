@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -35,9 +36,13 @@ public class MemberEntity {
 
     @Builder
     public MemberEntity(String nickname, String githubId, String memberEmail, String imageUrl) {
+        LocalDate now = LocalDate.now();
+
         this.nickname = nickname;
         this.githubId = githubId;
         this.memberEmail = memberEmail;
         this.imageUrl = imageUrl;
+        this.LastLoginDate = now;
+
     }
 }

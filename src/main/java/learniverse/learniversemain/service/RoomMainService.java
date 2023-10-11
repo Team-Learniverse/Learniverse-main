@@ -256,7 +256,7 @@ public class RoomMainService {
         WebClient webClient = WebClient.builder()
                 .baseUrl(addIssueUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                //.defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 
@@ -298,7 +298,7 @@ public class RoomMainService {
         WebClient webClient = WebClient.builder()
                 .baseUrl(getGitUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                //.defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 
@@ -359,7 +359,7 @@ public class RoomMainService {
         WebClient webClient = WebClient.builder()
                 .baseUrl(addIssueUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                //.defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 

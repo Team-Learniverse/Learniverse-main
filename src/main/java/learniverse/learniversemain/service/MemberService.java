@@ -236,7 +236,20 @@ public class MemberService {
 
     @Transactional
     public void registerMember(MemberEntity member) {
-        if (!memberRepository.existsByGithubId(member.getGithubId())) {
+        //깃허브 아이디로 멤버 찾기
+        Optional<MemberEntity> existingMember = memberRepository.getByGithubId(member.getGithubId());
+
+        if (existingMember.isPresent()) {
+            MemberEntity savedMember = existingMember.get();
+            if (member.getMemberEmail() != null)savedMember.setMemberEmail(member.getMemberEmail());
+            if (member.getMemberMessage() != null)savedMember.setMemberMessage(member.getMemberMessage());
+            if (member.getImageUrl() != null)savedMember.setImageUrl(member.getImageUrl());
+
+            savedMember.setMemberFirst(false);
+            memberRepository.save(savedMember); //여기서 체크
+
+        }
+        else {
             member.setMemberFirst(true);
             memberRepository.save(member);
         }
