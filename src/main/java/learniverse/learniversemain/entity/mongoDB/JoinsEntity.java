@@ -22,7 +22,7 @@ public class JoinsEntity {
         this.roomId = roomId;
         this.isDefault = isDefault;
         this.enterRoom = 0;
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now().plusHours(9);
         LocalDate localDate = now.toLocalDate();
         this.createdDate = localDate;
     }
