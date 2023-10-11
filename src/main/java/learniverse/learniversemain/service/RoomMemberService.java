@@ -32,7 +32,7 @@ public class RoomMemberService {
     private final RoomRepository roomRepository;
     private final RoomMemberRepository roomMemberRepository;
     private final MemberRepository memberRepository;
-    private final MemberStatusRepository memberStatusRepository;
+    //private final MemberStatusRepository memberStatusRepository;
     private final JoinsMongoDBRepository joinsMongoDBRepository;
     private final RoomService roomService;
 
@@ -113,9 +113,9 @@ public class RoomMemberService {
             long memberId = roomMemberEntity.getMemberId();
             MemberEntity memberEntity = memberRepository.findById(memberId)
                     .orElseThrow(()->new CustomBadRequestException("존재하지 않는 memberId"));
-            MemberStatusEntity memberStatusEntity = memberStatusRepository.findById(memberId)
-                    .orElseThrow(()->new CustomBadRequestException("memberId \'"+memberId+"\'의 memberStauts가 존재하지 않습니다"));
-            MemberDTO memberDTO = toMemberDTO(memberEntity, memberStatusEntity, roomMemberEntity);
+            //MemberStatusEntity memberStatusEntity = memberStatusRepository.findById(memberId)
+            //        .orElseThrow(()->new CustomBadRequestException("memberId \'"+memberId+"\'의 memberStauts가 존재하지 않습니다"));
+            MemberDTO memberDTO = toMemberDTO(memberEntity, roomMemberEntity);
             memberDTOS.add(memberDTO);
         }
         return memberDTOS;
