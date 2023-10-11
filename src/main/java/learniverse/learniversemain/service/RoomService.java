@@ -42,7 +42,7 @@ public class RoomService {
     private final RoomMemberRepository roomMemberRepository;
     private final HashtagRepository hashtagRepository;
     private final MemberRepository memberRepository;
-    private final MemberStatusRepository memberStatusRepository;
+    //private final MemberStatusRepository memberStatusRepository;
     private final RoomSettingRepository roomSettingRepository;
     private final JoinsMongoDBRepository joinsMongoDBRepository;
     private final DefaultMongoDBRepository defaultMongoDBRepository;
