@@ -21,6 +21,7 @@ import java.io.IOException;
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final TokenService tokenService;
+
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     public OAuth2SuccessHandler(TokenService tokenService) {
@@ -36,6 +37,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         Token token = tokenService.generateToken(Math.toIntExact(oAuth2User.getAttribute("id")), "USER");
 
+
         //토큰 생성
         makeTokenResponse(response, token);
         String targetUrl = request.getHeader("referer");
@@ -47,7 +49,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         }
 
         //redirectUri 만들기
-        String redirectUrl = UriComponentsBuilder.fromUriString("http://localhost:3004/login")
+        String redirectUrl = UriComponentsBuilder.fromUriString("https://learniverse-front-end.vercel.app/login")
                 .queryParam("token", token.getAccessToken())
                 .build().toUriString();
         redirectStrategy.sendRedirect(request, response, redirectUrl);

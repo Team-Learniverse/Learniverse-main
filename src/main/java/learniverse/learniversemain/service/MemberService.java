@@ -5,11 +5,8 @@ import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
 import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
 import learniverse.learniversemain.dto.*;
+import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
-import learniverse.learniversemain.entity.MemberEntity;
-import learniverse.learniversemain.entity.MoonEntity;
-import learniverse.learniversemain.entity.RoomEntity;
-import learniverse.learniversemain.entity.RoomMemberEntity;
 import learniverse.learniversemain.entity.mongoDB.JoinsEntity;
 import learniverse.learniversemain.entity.mongoDB.MembersEntity;
 import learniverse.learniversemain.repository.MemberRepository;
@@ -29,6 +26,7 @@ import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 
 @Service
@@ -239,14 +237,24 @@ public class MemberService {
     @Transactional
     public void registerMember(MemberEntity member) {
         if (!memberRepository.existsByGithubId(member.getGithubId())) {
+            member.setMemberFirst(true);
             memberRepository.save(member);
         }
+        else member.setMemberFirst(false);
     }
 
     @Transactional
     public Optional<MemberEntity> findMemberByGithubId(String githubId) {
         return memberRepository.getByGithubId(githubId);
     }
+
+    @Transactional
+    public Optional<MemberEntity> getMemberById(Long memberId){
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
+
+        return memberEntity;
+    }
+
 
     //public MemberDTO updateMember(MemberDTO updateMember);
 

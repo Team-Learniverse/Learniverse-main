@@ -28,6 +28,8 @@ public class MemberEntity {
     private String memberMessage;
     @Column(name = "member_url", nullable = true)
     private String imageUrl;
+    @Column(name = "member_isFirst")
+    private Boolean memberFirst;
     @Column(name = "last_login_date", nullable = true)
     private LocalDate LastLoginDate;
 

@@ -5,12 +5,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
-import learniverse.learniversemain.dto.MoonDTO;
-import learniverse.learniversemain.dto.ProfileDTO;
-import learniverse.learniversemain.dto.ResMoonDTO;
-import learniverse.learniversemain.dto.RoomCardDTO;
+import learniverse.learniversemain.dto.*;
 import learniverse.learniversemain.entity.HashtagEntity;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
+import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.entity.RoomMemberEntity;
 import learniverse.learniversemain.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +17,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Tag(name = "member", description = "member 관련 api")
 @RestController
@@ -159,4 +159,16 @@ public class MemberController {
         response.setMessage("최근 로그인 정보 업데이트 성공");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    /*@GetMapping()
+    public ResponseEntity<Response> getMemberByToken(Principal principal) { //token으로 멤버 조회
+        Response response = new Response();
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("issue 출력 성공");
+        Map<String, Object> data = new HashMap<>();
+        data.put("issue", memberService.getMemberById(Long.valueOf(principal.getName())));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }*/
 }
