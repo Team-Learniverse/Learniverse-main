@@ -42,12 +42,22 @@ public class MemberService {
     private final JoinsMongoDBRepository joinsMongoDBRepository;
     private final MembersMongoDBRepository membersMongoDBRepository;
 
+    @Transactional
     public void login(long memberId){
         MembersEntity membersEntity = membersMongoDBRepository.findByMemberId(memberId);
         if(membersEntity == null) throw new CustomBadRequestException("memberId 정보가 mongoDB에 존재하지 않습니다");
         membersEntity.setLastLoginDate(LocalDate.now());
         membersMongoDBRepository.save(membersEntity);
 
+        //달 추가
+        LocalDateTime localDateTime = LocalDateTime.now().plusHours(9);
+        LocalDate localDate = localDateTime.toLocalDate();
+        MoonEntity moonEntity
+                = moonRepository.findOneByMemberIdAndMoonDate(memberId, localDate);
+        if (moonEntity == null) { // 새로 저장
+            moonEntity = new MoonEntity(new MoonDTO(memberId, localDate));
+            moonRepository.save(moonEntity);
+        }
     }
     public void updateProfile(ProfileDTO profileDTO){
         MemberEntity memberEntity = memberRepository.findById(profileDTO.getMemberId())
@@ -74,7 +84,7 @@ public class MemberService {
         } else { // score + 1
             moonEntity.setMoonScore(moonEntity.getMoonScore() + 1);
             if (moonEntity.getMoonScore() > 4)
-                throw new CustomBadRequestException("이미 moomScore가 4단계 입니다.");
+                throw new CustomUnprocessableException("이미 moomScore가 4단계 입니다.");
         }
 
         moonRepository.save(moonEntity);

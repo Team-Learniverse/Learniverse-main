@@ -185,6 +185,8 @@ public class RoomService {
     public List<String> getHashtags2String(long roomId){
         List<String> res = new ArrayList<>();
         List<HashtagEntity>  hashtagEntityList = hashtagRepository.findByRoomId(roomId);
+        if(hashtagEntityList.size() == 0) return res;
+
         for(HashtagEntity hashtagEntity : hashtagEntityList){
             res.add(hashtagEntity.getHashtag());
         }
