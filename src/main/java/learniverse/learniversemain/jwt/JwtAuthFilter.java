@@ -44,6 +44,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             if (newAccessToken != null) {
                 // 새로운 Access Token을 응답 헤더에 추가
                 servletResponse.setHeader(HttpHeaders.AUTHORIZATION, newAccessToken);
+                SecurityContextHolder.getContext().setAuthentication(tokenService.getAuthentication(newAccessToken));
+
             }
         }
         filterChain.doFilter(servletRequest, servletResponse); // 다음 Filter를 실행(마지막 필터라면 필터 실행 후 리소스를 반환)
