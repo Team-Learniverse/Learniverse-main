@@ -31,8 +31,8 @@ public class IssueEntity {
     private String issueGitUrl;
     @Column(name = "git_file_name", nullable = false)
     private String gitFileName;
-    @Column(name = "git_code", nullable = true)
-    private String gitCode;
+    //@Column(name = "git_code", nullable = true)
+    //private String gitCode;
     @Column(name = "git_issue_number", nullable = true)
     private String gitIssueNumber;
     @Column(name = "issue_isOpen", nullable = false)
@@ -50,7 +50,7 @@ public class IssueEntity {
         this.memberId = newIssue.getMemberId();
         this.issueTitle = newIssue.getIssueTitle();
         this.issueDescription = newIssue.getIssueDescription();
-        this.gitCode = newIssue.getGitCode();
+        //this.gitCode = newIssue.getGitCode();
         this.issueOpen = newIssue.getIssueOpen();
         this.updatedDate = now;
     }

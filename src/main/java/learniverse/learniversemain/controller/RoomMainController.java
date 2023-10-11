@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.*;
+import learniverse.learniversemain.dto.mongoDB.GitCodeDTO;
 import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.service.RoomMainService;
 import lombok.RequiredArgsConstructor;
@@ -281,11 +282,23 @@ public class RoomMainController {
     }
 
     //이슈 수정
-    @PostMapping("/issue/update")
+    /*@PostMapping("/issue/update")
     public ResponseEntity<Response> updateIssue(@Valid @RequestBody IssueDTO issueDTO) {
         Response response = new Response();
 
         roomMainService.updateIssue(issueDTO);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("gitCode 수정 성공");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }*/
+
+    @PostMapping("/issue/update")
+    public ResponseEntity<Response> updateIssue(@Valid @RequestBody GitCodeDTO gitCodeDTO) {
+        Response response = new Response();
+
+        roomMainService.updateGitCode(gitCodeDTO);
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("gitCode 수정 성공");

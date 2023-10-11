@@ -6,8 +6,11 @@ import learniverse.learniversemain.controller.Exception.CustomBadRequestExceptio
 import learniverse.learniversemain.dto.*;
 import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
 import learniverse.learniversemain.dto.BoardDTO;
+import learniverse.learniversemain.dto.mongoDB.GitCodeDTO;
 import learniverse.learniversemain.entity.*;
+import learniverse.learniversemain.entity.mongoDB.GitcodeEntity;
 import learniverse.learniversemain.repository.*;
+import learniverse.learniversemain.repository.mongoDB.GitCodeMongoDBRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -38,6 +41,7 @@ public class RoomMainService {
     private final IssueOpinionRepository issueOpinionRepository;
     private final FcmTokenRepository fcmTokenRepository;
     private final RoomMemberRepository roomMemberRepository;
+    private final GitCodeMongoDBRepository gitCodeMongoDBRepository;
 
     /*
     public boolean createSchedule(ScheduleDTO scheduleDTO){
@@ -226,6 +230,7 @@ public class RoomMainService {
 
     public boolean createIssue(IssueDTO issueDTO) { //디비에 이슈 등록
         IssueEntity issueEntity = new IssueEntity(issueDTO);
+        GitcodeEntity gitcodeEntity = new GitcodeEntity();
 
         //깃헙에 이슈 업로드 후 이슈 넘버 저장
         String gitIssueNumber = uploadIssue(issueEntity);
@@ -233,10 +238,12 @@ public class RoomMainService {
 
         //깃헙에서 코드 가져와서 파일에 있는 코드 저장
         String gitCode = getCodeFromGit(issueEntity);
-        issueEntity.setGitCode(gitCode);
+        gitcodeEntity.setGitCode(gitCode);
+        //issueEntity.setGitCode(gitCode);
         issueEntity.setIssueOpen(true);
 
         issueRepository.save(issueEntity);
+        gitCodeMongoDBRepository.save(gitcodeEntity);
 
         return true;
     }
@@ -378,17 +385,24 @@ public class RoomMainService {
     }
 
 
-    @Transactional
+    /*@Transactional
     public void updateIssue(IssueDTO issueDTO) { //이슈 업데이트
         IssueEntity existedIssue = issueRepository.findById(issueDTO.getIssueId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 이슈가 없습니다."));
-
         if (issueDTO.getGitCode() != null) existedIssue.setGitCode(issueDTO.getGitCode());
-
         existedIssue.update(existedIssue);
-
         issueRepository.save(existedIssue);
+    }*/
+
+    @Transactional
+    public void updateGitCode(GitCodeDTO gitCodeDTO) { //깃코드 업데이트
+
+        GitcodeEntity existedGitcode = gitCodeMongoDBRepository.findByIssueId(gitCodeDTO.getIssueId());
+
+        if (gitCodeDTO.getGitCode() != null) existedGitcode.setGitCode(gitCodeDTO.getGitCode());
+        gitCodeMongoDBRepository.save(existedGitcode);
     }
+
 
 
     public List<IssueEntity> getIssues(Long roomId) {
