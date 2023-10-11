@@ -253,7 +253,6 @@ public class MemberService {
             member.setMemberFirst(true);
             memberRepository.save(member);
         }
-        else member.setMemberFirst(false);
     }
 
     @Transactional
