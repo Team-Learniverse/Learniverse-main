@@ -228,7 +228,7 @@ public class MemberService {
     public void registerMember(MemberEntity member) {
         if (!memberRepository.existsByGithubId(member.getGithubId())) {
             member.setMemberFirst(true);
-            memberRepository.save(member);
+            memberRepository.save(member); //여기서 체크
         }
         else member.setMemberFirst(false);
     }
