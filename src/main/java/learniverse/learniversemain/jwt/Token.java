@@ -3,8 +3,13 @@ package learniverse.learniversemain.jwt;
 import lombok.*;
 
 @Getter
-@AllArgsConstructor
+@Setter
+@NoArgsConstructor
 public class Token {
-    private final String accessToken;
-    private final String refreshToken;
+    private String accessToken;
+    private String refreshToken;
+    public Token(String token, String refreshToken) {
+        this.accessToken = token;
+        this.refreshToken = refreshToken;
+    }
 }

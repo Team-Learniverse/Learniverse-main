@@ -21,6 +21,7 @@ import java.io.IOException;
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
     private final TokenService tokenService;
+
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     public OAuth2SuccessHandler(TokenService tokenService) {
@@ -35,6 +36,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         log.info(oAuth2User.toString());
 
         Token token = tokenService.generateToken(Math.toIntExact(oAuth2User.getAttribute("id")), "USER");
+
 
         //토큰 생성
         makeTokenResponse(response, token);
