@@ -238,7 +238,10 @@ public class RoomMainService {
 
         //깃헙에서 코드 가져와서 파일에 있는 코드 저장
         String gitCode = getCodeFromGit(issueEntity);
+
         gitcodeEntity.setGitCode(gitCode);
+        gitcodeEntity.setIssueId(issueEntity.getIssueId());
+
         //issueEntity.setGitCode(gitCode);
         issueEntity.setIssueOpen(true);
 
@@ -260,6 +263,8 @@ public class RoomMainService {
 
         String addIssueUrl = "https://api.github.com/repos/" + issueGitUrl + "/issues";
 
+        log.info(addIssueUrl);
+
         WebClient webClient = WebClient.builder()
                 .baseUrl(addIssueUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
@@ -268,6 +273,8 @@ public class RoomMainService {
                 .build();
 
         String requestBody = String.format("{\"title\":\"%s\",\"body\":\"%s\"}", issueTitle, issueDescription);
+
+        log.info(requestBody.toString());
 
         Mono<Map<String, Object>> response = webClient.post()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -289,6 +296,8 @@ public class RoomMainService {
                 e.printStackTrace();
             }
         }
+
+        log.info(responseBody.toString());
 
         return issueNumberinGit;
     }
