@@ -11,14 +11,14 @@ import java.time.LocalDateTime;
 public class GitcodeEntity {
     private String id;
     private long issueId;
-    private long RoomId;
+    private long roomId;
     private String gitCode;
     @CreatedDate
     private LocalDateTime createdDate;
 
     /*public GitcodeEntity(long issueId, long RoomId, String gitCode){
         this.issueId = issueId;
-        this.RoomId = RoomId;
+        this.RoomId = roomId;
         this.gitCode = gitCode;
     }*/
 

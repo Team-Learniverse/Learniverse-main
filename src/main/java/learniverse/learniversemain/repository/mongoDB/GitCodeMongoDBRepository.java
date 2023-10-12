@@ -8,5 +8,5 @@ import java.util.List;
 public interface GitCodeMongoDBRepository extends MongoRepository<GitcodeEntity, String> {
     GitcodeEntity findByIssueId(Long issueId);
 
-    List<GitcodeEntity> findByRoomIdOrderByCreatedDateDesc(Long RoomId);
+    List<GitcodeEntity> findByRoomIdOrderByCreatedDateDesc(Long roomId);
 }
