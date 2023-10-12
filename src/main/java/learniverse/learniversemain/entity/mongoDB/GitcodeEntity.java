@@ -1,7 +1,7 @@
 package learniverse.learniversemain.entity.mongoDB;
 
 import lombok.Data;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -13,6 +13,8 @@ public class GitcodeEntity {
     private long issueId;
     private long RoomId;
     private String gitCode;
+    @CreatedDate
+    private LocalDateTime createdDate;
 
     /*public GitcodeEntity(long issueId, long RoomId, String gitCode){
         this.issueId = issueId;

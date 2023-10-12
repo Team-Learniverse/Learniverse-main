@@ -246,6 +246,7 @@ public class RoomMainService {
         issueRepository.save(issueEntity);
         gitcodeEntity.setIssueId(issueEntity.getIssueId());
         gitcodeEntity.setRoomId(issueEntity.getRoomId());
+        gitcodeEntity.setCreatedDate(issueEntity.getCreatedDate());
         gitCodeMongoDBRepository.save(gitcodeEntity);
 
         return true;
@@ -420,9 +421,23 @@ public class RoomMainService {
         return issuesEntites;
     }
 
+    public List<GitcodeEntity> getGitcodes(Long roomId) {
+        LocalDateTime now = LocalDateTime.now().plusHours(9);
+
+        List<GitcodeEntity> gitcodeEntities = gitCodeMongoDBRepository.findByRoomIdOrderByCreatedDateDesc(roomId);
+        return gitcodeEntities;
+    }
+
     public Optional<IssueEntity> getIssueById(Long issueId) {
         Optional<IssueEntity> issueEntity = issueRepository.findById(issueId);
         return issueEntity;
+    }
+
+    public String getGitcodeByIssueId(Long issueId) {
+        GitcodeEntity gitcodeEntity = gitCodeMongoDBRepository.findByIssueId(issueId);
+        String gitcode = gitcodeEntity.getGitCode();
+
+        return gitcode;
     }
 
     public boolean createOpinion(IssueOpinionDTO issueOpinionDTO) { //디비에 이슈 디스커션 등록

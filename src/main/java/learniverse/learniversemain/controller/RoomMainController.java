@@ -313,11 +313,13 @@ public class RoomMainController {
         Response response = new Response();
 
         List<IssueEntity> issueEntities = roomMainService.getIssues(roomId);
+        List<GitcodeEntity> gitcodeEntities = roomMainService.getGitcodes(roomId);
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("issue 리스트 출력 성공");
         Map<String, Object> data = new HashMap<>();
         data.put("issues", issueEntities);
+        data.put("gitcodes",gitcodeEntities);
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -330,6 +332,7 @@ public class RoomMainController {
         response.setMessage("issue 출력 성공");
         Map<String, Object> data = new HashMap<>();
         data.put("issue", roomMainService.getIssueById(issueId));
+        data.put("gitcode", roomMainService.getGitcodeByIssueId(issueId));
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
