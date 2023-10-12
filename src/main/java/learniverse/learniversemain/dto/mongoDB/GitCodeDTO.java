@@ -8,6 +8,8 @@ import lombok.Data;
 public class GitCodeDTO {
     @NotNull(message = " issueId 입력은 필수입니다.")
     private Long issueId;
+    @NotNull(message = " roomId 입력은 필수입니다.")
+    private Long roomId;
     @NotEmpty(message = "GitCode 입력은 필수입니다.")
     private String gitCode;
 }

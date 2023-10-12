@@ -238,14 +238,13 @@ public class RoomMainService {
 
         //깃헙에서 코드 가져와서 파일에 있는 코드 저장
         String gitCode = getCodeFromGit(issueEntity);
-
         gitcodeEntity.setGitCode(gitCode);
-        gitcodeEntity.setIssueId(issueEntity.getIssueId());
 
-        //issueEntity.setGitCode(gitCode);
         issueEntity.setIssueOpen(true);
 
         issueRepository.save(issueEntity);
+        gitcodeEntity.setIssueId(issueEntity.getIssueId());
+        gitcodeEntity.setRoomId(issueEntity.getRoomId());
         gitCodeMongoDBRepository.save(gitcodeEntity);
 
         return true;
@@ -333,7 +332,6 @@ public class RoomMainService {
         if (responseBody != null && responseBody.containsKey("content")) {
             String base64Content = (String) responseBody.get("content");
             base64Content = base64Content.replaceAll("\\s", ""); // 공백 제거
-            //base64Content = base64Content.replaceAll("^(.*?)base64,", ""); // "base64," 이전 문자열 제거
 
             try {
                 byte[] decodedBytes = Base64.getDecoder().decode(base64Content);
