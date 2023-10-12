@@ -8,6 +8,7 @@ import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.*;
 import learniverse.learniversemain.dto.mongoDB.GitCodeDTO;
 import learniverse.learniversemain.entity.*;
+import learniverse.learniversemain.entity.mongoDB.GitcodeEntity;
 import learniverse.learniversemain.service.RoomMainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -276,7 +277,7 @@ public class RoomMainController {
 
         roomMainService.closeIssue(issueEntity.getIssueId());
         response.setMessage("깃허브에 이슈 클로즈 성공");
-        response.setData(issueEntity);
+        response.setData(issueEntity.getIssueId());
 
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
@@ -302,6 +303,7 @@ public class RoomMainController {
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("gitCode 수정 성공");
+        response.setData(gitCodeDTO);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

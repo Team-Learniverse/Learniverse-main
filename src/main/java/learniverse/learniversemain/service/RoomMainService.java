@@ -240,6 +240,7 @@ public class RoomMainService {
         String gitCode = getCodeFromGit(issueEntity);
         gitcodeEntity.setGitCode(gitCode);
 
+        //이슈 열렸는지 체크
         issueEntity.setIssueOpen(true);
 
         issueRepository.save(issueEntity);

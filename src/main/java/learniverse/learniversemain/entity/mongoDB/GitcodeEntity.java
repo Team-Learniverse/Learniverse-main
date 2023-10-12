@@ -13,7 +13,11 @@ public class GitcodeEntity {
     private long issueId;
     private long RoomId;
     private String gitCode;
-    @LastModifiedDate
-    private LocalDateTime updatedDate;
+
+    /*public GitcodeEntity(long issueId, long RoomId, String gitCode){
+        this.issueId = issueId;
+        this.RoomId = RoomId;
+        this.gitCode = gitCode;
+    }*/
 
 }
