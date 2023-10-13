@@ -20,8 +20,6 @@ public class OAuth2Attribute {
     private String email;
     private String imageUrl;
 
-    private Integer id;
-
     public static OAuth2Attribute of(String provider,
                                      Map<String, Object> attributes) {
         switch (provider) {
@@ -37,7 +35,6 @@ public class OAuth2Attribute {
             log.info("{}={}", s, attributes.get(s));
         }
         return OAuth2Attribute.builder()
-                .id((Integer) attributes.get("id"))
                 .nickname((String) attributes.get("login"))
                 .email((String) attributes.get("email"))
                 .imageUrl((String) attributes.get("avatar_url"))
@@ -50,9 +47,9 @@ public class OAuth2Attribute {
         return new MemberEntity(nickname,nickname,email,imageUrl); //nickname, githubId, email, imageurl
     }
 
-    public Map<String, Object> toMap(long id) {
+    public Map<String, Object> toMap(long memberId) {
         Map<String, Object> map = new HashMap<>();
-        map.put("id", id); //(Member Id)
+        map.put("id", memberId); //(Member Id)
         map.put("key", attributeKey); //Github id
         map.put("nickname", nickname); //Github login(Member Nickname)
         map.put("email", email); //Github email

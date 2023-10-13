@@ -242,8 +242,8 @@ public class MemberService {
         if (existingMember.isPresent()) {
             MemberEntity savedMember = existingMember.get();
             if (member.getMemberEmail() != null)savedMember.setMemberEmail(member.getMemberEmail());
-            if (member.getMemberMessage() != null)savedMember.setMemberMessage(member.getMemberMessage());
             if (member.getImageUrl() != null)savedMember.setImageUrl(member.getImageUrl());
+            if (member.getAccessCode() != null)savedMember.setAccessCode((member.getAccessCode()));
 
             savedMember.setMemberFirst(false);
             memberRepository.save(savedMember); //여기서 체크
@@ -251,6 +251,7 @@ public class MemberService {
         }
         else {
             member.setMemberFirst(true);
+            member.setAccessCode(member.getAccessCode());
             memberRepository.save(member);
         }
     }

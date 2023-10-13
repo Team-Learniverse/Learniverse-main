@@ -42,6 +42,7 @@ public class RoomMainService {
     private final FcmTokenRepository fcmTokenRepository;
     private final RoomMemberRepository roomMemberRepository;
     private final GitCodeMongoDBRepository gitCodeMongoDBRepository;
+    private  final MemberRepository memberRepository;
 
     /*
     public boolean createSchedule(ScheduleDTO scheduleDTO){
@@ -264,18 +265,19 @@ public class RoomMainService {
 
         String addIssueUrl = "https://api.github.com/repos/" + issueGitUrl + "/issues";
 
-        log.info(addIssueUrl);
+        Long memberId = issueEntity.getMemberId();
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
+        String accessCode = memberEntity.get().getAccessCode();
+        log.info(accessCode);
 
         WebClient webClient = WebClient.builder()
                 .baseUrl(addIssueUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessCode) //여기에 access token 넣기
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 
         String requestBody = String.format("{\"title\":\"%s\",\"body\":\"%s\"}", issueTitle, issueDescription);
-
-        log.info(requestBody.toString());
 
         Mono<Map<String, Object>> response = webClient.post()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -312,10 +314,15 @@ public class RoomMainService {
 
         String getGitUrl = "https://api.github.com/repos/" + issueGitUrl + "/contents/" + gitFileName;
 
+        Long memberId = issueEntity.getMemberId();
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
+        String accessCode = memberEntity.get().getAccessCode();
+        log.info(accessCode);
+
         WebClient webClient = WebClient.builder()
                 .baseUrl(getGitUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer "+accessCode) //여기에 access token 넣기
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 
@@ -372,10 +379,15 @@ public class RoomMainService {
 
         String addIssueUrl = "https://api.github.com/repos/" + issueGitUrl + "/issues/" + issueNumberinGit;
 
+        Long memberId = issueEntity.getMemberId();
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
+        String accessCode = memberEntity.get().getAccessCode();
+        log.info(accessCode);
+
         WebClient webClient = WebClient.builder()
                 .baseUrl(addIssueUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessCode) //여기에 access token 넣기
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 

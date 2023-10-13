@@ -25,6 +25,8 @@ public class MemberEntity {
     private String nickname;
     @Column(name = "github_id", nullable = false)
     private String githubId;
+    @Column(name = "github_access_code", nullable = false)
+    private String accessCode;
     @Column(name = "member_message", nullable = true)
     private String memberMessage;
     @Column(name = "member_url", nullable = true)
