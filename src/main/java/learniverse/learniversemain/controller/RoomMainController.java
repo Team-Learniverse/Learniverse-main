@@ -319,7 +319,7 @@ public class RoomMainController {
         response.setMessage("issue 리스트 출력 성공");
         Map<String, Object> data = new HashMap<>();
         data.put("issues", issueEntities);
-        data.put("gitcodes",gitcodeEntities);
+        data.put("gitCodes",gitcodeEntities);
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -332,7 +332,7 @@ public class RoomMainController {
         response.setMessage("issue 출력 성공");
         Map<String, Object> data = new HashMap<>();
         data.put("issue", roomMainService.getIssueById(issueId));
-        data.put("gitcode", roomMainService.getGitcodeByIssueId(issueId));
+        data.put("gitCode", roomMainService.getGitcodeByIssueId(issueId));
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
 

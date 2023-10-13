@@ -427,17 +427,13 @@ public class RoomMainService {
 
 
     public List<IssueEntity> getIssues(Long roomId) {
-        LocalDateTime now = LocalDateTime.now().plusHours(9);
-
         List<IssueEntity> issuesEntites = issueRepository.findByRoomIdOrderByCreatedDateDesc(roomId);
         return issuesEntites;
     }
 
     public List<GitcodeEntity> getGitcodes(Long roomId) {
-        LocalDateTime now = LocalDateTime.now().plusHours(9);
-
-        List<GitcodeEntity> gitcodeEntities = gitCodeMongoDBRepository.findByRoomIdOrderByCreatedDateDesc(roomId);
-        return gitcodeEntities;
+        List<GitcodeEntity> gitCodeEntities = gitCodeMongoDBRepository.findByRoomIdOrderByCreatedDateDesc(roomId);
+        return gitCodeEntities;
     }
 
     public Optional<IssueEntity> getIssueById(Long issueId) {
@@ -446,10 +442,10 @@ public class RoomMainService {
     }
 
     public String getGitcodeByIssueId(Long issueId) {
-        GitcodeEntity gitcodeEntity = gitCodeMongoDBRepository.findByIssueId(issueId);
-        String gitcode = gitcodeEntity.getGitCode();
+        GitcodeEntity gitCodeEntity = gitCodeMongoDBRepository.findByIssueId(issueId);
+        String gitCode = gitCodeEntity.getGitCode();
 
-        return gitcode;
+        return gitCode;
     }
 
     public boolean createOpinion(IssueOpinionDTO issueOpinionDTO) { //디비에 이슈 디스커션 등록

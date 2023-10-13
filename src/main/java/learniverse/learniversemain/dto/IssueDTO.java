@@ -20,5 +20,5 @@ public class IssueDTO {
     @NotNull(message = "gitFileName 입력은 필수입니다.")
     private String gitFileName;
     //private String gitCode;
-    private long issueId;
+    //private long issueId;
 }
