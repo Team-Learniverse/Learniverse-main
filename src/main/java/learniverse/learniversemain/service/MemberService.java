@@ -261,13 +261,31 @@ public class MemberService {
         return memberRepository.getByGithubId(githubId);
     }
 
-    @Transactional
-    public Optional<MemberEntity> getMemberById(Long memberId){
+    /*@Transactional
+    public Optional<MemberEntity> getMemberById(long memberId){
         Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
 
         return memberEntity;
+    }*/
+
+    public boolean isMemberFirst(long memberId) {
+        MemberEntity memberEntity = memberRepository.findById(memberId)
+                .orElseThrow(() -> new CustomBadRequestException("해당 memberId와 매칭되는 정보를 찾을 수 없습니다."));
+
+        boolean memberFirst = memberEntity.getMemberFirst();
+
+        return memberFirst;
     }
 
+    /* public boolean isCore(Long roomId) {
+        boolean existRoom = roomRepository.existsByRoomId(roomId);
+        if (!existRoom) throw new CannotFindRoomException();
+
+        LocalDateTime now = LocalDateTime.now().plusHours(9);
+        CoreTimeEntity coreTimeEntity = coreTimeRepository.findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(roomId, now, now);
+        if (coreTimeEntity == null) return false;
+        else return true;
+    }*/
 
     //public MemberDTO updateMember(MemberDTO updateMember);
 
