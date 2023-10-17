@@ -52,7 +52,9 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         String redirectUrl = UriComponentsBuilder.fromUriString("http://localhost:3002/login")
                 .queryParam("token", token.getAccessToken())
                 .build().toUriString();
+        log.info(String.valueOf(response));
         redirectStrategy.sendRedirect(request, response, redirectUrl);
+
     }
 
     //access Token, refresh Token 생성
