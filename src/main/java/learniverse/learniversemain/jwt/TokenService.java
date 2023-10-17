@@ -68,6 +68,7 @@ public class TokenService implements InitializingBean {
     }
 
 
+    //멤버id, 토큰 발급시간, 토큰 만료시간
     private String makeJwtValue(Claims claims, Instant now, long tokenValidityInMilliseconds) {
         return Jwts.builder().setClaims(claims).setIssuedAt(new Date(now.toEpochMilli()))
                 .setExpiration(new Date(now.toEpochMilli() + tokenValidityInMilliseconds))
@@ -123,7 +124,7 @@ public class TokenService implements InitializingBean {
     }
 
     public Authentication getAuthentication(String token) {
-        int memberId = getMemberId(token);
+        long memberId = getMemberId(token);
         log.info("Authenticated Member Id:" + String.valueOf(memberId));
         return new UsernamePasswordAuthenticationToken(memberId, "",
                 Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));

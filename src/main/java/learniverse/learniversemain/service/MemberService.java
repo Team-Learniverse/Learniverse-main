@@ -9,10 +9,8 @@ import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.mongoDB.JoinsEntity;
 import learniverse.learniversemain.entity.mongoDB.MembersEntity;
-import learniverse.learniversemain.repository.MemberRepository;
-import learniverse.learniversemain.repository.MoonRepository;
-import learniverse.learniversemain.repository.RoomMemberRepository;
-import learniverse.learniversemain.repository.RoomRepository;
+import learniverse.learniversemain.jwt.Refresh;
+import learniverse.learniversemain.repository.*;
 import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
 import learniverse.learniversemain.repository.mongoDB.MembersMongoDBRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +37,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final JoinsMongoDBRepository joinsMongoDBRepository;
     private final MembersMongoDBRepository membersMongoDBRepository;
+    private  final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
     public void login(long memberId){
@@ -268,13 +267,20 @@ public class MemberService {
         return memberEntity;
     }*/
 
-    public boolean isMemberFirst(long memberId) {
+    public String isMemberFirst(long memberId) {
         MemberEntity memberEntity = memberRepository.findById(memberId)
                 .orElseThrow(() -> new CustomBadRequestException("해당 memberId와 매칭되는 정보를 찾을 수 없습니다."));
 
-        boolean memberFirst = memberEntity.getMemberFirst();
+        String memberFirst = String.valueOf(memberEntity.getMemberFirst());
 
         return memberFirst;
+    }
+
+    public String getRefreshToken(long memberId){
+        Refresh refreshToken = refreshTokenRepository.findByMemberId(memberId);
+        String token = refreshToken.getToken();
+
+        return token;
     }
 
     /* public boolean isCore(Long roomId) {
