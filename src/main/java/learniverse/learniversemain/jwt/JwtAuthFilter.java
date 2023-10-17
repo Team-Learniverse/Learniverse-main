@@ -40,6 +40,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }else if (refresh != null && tokenService.isRefreshTokenValid(refresh)) {
             // Access Token이 만료되었고 Refresh Token이 유효한 경우
             String newAccessToken = tokenService.refreshAccessToken(token);
+            log.info("accessToken 재발급");
 
             if (newAccessToken != null) {
                 // 새로운 Access Token을 응답 헤더에 추가
