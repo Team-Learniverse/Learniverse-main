@@ -153,7 +153,7 @@ public class MemberController {
     @GetMapping("/first")
     public ResponseEntity<Response> getMemberFirst(@Valid @RequestParam long memberId) {
         Response response = new Response();
-        Map<String, String> data = new HashMap<>();
+        Map<String, String>   data = new HashMap<>();
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("최초 사용자 확인 정보 출력 완료");
         data.put("memberFirst", memberService.isMemberFirst(memberId));
