@@ -9,10 +9,8 @@ import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.mongoDB.JoinsEntity;
 import learniverse.learniversemain.entity.mongoDB.MembersEntity;
-import learniverse.learniversemain.repository.MemberRepository;
-import learniverse.learniversemain.repository.MoonRepository;
-import learniverse.learniversemain.repository.RoomMemberRepository;
-import learniverse.learniversemain.repository.RoomRepository;
+import learniverse.learniversemain.jwt.Refresh;
+import learniverse.learniversemain.repository.*;
 import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
 import learniverse.learniversemain.repository.mongoDB.MembersMongoDBRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +37,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final JoinsMongoDBRepository joinsMongoDBRepository;
     private final MembersMongoDBRepository membersMongoDBRepository;
+    private  final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
     public void login(long memberId){
@@ -236,11 +235,24 @@ public class MemberService {
 
     @Transactional
     public void registerMember(MemberEntity member) {
-        if (!memberRepository.existsByGithubId(member.getGithubId())) {
+        //깃허브 아이디로 멤버 찾기
+        Optional<MemberEntity> existingMember = memberRepository.getByGithubId(member.getGithubId());
+
+        if (existingMember.isPresent()) {
+            MemberEntity savedMember = existingMember.get();
+            if (member.getMemberEmail() != null)savedMember.setMemberEmail(member.getMemberEmail());
+            if (member.getImageUrl() != null)savedMember.setImageUrl(member.getImageUrl());
+            if (member.getAccessCode() != null)savedMember.setAccessCode((member.getAccessCode()));
+
+            savedMember.setMemberFirst(false);
+            memberRepository.save(savedMember); //여기서 체크
+
+        }
+        else {
             member.setMemberFirst(true);
+            member.setAccessCode(member.getAccessCode());
             memberRepository.save(member);
         }
-        else member.setMemberFirst(false);
     }
 
     @Transactional
@@ -248,13 +260,38 @@ public class MemberService {
         return memberRepository.getByGithubId(githubId);
     }
 
-    @Transactional
-    public Optional<MemberEntity> getMemberById(Long memberId){
+    /*@Transactional
+    public Optional<MemberEntity> getMemberById(long memberId){
         Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
 
         return memberEntity;
+    }*/
+
+    public String isMemberFirst(long memberId) {
+        MemberEntity memberEntity = memberRepository.findById(memberId)
+                .orElseThrow(() -> new CustomBadRequestException("해당 memberId와 매칭되는 정보를 찾을 수 없습니다."));
+
+        String memberFirst = String.valueOf(memberEntity.getMemberFirst());
+
+        return memberFirst;
     }
 
+    public String getRefreshToken(long memberId){
+        Refresh refreshToken = refreshTokenRepository.findByMemberId(memberId);
+        String token = refreshToken.getToken();
+
+        return token;
+    }
+
+    /* public boolean isCore(Long roomId) {
+        boolean existRoom = roomRepository.existsByRoomId(roomId);
+        if (!existRoom) throw new CannotFindRoomException();
+
+        LocalDateTime now = LocalDateTime.now().plusHours(9);
+        CoreTimeEntity coreTimeEntity = coreTimeRepository.findOneByRoomIdAndCoreStartTimeLessThanEqualAndCoreEndTimeGreaterThan(roomId, now, now);
+        if (coreTimeEntity == null) return false;
+        else return true;
+    }*/
 
     //public MemberDTO updateMember(MemberDTO updateMember);
 

@@ -27,6 +27,8 @@ public class CustomOAuth2UserService implements OAuth2UserService <OAuth2UserReq
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         log.info("djdjj");
 
+        log.info("getAccessToken: "+userRequest.getAccessToken().getTokenValue());
+
         OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService = new DefaultOAuth2UserService();
 
         // 생성된 Service 객체로부터 User를 받는다
@@ -42,6 +44,7 @@ public class CustomOAuth2UserService implements OAuth2UserService <OAuth2UserReq
         log.info(oAuth2User.getAttributes().toString());
 
         MemberEntity requestMember = oAuth2Attribute.toMember();
+        requestMember.setAccessCode(userRequest.getAccessToken().getTokenValue());
         memberService.registerMember(requestMember); // login(닉네임)로 멤버가 있는지 확인후 없으면 생성
         Optional<MemberEntity> findMember = memberService.findMemberByGithubId(requestMember.getGithubId());
 

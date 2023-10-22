@@ -6,8 +6,11 @@ import learniverse.learniversemain.controller.Exception.CustomBadRequestExceptio
 import learniverse.learniversemain.dto.*;
 import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
 import learniverse.learniversemain.dto.BoardDTO;
+import learniverse.learniversemain.dto.mongoDB.GitCodeDTO;
 import learniverse.learniversemain.entity.*;
+import learniverse.learniversemain.entity.mongoDB.GitcodeEntity;
 import learniverse.learniversemain.repository.*;
+import learniverse.learniversemain.repository.mongoDB.GitCodeMongoDBRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -38,6 +41,8 @@ public class RoomMainService {
     private final IssueOpinionRepository issueOpinionRepository;
     private final FcmTokenRepository fcmTokenRepository;
     private final RoomMemberRepository roomMemberRepository;
+    private final GitCodeMongoDBRepository gitCodeMongoDBRepository;
+    private  final MemberRepository memberRepository;
 
     /*
     public boolean createSchedule(ScheduleDTO scheduleDTO){
@@ -226,6 +231,7 @@ public class RoomMainService {
 
     public boolean createIssue(IssueDTO issueDTO) { //디비에 이슈 등록
         IssueEntity issueEntity = new IssueEntity(issueDTO);
+        GitcodeEntity gitcodeEntity = new GitcodeEntity();
 
         //깃헙에 이슈 업로드 후 이슈 넘버 저장
         String gitIssueNumber = uploadIssue(issueEntity);
@@ -233,10 +239,16 @@ public class RoomMainService {
 
         //깃헙에서 코드 가져와서 파일에 있는 코드 저장
         String gitCode = getCodeFromGit(issueEntity);
-        issueEntity.setGitCode(gitCode);
+        gitcodeEntity.setGitCode(gitCode);
+
+        //이슈 열렸는지 체크
         issueEntity.setIssueOpen(true);
 
         issueRepository.save(issueEntity);
+        gitcodeEntity.setIssueId(issueEntity.getIssueId());
+        gitcodeEntity.setRoomId(issueEntity.getRoomId());
+        gitcodeEntity.setCreatedDate(issueEntity.getCreatedDate());
+        gitCodeMongoDBRepository.save(gitcodeEntity);
 
         return true;
     }
@@ -247,16 +259,21 @@ public class RoomMainService {
 
         String issueNumberinGit = "";
 
-        String issueGitUrl = issueEntity.getIssueGitUrl();
         String issueTitle = issueEntity.getIssueTitle();
+        String issueGitUrl = issueEntity.getIssueGitUrl();
         String issueDescription = issueEntity.getIssueDescription();
 
         String addIssueUrl = "https://api.github.com/repos/" + issueGitUrl + "/issues";
 
+        Long memberId = issueEntity.getMemberId();
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
+        String accessCode = memberEntity.get().getAccessCode();
+        log.info(accessCode);
+
         WebClient webClient = WebClient.builder()
                 .baseUrl(addIssueUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessCode) //여기에 access token 넣기
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 
@@ -283,6 +300,8 @@ public class RoomMainService {
             }
         }
 
+        log.info(responseBody.toString());
+
         return issueNumberinGit;
     }
 
@@ -295,10 +314,15 @@ public class RoomMainService {
 
         String getGitUrl = "https://api.github.com/repos/" + issueGitUrl + "/contents/" + gitFileName;
 
+        Long memberId = issueEntity.getMemberId();
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
+        String accessCode = memberEntity.get().getAccessCode();
+        log.info(accessCode);
+
         WebClient webClient = WebClient.builder()
                 .baseUrl(getGitUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer "+accessCode) //여기에 access token 넣기
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 
@@ -317,7 +341,6 @@ public class RoomMainService {
         if (responseBody != null && responseBody.containsKey("content")) {
             String base64Content = (String) responseBody.get("content");
             base64Content = base64Content.replaceAll("\\s", ""); // 공백 제거
-            //base64Content = base64Content.replaceAll("^(.*?)base64,", ""); // "base64," 이전 문자열 제거
 
             try {
                 byte[] decodedBytes = Base64.getDecoder().decode(base64Content);
@@ -356,10 +379,15 @@ public class RoomMainService {
 
         String addIssueUrl = "https://api.github.com/repos/" + issueGitUrl + "/issues/" + issueNumberinGit;
 
+        Long memberId = issueEntity.getMemberId();
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
+        String accessCode = memberEntity.get().getAccessCode();
+        log.info(accessCode);
+
         WebClient webClient = WebClient.builder()
                 .baseUrl(addIssueUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer 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") //여기에 access token 넣기
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer "+accessCode) //여기에 access token 넣기
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 
@@ -378,29 +406,46 @@ public class RoomMainService {
     }
 
 
-    @Transactional
+    /*@Transactional
     public void updateIssue(IssueDTO issueDTO) { //이슈 업데이트
         IssueEntity existedIssue = issueRepository.findById(issueDTO.getIssueId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 이슈가 없습니다."));
-
         if (issueDTO.getGitCode() != null) existedIssue.setGitCode(issueDTO.getGitCode());
-
         existedIssue.update(existedIssue);
-
         issueRepository.save(existedIssue);
+    }*/
+
+    @Transactional
+    public void updateGitCode(GitCodeDTO gitCodeDTO) { //깃코드 업데이트
+
+        GitcodeEntity existedGitcode = gitCodeMongoDBRepository.findByIssueId(gitCodeDTO.getIssueId());
+
+        if (gitCodeDTO.getGitCode() != null) existedGitcode.setGitCode(gitCodeDTO.getGitCode());
+        gitCodeMongoDBRepository.save(existedGitcode);
     }
 
 
-    public List<IssueEntity> getIssues(Long roomId) {
-        LocalDateTime now = LocalDateTime.now().plusHours(9);
 
+    public List<IssueEntity> getIssues(Long roomId) {
         List<IssueEntity> issuesEntites = issueRepository.findByRoomIdOrderByCreatedDateDesc(roomId);
         return issuesEntites;
+    }
+
+    public List<GitcodeEntity> getGitcodes(Long roomId) {
+        List<GitcodeEntity> gitCodeEntities = gitCodeMongoDBRepository.findByRoomIdOrderByCreatedDateDesc(roomId);
+        return gitCodeEntities;
     }
 
     public Optional<IssueEntity> getIssueById(Long issueId) {
         Optional<IssueEntity> issueEntity = issueRepository.findById(issueId);
         return issueEntity;
+    }
+
+    public String getGitcodeByIssueId(Long issueId) {
+        GitcodeEntity gitCodeEntity = gitCodeMongoDBRepository.findByIssueId(issueId);
+        String gitCode = gitCodeEntity.getGitCode();
+
+        return gitCode;
     }
 
     public boolean createOpinion(IssueOpinionDTO issueOpinionDTO) { //디비에 이슈 디스커션 등록

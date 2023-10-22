@@ -33,13 +33,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String refresh = httpServletRequest.getHeader("Refresh"); //refresh token
 
 
-        if (tokenService.validateToken(token)) { // JWT 토큰이 유효한 경우에만, USER객체 셋팅
+        if (token != null && tokenService.validateToken(token)) { // JWT 토큰이 유효한 경우에만, USER객체 셋팅
             Authentication authentication = tokenService.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             log.info("jwt success");
         }else if (refresh != null && tokenService.isRefreshTokenValid(refresh)) {
             // Access Token이 만료되었고 Refresh Token이 유효한 경우
             String newAccessToken = tokenService.refreshAccessToken(token);
+            log.info("accessToken 재발급");
 
             if (newAccessToken != null) {
                 // 새로운 Access Token을 응답 헤더에 추가

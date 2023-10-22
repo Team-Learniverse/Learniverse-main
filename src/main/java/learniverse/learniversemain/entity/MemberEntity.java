@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -24,6 +25,8 @@ public class MemberEntity {
     private String nickname;
     @Column(name = "github_id", nullable = false)
     private String githubId;
+    @Column(name = "github_access_code", nullable = false)
+    private String accessCode;
     @Column(name = "member_message", nullable = true)
     private String memberMessage;
     @Column(name = "member_url", nullable = true)
@@ -35,9 +38,13 @@ public class MemberEntity {
 
     @Builder
     public MemberEntity(String nickname, String githubId, String memberEmail, String imageUrl) {
+        LocalDate now = LocalDate.now();
+
         this.nickname = nickname;
         this.githubId = githubId;
         this.memberEmail = memberEmail;
         this.imageUrl = imageUrl;
+        this.LastLoginDate = now;
+
     }
 }

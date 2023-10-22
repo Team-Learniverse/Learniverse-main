@@ -24,7 +24,7 @@ public class Refresh {
     @CreatedDate
     private LocalDateTime createdDate;
 
-    public Refresh(int memberId, String refreshToken) {
+    public Refresh(long memberId, String refreshToken) {
         LocalDateTime now = LocalDateTime.now();
         this.memberId=memberId;
         this.token=refreshToken;

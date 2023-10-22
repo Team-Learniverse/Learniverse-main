@@ -53,6 +53,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
                 .queryParam("token", token.getAccessToken())
                 .build().toUriString();
         redirectStrategy.sendRedirect(request, response, redirectUrl);
+
     }
 
     //access Token, refresh Token 생성

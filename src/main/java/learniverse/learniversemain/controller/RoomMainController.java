@@ -6,7 +6,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.*;
+import learniverse.learniversemain.dto.mongoDB.GitCodeDTO;
 import learniverse.learniversemain.entity.*;
+import learniverse.learniversemain.entity.mongoDB.GitcodeEntity;
 import learniverse.learniversemain.service.RoomMainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -275,13 +277,13 @@ public class RoomMainController {
 
         roomMainService.closeIssue(issueEntity.getIssueId());
         response.setMessage("깃허브에 이슈 클로즈 성공");
-        response.setData(issueEntity);
+        response.setData(issueEntity.getIssueId());
 
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     //이슈 수정
-    @PostMapping("/issue/update")
+    /*@PostMapping("/issue/update")
     public ResponseEntity<Response> updateIssue(@Valid @RequestBody IssueDTO issueDTO) {
         Response response = new Response();
 
@@ -291,6 +293,19 @@ public class RoomMainController {
         response.setMessage("gitCode 수정 성공");
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }*/
+
+    @PostMapping("/issue/update")
+    public ResponseEntity<Response> updateIssue(@Valid @RequestBody GitCodeDTO gitCodeDTO) {
+        Response response = new Response();
+
+        roomMainService.updateGitCode(gitCodeDTO);
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("gitCode 수정 성공");
+        response.setData(gitCodeDTO);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/issues")
@@ -298,11 +313,13 @@ public class RoomMainController {
         Response response = new Response();
 
         List<IssueEntity> issueEntities = roomMainService.getIssues(roomId);
+        List<GitcodeEntity> gitcodeEntities = roomMainService.getGitcodes(roomId);
 
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("issue 리스트 출력 성공");
         Map<String, Object> data = new HashMap<>();
         data.put("issues", issueEntities);
+        data.put("gitCodes",gitcodeEntities);
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -315,6 +332,7 @@ public class RoomMainController {
         response.setMessage("issue 출력 성공");
         Map<String, Object> data = new HashMap<>();
         data.put("issue", roomMainService.getIssueById(issueId));
+        data.put("gitCode", roomMainService.getGitcodeByIssueId(issueId));
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
 

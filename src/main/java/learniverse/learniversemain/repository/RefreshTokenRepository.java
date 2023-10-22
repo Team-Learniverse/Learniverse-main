@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface RefreshTokenRepository extends JpaRepository<Refresh, Long> {
     Refresh findByToken(String token);
 
+    Refresh findByMemberId(Long memberId);
+
 }

@@ -150,6 +150,18 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/first")
+    public ResponseEntity<Response> getMemberFirst(@Valid @RequestParam long memberId) {
+        Response response = new Response();
+        Map<String, String>   data = new HashMap<>();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("최초 사용자 확인 정보 출력 완료");
+        data.put("memberFirst", memberService.isMemberFirst(memberId));
+        data.put("refreshToken", memberService.getRefreshToken(memberId));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<Response> addPin(@Valid @RequestBody long memberId) {
         Response response = new Response();

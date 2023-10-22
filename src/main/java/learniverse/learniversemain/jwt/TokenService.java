@@ -52,7 +52,7 @@ public class TokenService implements InitializingBean {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public Token generateToken(int memberId, String role) {
+    public Token generateToken(long memberId, String role) {
         log.info("generateToken");
         Claims claims = Jwts.claims().setSubject(String.valueOf(memberId));
         claims.put("role", role);
@@ -67,14 +67,34 @@ public class TokenService implements InitializingBean {
         return new Token(accessToken, refreshToken);
     }
 
+
+    //멤버id, 토큰 발급시간, 토큰 만료시간
     private String makeJwtValue(Claims claims, Instant now, long tokenValidityInMilliseconds) {
         return Jwts.builder().setClaims(claims).setIssuedAt(new Date(now.toEpochMilli()))
                 .setExpiration(new Date(now.toEpochMilli() + tokenValidityInMilliseconds))
                 .signWith(key, SignatureAlgorithm.HS256).compact();
     }
 
-    private void saveRefreshToken(int memberId, String refreshToken) {
-        refreshTokenRepository.save(new Refresh(memberId, refreshToken));
+    public Token updateAccessToken(long memberId, String role) {
+        log.info("updateAccessToken");
+        Claims claims = Jwts.claims().setSubject(String.valueOf(memberId));
+        claims.put("role", role);
+
+        Instant now = Instant.now();
+
+        String accessToken = makeJwtValue(claims, now, accessTokenValidityInMilliseconds);
+        Refresh existingRefreshToken = refreshTokenRepository.findByMemberId(memberId);
+        String refreshToken = existingRefreshToken.getToken();
+
+        return new Token(accessToken, refreshToken);
+    }
+
+    private void saveRefreshToken(long memberId, String refreshToken) {
+        Refresh existingRefreshToken = refreshTokenRepository.findByMemberId(memberId);
+
+        if(existingRefreshToken == null){
+            refreshTokenRepository.save(new Refresh(memberId, refreshToken));
+        }
     }
 
     public boolean validateToken(String token) {
@@ -104,7 +124,7 @@ public class TokenService implements InitializingBean {
     }
 
     public Authentication getAuthentication(String token) {
-        int memberId = getMemberId(token);
+        long memberId = getMemberId(token);
         log.info("Authenticated Member Id:" + String.valueOf(memberId));
         return new UsernamePasswordAuthenticationToken(memberId, "",
                 Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
@@ -131,17 +151,14 @@ public class TokenService implements InitializingBean {
     public String refreshAccessToken(String refreshToken) {
         String refreshTokenValue = refreshToken.substring(BEARER_PREFIX.length());
 
-        if (isRefreshTokenValid(refreshToken)) {
-            int memberId = getMemberId(refreshTokenValue);
+            long memberId = getMemberId(refreshTokenValue);
             String role = "USER";
 
             // 새로운 Access Token 생성
-            Token newAccessToken = generateToken(memberId, role);
+            Token newAccessToken = updateAccessToken(memberId, role);
 
             return newAccessToken.getAccessToken();
-        }
 
-        return null;
     }
 
     /*헤더에서 RefreshToken 추출
