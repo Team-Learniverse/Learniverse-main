@@ -218,9 +218,9 @@ public class RoomService {
     }
 
     public List<RoomCardDTO> getRoomsInSearch(long memberId, int page) {
-        List<RoomCardDTO> resRooms = new ArrayList<>();
-        List<RoomEntity> roomEntities;
-        roomEntities = getPageRooms(3 + (page-1)*5, 5);
+        List<RoomCardDTO> result = new ArrayList<>();
+        Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
+        Page<RoomEntity> roomEntities = roomRepository.findAll(pageable);
 
         for(RoomEntity roomEntity : roomEntities){
             long roomId = roomEntity.getRoomId();
@@ -228,9 +228,9 @@ public class RoomService {
             List<String> hashtags = getHashtags2String(roomId);
             String roomCategory = getCategory(roomEntity.getRoomCategory());
             int roomCount = getRoomCount(roomId);
-            resRooms.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+            result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
         }
-        return resRooms;
+        return result;
     }
 
     public List<RoomCardDTO> getSearchHashtag (String str, long memberId, int page){
