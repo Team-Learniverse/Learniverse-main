@@ -217,21 +217,43 @@ public class RoomService {
         return roomId;
     }
 
-    public List<RoomCardDTO> getSearchHashtag (String str, long memberId, int page){
-        List<RoomCardDTO> result = new ArrayList<>();
-        Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
-        Page<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str,pageable);
-        //List<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str);
-        historyRepository.save(new HistoryEntity(memberId, str, LocalDate.now()));
-        for (HashtagEntity hashtagEntity : roomList){
-            long roomId = hashtagEntity.getRoomId();
-            RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(()-> new CannotFindRoomException());
+    public List<RoomCardDTO> getRoomsInSearch(long memberId, int page) {
+        List<RoomCardDTO> resRooms = new ArrayList<>();
+        List<RoomEntity> roomEntities;
+        roomEntities = getPageRooms(3 + (page-1)*5, 5);
+
+        for(RoomEntity roomEntity : roomEntities){
+            long roomId = roomEntity.getRoomId();
             String isMember = getIsMember(roomId, memberId);
             List<String> hashtags = getHashtags2String(roomId);
             String roomCategory = getCategory(roomEntity.getRoomCategory());
             int roomCount = getRoomCount(roomId);
-            result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+            resRooms.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
         }
+        return resRooms;
+    }
+
+    public List<RoomCardDTO> getSearchHashtag (String str, long memberId, int page){
+        List<RoomCardDTO> result = new ArrayList<>();
+        if(str==""){
+            result = getRoomsInSearch(memberId, page);
+        }
+        else{
+            Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
+            Page<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str,pageable);
+            //List<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str);
+            historyRepository.save(new HistoryEntity(memberId, str, LocalDate.now()));
+            for (HashtagEntity hashtagEntity : roomList){
+                long roomId = hashtagEntity.getRoomId();
+                RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(()-> new CannotFindRoomException());
+                String isMember = getIsMember(roomId, memberId);
+                List<String> hashtags = getHashtags2String(roomId);
+                String roomCategory = getCategory(roomEntity.getRoomCategory());
+                int roomCount = getRoomCount(roomId);
+                result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+            }
+        }
+
 
         return result;
     }
