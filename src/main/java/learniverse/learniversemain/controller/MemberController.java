@@ -162,6 +162,17 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/repoList")
+    public ResponseEntity<Response> getGitRepo(@Valid @RequestParam long memberId) {
+        Response response = new Response();
+        Map<String, String>   data = new HashMap<>();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("레포리스트 출력 확인");
+        data.put("repoList", memberService.getRepoList(memberId));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<Response> addPin(@Valid @RequestBody long memberId) {
         Response response = new Response();
