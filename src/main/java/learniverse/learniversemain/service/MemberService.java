@@ -14,8 +14,13 @@ import learniverse.learniversemain.repository.*;
 import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
 import learniverse.learniversemain.repository.mongoDB.MembersMongoDBRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -24,9 +29,12 @@ import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.webjars.NotFoundException;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -281,6 +289,55 @@ public class MemberService {
         String token = refreshToken.getToken();
 
         return token;
+    }
+
+    public String getRepoList(long memberId){
+        MemberEntity memberEntity = memberRepository.findById(memberId)
+                .orElseThrow(() -> new CustomBadRequestException("해당 memberId와 매칭되는 정보를 찾을 수 없습니다."));
+
+        List <String> repoList = getRepoListFromGit(memberEntity);
+        log.info(repoList.toString());
+
+        return repoList.toString();
+    }
+
+    public List<String> getRepoListFromGit(MemberEntity memberEntity) { //깃헙 레포리스트 가져오기
+        log.info("RepoList");
+
+        List<String> repoList = new ArrayList<>();
+        String githubId = memberEntity.getGithubId();
+        String accessCode = memberEntity.getAccessCode();
+        log.info(accessCode);
+
+        String getGitUrl = "https://api.github.com/users/" + githubId + "/repos";
+
+        WebClient webClient = WebClient.builder()
+                .baseUrl(getGitUrl)
+                .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer "+accessCode) //여기에 access token 넣기
+                .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
+                .build();
+
+        // GitHub API에 GET 요청 보내기
+        Flux<Map<String, Object>> response = webClient.get()
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .onStatus(httpStatusCode -> httpStatusCode.is4xxClientError(), clientResponse -> {
+                    return Mono.error(new CustomBadRequestException("해당 유저의 레포지토리 리스트를 가져올 수 없습니다."));
+                })
+                .bodyToFlux(new ParameterizedTypeReference<Map<String, Object>>() {
+                });
+
+        response
+                .doOnNext(item -> {
+                    if (item.containsKey("full_name")) {
+                        String repoName = (String) item.get("full_name");
+                        repoList.add(repoName);
+                    }
+                })
+                .blockLast(); // 이 부분은 Flux를 동기적으로 처리하기 위한 블로킹 코드입니다.
+
+        return repoList;
     }
 
     /* public boolean isCore(Long roomId) {
