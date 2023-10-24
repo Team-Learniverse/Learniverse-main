@@ -162,13 +162,13 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/repoList")
+    @GetMapping("/repolanguage")
     public ResponseEntity<Response> getGitRepo(@Valid @RequestParam long memberId) {
         Response response = new Response();
         Map<String, String>   data = new HashMap<>();
         response.setStatus(Response.StatusEnum.OK);
-        response.setMessage("레포리스트 출력 확인");
-        data.put("repoList", memberService.getRepoList(memberId));
+        response.setMessage("레포언어 바이트 리스트 출력");
+        data.put("repoLanguageList", memberService.getRepoLanguage(memberId));
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
