@@ -291,14 +291,37 @@ public class MemberService {
         return token;
     }
 
-    public String getRepoList(long memberId){
+    public String getRepoLanguage(long memberId){
         MemberEntity memberEntity = memberRepository.findById(memberId)
                 .orElseThrow(() -> new CustomBadRequestException("해당 memberId와 매칭되는 정보를 찾을 수 없습니다."));
 
+        //사용자별 깃허브 public 레포 리스트 가져오기
         List <String> repoList = getRepoListFromGit(memberEntity);
         log.info(repoList.toString());
 
-        return repoList.toString();
+        //사용자의 모든 레포에서 language가져와서 languageMap으로
+        Map<String, Integer> languageMap = new HashMap<>();
+
+        for (String repoName : repoList) {
+            Map<String, Integer> repoLanguages = getRepoLanguageFromGit(repoName, memberEntity);
+
+            // repoLanguages에서 언어 정보를 languageMap에 더합니다.
+            for (Map.Entry<String, Integer> entry : repoLanguages.entrySet()) {
+                String language = entry.getKey();
+                int count = entry.getValue();
+
+                if (languageMap.containsKey(language)) {
+                    // 이미 languageMap에 동일한 언어가 있는 경우, 값을 누적합니다.
+                    int currentCount = languageMap.get(language);
+                    languageMap.put(language, currentCount + count);
+                } else {
+                    // languageMap에 해당 언어가 없는 경우, 새로 추가합니다.
+                    languageMap.put(language, count);
+                }
+            }
+        }
+
+        return languageMap.toString();
     }
 
     public List<String> getRepoListFromGit(MemberEntity memberEntity) { //깃헙 레포리스트 가져오기
@@ -307,6 +330,7 @@ public class MemberService {
         List<String> repoList = new ArrayList<>();
         String githubId = memberEntity.getGithubId();
         String accessCode = memberEntity.getAccessCode();
+
         log.info(accessCode);
 
         String getGitUrl = "https://api.github.com/users/" + githubId + "/repos";
@@ -322,9 +346,6 @@ public class MemberService {
         Flux<Map<String, Object>> response = webClient.get()
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .onStatus(httpStatusCode -> httpStatusCode.is4xxClientError(), clientResponse -> {
-                    return Mono.error(new CustomBadRequestException("해당 유저의 레포지토리 리스트를 가져올 수 없습니다."));
-                })
                 .bodyToFlux(new ParameterizedTypeReference<Map<String, Object>>() {
                 });
 
@@ -338,6 +359,43 @@ public class MemberService {
                 .blockLast(); // 이 부분은 Flux를 동기적으로 처리하기 위한 블로킹 코드입니다.
 
         return repoList;
+    }
+
+    public Map<String, Integer> getRepoLanguageFromGit(String repoName, MemberEntity memberEntity) { //깃헙 레포리스트 가져오기
+        log.info("Getting language from repo: " + repoName);
+
+        Map<String, Integer> languageList = new HashMap<>();
+        String accessCode = memberEntity.getAccessCode();
+
+        log.info(accessCode);
+
+        String getGitUrl = "https://api.github.com/repos/" + repoName + "/languages";
+
+        WebClient webClient = WebClient.builder()
+                .baseUrl(getGitUrl)
+                .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer "+accessCode) //여기에 access token 넣기
+                .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
+                .build();
+
+        // GitHub API에 GET 요청 보내기
+        Flux<Map<String, Object>> response = webClient.get()
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToFlux(new ParameterizedTypeReference<Map<String, Object>>() {
+                });
+
+        response
+                .doOnNext(item -> {
+                    for (Map.Entry<String, Object> entry : item.entrySet()) {
+                        String language = entry.getKey();
+                        Integer count = (Integer) entry.getValue();
+                        languageList.put(language, count);
+                    }
+                })
+                .blockLast(); // 이 부분은 Flux를 동기적으로 처리하기 위한 블로킹 코드입니다.
+
+        return languageList;
     }
 
     /* public boolean isCore(Long roomId) {
