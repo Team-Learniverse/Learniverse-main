@@ -324,7 +324,8 @@ public class MemberService {
         return languageMap.toString();
     }
 
-    public List<String> getRepoListFromGit(MemberEntity memberEntity) { //깃헙 레포리스트 가져오기
+    //깃헙 레포리스트 가져오기
+    public List<String> getRepoListFromGit(MemberEntity memberEntity) {
         log.info("RepoList");
 
         List<String> repoList = new ArrayList<>();
@@ -361,13 +362,12 @@ public class MemberService {
         return repoList;
     }
 
-    public Map<String, Integer> getRepoLanguageFromGit(String repoName, MemberEntity memberEntity) { //깃헙 레포리스트 가져오기
+    //레포별 언어 바이트 가져오기
+    public Map<String, Integer> getRepoLanguageFromGit(String repoName, MemberEntity memberEntity) {
         log.info("Getting language from repo: " + repoName);
 
         Map<String, Integer> languageList = new HashMap<>();
         String accessCode = memberEntity.getAccessCode();
-
-        log.info(accessCode);
 
         String getGitUrl = "https://api.github.com/repos/" + repoName + "/languages";
 
@@ -394,6 +394,8 @@ public class MemberService {
                     }
                 })
                 .blockLast(); // 이 부분은 Flux를 동기적으로 처리하기 위한 블로킹 코드입니다.
+
+        log.info(languageList.toString());
 
         return languageList;
     }
