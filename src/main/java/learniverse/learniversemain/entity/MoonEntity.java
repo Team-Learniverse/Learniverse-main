@@ -21,6 +21,8 @@ public class MoonEntity {
     private LocalDate moonDate;
     @Column(nullable = false, name = "moon_score")
     private Integer moonScore;
+    @Column(nullable = false, name = "is_core")
+    private boolean isCore = false;
 
     public MoonEntity(){}
 

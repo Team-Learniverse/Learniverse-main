@@ -16,7 +16,9 @@ public class CorsFilter extends OncePerRequestFilter {
     private static final List<String> ALLOWED_ORIGINS = new ArrayList<>(
             Arrays.asList(
                     "https://learniverse-front-end.vercel.app",
-                    "http://localhost:3000"
+                    "http://localhost:3000",
+                    "http://localhost:3004"
+
             )
     );
 

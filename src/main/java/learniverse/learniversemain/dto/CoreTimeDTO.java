@@ -14,7 +14,9 @@ public class CoreTimeDTO {
     @NotNull(message = "coreStartDate 입력은 필수입니다.")
     private LocalDateTime coreStartTime;
     @NotNull(message = "coreHour 입력은 필수입니다.")
-    private int coreHour;
+    private Integer coreHour;
     @NotNull(message = "coreMinute 입력은 필수입니다.")
-    private int coreMinute;
+    private Integer coreMinute;
+    @NotNull(message = "captureNum 입력은 필수입니다.")
+    private Integer captureNum;
 }

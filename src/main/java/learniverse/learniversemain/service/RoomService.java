@@ -5,24 +5,32 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
 import learniverse.learniversemain.dto.RoomCardDTO;
 import learniverse.learniversemain.dto.RoomDTO;
-import learniverse.learniversemain.dto.RoomSettingDTO;
+import learniverse.learniversemain.dto.mongoDB.DefaultRoomsDTO;
 import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
+import learniverse.learniversemain.entity.mongoDB.HistoryEntity;
+import learniverse.learniversemain.entity.mongoDB.JoinsEntity;
+import learniverse.learniversemain.entity.mongoDB.RoomsEntity;
 import learniverse.learniversemain.repository.*;
+import learniverse.learniversemain.repository.mongoDB.DefaultMongoDBRepository;
+import learniverse.learniversemain.repository.mongoDB.HistoryMongoDBRepository;
+import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
+import learniverse.learniversemain.repository.mongoDB.RoomsMongoDBRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -34,17 +42,22 @@ public class RoomService {
     private final RoomMemberRepository roomMemberRepository;
     private final HashtagRepository hashtagRepository;
     private final MemberRepository memberRepository;
-    private final MemberStatusRepository memberStatusRepository;
+    //private final MemberStatusRepository memberStatusRepository;
     private final RoomSettingRepository roomSettingRepository;
+    private final JoinsMongoDBRepository joinsMongoDBRepository;
+    private final DefaultMongoDBRepository defaultMongoDBRepository;
+    private final HistoryMongoDBRepository historyRepository;
+    private final RoomsMongoDBRepository roomMongoRepository;
 
-    public List<RoomSettingDTO> getSetting(String type){
+    public List<String> getSetting(String type){
         List<RoomSettingEntity> roomSettingEntities = roomSettingRepository.findByType(type);
-        List<RoomSettingDTO> roomSettingDTOS = new ArrayList<>();
-        for(int i=0;i<roomSettingEntities.size();i++){
-            roomSettingDTOS.add(new RoomSettingDTO(i, roomSettingEntities.get(i).getName()));
+        List<String> strings = new ArrayList<>();
+        for (RoomSettingEntity roomSettingEntity : roomSettingEntities){
+            strings.add(roomSettingEntity.getName());
         }
-        return roomSettingDTOS;
+        return strings;
     }
+
 
     @Transactional
     public long createRoom(RoomDTO roomDTO){
@@ -59,6 +72,8 @@ public class RoomService {
         RoomMemberEntity roomMemberEntity
                 = new RoomMemberEntity(roomEntity.getRoomId(), roomDTO.getMemberId(), true);
         roomMemberRepository.save(roomMemberEntity);
+        roomMongoRepository.save(new RoomsEntity(roomEntity, getCategory(roomEntity.getRoomCategory()), roomDTO.getRoomHashtags()));
+        joinsMongoDBRepository.save(new JoinsEntity(roomDTO.getMemberId(), roomEntity.getRoomId(), false));
         return roomEntity.getRoomId();
     }
 
@@ -91,9 +106,7 @@ public class RoomService {
     }
 
     public RoomDTO getRoomModifyInfo(Long roomId){
-        RoomEntity findRoom = roomRepository.findById(roomId)
-                .orElseThrow(()-> new CannotFindRoomException());
-        RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(() -> new RuntimeException());
+        RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(() -> new CannotFindRoomException());
         RoomDTO roomDTO = roomEntity.toRoomDTO();
         List<String> hashtags2String = getHashtags2String(roomId);
         String[] hashtags = new String[hashtags2String.size()];
@@ -102,6 +115,30 @@ public class RoomService {
         }
         roomDTO.setRoomHashtags(hashtags);
         return roomDTO;
+    }
+
+    public RoomEntity getRoomInfo(Long roomId){
+        RoomEntity roomEntity = roomRepository.findById(roomId)
+                .orElseThrow(()-> new CannotFindRoomException());
+
+        return roomEntity;
+    }
+
+    public void saveDefaultJoins(Long memberId, Long[] roomIds, boolean isDefault){
+        for(long roomId : roomIds){
+            JoinsEntity joinsEntity = new JoinsEntity(memberId, roomId, isDefault);
+            joinsMongoDBRepository.save(joinsEntity);
+        }
+    }
+
+    public List<RoomCardDTO> getDefaultRooms(){
+        List<DefaultRoomsDTO> defaultRoomsDTOS = defaultMongoDBRepository.findAll();
+        List<RoomCardDTO> rooms = new ArrayList<>();
+        for(DefaultRoomsDTO defaultRoomsDTO : defaultRoomsDTOS){
+            rooms.add(new RoomCardDTO(defaultRoomsDTO));
+        }
+        return rooms;
+
     }
 
     public boolean saveHashtags(long roomId, List<String> hashtags){
@@ -148,6 +185,8 @@ public class RoomService {
     public List<String> getHashtags2String(long roomId){
         List<String> res = new ArrayList<>();
         List<HashtagEntity>  hashtagEntityList = hashtagRepository.findByRoomId(roomId);
+        if(hashtagEntityList.size() == 0) return res;
+
         for(HashtagEntity hashtagEntity : hashtagEntityList){
             res.add(hashtagEntity.getHashtag());
         }
@@ -178,12 +217,77 @@ public class RoomService {
         return roomId;
     }
 
-    public Page<RoomEntity> getSearch (String str, int page){
-        //List<RoomDTO> result = new ArrayList<>();
-        PageRequest pageRequest = PageRequest.of(page,10);
-        Page<RoomEntity> roomList1 = roomRepository.findByRoomNameContainingOrRoomIntroContaining(str, str, pageRequest);
-        //List<HashtagEntity> roomList3 = hashtagRepository.findByHashtagContaining(str);
-        return roomList1;
+    public List<RoomCardDTO> getRoomsInSearch(long memberId, int page) {
+        List<RoomCardDTO> result = new ArrayList<>();
+        Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
+        Page<RoomEntity> roomEntities = roomRepository.findAll(pageable);
+
+        for(RoomEntity roomEntity : roomEntities){
+            long roomId = roomEntity.getRoomId();
+            String isMember = getIsMember(roomId, memberId);
+            List<String> hashtags = getHashtags2String(roomId);
+            String roomCategory = getCategory(roomEntity.getRoomCategory());
+            int roomCount = getRoomCount(roomId);
+            result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+        }
+        return result;
+    }
+
+    public List<RoomCardDTO> getSearchHashtag (String str, long memberId, int page){
+        List<RoomCardDTO> result = new ArrayList<>();
+        if(str==""){
+            result = getRoomsInSearch(memberId, page);
+        }
+        else{
+            Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
+            Page<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str,pageable);
+            //List<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str);
+            historyRepository.save(new HistoryEntity(memberId, str, LocalDate.now()));
+            for (HashtagEntity hashtagEntity : roomList){
+                long roomId = hashtagEntity.getRoomId();
+                RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(()-> new CannotFindRoomException());
+                String isMember = getIsMember(roomId, memberId);
+                List<String> hashtags = getHashtags2String(roomId);
+                String roomCategory = getCategory(roomEntity.getRoomCategory());
+                int roomCount = getRoomCount(roomId);
+                result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+            }
+        }
+
+
+        return result;
+    }
+
+    public List<RoomCardDTO> getSearch (String str, long memberId, int page){
+        List<RoomCardDTO> result = new ArrayList<>();
+        Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
+        Page<RoomEntity> roomList = roomRepository.findByRoomNameContainingOrRoomIntroContaining(str, str, pageable);
+        for (RoomEntity roomEntity : roomList){
+            long roomId = roomEntity.getRoomId();
+            String isMember = getIsMember(roomId, memberId);
+            List<String> hashtags = getHashtags2String(roomId);
+            String roomCategory = getCategory(roomEntity.getRoomCategory());
+            int roomCount = getRoomCount(roomId);
+            result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+        }
+        return result;
+    }
+
+    public List<RoomCardDTO> getSearchbyCategory (String str, long memberId, int category, int page){
+        List<RoomCardDTO> result = new ArrayList<>();
+        Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
+        //Page<RoomEntity> roomList = roomRepository.findByRoomCategoryAndRoomNameContainingOrRoomIntroContaining(category, str, str, pageable);
+        Page<RoomEntity> roomList = roomRepository.findByRoomCategoryAndRoomNameContainingOrRoomCategoryAndRoomIntroContaining(
+                category, str, category, str, pageable);
+        for (RoomEntity roomEntity : roomList){
+            long roomId = roomEntity.getRoomId();
+            String isMember = getIsMember(roomId, memberId);
+            List<String> hashtags = getHashtags2String(roomId);
+            String roomCategory = getCategory(roomEntity.getRoomCategory());
+            int roomCount = getRoomCount(roomId);
+            result.add(new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount));
+        }
+        return result;
     }
 
     public String getCategory(int settingId){
@@ -223,9 +327,24 @@ public class RoomService {
         return new RoomCardDTO(roomEntity, hashtags, roomCategory, isMember, roomCount);
     }
 
-    public List<RoomCardDTO> getRooms(long memberId) {
+    public List<RoomEntity> getPageRooms(int page, int num){
+        List<RoomEntity> roomEntities = new ArrayList<>();
+        for(int i = 0; i<num;i++){
+            Pageable pageable = PageRequest.of(page+i, 3, Sort.by(Sort.Direction.DESC, "roomId"));
+            Page<RoomEntity> roomPageEntities = roomRepository.findAll(pageable);
+            for(RoomEntity roomPageEntity : roomPageEntities)
+                roomEntities.add(roomPageEntity);
+        }
+        return roomEntities;
+    }
+
+
+    public List<RoomCardDTO> getRooms(long memberId, int page) {
         List<RoomCardDTO> resRooms = new ArrayList<>();
-        List<RoomEntity> roomEntities = roomRepository.findAll(Sort.by(Sort.Direction.DESC, "roomId"));
+        List<RoomEntity> roomEntities;
+        if(page == 0) roomEntities = getPageRooms(page, 3);
+        else roomEntities = getPageRooms(3 + (page-1)*5, 5);
+
         for(RoomEntity roomEntity : roomEntities){
             long roomId = roomEntity.getRoomId();
             String isMember = getIsMember(roomId, memberId);
@@ -252,5 +371,15 @@ public class RoomService {
         for (RoomMemberEntity roomMemberEntity : roomMemberEntities){
             roomMemberRepository.delete(roomMemberEntity);
         }
+    }
+
+    @Transactional
+    public void enterRoom(RoomMemberID roomMemberID){
+        List<JoinsEntity> joinsEntities = joinsMongoDBRepository.findByMemberIdAndRoomId(roomMemberID.getMemberId(), roomMemberID.getRoomId());
+        if(joinsEntities.size()==0) throw new CustomUnprocessableException("해당 멤버와 roomId 조합이 없습니다.");
+        JoinsEntity joinsEntity =  joinsEntities.get(0);
+        int enter = joinsEntity.getEnterRoom();
+        joinsEntity.setEnterRoom(enter+1);
+        joinsMongoDBRepository.save(joinsEntity);
     }
 }

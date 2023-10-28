@@ -5,6 +5,7 @@ import jakarta.validation.Path;
 import learniverse.learniversemain.controller.Exception.CannotFindRoomException;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
 import learniverse.learniversemain.controller.Exception.CustomException;
+import learniverse.learniversemain.controller.Exception.CustomUnprocessableException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -141,6 +142,7 @@ public class GlobalControllerAdvice {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    //400
     @ExceptionHandler(value = CustomBadRequestException.class)
     public ResponseEntity<Response> customBadRequestException(CustomBadRequestException e){
         Response response = new Response();
@@ -149,11 +151,21 @@ public class GlobalControllerAdvice {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    //500
     @ExceptionHandler(value = CustomException.class)
     public ResponseEntity<Response> customException(CustomException e){
         Response response = new Response();
         response.setMessage(e.getMessage());
         response.setStatus(Response.StatusEnum.INTERNAL_SERVER_ERROR);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    //422
+    @ExceptionHandler(value = CustomUnprocessableException.class)
+    public ResponseEntity<Response> customUnprocessableException(CustomUnprocessableException e){
+        Response response = new Response();
+        response.setMessage(e.getMessage());
+        response.setStatus(Response.StatusEnum.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(response, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }

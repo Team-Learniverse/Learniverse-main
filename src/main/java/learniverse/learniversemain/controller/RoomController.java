@@ -7,9 +7,11 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.dto.*;
+import learniverse.learniversemain.dto.mongoDB.JoinsDTO;
 import learniverse.learniversemain.dto.validGroups.Create;
 import learniverse.learniversemain.dto.validGroups.Update;
 import learniverse.learniversemain.entity.HashtagEntity;
+import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.RoomEntity;
 import learniverse.learniversemain.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -32,25 +34,26 @@ import java.util.Map;
 public class RoomController {
     private final RoomService roomService;
 
-    @GetMapping("/setting/category")
+    @Hidden
+    @GetMapping("/category")
     public ResponseEntity<Response> getCategories(){
         Response response = new Response();
 
-        Map<String, List<RoomSettingDTO>> data = new HashMap<>();
+        Map<String, List<String>> data = new HashMap<>();
         data.put("category",roomService.getSetting("category"));
         response.setData(data);
         response.setStatus(Response.StatusEnum.OK);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Hidden
-    @GetMapping("/setting/language")
+    @GetMapping("/languages")
     public ResponseEntity<Response> getLanguages(){
         Response response = new Response();
 
-        Map<String, List<RoomSettingDTO>> data = new HashMap<>();
-        data.put("language",roomService.getSetting("language"));
+        Map<String, List<String>> data = new HashMap<>();
+        data.put("languages",roomService.getSetting("language"));
         response.setData(data);
+        response.setMessage("개발 언어 출력 성공");
         response.setStatus(Response.StatusEnum.OK);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -70,6 +73,27 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @PostMapping("/create/interest")
+    public ResponseEntity<Response> saveDefault(@Valid @RequestBody JoinsDTO joinsDTO){
+        Response response = new Response();
+
+        roomService.saveDefaultJoins(joinsDTO.getMemberId(), joinsDTO.getRoomIds(), true);
+        response.setStatus(Response.StatusEnum.CREATED);
+        response.setMessage("관심 있는 방 저장 성공");
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/create/interest")
+    public ResponseEntity<Response> getDefault(){
+        Response response = new Response();
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomService.getDefaultRooms());
+        response.setData(data);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("관심있는 방 출력 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+    }
 
     @Validated(Update.class)
     @PostMapping("/update")
@@ -134,7 +158,6 @@ public class RoomController {
 
     }
 
-    @Hidden
     @GetMapping("/modify/info")
     public ResponseEntity<Response> getRoomModifyInfo(@NotNull @RequestParam long roomId){
         Response response = new Response();
@@ -152,9 +175,7 @@ public class RoomController {
     public ResponseEntity<Response> getRoomInfo(@PathVariable String path,
                                                 @NotNull @RequestParam long roomId){
         Response response = new Response();
-        RoomDTO roomDTO = roomService.getRoomModifyInfo(roomId);
-        RoomEntity roomEntity = RoomEntity.toRoomEntity(roomDTO);
-
+        RoomEntity roomEntity = roomService.getRoomInfo(roomId);
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("스터디룸 정보 출력 성공");
         Map<String, String> data = roomEntity.getPath(path);
@@ -202,13 +223,37 @@ public class RoomController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Hidden
-    @GetMapping("/search")
-    public ResponseEntity<Response> getSearch(@NotNull @RequestParam String str){
+
+    @GetMapping("/search/hashtag")
+    public ResponseEntity<Response> getSearchHashtag(@NotNull String hashtag, @NotNull long memberId, @NotNull int page){
         Response response = new Response();
         response.setStatus(Response.StatusEnum.OK);
-        response.setMessage("검색");
-        response.setData(roomService.getSearch(str, 0));
+        response.setMessage("해시태그 검색");
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomService.getSearchHashtag(hashtag, memberId, page));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Response> getSearch(@NotNull String search, @NotNull long memberId, @NotNull int page){
+        Response response = new Response();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("방 이름/소개 검색");
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomService.getSearch(search, memberId, page));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/search/category")
+    public ResponseEntity<Response> getSearch(@NotNull String search, @NotNull long memberId, @NotNull int category, @NotNull int page){
+        Response response = new Response();
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("방 이름/소개 검색, 카테고리 정렬");
+        Map<String, List<RoomCardDTO>> data = new HashMap<>();
+        data.put("rooms", roomService.getSearchbyCategory(search, memberId, category, page));
+        response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -224,12 +269,12 @@ public class RoomController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getRooms(@NotNull long memberId){
+    public ResponseEntity<Response> getRooms(@NotNull long memberId, @NotNull int page){
         Response response = new Response();
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("전체 방 조회");
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
-        data.put("rooms", roomService.getRooms(memberId));
+        data.put("rooms", roomService.getRooms(memberId, page));
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -240,6 +285,15 @@ public class RoomController {
         roomService.deleteRoom(roomId);
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("방 삭제 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/enter")
+    public ResponseEntity<Response> enterRoom(@Valid @RequestBody RoomMemberID roomMemberID){
+        Response response = new Response();
+        roomService.enterRoom(roomMemberID);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("방 입장 기록 성공");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

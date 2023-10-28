@@ -26,6 +26,7 @@ public class RoomDTO {
     private Integer roomLimit;
     @NotEmpty(groups = {Create.class, Update.class}, message = "해시태그 입력은 필수입니다.")
     private String[] roomHashtags;
+    private String[] roomLanguages;
 
     public static RoomEntity toRoomEntity(RoomDTO roomDTO){
         RoomEntity roomEntity = new RoomEntity();
