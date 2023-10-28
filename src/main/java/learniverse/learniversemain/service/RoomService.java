@@ -240,12 +240,13 @@ public class RoomService {
         }
         else{
             Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
-            Page<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str,pageable);
+            Page<RoomEntity> roomList = roomRepository.findByHashtagsHashtagContaining(str, pageable);
+            //Page<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str,pageable);
             //List<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str);
-            historyRepository.save(new HistoryEntity(memberId, str, LocalDate.now()));
-            for (HashtagEntity hashtagEntity : roomList){
-                long roomId = hashtagEntity.getRoomId();
-                RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(()-> new CannotFindRoomException());
+            if(page == 0) historyRepository.save(new HistoryEntity(memberId, str, LocalDate.now()));
+            for (RoomEntity roomEntity : roomList){
+                long roomId = roomEntity.getRoomId();
+                //RoomEntity roomEntity = roomRepository.findById(roomId).orElseThrow(()-> new CannotFindRoomException());
                 String isMember = getIsMember(roomId, memberId);
                 List<String> hashtags = getHashtags2String(roomId);
                 String roomCategory = getCategory(roomEntity.getRoomCategory());
@@ -292,7 +293,6 @@ public class RoomService {
 
     public String getCategory(int settingId){
         RoomSettingEntity roomCategoryEntity = roomSettingRepository.findFirstByTypeOrderBySettingIdAsc("category");
-        System.out.println(settingId + roomCategoryEntity.getSettingId());
         RoomSettingEntity roomSettingEntity = roomSettingRepository.findById(settingId + roomCategoryEntity.getSettingId())
                 .orElseThrow(() -> new CustomBadRequestException("settingId 오류"));
 

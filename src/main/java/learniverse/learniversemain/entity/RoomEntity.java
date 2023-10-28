@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 import learniverse.learniversemain.dto.RoomDTO;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -34,6 +37,9 @@ public class RoomEntity {
     private String roomFigma;
     @Column(name = "room_languages", nullable = true)
     private String roomLanguages = "";
+
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+    private List<HashtagEntity> hashtags = new ArrayList<>();
 
     public static RoomEntity toRoomEntity(RoomDTO roomDTO){
         RoomEntity roomEntity = new RoomEntity();

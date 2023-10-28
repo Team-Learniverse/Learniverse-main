@@ -20,6 +20,10 @@ public class HashtagEntity {
     @Column(nullable = false)
     private String hashtag;
 
+    @ManyToOne
+    @JoinColumn(name = "room_id", insertable = false, updatable = false)
+    private RoomEntity room;
+
     public HashtagEntity(long roomId,String hashtag) {
         this.roomId = roomId;
         this.hashtag = hashtag;
