@@ -8,10 +8,12 @@ import learniverse.learniversemain.dto.*;
 import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.mongoDB.JoinsEntity;
+import learniverse.learniversemain.entity.mongoDB.LangEntity;
 import learniverse.learniversemain.entity.mongoDB.MembersEntity;
 import learniverse.learniversemain.jwt.Refresh;
 import learniverse.learniversemain.repository.*;
 import learniverse.learniversemain.repository.mongoDB.JoinsMongoDBRepository;
+import learniverse.learniversemain.repository.mongoDB.LangMongoDBRepository;
 import learniverse.learniversemain.repository.mongoDB.MembersMongoDBRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +47,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final JoinsMongoDBRepository joinsMongoDBRepository;
     private final MembersMongoDBRepository membersMongoDBRepository;
-    private  final RefreshTokenRepository refreshTokenRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
+    private final LangMongoDBRepository langMongoDBRepository;
 
     @Transactional
     public void login(long memberId){
@@ -260,6 +263,8 @@ public class MemberService {
             member.setMemberFirst(true);
             member.setAccessCode(member.getAccessCode());
             memberRepository.save(member);
+            //mongoDB에 저장
+            membersMongoDBRepository.save(new MembersEntity(member.getMemberId()));
         }
     }
 
@@ -300,19 +305,19 @@ public class MemberService {
         log.info(repoList.toString());
 
         //사용자의 모든 레포에서 language가져와서 languageMap으로
-        Map<String, Integer> languageMap = new HashMap<>();
+        Map<String, Long> languageMap = new HashMap<>();
 
         for (String repoName : repoList) {
-            Map<String, Integer> repoLanguages = getRepoLanguageFromGit(repoName, memberEntity);
+            Map<String, Long> repoLanguages = getRepoLanguageFromGit(repoName, memberEntity);
 
             // repoLanguages에서 언어 정보를 languageMap에 더합니다.
-            for (Map.Entry<String, Integer> entry : repoLanguages.entrySet()) {
+            for (Map.Entry<String, Long> entry : repoLanguages.entrySet()) {
                 String language = entry.getKey();
-                int count = entry.getValue();
+                long count = entry.getValue();
 
                 if (languageMap.containsKey(language)) {
                     // 이미 languageMap에 동일한 언어가 있는 경우, 값을 누적합니다.
-                    int currentCount = languageMap.get(language);
+                    long currentCount = languageMap.get(language);
                     languageMap.put(language, currentCount + count);
                 } else {
                     // languageMap에 해당 언어가 없는 경우, 새로 추가합니다.
@@ -320,6 +325,12 @@ public class MemberService {
                 }
             }
         }
+
+        //mongoDB에 저장
+        for(String key : languageMap.keySet()){
+            langMongoDBRepository.save(new LangEntity(memberId, key, languageMap.get(key)));
+        }
+
 
         return languageMap.toString();
     }
@@ -363,10 +374,10 @@ public class MemberService {
     }
 
     //레포별 언어 바이트 가져오기
-    public Map<String, Integer> getRepoLanguageFromGit(String repoName, MemberEntity memberEntity) {
+    public Map<String, Long> getRepoLanguageFromGit(String repoName, MemberEntity memberEntity) {
         log.info("Getting language from repo: " + repoName);
 
-        Map<String, Integer> languageList = new HashMap<>();
+        Map<String, Long> languageList = new HashMap<>();
         String accessCode = memberEntity.getAccessCode();
 
         String getGitUrl = "https://api.github.com/repos/" + repoName + "/languages";
@@ -390,7 +401,7 @@ public class MemberService {
                     for (Map.Entry<String, Object> entry : item.entrySet()) {
                         String language = entry.getKey();
                         Integer count = (Integer) entry.getValue();
-                        languageList.put(language, count);
+                        languageList.put(language, Long.valueOf(count));
                     }
                 })
                 .blockLast(); // 이 부분은 Flux를 동기적으로 처리하기 위한 블로킹 코드입니다.

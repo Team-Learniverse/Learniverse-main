@@ -1,5 +1,6 @@
 package learniverse.learniversemain.entity.mongoDB;
 
+import learniverse.learniversemain.entity.MemberEntity;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,4 +13,9 @@ public class MembersEntity {
     private long memberId;
     private LocalDate lastLoginDate;
     private LocalDate createdDate;
+
+    public MembersEntity(long memberId) {
+        this.memberId = memberId;
+        this.createdDate = LocalDate.now();
+    }
 }
