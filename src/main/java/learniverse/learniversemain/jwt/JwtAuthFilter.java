@@ -37,7 +37,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             Authentication authentication = tokenService.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             log.info("jwt success");
-        }else if (refresh != null && tokenService.isRefreshTokenValid(refresh)) {
+        }
+        /*else if (refresh != null && tokenService.isRefreshTokenValid(refresh)) {
             // Access Token이 만료되었고 Refresh Token이 유효한 경우
             String newAccessToken = tokenService.refreshAccessToken(token);
             log.info("accessToken 재발급");
@@ -49,6 +50,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             }
         }
+         */
         filterChain.doFilter(servletRequest, servletResponse); // 다음 Filter를 실행(마지막 필터라면 필터 실행 후 리소스를 반환)
     }
 }
