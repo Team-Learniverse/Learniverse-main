@@ -161,20 +161,14 @@ public class TokenService implements InitializingBean {
 
     }
 
-    /*헤더에서 RefreshToken 추출
-     * 토큰 형식 : Bearer XXX에서 Bearer를 제외하고 순수 토큰만 가져오기 위해서
-     * 헤더를 가져온 후 "Bearer"를 삭제(""로 replace)
-     */
+    //헤더에서 RefreshToken 추출: 헤더를 가져온 후 "Bearer"를 삭제
     public Optional<String> extractRefreshToken(HttpServletRequest request) {
         return Optional.ofNullable(request.getHeader("Refresh"))
                 .filter(refreshToken -> refreshToken.startsWith("Bearer"))
                 .map(refreshToken -> refreshToken.replace("Bearer", ""));
     }
 
-    /*헤더에서 AccessToken 추출
-     * 토큰 형식 : Bearer XXX에서 Bearer를 제외하고 순수 토큰만 가져오기 위해서
-     * 헤더를 가져온 후 "Bearer"를 삭제(""로 replace)
-     */
+    //헤더에서 AccessToken 추출: 헤더를 가져온 후 "Bearer"를 삭제
     public Optional<String> extractAccessToken(HttpServletRequest request) {
         return Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION))
                 .filter(refreshToken -> refreshToken.startsWith("Bearer"))
