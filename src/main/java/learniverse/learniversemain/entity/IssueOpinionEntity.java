@@ -24,8 +24,10 @@ public class IssueOpinionEntity {
     private long memberId;
     @Column(name = "issue_opinion", nullable = false)
     private String issueOpinion;
-    @Column(name = "issue_opinion_line", nullable = false)
-    private Integer issueOpinionLine;
+    @Column(name = "issue_opinion_start_line", nullable = true)
+    private Integer issueOpinionStartLine;
+    @Column(name = "issue_opinion_end_line", nullable = true)
+    private Integer issueOpinionEndLine;
     @Column(name = "issue_opinion_code", nullable = true)
     private String issueOpinionCode;
     @CreatedDate
@@ -37,7 +39,8 @@ public class IssueOpinionEntity {
         this.issueId = issueOpinionDTO.getIssueId();
         this.memberId = issueOpinionDTO.getMemberId();
         this.issueOpinion = issueOpinionDTO.getIssueOpinion();
-        this.issueOpinionLine = issueOpinionDTO.getIssueOpinionLine();
+        this.issueOpinionStartLine = issueOpinionDTO.getIssueOpinionStartLine();
+        this.issueOpinionEndLine = issueOpinionDTO.getIssueOpinionEndLine();
         this.issueOpinionCode = issueOpinionDTO.getIssueOpinionCode();
         this.createdDate = now;
 
