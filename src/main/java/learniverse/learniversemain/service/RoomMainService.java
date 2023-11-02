@@ -323,12 +323,31 @@ public class RoomMainService {
         String prefix = "https://github.com/";
         String blobIndicator="blob/";
         String gitFileRepo="";
+        String ref = "";
+
         int startIndex = fullUrl.indexOf(prefix);
         int endIndex = fullUrl.indexOf(blobIndicator);
 
         if (startIndex != -1 && endIndex != -1) {
             gitFileRepo = fullUrl.substring(startIndex + prefix.length(), endIndex);
             log.info("Git File Repo: " + gitFileRepo);
+
+            int refStartIndex = endIndex + blobIndicator.length();
+            int refEndIndex = fullUrl.indexOf('/', refStartIndex);
+            if (refEndIndex != -1) {
+                ref = fullUrl.substring(refStartIndex, refEndIndex);
+                log.info("Branch Name (ref): " + ref);
+
+                int fileNameStartIndex = fullUrl.indexOf(blobIndicator + ref + "/", refEndIndex + 1);
+                if (fileNameStartIndex != -1) {
+                    String gitFileName = fullUrl.substring(fileNameStartIndex + blobIndicator.length() + ref.length() + 1);
+                    log.info("Git File Name: " + gitFileName);
+                } else {
+                    throw new CustomBadRequestException("파일명이 올바르지 않습니다.");
+                }
+            } else {
+                throw new CustomBadRequestException("브랜치 이름을 찾을 수 없습니다.");
+            }
         } else {
             throw new CustomBadRequestException("해당 주소와 일치하는 레포지토리가 존재하지 않습니다.");
         }
@@ -342,7 +361,7 @@ public class RoomMainService {
             throw new CustomBadRequestException("파일명이 올바르지 않습니다.");
         }
 
-        String getGitUrl = "https://api.github.com/repos/" + gitFileRepo + "contents/" + gitFileName;
+        String getGitUrl = "https://api.github.com/repos/" + gitFileRepo + "contents/" + gitFileName + "?ref=" + ref;
 
         Long memberId = issueEntity.getMemberId();
         Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
