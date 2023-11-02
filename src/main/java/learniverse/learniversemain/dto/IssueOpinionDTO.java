@@ -11,8 +11,8 @@ public class IssueOpinionDTO {
     private Long memberId;
     @NotNull(message = "issueOpinion 입력은 필수입니다.")
     private String issueOpinion;
-    @NotNull(message = "issueOpinionLine 입력은 필수입니다.")
-    private Integer issueOpinionLine;
+    private Integer issueOpinionStartLine;
+    private Integer issueOpinionEndLine;
     private String issueOpinionCode;
 
 

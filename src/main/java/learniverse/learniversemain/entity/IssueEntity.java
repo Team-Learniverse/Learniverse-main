@@ -29,7 +29,7 @@ public class IssueEntity {
     private String issueDescription;
     @Column(name = "issue_git_url", nullable = false)
     private String issueGitUrl;
-    @Column(name = "git_file_name", nullable = false)
+    @Column(name = "git_file_name", nullable = true)
     private String gitFileName;
     @Column(name = "git_issue_number", nullable = true)
     private String gitIssueNumber;
@@ -39,18 +39,6 @@ public class IssueEntity {
     private LocalDateTime createdDate;
     @LastModifiedDate
     private LocalDateTime updatedDate;
-
-    public void update(IssueEntity newIssue) {
-        LocalDateTime now = LocalDateTime.now();
-
-        this.issueId = newIssue.getIssueId();
-        this.memberId = newIssue.getMemberId();
-        this.roomId = newIssue.getRoomId();
-        this.issueTitle = newIssue.getIssueTitle();
-        this.issueDescription = newIssue.getIssueDescription();
-        this.issueOpen = newIssue.getIssueOpen();
-        this.updatedDate = now;
-    }
 
     public IssueEntity(IssueDTO issueDTO) {
         LocalDateTime now = LocalDateTime.now();

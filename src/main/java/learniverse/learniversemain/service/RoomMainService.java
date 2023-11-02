@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -240,6 +241,7 @@ public class RoomMainService {
         //깃헙에서 코드 가져와서 파일에 있는 코드 저장
         String gitCode = getCodeFromGit(issueEntity);
         gitcodeEntity.setGitCode(gitCode);
+        gitcodeEntity.setGitCodeModify(gitCode);
 
         //이슈 열렸는지 체크
         issueEntity.setIssueOpen(true);
@@ -260,7 +262,15 @@ public class RoomMainService {
         String issueNumberinGit = "";
 
         String issueTitle = issueEntity.getIssueTitle();
-        String issueGitUrl = issueEntity.getIssueGitUrl();
+        String fullUrl = issueEntity.getIssueGitUrl();
+        String prefix = "https://github.com/";
+        String issueGitUrl="";
+
+        if (fullUrl.startsWith(prefix)) {
+            issueGitUrl = fullUrl.substring(prefix.length());
+        }else{
+            throw new CustomBadRequestException("해당 주소와 일치하는 레포지토리가 존재하지 않습니다.");
+        }
         String issueDescription = issueEntity.getIssueDescription();
 
         String addIssueUrl = "https://api.github.com/repos/" + issueGitUrl + "/issues";
@@ -309,10 +319,30 @@ public class RoomMainService {
         log.info("GitCode");
 
         String gitCode = "";
-        String issueGitUrl = issueEntity.getIssueGitUrl();
-        String gitFileName = issueEntity.getGitFileName();
+        String fullUrl = issueEntity.getGitFileName();
+        String prefix = "https://github.com/";
+        String blobIndicator="blob/";
+        String gitFileRepo="";
+        int startIndex = fullUrl.indexOf(prefix);
+        int endIndex = fullUrl.indexOf(blobIndicator);
 
-        String getGitUrl = "https://api.github.com/repos/" + issueGitUrl + "/contents/" + gitFileName;
+        if (startIndex != -1 && endIndex != -1) {
+            gitFileRepo = fullUrl.substring(startIndex + prefix.length(), endIndex);
+            log.info("Git File Repo: " + gitFileRepo);
+        } else {
+            throw new CustomBadRequestException("해당 주소와 일치하는 레포지토리가 존재하지 않습니다.");
+        }
+
+        String gitFileName = "";
+        int index = fullUrl.indexOf(blobIndicator);
+        if (index != -1) {
+            gitFileName = fullUrl.substring(index + blobIndicator.length());
+            log.info("Git File Name: " + gitFileName);
+        } else {
+            throw new CustomBadRequestException("파일명이 올바르지 않습니다.");
+        }
+
+        String getGitUrl = "https://api.github.com/repos/" + gitFileRepo + "contents/" + gitFileName;
 
         Long memberId = issueEntity.getMemberId();
         Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
@@ -365,15 +395,24 @@ public class RoomMainService {
         if (existedIssue.getIssueOpen()) {
             changeIssue(existedIssue);
             existedIssue.setIssueOpen(false);
+            existedIssue.setUpdatedDate(LocalDateTime.now());
         }
 
-        existedIssue.update(existedIssue);
+        issueRepository.save(existedIssue);
     }
 
     public void changeIssue(IssueEntity issueEntity) { //깃헙에 이슈 업데이트
         log.info("changeIssue");
 
-        String issueGitUrl = issueEntity.getIssueGitUrl();
+        String fullUrl = issueEntity.getIssueGitUrl();
+        String prefix = "https://github.com/";
+        String issueGitUrl="";
+
+        if (fullUrl.startsWith(prefix)) {
+            issueGitUrl = fullUrl.substring(prefix.length());
+        }else{
+            throw new CustomBadRequestException("해당 주소와 일치하는 레포지토리가 존재하지 않습니다.");
+        }
 
         String issueNumberinGit = issueEntity.getGitIssueNumber();
 
@@ -405,7 +444,6 @@ public class RoomMainService {
 
     }
 
-
     /*@Transactional
     public void updateIssue(IssueDTO issueDTO) { //이슈 업데이트
         IssueEntity existedIssue = issueRepository.findById(issueDTO.getIssueId())
@@ -420,11 +458,9 @@ public class RoomMainService {
 
         GitcodeEntity existedGitcode = gitCodeMongoDBRepository.findByIssueId(gitCodeDTO.getIssueId());
 
-        if (gitCodeDTO.getGitCode() != null) existedGitcode.setGitCode(gitCodeDTO.getGitCode());
+        if (gitCodeDTO.getGitCode() != null) existedGitcode.setGitCodeModify(gitCodeDTO.getGitCodeModify());
         gitCodeMongoDBRepository.save(existedGitcode);
     }
-
-
 
     public List<IssueEntity> getIssues(Long roomId) {
         List<IssueEntity> issuesEntites = issueRepository.findByRoomIdOrderByCreatedDateDesc(roomId);
@@ -449,9 +485,70 @@ public class RoomMainService {
     }
 
     public boolean createOpinion(IssueOpinionDTO issueOpinionDTO) { //디비에 이슈 디스커션 등록
+        if (issueOpinionDTO.getIssueOpinionCode() != null && !issueOpinionDTO.getIssueOpinionCode().isEmpty()) {
+            if (issueOpinionDTO.getIssueOpinionStartLine() == null || issueOpinionDTO.getIssueOpinionEndLine() == null) {
+                throw new CustomBadRequestException("수정하고 싶은 줄의 시작과 끝 번호를 입력해주세요.");
+            }
+        }
         IssueOpinionEntity issueOpinionEntity = new IssueOpinionEntity(issueOpinionDTO);
+        long issueId = issueOpinionEntity.getIssueId();
+        IssueEntity issueEntity = issueRepository.findById(issueId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 이슈가 없습니다."));
+
+        //깃허브 이슈에 코멘트로 등록
+        uploadOpinion(issueOpinionEntity, issueEntity);
+        log.info("이슈 업로드 완료");
+
         issueOpinionRepository.save(issueOpinionEntity);
         return true;
+    }
+
+    public void uploadOpinion(IssueOpinionEntity issueOpinionEntity, IssueEntity issueEntity){
+        log.info("uploadOpinion");
+
+        String fullUrl = issueEntity.getIssueGitUrl();
+        String prefix = "https://github.com/";
+        String issueGitUrl="";
+        String issueOpinion = issueOpinionEntity.getIssueOpinion();
+        String issueOpinionCode = (issueOpinionEntity.getIssueOpinionCode() != null) ? issueOpinionEntity.getIssueOpinionCode() : "코드 제안 없음";
+        String issueComment = "\"리뷰내용\": "+ issueOpinion + "\n\"수정제안코드\": `" + issueOpinionCode + "`\n\n\ncommented from Learniverse";
+        log.info(issueComment);
+
+        if (fullUrl.startsWith(prefix)) {
+            issueGitUrl = fullUrl.substring(prefix.length());
+        }else{
+            throw new CustomBadRequestException("해당 주소와 일치하는 레포지토리가 존재하지 않습니다.");
+        }
+
+        String issueNumberinGit = issueEntity.getGitIssueNumber();
+
+        String uploadIssueComment = "https://api.github.com/repos/" + issueGitUrl + "/issues/" +
+                issueNumberinGit + "/comments";
+
+        Long memberId = issueOpinionEntity.getMemberId();
+        Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
+        String accessCode = memberEntity.get().getAccessCode();
+
+        WebClient webClient = WebClient.builder()
+                .baseUrl(uploadIssueComment)
+                .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessCode) //여기에 access token 넣기
+                .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
+                .build();
+
+        String requestBody = String.format("{\"body\":\"%s\"}", issueComment);
+
+        Mono<Void> response = webClient.post()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(requestBody)
+                .retrieve()
+                .onStatus(httpStatusCode -> httpStatusCode.is4xxClientError(), clientResponse -> {
+                    return Mono.error(new CustomBadRequestException("이슈 코멘트 등록에 문제가 발생했습니다."));
+                })
+                .bodyToMono(Void.class);
+
+        //요청 실행 및 응답 처리
+        response.block();
     }
 
     public List<IssueOpinionEntity> getOpinions(Long issueId) {
