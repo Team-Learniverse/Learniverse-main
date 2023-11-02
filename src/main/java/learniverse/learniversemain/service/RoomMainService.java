@@ -324,6 +324,7 @@ public class RoomMainService {
         String blobIndicator="blob/";
         String gitFileRepo="";
         String ref = "";
+        String gitFileName="";
 
         int startIndex = fullUrl.indexOf(prefix);
         int endIndex = fullUrl.indexOf(blobIndicator);
@@ -340,7 +341,7 @@ public class RoomMainService {
 
                 int fileNameStartIndex = fullUrl.indexOf(blobIndicator + ref + "/", refEndIndex + 1);
                 if (fileNameStartIndex != -1) {
-                    String gitFileName = fullUrl.substring(fileNameStartIndex + blobIndicator.length() + ref.length() + 1);
+                    gitFileName = fullUrl.substring(fileNameStartIndex + blobIndicator.length() + ref.length() + 1);
                     log.info("Git File Name: " + gitFileName);
                 } else {
                     throw new CustomBadRequestException("파일명이 올바르지 않습니다.");
@@ -350,15 +351,6 @@ public class RoomMainService {
             }
         } else {
             throw new CustomBadRequestException("해당 주소와 일치하는 레포지토리가 존재하지 않습니다.");
-        }
-
-        String gitFileName = "";
-        int index = fullUrl.indexOf(blobIndicator);
-        if (index != -1) {
-            gitFileName = fullUrl.substring(index + blobIndicator.length());
-            log.info("Git File Name: " + gitFileName);
-        } else {
-            throw new CustomBadRequestException("파일명이 올바르지 않습니다.");
         }
 
         String getGitUrl = "https://api.github.com/repos/" + gitFileRepo + "contents/" + gitFileName + "?ref=" + ref;
