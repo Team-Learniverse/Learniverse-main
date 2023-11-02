@@ -43,7 +43,7 @@ public class RoomMainService {
     private final FcmTokenRepository fcmTokenRepository;
     private final RoomMemberRepository roomMemberRepository;
     private final GitCodeMongoDBRepository gitCodeMongoDBRepository;
-    private  final MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
     /*
     public boolean createSchedule(ScheduleDTO scheduleDTO){
@@ -185,14 +185,13 @@ public class RoomMainService {
 
     @Transactional
     public boolean createToken(FcmTokenDTO fcmTokenDTO) {
-        long memberId =fcmTokenDTO.getMemberId();
+        long memberId = fcmTokenDTO.getMemberId();
         FcmTokenEntity existedToken = fcmTokenRepository.findByMemberId(memberId);
         FcmTokenEntity newfcmTokenEntity = new FcmTokenEntity(fcmTokenDTO);
 
-        if (existedToken != null){
+        if (existedToken != null) {
             existedToken.update(newfcmTokenEntity);
-        }
-        else{
+        } else {
             fcmTokenRepository.save(newfcmTokenEntity);
         }
         return true;
@@ -264,11 +263,11 @@ public class RoomMainService {
         String issueTitle = issueEntity.getIssueTitle();
         String fullUrl = issueEntity.getIssueGitUrl();
         String prefix = "https://github.com/";
-        String issueGitUrl="";
+        String issueGitUrl = "";
 
         if (fullUrl.startsWith(prefix)) {
             issueGitUrl = fullUrl.substring(prefix.length());
-        }else{
+        } else {
             throw new CustomBadRequestException("해당 주소와 일치하는 레포지토리가 존재하지 않습니다.");
         }
         String issueDescription = issueEntity.getIssueDescription();
@@ -321,10 +320,10 @@ public class RoomMainService {
         String gitCode = "";
         String fullUrl = issueEntity.getGitFileName();
         String prefix = "https://github.com/";
-        String blobIndicator="blob/";
-        String gitFileRepo="";
+        String blobIndicator = "blob/";
+        String gitFileRepo = "";
         String ref = "";
-        String gitFileName="";
+        String gitFileName = "";
 
         int startIndex = fullUrl.indexOf(prefix);
         int endIndex = fullUrl.indexOf(blobIndicator);
@@ -339,7 +338,7 @@ public class RoomMainService {
                 ref = fullUrl.substring(refStartIndex, refEndIndex);
                 log.info("Branch Name: " + ref);
 
-                gitFileName = fullUrl.substring(refEndIndex);
+                gitFileName = fullUrl.substring(refEndIndex + 1);
                 log.info("Git File Name: " + gitFileName);
             } else {
                 throw new CustomBadRequestException("브랜치를 찾을 수 없습니다.");
@@ -358,7 +357,7 @@ public class RoomMainService {
         WebClient webClient = WebClient.builder()
                 .baseUrl(getGitUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer "+accessCode) //여기에 access token 넣기
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessCode) //여기에 access token 넣기
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 
@@ -412,11 +411,11 @@ public class RoomMainService {
 
         String fullUrl = issueEntity.getIssueGitUrl();
         String prefix = "https://github.com/";
-        String issueGitUrl="";
+        String issueGitUrl = "";
 
         if (fullUrl.startsWith(prefix)) {
             issueGitUrl = fullUrl.substring(prefix.length());
-        }else{
+        } else {
             throw new CustomBadRequestException("해당 주소와 일치하는 레포지토리가 존재하지 않습니다.");
         }
 
@@ -432,7 +431,7 @@ public class RoomMainService {
         WebClient webClient = WebClient.builder()
                 .baseUrl(addIssueUrl)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer "+accessCode) //여기에 access token 넣기
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessCode) //여기에 access token 넣기
                 .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
                 .build();
 
@@ -509,20 +508,20 @@ public class RoomMainService {
         return true;
     }
 
-    public void uploadOpinion(IssueOpinionEntity issueOpinionEntity, IssueEntity issueEntity){
+    public void uploadOpinion(IssueOpinionEntity issueOpinionEntity, IssueEntity issueEntity) {
         log.info("uploadOpinion");
 
         String fullUrl = issueEntity.getIssueGitUrl();
         String prefix = "https://github.com/";
-        String issueGitUrl="";
+        String issueGitUrl = "";
         String issueOpinion = issueOpinionEntity.getIssueOpinion();
         String issueOpinionCode = (issueOpinionEntity.getIssueOpinionCode() != null) ? issueOpinionEntity.getIssueOpinionCode() : "코드 제안 없음";
-        String issueComment = "\"리뷰내용\": "+ issueOpinion + "\n\"수정제안코드\": `" + issueOpinionCode + "`\n\n\ncommented from Learniverse";
+        String issueComment = "\"리뷰내용\": " + issueOpinion + "\n\"수정제안코드\": `" + issueOpinionCode + "`\n\n\ncommented from Learniverse";
         log.info(issueComment);
 
         if (fullUrl.startsWith(prefix)) {
             issueGitUrl = fullUrl.substring(prefix.length());
-        }else{
+        } else {
             throw new CustomBadRequestException("해당 주소와 일치하는 레포지토리가 존재하지 않습니다.");
         }
 
