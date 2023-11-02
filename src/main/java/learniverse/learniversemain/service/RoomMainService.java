@@ -232,26 +232,26 @@ public class RoomMainService {
 
     public boolean createIssue(IssueDTO issueDTO) { //디비에 이슈 등록
         IssueEntity issueEntity = new IssueEntity(issueDTO);
-        GitcodeEntity gitcodeEntity = new GitcodeEntity();
 
         //깃헙에 이슈 업로드 후 이슈 넘버 저장
         String gitIssueNumber = uploadIssue(issueEntity);
         issueEntity.setGitIssueNumber(gitIssueNumber);
+        //이슈 상태 열림으로
+        issueEntity.setIssueOpen(true);
+        issueRepository.save(issueEntity);
 
         //깃헙에서 코드 가져와서 파일에 있는 코드 저장
-        String gitCode = getCodeFromGit(issueEntity);
-        gitcodeEntity.setGitCode(gitCode);
-        gitcodeEntity.setGitCodeModify(gitCode);
+        if (issueDTO.getGitFileName() != null) {
+            GitcodeEntity gitcodeEntity = new GitcodeEntity();
+            String gitCode = getCodeFromGit(issueEntity);
+            gitcodeEntity.setGitCode(gitCode);
+            gitcodeEntity.setGitCodeModify(gitCode);
+            gitcodeEntity.setIssueId(issueEntity.getIssueId());
+            gitcodeEntity.setRoomId(issueEntity.getRoomId());
+            gitcodeEntity.setCreatedDate(issueEntity.getCreatedDate());
+            gitCodeMongoDBRepository.save(gitcodeEntity);
 
-        //이슈 열렸는지 체크
-        issueEntity.setIssueOpen(true);
-
-        issueRepository.save(issueEntity);
-        gitcodeEntity.setIssueId(issueEntity.getIssueId());
-        gitcodeEntity.setRoomId(issueEntity.getRoomId());
-        gitcodeEntity.setCreatedDate(issueEntity.getCreatedDate());
-        gitCodeMongoDBRepository.save(gitcodeEntity);
-
+        }
         return true;
     }
 
