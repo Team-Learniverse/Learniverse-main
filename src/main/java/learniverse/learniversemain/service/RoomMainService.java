@@ -337,17 +337,12 @@ public class RoomMainService {
             int refEndIndex = fullUrl.indexOf('/', refStartIndex);
             if (refEndIndex != -1) {
                 ref = fullUrl.substring(refStartIndex, refEndIndex);
-                log.info("Branch Name (ref): " + ref);
+                log.info("Branch Name: " + ref);
 
-                int fileNameStartIndex = fullUrl.indexOf(blobIndicator + ref + "/", refEndIndex + 1);
-                if (fileNameStartIndex != -1) {
-                    gitFileName = fullUrl.substring(fileNameStartIndex + blobIndicator.length() + ref.length() + 1);
-                    log.info("Git File Name: " + gitFileName);
-                } else {
-                    throw new CustomBadRequestException("파일명이 올바르지 않습니다.");
-                }
+                gitFileName = fullUrl.substring(refEndIndex);
+                log.info("Git File Name: " + gitFileName);
             } else {
-                throw new CustomBadRequestException("브랜치 이름을 찾을 수 없습니다.");
+                throw new CustomBadRequestException("브랜치를 찾을 수 없습니다.");
             }
         } else {
             throw new CustomBadRequestException("해당 주소와 일치하는 레포지토리가 존재하지 않습니다.");
