@@ -319,7 +319,7 @@ public class RoomMainController {
         response.setMessage("issue 리스트 출력 성공");
         Map<String, Object> data = new HashMap<>();
         data.put("issues", issueEntities);
-        data.put("gitCodes",gitcodeEntities);
+        data.put("gitCodes", gitcodeEntities);
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
