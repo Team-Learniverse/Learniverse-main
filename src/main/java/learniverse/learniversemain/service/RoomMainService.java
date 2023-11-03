@@ -8,6 +8,7 @@ import learniverse.learniversemain.controller.Exception.CustomUnprocessableExcep
 import learniverse.learniversemain.dto.BoardDTO;
 import learniverse.learniversemain.dto.mongoDB.GitCodeDTO;
 import learniverse.learniversemain.entity.*;
+import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.mongoDB.GitcodeEntity;
 import learniverse.learniversemain.repository.*;
 import learniverse.learniversemain.repository.mongoDB.GitCodeMongoDBRepository;
@@ -499,6 +500,9 @@ public class RoomMainService {
         uploadOpinion(issueOpinionEntity, issueEntity);
         log.info("이슈 업로드 완료");
 
+        //이슈 수락 false로
+        issueOpinionEntity.setIssueAccepted(false);
+
         issueOpinionRepository.save(issueOpinionEntity);
         return true;
     }
@@ -530,7 +534,6 @@ public class RoomMainService {
         Long memberId = issueOpinionEntity.getMemberId();
         Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
         String accessCode = memberEntity.get().getAccessCode();
-        log.info(accessCode);
 
         WebClient webClient = WebClient.builder()
                 .baseUrl(uploadIssueComment)
@@ -560,6 +563,28 @@ public class RoomMainService {
 
         //요청 실행 및 응답 처리
         response.block();
+    }
+
+    @Transactional
+    public void applyOpinion(Long opinionId) { //이슈 디스커션 상태 true로 바꾸기 > 수락
+        IssueOpinionEntity existOpinion = issueOpinionRepository.findById(opinionId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 이슈 디스커션이 없습니다."));
+
+        //issue 수락 true로
+        if (existOpinion.getIssueAccepted()) {
+            existOpinion.setIssueAccepted(true);
+            existOpinion.setUpdatedDate(LocalDateTime.now());
+        }
+
+        issueOpinionRepository.save(existOpinion);
+    }
+
+    //수락 여부 출력
+    public boolean isOpinonAccepted(Long opinionId) {
+        IssueOpinionEntity issueOpinionEntity = issueOpinionRepository.findById(opinionId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 이슈 디스커션이 없습니다."));
+
+        return issueOpinionEntity.getIssueAccepted();
     }
 
     public List<IssueOpinionEntity> getOpinions(Long issueId) {
