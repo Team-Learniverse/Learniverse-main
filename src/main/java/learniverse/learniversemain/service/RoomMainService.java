@@ -480,16 +480,23 @@ public class RoomMainService {
 
     public String getGitcodeByIssueId(Long issueId) {
         GitcodeEntity gitCodeEntity = gitCodeMongoDBRepository.findByIssueId(issueId);
-        String gitCode = gitCodeEntity.getGitCode();
 
-        return gitCode;
+        if (gitCodeEntity != null) {
+            String gitCode = gitCodeEntity.getGitCode();
+            return gitCode;
+        } else {
+            return null;
+        }
     }
 
     public String getGitcodeModifyByIssueId(Long issueId) {
         GitcodeEntity gitCodeEntity = gitCodeMongoDBRepository.findByIssueId(issueId);
-        String gitCodeModify = gitCodeEntity.getGitCodeModify();
-
-        return gitCodeModify;
+        if (gitCodeEntity != null) {
+            String gitCodeModify = gitCodeEntity.getGitCodeModify();
+            return gitCodeModify;
+        } else {
+            return null;
+        }
     }
 
     public boolean createOpinion(IssueOpinionDTO issueOpinionDTO) { //디비에 이슈 디스커션 등록
