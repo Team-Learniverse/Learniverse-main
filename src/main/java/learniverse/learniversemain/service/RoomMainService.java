@@ -23,11 +23,7 @@ import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.Base64;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 
@@ -534,7 +530,7 @@ public class RoomMainService {
         Long memberId = issueOpinionEntity.getMemberId();
         Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
         String accessCode = memberEntity.get().getAccessCode();
-        log.info(String.valueOf(memberId));
+        log.info(accessCode);
 
         WebClient webClient = WebClient.builder()
                 .baseUrl(uploadIssueComment)
@@ -544,14 +540,20 @@ public class RoomMainService {
                 .build();
 
         String requestBody = String.format("{\"body\":\"%s\"}", issueComment);
-        log.info(requestBody);
+        log.info(requestBody.toString());
 
         Mono<Map<String, Object>> response = webClient.post()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(requestBody)
                 .retrieve()
-                .onStatus(httpStatusCode -> httpStatusCode.is4xxClientError(), clientResponse -> {
+                /*.onStatus(httpStatusCode -> httpStatusCode.is4xxClientError(), clientResponse -> {
                     return Mono.error(new CustomBadRequestException("이슈 코멘트 등록에 문제가 발생했습니다."));
+                })*/
+                .onStatus(httpStatusCode -> httpStatusCode.is4xxClientError(), clientResponse -> {
+                    return clientResponse.bodyToMono(String.class).flatMap(errorBody -> {
+                        System.err.println("GitHub API 오류: " + errorBody);
+                        return Mono.error(new CustomBadRequestException("이슈 코멘트 등록에 문제가 발생했습니다."));
+                    });
                 })
                 .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
                 });
