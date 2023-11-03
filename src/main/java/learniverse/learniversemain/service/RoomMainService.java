@@ -515,7 +515,7 @@ public class RoomMainService {
         String issueGitUrl = "";
         String issueOpinion = issueOpinionEntity.getIssueOpinion();
         String issueOpinionCode = (issueOpinionEntity.getIssueOpinionCode() != null) ? issueOpinionEntity.getIssueOpinionCode() : "코드 제안 없음";
-        String issueComment = "\"리뷰내용\": " + issueOpinion + "\n\"수정제안코드\": `" + issueOpinionCode + "`\n\n\ncommented from Learniverse";
+        String issueComment = "<리뷰내용>: " + issueOpinion + "\n<수정제안코드>: `" + issueOpinionCode + "`\n\n\ncommented from Learniverse";
         log.info(issueComment);
 
         if (fullUrl.startsWith(prefix)) {
@@ -534,6 +534,7 @@ public class RoomMainService {
         Long memberId = issueOpinionEntity.getMemberId();
         Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
         String accessCode = memberEntity.get().getAccessCode();
+        log.info(String.valueOf(memberId));
 
         WebClient webClient = WebClient.builder()
                 .baseUrl(uploadIssueComment)
@@ -543,7 +544,6 @@ public class RoomMainService {
                 .build();
 
         String requestBody = String.format("{\"body\":\"%s\"}", issueComment);
-
         log.info(requestBody);
 
         Mono<Void> response = webClient.post()
