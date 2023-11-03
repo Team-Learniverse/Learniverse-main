@@ -460,10 +460,9 @@ public class RoomMainService {
 
     @Transactional
     public void updateGitCode(GitCodeDTO gitCodeDTO) { //깃코드 업데이트
-
         GitcodeEntity existedGitcode = gitCodeMongoDBRepository.findByIssueId(gitCodeDTO.getIssueId());
 
-        if (gitCodeDTO.getGitCode() != null) existedGitcode.setGitCodeModify(gitCodeDTO.getGitCodeModify());
+        if (gitCodeDTO.getGitCodeModify() != null) existedGitcode.setGitCodeModify(gitCodeDTO.getGitCodeModify());
         gitCodeMongoDBRepository.save(existedGitcode);
     }
 
@@ -485,7 +484,7 @@ public class RoomMainService {
     public String getGitcodeByIssueId(Long issueId) {
         GitcodeEntity gitCodeEntity = gitCodeMongoDBRepository.findByIssueId(issueId);
         String gitCode = gitCodeEntity.getGitCode();
-
+///
         return gitCode;
     }
 
@@ -530,6 +529,8 @@ public class RoomMainService {
         String uploadIssueComment = "https://api.github.com/repos/" + issueGitUrl + "/issues/" +
                 issueNumberinGit + "/comments";
 
+        log.info(uploadIssueComment);
+
         Long memberId = issueOpinionEntity.getMemberId();
         Optional<MemberEntity> memberEntity = memberRepository.findById(memberId);
         String accessCode = memberEntity.get().getAccessCode();
@@ -542,6 +543,8 @@ public class RoomMainService {
                 .build();
 
         String requestBody = String.format("{\"body\":\"%s\"}", issueComment);
+
+        log.info(requestBody);
 
         Mono<Void> response = webClient.post()
                 .contentType(MediaType.APPLICATION_JSON)
