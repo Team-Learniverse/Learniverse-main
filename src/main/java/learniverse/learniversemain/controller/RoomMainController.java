@@ -320,6 +320,7 @@ public class RoomMainController {
         Map<String, Object> data = new HashMap<>();
         data.put("issue", roomMainService.getIssueById(issueId));
         data.put("gitCode", roomMainService.getGitcodeByIssueId(issueId));
+        data.put("gitCodeModify", roomMainService.getGitcodeModifyByIssueId(issueId));
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
