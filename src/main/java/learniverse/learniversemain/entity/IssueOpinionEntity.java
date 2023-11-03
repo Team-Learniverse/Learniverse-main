@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
@@ -30,8 +31,12 @@ public class IssueOpinionEntity {
     private Integer issueOpinionEndLine;
     @Column(name = "issue_opinion_code", nullable = true)
     private String issueOpinionCode;
+    @Column(name = "issue_accepted", nullable = false)
+    private Boolean issueAccepted;
     @CreatedDate
     private LocalDateTime createdDate;
+    @LastModifiedDate
+    private LocalDateTime updatedDate;
 
     public IssueOpinionEntity(IssueOpinionDTO issueOpinionDTO) {
         LocalDateTime now = LocalDateTime.now();

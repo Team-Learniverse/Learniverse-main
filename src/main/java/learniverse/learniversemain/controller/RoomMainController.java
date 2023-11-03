@@ -339,6 +339,29 @@ public class RoomMainController {
         } else throw new RuntimeException();
     }
 
+    @PostMapping("/discussion/apply")
+    public ResponseEntity<Response> applyOpinion(@Valid @RequestBody IssueOpinionEntity issueOpinionEntity) {
+        Response response = new Response();
+
+        roomMainService.applyOpinion(issueOpinionEntity.getOpinionId());
+        response.setMessage("이슈 디스커션 수락 요청 성공");
+        response.setData(issueOpinionEntity.getIssueId());
+
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/discussion/isAccepted")
+    public ResponseEntity<Response> isOpinionAccepted(@NotNull @RequestParam Long opinionId) {
+        Response response = new Response();
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("디스커션 수락 여부 출력 성공");
+        Map<String, Boolean> data = new HashMap<>();
+        data.put("isOpinionAccepted", roomMainService.isOpinonAccepted(opinionId));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @GetMapping("/discussions")
     public ResponseEntity<Response> getOpinions(@RequestParam Long issueId) {
         Response response = new Response();
