@@ -509,9 +509,9 @@ public class RoomMainService {
         String fullUrl = issueEntity.getIssueGitUrl();
         String prefix = "https://github.com/";
         String issueGitUrl = "";
-        String issueOpinion = issueOpinionEntity.getIssueOpinion();
-        String issueOpinionCode = (issueOpinionEntity.getIssueOpinionCode() != null) ? issueOpinionEntity.getIssueOpinionCode() : "코드 제안 없음";
-        String issueComment = "<리뷰내용>: " + issueOpinion + "\n<수정제안코드>: `" + issueOpinionCode + "`\n\n\ncommented from Learniverse";
+        String issueOpinion = issueOpinionEntity.getIssueOpinion().replaceAll("\\\\", "\\\\\\\\");
+        String issueOpinionCode = (issueOpinionEntity.getIssueOpinionCode() != null) ? issueOpinionEntity.getIssueOpinionCode().replaceAll("\\\\", "\\\\\\\\") : "코드 제안 없음";
+        String issueComment = "<리뷰내용>: " + issueOpinion + "\\n<수정제안코드>: `" + issueOpinionCode + "`\\n\\n\\ncommented from Learniverse";
         log.info(issueComment);
 
         if (fullUrl.startsWith(prefix)) {
