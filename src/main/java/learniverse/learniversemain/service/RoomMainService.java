@@ -546,14 +546,15 @@ public class RoomMainService {
         String requestBody = String.format("{\"body\":\"%s\"}", issueComment);
         log.info(requestBody);
 
-        Mono<Void> response = webClient.post()
+        Mono<Map<String, Object>> response = webClient.post()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(requestBody)
                 .retrieve()
                 .onStatus(httpStatusCode -> httpStatusCode.is4xxClientError(), clientResponse -> {
                     return Mono.error(new CustomBadRequestException("이슈 코멘트 등록에 문제가 발생했습니다."));
                 })
-                .bodyToMono(Void.class);
+                .bodyToMono(new ParameterizedTypeReference<Map<String, Object>>() {
+                });
 
         //요청 실행 및 응답 처리
         response.block();
