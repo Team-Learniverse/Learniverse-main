@@ -220,7 +220,8 @@ public class RoomService {
     public List<RoomCardDTO> getRoomsInSearch(long memberId, int page) {
         List<RoomCardDTO> result = new ArrayList<>();
         Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
-        Page<RoomEntity> roomEntities = roomRepository.findAll(pageable);
+        //Page<RoomEntity> roomEntities = roomRepository.findAll(pageable);
+        Page<RoomEntity> roomEntities = roomRepository.findByIsFullFalse(pageable);
 
         for(RoomEntity roomEntity : roomEntities){
             long roomId = roomEntity.getRoomId();
@@ -240,7 +241,7 @@ public class RoomService {
         }
         else{
             Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
-            Page<RoomEntity> roomList = roomRepository.findByHashtagsHashtagContaining(str, pageable);
+            Page<RoomEntity> roomList = roomRepository.findByIsFullFalseAndHashtagsHashtagContaining(str, pageable);
             //Page<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str,pageable);
             //List<HashtagEntity> roomList = hashtagRepository.findByHashtagContaining(str);
             if(page == 0) historyRepository.save(new HistoryEntity(memberId, str, LocalDate.now()));
@@ -262,7 +263,7 @@ public class RoomService {
     public List<RoomCardDTO> getSearch (String str, long memberId, int page){
         List<RoomCardDTO> result = new ArrayList<>();
         Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
-        Page<RoomEntity> roomList = roomRepository.findByRoomNameContainingOrRoomIntroContaining(str, str, pageable);
+        Page<RoomEntity> roomList = roomRepository.findByIsFullFalseAndRoomNameContainingOrIsFullFalseAndRoomIntroContaining(str, str, pageable);
         for (RoomEntity roomEntity : roomList){
             long roomId = roomEntity.getRoomId();
             String isMember = getIsMember(roomId, memberId);
@@ -278,7 +279,7 @@ public class RoomService {
         List<RoomCardDTO> result = new ArrayList<>();
         Pageable pageable = PageRequest.of(page, 15, Sort.by(Sort.Direction.DESC, "roomId"));
         //Page<RoomEntity> roomList = roomRepository.findByRoomCategoryAndRoomNameContainingOrRoomIntroContaining(category, str, str, pageable);
-        Page<RoomEntity> roomList = roomRepository.findByRoomCategoryAndRoomNameContainingOrRoomCategoryAndRoomIntroContaining(
+        Page<RoomEntity> roomList = roomRepository.findByIsFullFalseAndRoomCategoryAndRoomNameContainingOrRoomCategoryAndRoomIntroContaining(
                 category, str, category, str, pageable);
         for (RoomEntity roomEntity : roomList){
             long roomId = roomEntity.getRoomId();
@@ -331,7 +332,7 @@ public class RoomService {
         List<RoomEntity> roomEntities = new ArrayList<>();
         for(int i = 0; i<num;i++){
             Pageable pageable = PageRequest.of(page+i, 3, Sort.by(Sort.Direction.DESC, "roomId"));
-            Page<RoomEntity> roomPageEntities = roomRepository.findAll(pageable);
+            Page<RoomEntity> roomPageEntities = roomRepository.findByIsFullFalse(pageable);
             for(RoomEntity roomPageEntity : roomPageEntities)
                 roomEntities.add(roomPageEntity);
         }

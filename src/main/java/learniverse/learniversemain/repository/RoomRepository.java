@@ -22,4 +22,16 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
 
     @Query("SELECT DISTINCT r FROM rooms r LEFT JOIN r.hashtags h WHERE h.hashtag LIKE %:hashtag%")
     Page<RoomEntity> findByHashtagsHashtagContaining(@Param("hashtag") String hashtag, Pageable pageable);
+
+    Page<RoomEntity> findByIsFullTrue(Pageable pageable);
+
+    Page<RoomEntity> findByIsFullFalse(Pageable pageable);
+
+    Page<RoomEntity> findByIsFullFalseAndHashtagsHashtagContaining(String str, Pageable pageable);
+
+    Page<RoomEntity> findByIsFullFalseAndRoomNameContainingOrRoomIntroContaining(String str, String str1, Pageable pageable);
+
+    Page<RoomEntity> findByIsFullFalseAndRoomCategoryAndRoomNameContainingOrRoomCategoryAndRoomIntroContaining(int category, String str, int category1, String str1, Pageable pageable);
+
+    Page<RoomEntity> findByIsFullFalseAndRoomNameContainingOrIsFullFalseAndRoomIntroContaining(String str, String str1, Pageable pageable);
 }

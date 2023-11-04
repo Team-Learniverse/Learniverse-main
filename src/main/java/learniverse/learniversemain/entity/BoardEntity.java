@@ -26,7 +26,8 @@ public class BoardEntity {
     private long memberId;
     @Column(name = "title")
     private String title;
-    @Column(name = "content")
+    //varchar(500)
+    @Column(name = "content", length = 500)
     private String content;
     @CreatedDate
     private LocalDateTime createdDate;

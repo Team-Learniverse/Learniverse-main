@@ -27,6 +27,10 @@ public class RoomEntity {
     private String roomIntro;
     @Column(name = "room_limit",nullable = false)
     private int roomLimit;
+    @Column(name = "room_count",nullable = false)
+    private int roomCount;
+    @Column(name = "room_is_full",nullable = false)
+    private boolean isFull;
     @Column(name = "room_git_org",nullable = true)
     private String roomGitOrg;
     @Column(name = "room_notion",nullable = true)
@@ -48,6 +52,8 @@ public class RoomEntity {
         roomEntity.setRoomCategory(roomDTO.getRoomCategory());
         roomEntity.setRoomIntro(roomDTO.getRoomIntro());
         roomEntity.setRoomLimit(roomDTO.getRoomLimit());
+        roomEntity.setRoomCount(1);
+        roomEntity.setFull(false);
         if(roomDTO.getRoomLanguages() != null){
             String languages = " ";
             for(String language : roomDTO.getRoomLanguages()){
