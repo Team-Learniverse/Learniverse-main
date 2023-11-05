@@ -2,6 +2,7 @@ package learniverse.learniversemain.jwt;
 
 import io.jsonwebtoken.*;
 import jakarta.transaction.Transactional;
+import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
 import learniverse.learniversemain.repository.RefreshTokenRepository;
 import learniverse.learniversemain.service.MemberService;
 import io.jsonwebtoken.io.Decoders;
@@ -78,12 +79,9 @@ public class TokenService implements InitializingBean {
     }
 
     private void saveRefreshToken(long memberId, String refreshToken) {
-        Refresh existingRefreshToken = refreshTokenRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 Refresh 토큰을 찾을 수 없습니다."));
+       Refresh refresh = new Refresh(memberId,refreshToken);
 
-        if(existingRefreshToken == null){
-            refreshTokenRepository.save(new Refresh(memberId, refreshToken));
-        }
+       refreshTokenRepository.save(refresh);
     }
 
     public boolean validateToken(String token) {
@@ -128,8 +126,9 @@ public class TokenService implements InitializingBean {
 
     public boolean validateRefreshToken(String token) {
         String refreshTokenValue = token.substring(BEARER_PREFIX.length());
+        log.info(refreshTokenValue);
         Refresh refreshToken = refreshTokenRepository.findByToken(refreshTokenValue)
-                .orElseThrow(() -> new IllegalArgumentException("해당 Refresh 토큰을 찾을 수 없습니다."));
+                .orElseThrow(() -> new CustomBadRequestException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
         return refreshToken != null && !isTokenExpired(refreshToken);
     }
@@ -147,7 +146,7 @@ public class TokenService implements InitializingBean {
 
         String accessToken = makeJwtValue(claims, now, accessTokenValidityInMilliseconds);
         Refresh existingRefreshToken = refreshTokenRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 Refresh 토큰을 찾을 수 없습니다."));
+                .orElseThrow(() -> new CustomBadRequestException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
         String refreshToken = existingRefreshToken.getToken();
 
@@ -155,13 +154,15 @@ public class TokenService implements InitializingBean {
     }
 
     public String refreshAccessToken(String refreshToken) {
-        String refreshTokenValue = refreshToken.substring(BEARER_PREFIX.length());
+        log.info("refresh Access Token");
 
-            long memberId = getMemberId(refreshTokenValue);
+            long memberId = getMemberId(refreshToken);
             String role = "USER";
 
             // 새로운 Access Token 생성
             Token newAccessToken = updateAccessToken(memberId, role);
+
+            log.info(newAccessToken.getAccessToken());
 
             return newAccessToken.getAccessToken();
     }
