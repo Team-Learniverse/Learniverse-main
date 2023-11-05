@@ -13,6 +13,7 @@ public class GitcodeEntity {
     private long issueId;
     private long roomId;
     private String gitCode;
+    private String gitCodeModify;
     @CreatedDate
     private LocalDateTime createdDate;
 

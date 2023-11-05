@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
@@ -24,12 +25,18 @@ public class IssueOpinionEntity {
     private long memberId;
     @Column(name = "issue_opinion", nullable = false)
     private String issueOpinion;
-    @Column(name = "issue_opinion_line", nullable = false)
-    private Integer issueOpinionLine;
+    @Column(name = "issue_opinion_start_line", nullable = true)
+    private Integer issueOpinionStartLine;
+    @Column(name = "issue_opinion_end_line", nullable = true)
+    private Integer issueOpinionEndLine;
     @Column(name = "issue_opinion_code", nullable = true)
     private String issueOpinionCode;
+    @Column(name = "issue_accepted", nullable = false)
+    private Boolean issueAccepted;
     @CreatedDate
     private LocalDateTime createdDate;
+    @LastModifiedDate
+    private LocalDateTime updatedDate;
 
     public IssueOpinionEntity(IssueOpinionDTO issueOpinionDTO) {
         LocalDateTime now = LocalDateTime.now();
@@ -37,7 +44,8 @@ public class IssueOpinionEntity {
         this.issueId = issueOpinionDTO.getIssueId();
         this.memberId = issueOpinionDTO.getMemberId();
         this.issueOpinion = issueOpinionDTO.getIssueOpinion();
-        this.issueOpinionLine = issueOpinionDTO.getIssueOpinionLine();
+        this.issueOpinionStartLine = issueOpinionDTO.getIssueOpinionStartLine();
+        this.issueOpinionEndLine = issueOpinionDTO.getIssueOpinionEndLine();
         this.issueOpinionCode = issueOpinionDTO.getIssueOpinionCode();
         this.createdDate = now;
 

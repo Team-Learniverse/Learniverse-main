@@ -282,19 +282,6 @@ public class RoomMainController {
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
-    //이슈 수정
-    /*@PostMapping("/issue/update")
-    public ResponseEntity<Response> updateIssue(@Valid @RequestBody IssueDTO issueDTO) {
-        Response response = new Response();
-
-        roomMainService.updateIssue(issueDTO);
-
-        response.setStatus(Response.StatusEnum.OK);
-        response.setMessage("gitCode 수정 성공");
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }*/
-
     @PostMapping("/issue/update")
     public ResponseEntity<Response> updateIssue(@Valid @RequestBody GitCodeDTO gitCodeDTO) {
         Response response = new Response();
@@ -319,7 +306,7 @@ public class RoomMainController {
         response.setMessage("issue 리스트 출력 성공");
         Map<String, Object> data = new HashMap<>();
         data.put("issues", issueEntities);
-        data.put("gitCodes",gitcodeEntities);
+        data.put("gitCodes and gitCodeModifies", gitcodeEntities);
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -333,6 +320,7 @@ public class RoomMainController {
         Map<String, Object> data = new HashMap<>();
         data.put("issue", roomMainService.getIssueById(issueId));
         data.put("gitCode", roomMainService.getGitcodeByIssueId(issueId));
+        data.put("gitCodeModify", roomMainService.getGitcodeModifyByIssueId(issueId));
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
@@ -350,6 +338,29 @@ public class RoomMainController {
             response.setData(issueOpinionDTO);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } else throw new RuntimeException();
+    }
+
+    @PostMapping("/discussion/apply")
+    public ResponseEntity<Response> applyOpinion(@Valid @RequestBody IssueOpinionEntity issueOpinionEntity) {
+        Response response = new Response();
+
+        roomMainService.applyOpinion(issueOpinionEntity.getOpinionId());
+        response.setMessage("이슈 디스커션 수락 요청 성공");
+        response.setData(issueOpinionEntity.getIssueId());
+
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/discussion/isAccepted")
+    public ResponseEntity<Response> isOpinionAccepted(@NotNull @RequestParam Long opinionId) {
+        Response response = new Response();
+
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("디스커션 수락 여부 출력 성공");
+        Map<String, Boolean> data = new HashMap<>();
+        data.put("isOpinionAccepted", roomMainService.isOpinonAccepted(opinionId));
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/discussions")

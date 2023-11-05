@@ -10,6 +10,6 @@ public class GitCodeDTO {
     private Long issueId;
     @NotNull(message = " roomId 입력은 필수입니다.")
     private Long roomId;
-    @NotEmpty(message = "gitCode 입력은 필수입니다.")
-    private String gitCode;
+    @NotEmpty(message = "gitCodeModify 입력은 필수입니다.")
+    private String gitCodeModify;
 }
