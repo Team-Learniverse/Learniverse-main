@@ -45,7 +45,6 @@ public class AuthController {
             String newAccessToken = tokenService.refreshAccessToken(refreshToken);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType((new MediaType("application", "json", Charset.forName("UTF-8"))));
             headers.add(HttpHeaders.AUTHORIZATION, newAccessToken); // AccessToken을 HttpHeaders에 추가
 
             response.setStatus(Response.StatusEnum.OK);
