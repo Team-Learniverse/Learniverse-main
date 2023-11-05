@@ -8,4 +8,5 @@ import java.util.List;
 public interface IssueOpinionRepository extends JpaRepository<IssueOpinionEntity, Long> {
     public List<IssueOpinionEntity> findByIssueId(Long issueId);
 
+
 }
