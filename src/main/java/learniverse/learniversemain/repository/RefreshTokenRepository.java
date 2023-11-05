@@ -3,9 +3,14 @@ package learniverse.learniversemain.repository;
 import learniverse.learniversemain.jwt.Refresh;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RefreshTokenRepository extends JpaRepository<Refresh, Long> {
-    Refresh findByToken(String token);
+import java.util.List;
+import java.util.Optional;
 
-    Refresh findByMemberId(Long memberId);
+public interface RefreshTokenRepository extends JpaRepository<Refresh, Long> {
+    Optional<Refresh> findByToken(String token);
+
+    Optional<Refresh> findByMemberId(Long memberId);
+
+    //public List<Refresh> findByMemberId(Long memberId);
 
 }

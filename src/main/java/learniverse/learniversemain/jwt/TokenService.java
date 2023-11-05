@@ -1,10 +1,12 @@
 package learniverse.learniversemain.jwt;
 
 import io.jsonwebtoken.*;
+import jakarta.transaction.Transactional;
 import learniverse.learniversemain.repository.RefreshTokenRepository;
 import learniverse.learniversemain.service.MemberService;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -75,22 +77,9 @@ public class TokenService implements InitializingBean {
                 .signWith(key, SignatureAlgorithm.HS256).compact();
     }
 
-    public Token updateAccessToken(long memberId, String role) {
-        log.info("updateAccessToken");
-        Claims claims = Jwts.claims().setSubject(String.valueOf(memberId));
-        claims.put("role", role);
-
-        Instant now = Instant.now();
-
-        String accessToken = makeJwtValue(claims, now, accessTokenValidityInMilliseconds);
-        Refresh existingRefreshToken = refreshTokenRepository.findByMemberId(memberId);
-        String refreshToken = existingRefreshToken.getToken();
-
-        return new Token(accessToken, refreshToken);
-    }
-
     private void saveRefreshToken(long memberId, String refreshToken) {
-        Refresh existingRefreshToken = refreshTokenRepository.findByMemberId(memberId);
+        Refresh existingRefreshToken = refreshTokenRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
         if(existingRefreshToken == null){
             refreshTokenRepository.save(new Refresh(memberId, refreshToken));
@@ -137,15 +126,32 @@ public class TokenService implements InitializingBean {
         return Integer.parseInt(subject);
     }
 
-    public boolean isRefreshTokenValid(String token) {
+    public boolean validateRefreshToken(String token) {
         String refreshTokenValue = token.substring(BEARER_PREFIX.length());
-        Refresh refreshToken = refreshTokenRepository.findByToken(refreshTokenValue);
+        Refresh refreshToken = refreshTokenRepository.findByToken(refreshTokenValue)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
         return refreshToken != null && !isTokenExpired(refreshToken);
     }
     private boolean isTokenExpired(Refresh refreshToken) {
         LocalDateTime expirationDateTime = refreshToken.getCreatedDate().plusSeconds(refreshTokenValidityInMilliseconds/1000);
         return LocalDateTime.now().isAfter(expirationDateTime);
+    }
+
+    public Token updateAccessToken(long memberId, String role) {
+        log.info("updateAccessToken");
+        Claims claims = Jwts.claims().setSubject(String.valueOf(memberId));
+        claims.put("role", role);
+
+        Instant now = Instant.now();
+
+        String accessToken = makeJwtValue(claims, now, accessTokenValidityInMilliseconds);
+        Refresh existingRefreshToken = refreshTokenRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Refresh 토큰을 찾을 수 없습니다."));
+
+        String refreshToken = existingRefreshToken.getToken();
+
+        return new Token(accessToken, refreshToken);
     }
 
     public String refreshAccessToken(String refreshToken) {
@@ -158,7 +164,15 @@ public class TokenService implements InitializingBean {
             Token newAccessToken = updateAccessToken(memberId, role);
 
             return newAccessToken.getAccessToken();
+    }
 
+    @Transactional
+    public void removeRefreshToken(String accessToken) {
+        long memberId = getMemberId(accessToken);
+        Refresh refreshToken = refreshTokenRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Refresh 토큰을 찾을 수 없습니다."));
+
+        refreshTokenRepository.delete(refreshToken);
     }
 
     //헤더에서 RefreshToken 추출: 헤더를 가져온 후 "Bearer"를 삭제

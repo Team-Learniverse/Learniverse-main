@@ -27,7 +27,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Slf4j
-
 @Service
 @RequiredArgsConstructor
 public class RoomMainService {
@@ -232,12 +231,13 @@ public class RoomMainService {
         //깃헙에 이슈 업로드 후 이슈 넘버 저장
         String gitIssueNumber = uploadIssue(issueEntity);
         issueEntity.setGitIssueNumber(gitIssueNumber);
+
         //이슈 상태 열림으로
         issueEntity.setIssueOpen(true);
         issueRepository.save(issueEntity);
 
         //깃헙에서 코드 가져와서 파일에 있는 코드 저장
-        if (issueDTO.getGitFileName() != null) {
+        if (!issueDTO.getGitFileName().isEmpty()) {
             GitcodeEntity gitcodeEntity = new GitcodeEntity();
             String gitCode = getCodeFromGit(issueEntity);
             gitcodeEntity.setGitCode(gitCode);
@@ -583,6 +583,7 @@ public class RoomMainService {
     public void applyOpinion(Long opinionId) { //이슈 디스커션 상태 true로 바꾸기 > 수락
         IssueOpinionEntity existOpinion = issueOpinionRepository.findById(opinionId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 이슈 디스커션이 없습니다."));
+
 
         //issue 수락 true로
         if (existOpinion.getIssueAccepted()) {

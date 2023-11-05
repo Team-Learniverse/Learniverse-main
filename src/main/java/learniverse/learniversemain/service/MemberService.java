@@ -290,7 +290,8 @@ public class MemberService {
     }
 
     public String getRefreshToken(long memberId){
-        Refresh refreshToken = refreshTokenRepository.findByMemberId(memberId);
+        Refresh refreshToken = refreshTokenRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 Refresh 토큰을 찾을 수 없습니다."));
         String token = refreshToken.getToken();
 
         return token;
