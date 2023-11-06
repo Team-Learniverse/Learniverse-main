@@ -3,6 +3,7 @@ package learniverse.learniversemain.jwt;
 import io.jsonwebtoken.*;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.entity.BoardEntity;
 import learniverse.learniversemain.repository.RefreshTokenRepository;
 import learniverse.learniversemain.service.MemberService;
 import io.jsonwebtoken.io.Decoders;
@@ -80,9 +81,12 @@ public class TokenService implements InitializingBean {
     }
 
     private void saveRefreshToken(long memberId, String refreshToken) {
-       Refresh refresh = new Refresh(memberId,refreshToken);
+        Optional<Refresh> existRefresh = refreshTokenRepository.findByMemberId(memberId);
 
-       refreshTokenRepository.save(refresh);
+        if(!existRefresh.isPresent()){
+            Refresh refresh = new Refresh(memberId,refreshToken);
+            refreshTokenRepository.save(refresh);
+        }
     }
 
     public boolean validateToken(String token) {
