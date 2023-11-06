@@ -16,9 +16,9 @@ public class Refresh {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "refresh_token_id")
-    private long tokenId;
+    private Long tokenId;
     @Column(name = "member_id")
-    private long memberId;
+    private Long memberId;
     @Column(name = "refresh_token")
     private String token;
     @CreatedDate

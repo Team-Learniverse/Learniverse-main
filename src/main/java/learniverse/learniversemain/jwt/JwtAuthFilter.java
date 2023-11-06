@@ -36,10 +36,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
 
         // 토큰 검사 생략(모두 허용 URL의 경우 토큰 검사 통과)
-        if (!StringUtils.hasText(token)) {
-            doFilter(servletRequest, servletResponse, filterChain);
-            return;
-        }
+        //if (!StringUtils.hasText(token)) {
+        //    doFilter(servletRequest, servletResponse, filterChain);
+        //    return;
+        //}
 
         // AccessToken을 검증하고, 만료되었을경우 예외를 발생시킨다.
         if (!tokenService.validateToken(token)) {

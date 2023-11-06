@@ -7,7 +7,6 @@ import learniverse.learniversemain.repository.RefreshTokenRepository;
 import learniverse.learniversemain.service.MemberService;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,6 +63,8 @@ public class TokenService implements InitializingBean {
 
         String accessToken = makeJwtValue(claims, now, accessTokenValidityInMilliseconds);
         String refreshToken = makeJwtValue(claims, now, refreshTokenValidityInMilliseconds);
+        log.info(accessToken);
+        log.info(refreshToken);
 
         saveRefreshToken(memberId, refreshToken);
 
@@ -171,7 +172,7 @@ public class TokenService implements InitializingBean {
     public void removeRefreshToken(String accessToken) {
         long memberId = getMemberId(accessToken);
         Refresh refreshToken = refreshTokenRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 Refresh 토큰을 찾을 수 없습니다."));
+                .orElseThrow(() -> new CustomBadRequestException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
         refreshTokenRepository.delete(refreshToken);
     }

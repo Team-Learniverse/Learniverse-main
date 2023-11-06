@@ -18,11 +18,11 @@ public class IssueEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "issue_id")
-    private long issueId;
+    private Long issueId;
     @Column(name = "member_id", nullable = false)
-    private long memberId;
+    private Long memberId;
     @Column(name = "room_id", nullable = false)
-    private long roomId;
+    private Long roomId;
     @Column(name = "issue_title", nullable = false)
     private String issueTitle;
     @Column(name = "issue_description", nullable = false)
