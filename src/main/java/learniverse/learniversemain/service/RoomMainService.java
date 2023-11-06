@@ -586,7 +586,7 @@ public class RoomMainService {
 
 
         //issue 수락 true로
-        if (existOpinion.getIssueAccepted()) {
+        if (!existOpinion.getIssueAccepted()) {
             existOpinion.setIssueAccepted(true);
             existOpinion.setUpdatedDate(LocalDateTime.now());
         }
