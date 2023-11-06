@@ -30,6 +30,7 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.setCharacterEncoding("UTF-8");
 
+            //access token 만료
             Map<String, Object> jsonResponse = new HashMap<>();
             jsonResponse.put("message", "Unauthorized");
             jsonResponse.put("status", HttpServletResponse.SC_UNAUTHORIZED);
