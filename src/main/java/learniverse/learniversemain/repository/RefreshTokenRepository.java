@@ -10,6 +10,6 @@ public interface RefreshTokenRepository extends JpaRepository<Refresh, Long> {
 
     Optional<Refresh> findByMemberId(Long memberId);
 
-    //public List<Refresh> findByMemberId(Long memberId);
+    //List<Refresh> findByMemberId(Long memberId);
 
 }
