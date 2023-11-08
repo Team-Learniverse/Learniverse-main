@@ -9,6 +9,7 @@ import learniverse.learniversemain.dto.*;
 import learniverse.learniversemain.dto.mongoDB.GitCodeDTO;
 import learniverse.learniversemain.entity.*;
 import learniverse.learniversemain.entity.mongoDB.GitcodeEntity;
+import learniverse.learniversemain.jwt.TokenService;
 import learniverse.learniversemain.service.RoomMainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +33,7 @@ import java.util.Optional;
 @Validated
 public class RoomMainController {
     private final RoomMainService roomMainService;
+    private final TokenService tokenService;
 
 
     @PostMapping("/workspace/update")
@@ -257,12 +259,14 @@ public class RoomMainController {
     }
 
     @PostMapping("/issue/create")
-    public ResponseEntity<Response> createIssue(@Valid @RequestBody IssueDTO issueDTO) {
+    public ResponseEntity<Response> createIssue(@RequestHeader("Authorization") String accessToken, @Valid @RequestBody IssueDTO issueDTO) {
         Response response = new Response();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType((new MediaType("application", "json", Charset.forName("UTF-8"))));
 
-        if (roomMainService.createIssue(issueDTO)) {
+        Long memberId = tokenService.getMemberId(accessToken);
+
+        if (roomMainService.createIssue(memberId, issueDTO)) {
             response.setStatus(Response.StatusEnum.CREATED);
             response.setMessage("이슈 생성 성공");
             response.setData(issueDTO);

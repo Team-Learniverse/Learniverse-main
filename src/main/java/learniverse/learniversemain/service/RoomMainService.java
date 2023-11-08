@@ -225,7 +225,7 @@ public class RoomMainService {
         return tokenList;
     }
 
-    public boolean createIssue(IssueDTO issueDTO) { //디비에 이슈 등록
+    public boolean createIssue(Long memberId, IssueDTO issueDTO) { //디비에 이슈 등록
         IssueEntity issueEntity = new IssueEntity(issueDTO);
 
         //깃헙에 이슈 업로드 후 이슈 넘버 저장
