@@ -135,10 +135,11 @@ public class MemberController {
     }
 
     @PostMapping("/pin")
-    public ResponseEntity<Response> addPin(@Valid @RequestBody RoomMemberID roomMemberID) {
+    public ResponseEntity<Response> addPin(@RequestHeader("Authorization") String accessToken, @Valid @RequestBody RoomMemberID roomMemberID) {
         Response response = new Response();
 
-        boolean change = memberService.updatePin(roomMemberID);
+        Long memberId = tokenService.getMemberId(accessToken);
+        boolean change = memberService.updatePin(memberId, roomMemberID);
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("스터디룸 고정 \'" + change + "\' 로 변경 성공");
         return new ResponseEntity<>(response, HttpStatus.OK);

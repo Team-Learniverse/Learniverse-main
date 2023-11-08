@@ -226,7 +226,7 @@ public class MemberService {
     }
 
     @Transactional
-    public boolean updatePin(RoomMemberID roomMemberID) {
+    public boolean updatePin(long memberId, RoomMemberID roomMemberID) {
         Optional<RoomMemberEntity> roomMemberEntity = roomMemberRepository.findById(roomMemberID);
         if (roomMemberEntity.isEmpty())
             throw new CustomBadRequestException("해당 roomId, memberId 조합에 대한 결과가 존재하지 않습니다.");

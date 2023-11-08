@@ -177,7 +177,8 @@ public class TokenService implements InitializingBean {
     public String refreshAccessToken(String refreshToken) {
         log.info("refresh Access Token");
 
-        long memberId = getMemberId(refreshToken);
+        long memberId = Long.parseLong(Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(refreshToken).getBody().getSubject());
+
         Claims claims = Jwts.claims().setSubject(String.valueOf(memberId));
         claims.put("role", "USER");
 
@@ -205,6 +206,8 @@ public class TokenService implements InitializingBean {
 
         refreshTokenRepository.delete(refreshToken);
     }
+
+
 
     //헤더에서 RefreshToken 추출: 헤더를 가져온 후 "Bearer"를 삭제
     public Optional<String> extractRefreshToken(HttpServletRequest request) {
