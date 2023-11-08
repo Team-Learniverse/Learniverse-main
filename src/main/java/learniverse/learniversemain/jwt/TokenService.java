@@ -158,7 +158,7 @@ public class TokenService implements InitializingBean {
         return LocalDateTime.now().isAfter(expirationDateTime);
     }
 
-    public Token updateAccessToken(long memberId, String role) {
+    /*public Token updateAccessToken(long memberId, String role) {
         log.info("updateAccessToken");
         Claims claims = Jwts.claims().setSubject(String.valueOf(memberId));
         claims.put("role", role);
@@ -172,20 +172,26 @@ public class TokenService implements InitializingBean {
         String refreshToken = existingRefreshToken.getToken();
 
         return new Token(accessToken, refreshToken);
-    }
+    }*/
 
     public String refreshAccessToken(String refreshToken) {
         log.info("refresh Access Token");
 
-            long memberId = getMemberId(refreshToken);
-            String role = "USER";
+        long memberId = getMemberId(refreshToken);
+        Claims claims = Jwts.claims().setSubject(String.valueOf(memberId));
+        claims.put("role", "USER");
 
-            // 새로운 Access Token 생성
-            Token newAccessToken = updateAccessToken(memberId, role);
+        Instant now = Instant.now();
+        String accessToken = makeJwtValue(claims, now, accessTokenValidityInMilliseconds);
 
-            log.info(newAccessToken.getAccessToken());
 
-            return newAccessToken.getAccessToken();
+        // 새로운 Access Token 생성
+        Token newAccessToken = new Token(accessToken, refreshToken);
+
+        log.info("new access token: " + newAccessToken.getAccessToken());
+        log.info("refresh token: " +newAccessToken.getRefreshToken());
+
+        return newAccessToken.getAccessToken();
     }
 
     @Transactional
