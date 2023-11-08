@@ -3,6 +3,7 @@ package learniverse.learniversemain.jwt;
 import io.jsonwebtoken.*;
 import jakarta.transaction.Transactional;
 import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.controller.Exception.CustomUnauthorizedException;
 import learniverse.learniversemain.entity.BoardEntity;
 import learniverse.learniversemain.repository.RefreshTokenRepository;
 import learniverse.learniversemain.service.MemberService;
@@ -89,11 +90,11 @@ public class TokenService implements InitializingBean {
             Refresh existingRefresh = existRefresh.get();
             existingRefresh.setToken(refreshToken); // 새로운 토큰으로 갱신
             existingRefresh.setUpdatedDate(LocalDateTime.now());
-            log.info(String.valueOf(existingRefresh));
+            log.info(String.valueOf(existingRefresh.getToken()));
             refreshTokenRepository.save(existingRefresh);
         }else{
             Refresh refresh = new Refresh(memberId, refreshToken);
-            log.info(String.valueOf(refresh));
+            log.info(String.valueOf(refresh.getToken()));
             refreshTokenRepository.save(refresh);
         }
     }
@@ -144,7 +145,7 @@ public class TokenService implements InitializingBean {
         String refreshTokenValue = token.substring(BEARER_PREFIX.length());
         log.info(refreshTokenValue);
         Refresh refreshToken = refreshTokenRepository.findByToken(refreshTokenValue)
-                .orElseThrow(() -> new CustomBadRequestException("해당 Refresh 토큰을 찾을 수 없습니다."));
+                .orElseThrow(() -> new CustomUnauthorizedException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
         return refreshToken != null && !isTokenExpired(refreshToken);
     }
@@ -162,7 +163,7 @@ public class TokenService implements InitializingBean {
 
         String accessToken = makeJwtValue(claims, now, accessTokenValidityInMilliseconds);
         Refresh existingRefreshToken = refreshTokenRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new CustomBadRequestException("해당 Refresh 토큰을 찾을 수 없습니다."));
+                .orElseThrow(() -> new CustomUnauthorizedException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
         String refreshToken = existingRefreshToken.getToken();
 
@@ -190,7 +191,7 @@ public class TokenService implements InitializingBean {
         long memberId = getMemberId(accessToken);
         log.info("Authenticated Member Id:" + String.valueOf(memberId));
         Refresh refreshToken = refreshTokenRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new CustomBadRequestException("해당 Refresh 토큰을 찾을 수 없습니다."));
+                .orElseThrow(() -> new CustomUnauthorizedException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
         refreshTokenRepository.delete(refreshToken);
     }
