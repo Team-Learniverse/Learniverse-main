@@ -22,7 +22,6 @@ import java.util.Map;
 public class JwtExceptionFilter extends OncePerRequestFilter {
 
     private final ObjectMapper objectMapper;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         log.info("JwtExceptionFilter");

@@ -147,9 +147,8 @@ public class TokenService implements InitializingBean {
 
     public boolean validateRefreshToken(String token) {
         log.info("validateRefreshToken");
-        String refreshTokenValue = token.substring(BEARER_PREFIX.length());
-        log.info(refreshTokenValue);
-        Refresh refreshToken = refreshTokenRepository.findByToken(refreshTokenValue)
+
+        Refresh refreshToken = refreshTokenRepository.findByToken(token)
                 .orElseThrow(() -> new CustomUnauthorizedException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
         return refreshToken != null && !isTokenExpired(refreshToken);

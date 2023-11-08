@@ -43,9 +43,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         //AccessToken을 검증하고, 만료되었을경우 예외를 발생시킨다.
-        if (!tokenService.validateToken(token)) {
-            throw new JwtException("해당 Refresh 토큰이 유효하지 않습니.");
-        }
+        //if (!tokenService.validateToken(token)) {
+        //    throw new JwtException("해당 Refresh 토큰이 유효하지 않습니다.");
+        //}
 
         if (token != null && tokenService.validateToken(token)) { // JWT 토큰이 유효한 경우에만, USER객체 셋팅
             Authentication authentication = tokenService.getAuthentication(token);
