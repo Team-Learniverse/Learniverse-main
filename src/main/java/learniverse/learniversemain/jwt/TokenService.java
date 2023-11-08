@@ -83,8 +83,12 @@ public class TokenService implements InitializingBean {
     private void saveRefreshToken(long memberId, String refreshToken) {
         Optional<Refresh> existRefresh = refreshTokenRepository.findByMemberId(memberId);
 
-        if(!existRefresh.isPresent()){
-            Refresh refresh = new Refresh(memberId,refreshToken);
+        if(existRefresh.isPresent()){
+            Refresh existingRefresh = existRefresh.get();
+            existingRefresh.setToken(refreshToken); // 새로운 토큰으로 갱신
+            refreshTokenRepository.save(existingRefresh);
+        }else{
+            Refresh refresh = new Refresh(memberId, refreshToken);
             refreshTokenRepository.save(refresh);
         }
     }
