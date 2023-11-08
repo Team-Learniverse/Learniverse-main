@@ -81,19 +81,25 @@ public class TokenService implements InitializingBean {
     }
 
     private void saveRefreshToken(long memberId, String refreshToken) {
+        log.info("saveRefreshToken");
+
         Optional<Refresh> existRefresh = refreshTokenRepository.findByMemberId(memberId);
 
         if(existRefresh.isPresent()){
             Refresh existingRefresh = existRefresh.get();
             existingRefresh.setToken(refreshToken); // 새로운 토큰으로 갱신
+            existingRefresh.setUpdatedDate(LocalDateTime.now());
+            log.info(String.valueOf(existingRefresh));
             refreshTokenRepository.save(existingRefresh);
         }else{
             Refresh refresh = new Refresh(memberId, refreshToken);
+            log.info(String.valueOf(refresh));
             refreshTokenRepository.save(refresh);
         }
     }
 
     public boolean validateToken(String token) {
+        log.info("validateToken");
         if (null == token) {
             return false;
         }
@@ -134,6 +140,7 @@ public class TokenService implements InitializingBean {
     }
 
     public boolean validateRefreshToken(String token) {
+        log.info("validateRefreshToken");
         String refreshTokenValue = token.substring(BEARER_PREFIX.length());
         log.info(refreshTokenValue);
         Refresh refreshToken = refreshTokenRepository.findByToken(refreshTokenValue)
@@ -178,7 +185,10 @@ public class TokenService implements InitializingBean {
 
     @Transactional
     public void removeRefreshToken(String accessToken) {
+        log.info("removeRefreshToken");
+        log.info(accessToken);
         long memberId = getMemberId(accessToken);
+        log.info("Authenticated Member Id:" + String.valueOf(memberId));
         Refresh refreshToken = refreshTokenRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new CustomBadRequestException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
@@ -198,9 +208,5 @@ public class TokenService implements InitializingBean {
                 .filter(refreshToken -> refreshToken.startsWith("Bearer"))
                 .map(refreshToken -> refreshToken.replace("Bearer", ""));
     }
-
-
-
-
 
 }

@@ -3,13 +3,11 @@ package learniverse.learniversemain.jwt;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import learniverse.learniversemain.controller.response.Response;
-import learniverse.learniversemain.entity.IssueEntity;
 import learniverse.learniversemain.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.charset.Charset;
-import java.util.Optional;
 
 @Slf4j
 @Tag(name = "token", description = "token 관련 api")
@@ -33,7 +29,7 @@ public class AuthController {
     @PostMapping("/logout")
     public ResponseEntity<Response> logout(@Valid @RequestHeader(HttpHeaders.AUTHORIZATION) final String accessToken) {
         Response response = new Response();
-
+        log.info(accessToken);
         tokenService.removeRefreshToken(accessToken);
 
         response.setStatus(Response.StatusEnum.OK);
@@ -46,9 +42,13 @@ public class AuthController {
     public ResponseEntity<Response> refresh(@Valid @RequestHeader("Refresh") final String refreshToken) {
         Response response = new Response();
 
+        log.info(refreshToken);
+
         //access token 재발급
         if (tokenService.validateRefreshToken(refreshToken)) {
             String newAccessToken = tokenService.refreshAccessToken(refreshToken);
+
+            log.info(newAccessToken);
 
             HttpHeaders headers = new HttpHeaders();
             headers.add(HttpHeaders.AUTHORIZATION, newAccessToken); // AccessToken을 HttpHeaders에 추가
