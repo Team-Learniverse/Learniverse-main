@@ -6,6 +6,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
+import learniverse.learniversemain.controller.Exception.CustomUnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
@@ -28,6 +31,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest servletRequest,
                                     HttpServletResponse servletResponse, FilterChain filterChain)
             throws ServletException, IOException {
+        log.info("JwtAuthFilter");
 
         HttpServletRequest httpServletRequest = servletRequest;
         String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION); //access token
@@ -38,10 +42,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         //    return;
         //}
 
-        // AccessToken을 검증하고, 만료되었을경우 예외를 발생시킨다.
-        //if (!tokenService.validateToken(token)) {
-        //    throw new JwtException("Access Token 만료!");
-        //}
+        //AccessToken을 검증하고, 만료되었을경우 예외를 발생시킨다.
+        if (!tokenService.validateToken(token)) {
+            throw new CustomUnauthorizedException("해당 Refresh 토큰이 유효하지 않습니다.");
+        }
 
         if (token != null && tokenService.validateToken(token)) { // JWT 토큰이 유효한 경우에만, USER객체 셋팅
             Authentication authentication = tokenService.getAuthentication(token);

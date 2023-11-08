@@ -1,7 +1,6 @@
 package learniverse.learniversemain.jwt;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import learniverse.learniversemain.controller.response.Response;
 import learniverse.learniversemain.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +26,11 @@ public class AuthController {
     private final TokenService tokenService;
 
     @PostMapping("/logout")
-    public ResponseEntity<Response> logout(@Valid @RequestHeader(HttpHeaders.AUTHORIZATION) final String accessToken) {
-        Response response = new Response();
+    public ResponseEntity<Response> logout(@RequestHeader(HttpHeaders.AUTHORIZATION) final String accessToken) {
+        //access token으로 refresh token 삭제
         log.info(accessToken);
+
+        Response response = new Response();
         tokenService.removeRefreshToken(accessToken);
 
         response.setStatus(Response.StatusEnum.OK);
@@ -39,12 +40,11 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<Response> refresh(@Valid @RequestHeader("Refresh") final String refreshToken) {
-        Response response = new Response();
-
+    public ResponseEntity<Response> refresh(@RequestHeader("Refresh") final String refreshToken) {
         log.info(refreshToken);
 
-        //access token 재발급
+        Response response = new Response();
+        //refresh token으로 access token 재발급
         if (tokenService.validateRefreshToken(refreshToken)) {
             String newAccessToken = tokenService.refreshAccessToken(refreshToken);
 
