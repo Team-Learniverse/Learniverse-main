@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
@@ -23,6 +24,9 @@ public class Refresh {
     private String token;
     @CreatedDate
     private LocalDateTime createdDate;
+    @LastModifiedDate
+    private LocalDateTime updatedDate;
+
 
     public Refresh(long memberId, String refreshToken) {
         LocalDateTime now = LocalDateTime.now();
