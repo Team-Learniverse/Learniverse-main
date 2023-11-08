@@ -7,13 +7,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import learniverse.learniversemain.controller.Exception.CustomBadRequestException;
-import learniverse.learniversemain.controller.Exception.CustomUnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Slf4j
@@ -36,11 +35,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         HttpServletRequest httpServletRequest = servletRequest;
         String token = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION); //access token
 
-        // 토큰 검사 생략(모두 허용 URL의 경우 토큰 검사 통과)
-        //if (!StringUtils.hasText(token)) {
-        //    doFilter(servletRequest, servletResponse, filterChain);
-        //    return;
-        //}
+         //토큰 검사 생략(모두 허용 URL의 경우 토큰 검사 통과)
+        if (!StringUtils.hasText(token)) {
+            log.info("토큰 검사 생략, 다음 필터 실행");
+            doFilter(servletRequest, servletResponse, filterChain);
+            return;
+        }
 
         //AccessToken을 검증하고, 만료되었을경우 예외를 발생시킨다.
         if (!tokenService.validateToken(token)) {

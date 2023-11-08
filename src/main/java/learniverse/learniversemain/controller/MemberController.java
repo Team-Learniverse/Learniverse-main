@@ -84,10 +84,10 @@ public class MemberController {
     }
 
     @GetMapping("/moon/list")
-    public ResponseEntity<Response> getMoon(@NotNull long memberId) {
+    public ResponseEntity<Response> getMoon(@RequestHeader("Authorization") String accessToken) {
         Response response = new Response();
-
         Map<String, List<ResMoonDTO>> data = new HashMap<>();
+        Long memberId = tokenService.getMemberId(accessToken);
         data.put("moons", memberService.getMoon(memberId));
         response.setData(data);
 
@@ -98,8 +98,9 @@ public class MemberController {
     }
 
     @GetMapping("/room/list")
-    public ResponseEntity<Response> getRooms(@NotNull long memberId) {
+    public ResponseEntity<Response> getRooms(@RequestHeader("Authorization") String accessToken) {
         Response response = new Response();
+        Long memberId = tokenService.getMemberId(accessToken);
         response.setData(memberService.getRooms(memberId));
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("참여 스터디룸 출력 성공");
@@ -107,8 +108,9 @@ public class MemberController {
     }
 
     @GetMapping("/room/list/apply")
-    public ResponseEntity<Response> getApplyRooms(@NotNull long memberId) {
+    public ResponseEntity<Response> getApplyRooms(@RequestHeader("Authorization") String accessToken) {
         Response response = new Response();
+        Long memberId = tokenService.getMemberId(accessToken);
         List<RoomCardDTO> roomCardDTOS = memberService.getRoomsIs(memberId, false);
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
         data.put("rooms", roomCardDTOS);
@@ -120,8 +122,9 @@ public class MemberController {
 
 
     @GetMapping("/room/list/leader")
-    public ResponseEntity<Response> getLeaderRooms(@NotNull long memberId) {
+    public ResponseEntity<Response> getLeaderRooms(@RequestHeader("Authorization") String accessToken) {
         Response response = new Response();
+        Long memberId = tokenService.getMemberId(accessToken);
         List<RoomCardDTO> roomCardDTOS = memberService.getRoomsIs(memberId, true);
         Map<String, List<RoomCardDTO>> data = new HashMap<>();
         data.put("rooms", roomCardDTOS);
@@ -142,9 +145,10 @@ public class MemberController {
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<Response> getMember(@Valid @RequestParam Long memberId) {
+    public ResponseEntity<Response> getMember(@RequestHeader("Authorization") String accessToken) {
         Response response = new Response();
         Map<String, Map<String, String>> data = new HashMap<>();
+        Long memberId = tokenService.getMemberId(accessToken);
         data.put("member", memberService.getMember(memberId));
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("멤버 프로필 정보 출력 완료");
