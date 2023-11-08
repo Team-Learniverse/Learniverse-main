@@ -10,6 +10,7 @@ import learniverse.learniversemain.entity.HashtagEntity;
 import learniverse.learniversemain.entity.ID.RoomMemberID;
 import learniverse.learniversemain.entity.MemberEntity;
 import learniverse.learniversemain.entity.RoomMemberEntity;
+import learniverse.learniversemain.jwt.TokenService;
 import learniverse.learniversemain.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,7 @@ import java.util.Optional;
 public class MemberController {
 
     private final MemberService memberService;
+    private final TokenService tokenService;
 
     @PostMapping("/profile/update")
     public ResponseEntity<Response> updateProfile(@Valid @RequestBody ProfileDTO profileDTO){
@@ -151,11 +153,13 @@ public class MemberController {
     }
 
     @GetMapping("/first")
-    public ResponseEntity<Response> getMemberFirst(@Valid @RequestParam long memberId) {
+    public ResponseEntity<Response> getMemberFirst(@RequestHeader("Authorization") String accessToken) {
         Response response = new Response();
         Map<String, String>   data = new HashMap<>();
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("최초 사용자 확인 정보 출력 완료");
+        Long memberId = tokenService.getMemberId(accessToken);
+
         data.put("memberFirst", memberService.isMemberFirst(memberId));
         data.put("refreshToken", memberService.getRefreshToken(memberId));
         response.setData(data);
@@ -163,20 +167,22 @@ public class MemberController {
     }
 
     @GetMapping("/repolanguage")
-    public ResponseEntity<Response> getGitRepo(@Valid @RequestParam long memberId) {
+    public ResponseEntity<Response> getGitRepo(@RequestHeader("Authorization") String accessToken) {
         Response response = new Response();
         Map<String, String>   data = new HashMap<>();
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("레포언어 바이트 리스트 출력");
+        Long memberId = tokenService.getMemberId(accessToken);
+
         data.put("repoLanguageList", memberService.getRepoLanguage(memberId));
         response.setData(data);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Response> addPin(@Valid @RequestBody long memberId) {
+    public ResponseEntity<Response> addPin(@RequestHeader("Authorization") String accessToken) {
         Response response = new Response();
-
+        Long memberId = tokenService.getMemberId(accessToken);
         memberService.login(memberId);
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("최근 로그인 정보 업데이트 성공");
