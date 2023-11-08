@@ -101,12 +101,16 @@ public class TokenService implements InitializingBean {
 
     public boolean validateToken(String token) {
         log.info("validateToken");
+        log.info(token);
+        long memberId = getMemberId(token);
+        log.info("Authenticated Member Id:" + String.valueOf(memberId));
+
         if (null == token) {
-            return false;
+            throw new CustomUnauthorizedException("토큰이 없습니다.");
         }
 
         if (false == token.startsWith(BEARER_PREFIX)) {
-            return false;
+            throw new CustomUnauthorizedException("올바르지 않은 토큰 포맷입니다.");
         }
 
         String value = token.substring(BEARER_PREFIX.length());
@@ -118,12 +122,13 @@ public class TokenService implements InitializingBean {
             log.error("잘못된 jwt 서명을 가진 토큰입니다", e);
         } catch (ExpiredJwtException e) {
             log.error("만료된 jwt 토큰입니다", e);
+            throw new CustomUnauthorizedException("만료된 토큰입니다");
         } catch (UnsupportedJwtException e) {
             log.error("지원하지 않는 jwt 토큰입니다", e);
         } catch (IllegalArgumentException e) {
             log.error("잘못된 jwt 토큰입니다", e);
         }
-        return false;
+        throw new CustomUnauthorizedException("토큰이 유효하지 않습니다");
     }
 
     public Authentication getAuthentication(String token) {
@@ -133,11 +138,11 @@ public class TokenService implements InitializingBean {
                 Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
     }
 
-    public int getMemberId(String token) {
+    public Long getMemberId(String token) {
         String value = token.substring(BEARER_PREFIX.length());
         String subject = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(value).getBody()
                 .getSubject();
-        return Integer.parseInt(subject);
+        return Long.parseLong(subject);
     }
 
     public boolean validateRefreshToken(String token) {
