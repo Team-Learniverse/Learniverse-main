@@ -267,7 +267,7 @@ public class RoomMainService {
         } else {
             throw new CustomBadRequestException("해당 주소와 일치하는 레포지토리가 존재하지 않습니다.");
         }
-        String issueDescription = issueEntity.getIssueDescription();
+        String issueDescription = issueEntity.getIssueDescription().replaceAll("\\\\", "\\\\\\\\");
 
         String addIssueUrl = "https://api.github.com/repos/" + issueGitUrl + "/issues";
 
