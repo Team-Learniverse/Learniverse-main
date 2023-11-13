@@ -36,10 +36,11 @@ public class MemberController {
     private final TokenService tokenService;
 
     @PostMapping("/profile/update")
-    public ResponseEntity<Response> updateProfile(@Valid @RequestBody ProfileDTO profileDTO){
+    public ResponseEntity<Response> updateProfile(@RequestHeader("Authorization") String accessToken, @Valid @RequestBody ProfileDTO profileDTO){
         Response response = new Response();
 
-        memberService.updateProfile(profileDTO);
+        Long memberId = tokenService.getMemberId(accessToken);
+        memberService.updateProfile(memberId, profileDTO);
 
         response.setStatus(Response.StatusEnum.CREATED);
         response.setMessage("프로필 정보 저장 성공");

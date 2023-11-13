@@ -67,7 +67,7 @@ public class MemberService {
             moonRepository.save(moonEntity);
         }
     }
-    public void updateProfile(ProfileDTO profileDTO){
+    public void updateProfile(long memberId, ProfileDTO profileDTO){
         MemberEntity memberEntity = memberRepository.findById(profileDTO.getMemberId())
                 .orElseThrow( () -> new CustomBadRequestException("존재하지 않는 memberId 입니다."));
 
