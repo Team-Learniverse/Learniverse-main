@@ -22,7 +22,6 @@ import java.util.Map;
 public class JwtExceptionFilter extends OncePerRequestFilter {
 
     private final ObjectMapper objectMapper;
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         log.info("JwtExceptionFilter");
@@ -37,6 +36,7 @@ public class JwtExceptionFilter extends OncePerRequestFilter {
             Map<String, Object> jsonResponse = new HashMap<>();
             jsonResponse.put("message", "Unauthorized");
             jsonResponse.put("status", HttpServletResponse.SC_UNAUTHORIZED);
+            log.info(jsonResponse.toString());
 
             objectMapper.writeValue(response.getWriter(), jsonResponse);
         }

@@ -147,9 +147,8 @@ public class TokenService implements InitializingBean {
 
     public boolean validateRefreshToken(String token) {
         log.info("validateRefreshToken");
-        String refreshTokenValue = token.substring(BEARER_PREFIX.length());
-        log.info(refreshTokenValue);
-        Refresh refreshToken = refreshTokenRepository.findByToken(refreshTokenValue)
+
+        Refresh refreshToken = refreshTokenRepository.findByToken(token)
                 .orElseThrow(() -> new CustomUnauthorizedException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
         return refreshToken != null && !isTokenExpired(refreshToken);
@@ -159,34 +158,25 @@ public class TokenService implements InitializingBean {
         return LocalDateTime.now().isAfter(expirationDateTime);
     }
 
-    public Token updateAccessToken(long memberId, String role) {
-        log.info("updateAccessToken");
-        Claims claims = Jwts.claims().setSubject(String.valueOf(memberId));
-        claims.put("role", role);
-
-        Instant now = Instant.now();
-
-        String accessToken = makeJwtValue(claims, now, accessTokenValidityInMilliseconds);
-        Refresh existingRefreshToken = refreshTokenRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new CustomUnauthorizedException("해당 Refresh 토큰을 찾을 수 없습니다."));
-
-        String refreshToken = existingRefreshToken.getToken();
-
-        return new Token(accessToken, refreshToken);
-    }
-
     public String refreshAccessToken(String refreshToken) {
         log.info("refresh Access Token");
 
-            long memberId = getMemberId(refreshToken);
-            String role = "USER";
+        long memberId = Long.parseLong(Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(refreshToken).getBody().getSubject());
 
-            // 새로운 Access Token 생성
-            Token newAccessToken = updateAccessToken(memberId, role);
+        Claims claims = Jwts.claims().setSubject(String.valueOf(memberId));
+        claims.put("role", "USER");
 
-            log.info(newAccessToken.getAccessToken());
+        Instant now = Instant.now();
+        String accessToken = makeJwtValue(claims, now, accessTokenValidityInMilliseconds);
 
-            return newAccessToken.getAccessToken();
+
+        // 새로운 Access Token 생성
+        Token newAccessToken = new Token(accessToken, refreshToken);
+
+        log.info("new access token: " + newAccessToken.getAccessToken());
+        log.info("refresh token: " +newAccessToken.getRefreshToken());
+
+        return newAccessToken.getAccessToken();
     }
 
     @Transactional
@@ -199,20 +189,6 @@ public class TokenService implements InitializingBean {
                 .orElseThrow(() -> new CustomUnauthorizedException("해당 Refresh 토큰을 찾을 수 없습니다."));
 
         refreshTokenRepository.delete(refreshToken);
-    }
-
-    //헤더에서 RefreshToken 추출: 헤더를 가져온 후 "Bearer"를 삭제
-    public Optional<String> extractRefreshToken(HttpServletRequest request) {
-        return Optional.ofNullable(request.getHeader("Refresh"))
-                .filter(refreshToken -> refreshToken.startsWith("Bearer"))
-                .map(refreshToken -> refreshToken.replace("Bearer", ""));
-    }
-
-    //헤더에서 AccessToken 추출: 헤더를 가져온 후 "Bearer"를 삭제
-    public Optional<String> extractAccessToken(HttpServletRequest request) {
-        return Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION))
-                .filter(refreshToken -> refreshToken.startsWith("Bearer"))
-                .map(refreshToken -> refreshToken.replace("Bearer", ""));
     }
 
 }
