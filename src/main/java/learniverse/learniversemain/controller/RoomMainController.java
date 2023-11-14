@@ -203,8 +203,15 @@ public class RoomMainController {
     }
 
     @GetMapping("/boards")
-    public List<BoardEntity> getBoards(@RequestParam Long roomId) {
-        return roomMainService.getBoards(roomId);
+    public ResponseEntity<Response> getBoards(@RequestParam Long roomId) {
+        Response response = new Response();
+        List<BoardEntity> boardList = roomMainService.getBoards(roomId);
+        response.setStatus(Response.StatusEnum.OK);
+        response.setMessage("공지사항 출력 성공");
+        Map<String, List<BoardEntity>> data = new HashMap<>();
+        data.put("boards", boardList);
+        response.setData(data);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/board")
