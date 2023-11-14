@@ -527,8 +527,8 @@ public class RoomMainService {
         String fullUrl = issueEntity.getIssueGitUrl();
         String prefix = "https://github.com/";
         String issueGitUrl = "";
-        String issueOpinion = issueOpinionEntity.getIssueOpinion().replaceAll("\\\\", "\\\\\\\\");
-        String issueOpinionCode = (issueOpinionEntity.getIssueOpinionCode() != null) ? issueOpinionEntity.getIssueOpinionCode().replaceAll("\\\\", "\\\\\\\\") : "코드 제안 없음";
+        String issueOpinion = issueOpinionEntity.getIssueOpinion().replaceAll("\\\\", "\\\\\\\\").replaceAll("\n", "\\\\n");
+        String issueOpinionCode = (issueOpinionEntity.getIssueOpinionCode() != null) ? issueOpinionEntity.getIssueOpinionCode().replaceAll("\\\\", "\\\\\\\\").replaceAll("\n", "\\\\n") : "코드 제안 없음";
         String issueComment = "<리뷰내용>: " + issueOpinion + "\\n<수정제안코드>: `" + issueOpinionCode + "`\\n\\n\\ncommented from Learniverse";
         log.info(issueComment);
 
@@ -583,7 +583,6 @@ public class RoomMainService {
     public void applyOpinion(Long opinionId) { //이슈 디스커션 상태 true로 바꾸기 > 수락
         IssueOpinionEntity existOpinion = issueOpinionRepository.findById(opinionId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 이슈 디스커션이 없습니다."));
-
 
         //issue 수락 true로
         if (!existOpinion.getIssueAccepted()) {

@@ -49,7 +49,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         }
 
         //redirectUri 만들기
-        String redirectUrl = UriComponentsBuilder.fromUriString("https://learniverse-front-end.vercel.app/login")
+        String redirectUrl = UriComponentsBuilder.fromUriString("http://localhost:3000/login")
                 .queryParam("token", token.getAccessToken())
                 .build().toUriString();
         redirectStrategy.sendRedirect(request, response, redirectUrl);
