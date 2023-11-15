@@ -13,6 +13,7 @@ import learniverse.learniversemain.entity.RoomMemberEntity;
 import learniverse.learniversemain.jwt.TokenService;
 import learniverse.learniversemain.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -177,8 +178,10 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Response> addPin(@RequestParam Long memberId) {
+    public ResponseEntity<Response> addPin(@RequestHeader(HttpHeaders.AUTHORIZATION) final String accessToken) {
         Response response = new Response();
+        Long memberId = tokenService.getMemberId(accessToken);
+
         memberService.login(memberId);
         response.setStatus(Response.StatusEnum.OK);
         response.setMessage("최근 로그인 정보 업데이트 성공");
