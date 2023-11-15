@@ -67,7 +67,7 @@ public class MemberService {
             moonRepository.save(moonEntity);
         }
     }
-    public void updateProfile(long memberId, ProfileDTO profileDTO){
+    public void updateProfile(ProfileDTO profileDTO){
         MemberEntity memberEntity = memberRepository.findById(profileDTO.getMemberId())
                 .orElseThrow( () -> new CustomBadRequestException("존재하지 않는 memberId 입니다."));
 
@@ -226,7 +226,7 @@ public class MemberService {
     }
 
     @Transactional
-    public boolean updatePin(long memberId, RoomMemberID roomMemberID) {
+    public boolean updatePin(RoomMemberID roomMemberID) {
         Optional<RoomMemberEntity> roomMemberEntity = roomMemberRepository.findById(roomMemberID);
         if (roomMemberEntity.isEmpty())
             throw new CustomBadRequestException("해당 roomId, memberId 조합에 대한 결과가 존재하지 않습니다.");
